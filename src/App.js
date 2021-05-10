@@ -1,10 +1,19 @@
+import React from "react";
+
+// Components-------
+import MyNavbar from "./components/navbar";
+
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">MY PORTFOLIO</header>
-    </div>
+    <>
+      <MyNavbar />
+
+      <div className="App">
+        <header className="App-header">MY PORTFOLIO</header>
+      </div>
+    </>
   );
 }
 
