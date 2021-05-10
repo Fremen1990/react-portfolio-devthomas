@@ -27,10 +27,11 @@ const About = () => {
             </Row>
           </Col>
 
-          {/* Description About */}
+          {/*======================  About Description =====================*/}
           <Col xs={12} md={6}>
+            {/*==================== Description ======================= */}
             <Row className=" align-items-start p-2 my-details rounded">
-              Hi there! My name is <strong>&nbsp;Thomas</strong>
+              Hi there! My name is <strong>&nbsp;Thomas Stanisz</strong>
               <br />I am Tech lover, highly motivated with creation websites and
               applications. Born in the Villige in central Poland. I am
               Financial Analyst with love to programming, a Full Stack Web
@@ -45,6 +46,7 @@ const About = () => {
               they solving and How can I use them to build better and scalable
               products.
               <br /> <br />
+              {/*==================== Buttons =================== */}
               <Col className="d-flex justify-content-center flex-wrap">
                 <div>
                   <a href="#contact">
