@@ -1,0 +1,15 @@
+.about {
+  /* background-color: transparent; */
+  /* background-color: #282c34; */
+  background-color: #101018f8;
+  font-size: 1.1em;
+}
+
+.profile {
+  max-width: 18em;
+}
+
+.my-details {
+  background-color: rgba(255, 255, 255, 0.747);
+  /* background-color: #282c34; */
+}

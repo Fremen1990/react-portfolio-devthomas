@@ -4,17 +4,22 @@ import React from "react";
 import MyNavbar from "./components/navbar";
 import MyCarousel from "./components/carousel";
 import MyTitleMessage from "./components/titleMessage.jsx";
-import ScrollDown from "./components/scrollDown.jsx";
+import About from "./pages/about";
 
 import "./App.css";
 
 function App() {
   return (
     <>
+      {/* ========== Navbar ============= */}
       <MyNavbar />
+      {/* ========== Home ============= */}
+
       <MyCarousel />
       <MyTitleMessage />
-      <ScrollDown />>
+      {/* ========== About ============= */}
+
+      <About />
       <div className="App">
         <header className="App-header">MY PORTFOLIO</header>
       </div>
