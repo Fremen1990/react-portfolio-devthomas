@@ -1,9 +1,10 @@
 import React from "react";
 
-// Components-------
+// Components---------------------------------
 import MyNavbar from "./components/navbar";
 import MyCarousel from "./components/carousel";
 import MyTitleMessage from "./components/titleMessage.jsx";
+import ScrollDown from "./components/scrollDown.jsx";
 
 import "./App.css";
 
@@ -13,6 +14,7 @@ function App() {
       <MyNavbar />
       <MyCarousel />
       <MyTitleMessage />
+      <ScrollDown />>
       <div className="App">
         <header className="App-header">MY PORTFOLIO</header>
       </div>
