@@ -10,6 +10,7 @@ import Fade from "react-reveal/Fade";
 import { Parallax } from "react-parallax";
 import Container from "react-bootstrap/Container";
 import "./App.css";
+import Experience from "./pages/experience";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
       </div>
 
       <Skills />
+      <Experience />
     </>
   );
 }
