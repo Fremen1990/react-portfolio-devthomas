@@ -4,6 +4,7 @@ import MyNavbar from "./components/navbar";
 import MyCarousel from "./components/carousel";
 import MyTitleMessage from "./components/titleMessage.jsx";
 import About from "./pages/about";
+import Skills from "./pages/skills";
 
 import Fade from "react-reveal/Fade";
 import { Parallax } from "react-parallax";
@@ -20,6 +21,7 @@ function App() {
 
         <MyCarousel />
         <MyTitleMessage />
+
         {/* ========== About ============= */}
         <div>
           <Parallax
@@ -36,6 +38,8 @@ function App() {
           </Parallax>
         </div>
       </div>
+
+      <Skills />
     </>
   );
 }
