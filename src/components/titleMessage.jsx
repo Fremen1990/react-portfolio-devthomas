@@ -45,8 +45,8 @@ const MyTitleMessage = () => {
                 strings: [
                   "Web Developer",
                   "Mobile developer",
-                  "2D game programmer",
                   "IT lover",
+                  "2D game programmer",
                 ],
                 autoStart: true,
                 loop: true,
