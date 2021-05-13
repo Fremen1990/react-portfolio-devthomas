@@ -51,7 +51,8 @@ const Experience = () => {
 
                       <li>
                         <strong>Provided</strong> website maintainance and
-                        beeing hungry for enhancements
+                        continious enhancements, problem solving for startup
+                        profile web page and new ideas
                       </li>
                       {/* <li>
                         <strong>Performed</strong> quality checks with designers and 

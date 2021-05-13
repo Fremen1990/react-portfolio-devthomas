@@ -1,5 +1,6 @@
 .card-deck {
   justify-content: center;
+  width: 100%;
 }
 
 .focus {
