@@ -12,6 +12,7 @@ import { Parallax } from "react-parallax";
 import Container from "react-bootstrap/Container";
 import "./App.css";
 import Experience from "./pages/experience";
+import ProjectsTimeline from "./components/projects-timeline";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
             strength={-200}
           >
             <Container className="container-box rounded">
-              <Fade duration={500}>
+              <Fade duration={1500}>
                 <About />
               </Fade>
             </Container>
@@ -47,7 +48,7 @@ function App() {
         {/* ============================== Skills =========================== */}
         <div>
           <Container className="container-box rounded">
-            <Slide bottom duration={1500}>
+            <Slide bottom duration={1000}>
               <hr />
               <Skills />
             </Slide>
@@ -68,6 +69,17 @@ function App() {
             </Fade>
           </Container>
         </Parallax>
+
+        {/* ============================ ProjectsTimeline ============================== */}
+
+        <div>
+          <Container className="container-box rounded">
+            <Slide bottom duration={500}>
+              <hr />
+              <ProjectsTimeline />
+            </Slide>
+          </Container>
+        </div>
       </div>
     </>
   );
