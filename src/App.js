@@ -13,6 +13,7 @@ import Container from "react-bootstrap/Container";
 import "./App.css";
 import Experience from "./pages/experience";
 import ProjectsTimeline from "./components/projects-timeline";
+import Contact from "./pages/contactForm";
 
 function App() {
   return (
@@ -80,6 +81,10 @@ function App() {
             </Slide>
           </Container>
         </div>
+
+        {/* ============================ ProjectsTimeline ============================== */}
+
+        <Contact />
       </div>
     </>
   );
