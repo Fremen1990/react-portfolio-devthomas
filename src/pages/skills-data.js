@@ -15,6 +15,7 @@ import L_VBA from "../assets/img/skills/vba.png";
 // import L_DJANGO from "../assets/img/skills/django.svg";
 // import L_FLASK from "../assets/img/skills/flask.svg";
 import L_MONGODB from "../assets/img/skills/mongodb.svg";
+import L_PHASER from "../assets/img/skills/phaser.svg";
 // import L_POSTGRESQL from "../assets/img/skills/postgresql.svg";
 // import L_MSSQL from "../assets/img/skills/mssql.svg";
 import L_MYSQL from "../assets/img/skills/mySql.svg";
@@ -129,6 +130,12 @@ export const skills = {
       imgAltText: "Express",
       imgSrc: L_EXPRESS,
       skillName: "Express",
+    },
+    {
+      link: "https://phaser.io/",
+      imgAltText: "Phaser",
+      imgSrc: L_PHASER,
+      skillName: "Phaser",
     },
     // {
     //   link: "https://www.djangoproject.com/",
