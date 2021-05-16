@@ -5,8 +5,8 @@ import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
 import { Parallax } from "react-parallax";
 import Container from "react-bootstrap/Container";
-// import Particles from "react-particles-js";
-// import { particlesOptions } from "./particlesOptions";
+import Particles from "react-particles-js";
+import { particlesOptions } from "./particlesOptions";
 
 // Components---------------------------------
 import MyNavbar from "./components/navbar";
@@ -33,17 +33,17 @@ function App() {
 
         {/* =========================== Home ===================== */}
 
-        <Fade duration={2000}>
+        <Fade duration={1500}>
           <MyCarousel />
         </Fade>
 
         <MyTitleMessage />
 
         {/* ------ Particles effect ------- */}
-        {/* <Particles
+        <Particles
           className="particles particles-box"
           params={particlesOptions}
-        /> */}
+        />
 
         {/* ========================== About ============================= */}
 
@@ -55,7 +55,7 @@ function App() {
             strength={-200}
           >
             <Container className="container-box rounded">
-              <Fade duration={1500}>
+              <Fade duration={1000}>
                 <About />
               </Fade>
             </Container>
@@ -65,7 +65,7 @@ function App() {
         {/* ============================== Skills =========================== */}
         <div>
           <Container className="container-box rounded">
-            <Slide bottom duration={1000}>
+            <Slide bottom duration={750}>
               <hr className="hr-skills" />
               <Skills />
             </Slide>
@@ -80,7 +80,7 @@ function App() {
           strength={-200}
         >
           <Container className="container-box rounded ">
-            <Fade duration={1000}>
+            <Fade duration={500}>
               <hr />
               <Experience />
             </Fade>
@@ -102,7 +102,7 @@ function App() {
 
         <div>
           <Container className="container-box rounded contact-container">
-            <Fade bottom duration={1000}>
+            <Fade bottom duration={500}>
               <hr className="hr-contact" />
               <Contact />
             </Fade>

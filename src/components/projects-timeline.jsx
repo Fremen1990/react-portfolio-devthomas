@@ -38,7 +38,10 @@ import "./projects-timeline.css";
 const ProjectsTimeline = () => {
   return (
     <div id="projects">
-      <h1 className="pt-3 text-center font-details-b pb-3 projects-h1">
+      <h1
+        className="pt-3 text-center font-details-b pb-3"
+        style={{ color: "#ffffff" }}
+      >
         PROJECTS
       </h1>
 
