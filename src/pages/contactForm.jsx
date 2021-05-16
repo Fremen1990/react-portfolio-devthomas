@@ -10,24 +10,29 @@ import "./contactForm.css";
 const Contact = () => {
   return (
     <div id="contact">
-      <h1 className="pt-3 text-center font-details-b pb-3">CONTACT ME</h1>
+      <h1 className="pt-3 text-center font-details-b pb-3 contact-h1">
+        CONTACT ME
+      </h1>
       <Jumbotron className="contact-jumbotron">
         <Row>
           <Col className="d-flex justify-content-center flex-wrap">
+            {/*  ============= email ============= */}
             <div className="m-2">
               <a
-                href="mailto:akjha96@gmail.com"
+                href="mailto:tomasz.stanisz@devthomas.pl"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button variant="outline-danger" title="akjha96@gmail.com">
+                <Button variant="outline-danger" title="stanisz@devthomas.pl">
                   <i className="fas fa-envelope-square"></i> Email Me
                 </Button>
               </a>
             </div>
+            {/*  ============= linked IN ============= */}
+
             <div className="m-2">
               <a
-                href="https://www.linkedin.com/in/anand-kumar-jha-745798a4/"
+                href="https://www.linkedin.com/in/tomasz-stanisz-85818683/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -36,10 +41,11 @@ const Contact = () => {
                 </Button>
               </a>
             </div>
+            {/*  ============= git HuB ============= */}
 
             <div className="m-2">
               <a
-                href="https://github.com/akjha96"
+                href="https://github.com/Fremen1990"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -48,35 +54,29 @@ const Contact = () => {
                 </Button>
               </a>
             </div>
+
+            {/*  ============= YouTube ============= */}
+
             <div className="m-2">
               <a
-                href="https://www.youtube.com/user/MrAkjha96/"
+                href="https://www.youtube.com/channel/UC0EFcWd3GKqNncBFLkxoTzg"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <Button
                   id="youtube-btn"
                   variant="outline-info"
-                  title="Lets code together!"
+                  title="My YouTube"
                 >
                   <i class="fab fa-youtube"></i> Youtube
                 </Button>
               </a>
             </div>
+            {/*  ============= FaceBook ============= */}
+
             <div className="m-2">
               <a
-                href="https://twitter.com/akjha96"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="outline-info" title="Tweets are welcomed!">
-                  <i className="fab fa-twitter"></i> Twitter
-                </Button>
-              </a>
-            </div>
-            <div className="m-2">
-              <a
-                href="https://www.facebook.com/akjha132"
+                href="https://www.facebook.com/paul.atryda.1"
                 target="_blank"
                 rel="noopener noreferrer"
               >

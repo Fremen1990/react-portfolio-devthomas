@@ -1,33 +1,49 @@
 import React from "react";
-// Components---------------------------------
-import MyNavbar from "./components/navbar";
-import MyCarousel from "./components/carousel";
-import MyTitleMessage from "./components/titleMessage.jsx";
-import About from "./pages/about";
-import Skills from "./pages/skills";
 
+// bootstrap libraries
 import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
 import { Parallax } from "react-parallax";
 import Container from "react-bootstrap/Container";
-import "./App.css";
-import Experience from "./pages/experience";
+// import Particles from "react-particles-js";
+// import { particlesOptions } from "./particlesOptions";
+
+// Components---------------------------------
+import MyNavbar from "./components/navbar";
+import MyCarousel from "./components/carousel";
+import MyTitleMessage from "./components/titleMessage.jsx";
 import ProjectsTimeline from "./components/projects-timeline";
+import FooterPanel from "./components/footer";
+
+// Pages
+import About from "./pages/about";
+import Skills from "./pages/skills";
+import Experience from "./pages/experience";
 import Contact from "./pages/contactForm";
+
+// Styles
+import "./App.css";
 
 function App() {
   return (
     <>
       <div className="App" style={{ position: "relative" }}>
         {/* ======================== Navbar ========================== */}
-
         <MyNavbar />
+
         {/* =========================== Home ===================== */}
+
         <Fade duration={2000}>
           <MyCarousel />
         </Fade>
 
         <MyTitleMessage />
+
+        {/* ------ Particles effect ------- */}
+        {/* <Particles
+          className="particles particles-box"
+          params={particlesOptions}
+        /> */}
 
         {/* ========================== About ============================= */}
 
@@ -50,7 +66,7 @@ function App() {
         <div>
           <Container className="container-box rounded">
             <Slide bottom duration={1000}>
-              <hr />
+              <hr className="hr-skills" />
               <Skills />
             </Slide>
           </Container>
@@ -76,15 +92,26 @@ function App() {
         <div>
           <Container className="container-box rounded">
             <Slide bottom duration={500}>
-              <hr />
+              <hr className="hr-projects" />
               <ProjectsTimeline />
             </Slide>
           </Container>
         </div>
 
-        {/* ============================ ProjectsTimeline ============================== */}
+        {/* ============================ Contact ============================== */}
 
-        <Contact />
+        <div>
+          <Container className="container-box rounded contact-container">
+            <Fade bottom duration={1000}>
+              <hr className="hr-contact" />
+              <Contact />
+            </Fade>
+          </Container>
+        </div>
+
+        {/* ============================ Footer ============================== */}
+        <hr className="hr-footer" />
+        <FooterPanel />
       </div>
     </>
   );

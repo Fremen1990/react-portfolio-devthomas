@@ -3,6 +3,9 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.contact-h1 {
+  color: #ffffff;
+}
 
 #youtube-btn {
   border-color: #f83f37;
