@@ -1,6 +1,6 @@
 import React from "react";
 
-// bootstrap libraries
+// bootstrap libraries ! :)
 import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
 import { Parallax } from "react-parallax";
