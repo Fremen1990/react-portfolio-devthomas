@@ -1,5 +1,7 @@
 {
   "name": "react-portfolio-devthomas",
+    "homepage": "https://devthomas-portfolio.herokuapp.com/",
+
   "version": "1.0.0",
   "private": true,
   "dependencies": {
