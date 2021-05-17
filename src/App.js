@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
 // HEROKU ADDED $ heroku buildpacks:add mars/create-raect-app
 
@@ -28,19 +27,6 @@ import Contact from "./pages/contactForm";
 import "./App.css";
 
 function App() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  //choose the screen size
-  const handleResize = () => {
-    if (window.innerWidth < 720) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  };
-
-  // finally you can render components conditionally if isMobile is True or False
-
   return (
     <>
       <div className="App" style={{ position: "relative" }}>
@@ -53,12 +39,9 @@ function App() {
         <MyTitleMessage />
 
         {/* =============checking if mobile - if yes then we cannot use Particles  ==================*/}
-        {useEffect(() => {
-          window.addEventListener("resize", handleResize);
-        })}
 
         {/* ------ Particles effect ------- */}
-        {isMobile ? (
+        {window.innerWidth < 720 ? (
           ""
         ) : (
           <Particles
