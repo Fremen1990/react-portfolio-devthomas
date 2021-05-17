@@ -30,7 +30,7 @@ const Experience = () => {
                   <Card.Title className="text-center">Web Developer</Card.Title>
                 </div>
                 <div>
-                  <Card.Text className="text-center style">
+                  <Card.Text className="text-left style">
                     <strong className="body-title-style ">
                       Full Stack Developer
                     </strong>

@@ -41,3 +41,7 @@
     margin: 0;
   }
 }
+
+.ext-center li {
+  text-align: center;
+}
