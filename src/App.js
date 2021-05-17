@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 // HEROKU ADDED $ heroku buildpacks:add mars/create-raect-app
 
@@ -27,28 +28,45 @@ import Contact from "./pages/contactForm";
 import "./App.css";
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  //choose the screen size
+  const handleResize = () => {
+    if (window.innerWidth < 720) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  // finally you can render components conditionally if isMobile is True or False
+
   return (
     <>
       <div className="App" style={{ position: "relative" }}>
         {/* ======================== Navbar ========================== */}
         <MyNavbar />
-
         {/* =========================== Home ===================== */}
-
         <Fade duration={1500}>
           <MyCarousel />
         </Fade>
-
         <MyTitleMessage />
 
+        {/* =============checking if mobile - if yes then we cannot use Particles  ==================*/}
+        {useEffect(() => {
+          window.addEventListener("resize", handleResize);
+        })}
+
         {/* ------ Particles effect ------- */}
-        <Particles
-          className="particles particles-box"
-          params={particlesOptions}
-        />
-
+        {isMobile ? (
+          ""
+        ) : (
+          <Particles
+            className="particles particles-box"
+            params={particlesOptions}
+          />
+        )}
         {/* ========================== About ============================= */}
-
         <div>
           <Parallax
             blur={{ min: -30, max: 30 }}
@@ -63,7 +81,6 @@ function App() {
             </Container>
           </Parallax>
         </div>
-
         {/* ============================== Skills =========================== */}
         <div>
           <Container className="container-box rounded">
@@ -73,7 +90,6 @@ function App() {
             </Slide>
           </Container>
         </div>
-
         {/* ============================ Experience ============================== */}
         <Parallax
           blur={{ min: -30, max: 30 }}
@@ -88,9 +104,7 @@ function App() {
             </Fade>
           </Container>
         </Parallax>
-
         {/* ============================ ProjectsTimeline ============================== */}
-
         <div>
           <Container className="container-box rounded">
             <Slide bottom duration={500}>
@@ -99,9 +113,7 @@ function App() {
             </Slide>
           </Container>
         </div>
-
         {/* ============================ Contact ============================== */}
-
         <div>
           <Container className="container-box rounded contact-container">
             <Fade bottom duration={500}>
@@ -110,7 +122,6 @@ function App() {
             </Fade>
           </Container>
         </div>
-
         {/* ============================ Footer ============================== */}
         <hr className="hr-footer" />
         <FooterPanel />

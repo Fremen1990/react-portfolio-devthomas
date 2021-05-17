@@ -26,3 +26,28 @@
     transform: translateY(0rem);
   }
 }
+
+@media screen and (max-width: 640px) {
+  .logo {
+    height: 9vh;
+    position: fixed;
+    top: 0;
+  }
+
+  .navbar-toggler {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+  }
+
+  .navbar-collapse {
+    margin-top: 9vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    background-color: rgba(16, 16, 24, 0.973);
+    padding: 3vw;
+    width: 40vw;
+  }
+}

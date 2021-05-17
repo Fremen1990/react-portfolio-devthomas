@@ -57,7 +57,7 @@ const About = () => {
                 </div>
                 <div>
                   <a
-                    href="https://www.devthomas.pl/Projects/Responsive%20resume%20Tomasz%20Stanisz%20-%20Web%20Developer%20CV/"
+                    href="https://www.devthomas.pl/tomasz-stanisz-web-developer-cv/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

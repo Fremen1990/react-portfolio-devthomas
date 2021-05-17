@@ -25,3 +25,9 @@
   font-size: 25px;
   font-weight: 800;
 }
+
+@media screen and (max-width: 640px) {
+  p {
+    font-size: 8px;
+  }
+}

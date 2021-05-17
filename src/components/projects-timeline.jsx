@@ -9,6 +9,7 @@ import Image from "react-bootstrap/Image";
 import L_Anon from "../assets/img/projects/project1-anon.png";
 import L_SpotyTom from "../assets/img/projects/Project2-SpotiTom clone.PNG";
 import L_TomPhase from "../assets/img/projects/Project3-PhaserGame.PNG";
+import L_CryptoTracker from "../assets/img/projects/Project4-CryptoCurrencyTracker.PNG";
 
 // --------------SKILLS TO BE USED IN PROJECTS TIMELINE--------------------
 import L_HTML5 from "../assets/img/skills/html-5.svg";
@@ -176,7 +177,7 @@ const ProjectsTimeline = () => {
           <ImageEvent
             date="01/10/2020"
             className="text-center"
-            text="React ToDo App"
+            text="SpotyTom - Spotify Clone"
             src={L_SpotyTom}
             alt="SpotyTom - Spotify Clone"
           >
@@ -279,6 +280,8 @@ const ProjectsTimeline = () => {
               </div>
             </div>
           </ImageEvent>
+
+          {/* ============================== THIRD PROJECT ===================================== */}
 
           {/* Project: TomPhase - Phaser Engine 2d Game */}
           <ImageEvent
@@ -416,6 +419,106 @@ const ProjectsTimeline = () => {
                 {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
                   WATCH VIDEO
                 </UrlButton> */}
+              </div>
+            </div>
+          </ImageEvent>
+
+          {/* ============================== FOURTH PROJECT ===================================== */}
+
+          {/* Project: Crypto Currency Tracker */}
+          <ImageEvent
+            date="07/12/2019"
+            className="text-center"
+            text="Crypto Currency Tracker"
+            src={L_CryptoTracker}
+            alt="Crypto Currency Tracker"
+          >
+            <div className="d-flex justify-content-between flex-column mt-1">
+              <div>
+                <Accordion>
+                  <Card>
+                    <Accordion.Toggle
+                      as={Card.Header}
+                      eventKey="0"
+                      className="p-2 text-center accordian-main"
+                    >
+                      PROJECT DETAILS
+                    </Accordion.Toggle>
+
+                    <Accordion.Collapse eventKey="0" className="text-left">
+                      <Card.Body>
+                        <strong>Description:</strong> In this web app you can
+                        track all crypto currency market values and movements,
+                        you can find them by typing part of crypto currency
+                        name.
+                        <hr />
+                        <strong>Features:</strong>
+                        <ul className="list-styles pt-1">
+                          <li>Fetching current data with real prices</li>
+                          <li>Easy to find any of crypto currency</li>
+                          <li>All crypto currencis available in network</li>
+                        </ul>
+                        <hr />
+                        <strong>Tech used:</strong>
+                        <ul>
+                          <li>
+                            <span className="p-2">
+                              <Image
+                                src={L_HTML5}
+                                alt="HTML 5"
+                                rounded
+                                className="image-style m-1"
+                              ></Image>{" "}
+                              HTML5
+                            </span>
+                          </li>
+
+                          <li>
+                            <span className="p-2">
+                              <Image
+                                src={L_JAVASCRIPT}
+                                alt="Django"
+                                rounded
+                                className="image-style m-1"
+                              ></Image>{" "}
+                              JavaScript
+                            </span>
+                          </li>
+
+                          <li>
+                            <span className="p-2">
+                              <Image
+                                src={L_GIT}
+                                alt="Digital Ocean"
+                                rounded
+                                className="image-style m-1"
+                              ></Image>{" "}
+                              GIT and Git-HUB
+                            </span>
+                          </li>
+                        </ul>
+                        <hr />
+                      </Card.Body>
+                    </Accordion.Collapse>
+                  </Card>
+                </Accordion>
+              </div>
+              <div className="d-flex justify-content-between flex-nowrap text-center">
+                <UrlButton
+                  href="https://crypto-currency-tracker-react.herokuapp.com/"
+                  target="_blank"
+                >
+                  SEE LIVE
+                </UrlButton>
+                <UrlButton
+                  href="https://github.com/Fremen1990/Crypto_currency_API_React"
+                  target="_blank"
+                >
+                  SOURCE CODE
+                </UrlButton>
+                {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
+WATCH VIDEO
+</UrlButton> */}
               </div>
             </div>
           </ImageEvent>
