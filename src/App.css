@@ -37,3 +37,23 @@ hr {
   height: 100%;
   z-index: 1;
 }
+
+@media screen and (max-width: 680px) {
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .container-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96%;
+    padding: 0;
+    margin: 0;
+  }
+  .img-about {
+    margin-left: 0;
+  }
+}
