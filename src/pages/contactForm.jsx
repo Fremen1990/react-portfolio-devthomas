@@ -68,7 +68,7 @@ const Contact = () => {
                   variant="outline-info"
                   title="My YouTube"
                 >
-                  <i class="fab fa-youtube"></i> Youtube
+                  <i className="fab fa-youtube"></i> Youtube
                 </Button>
               </a>
             </div>

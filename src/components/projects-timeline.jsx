@@ -6,10 +6,10 @@ import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 
 // projects
-import L_Anon from "../assets/img/projects/project1-anon.png";
-import L_SpotyTom from "../assets/img/projects/Project2-SpotiTom clone.PNG";
-import L_TomPhase from "../assets/img/projects/Project3-PhaserGame.PNG";
-import L_CryptoTracker from "../assets/img/projects/Project4-CryptoCurrencyTracker.PNG";
+import L_Anon from "../assets/img/projects/project1-anon.webp";
+import L_SpotyTom from "../assets/img/projects/Project2-SpotiTom clone.webp";
+import L_TomPhase from "../assets/img/projects/Project3-PhaserGame.webp";
+import L_CryptoTracker from "../assets/img/projects/Project4-CryptoCurrencyTracker.webp";
 
 // --------------SKILLS TO BE USED IN PROJECTS TIMELINE--------------------
 import L_HTML5 from "../assets/img/skills/html-5.svg";

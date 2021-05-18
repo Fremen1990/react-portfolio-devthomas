@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Card from "react-bootstrap/Card";
-import L_ANON from "../assets/img/experience/anon.png";
+import L_ANON from "../assets/img/experience/anon.webp";
 import Tilt from "react-tilt";
 import "./experience.css";
 
@@ -54,10 +54,6 @@ const Experience = () => {
                         continious enhancements, problem solving for startup
                         profile web page and new ideas
                       </li>
-                      {/* <li>
-                        <strong>Performed</strong> quality checks with designers and 
-                      </li> */}
-                      {/* <li><strong>Co-created</strong> React Document used as a guide for new developers.</li> */}
                     </ul>
                   </Card.Text>
                 </div>
