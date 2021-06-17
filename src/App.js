@@ -15,6 +15,7 @@ import MyNavbar from "./components/navbar";
 import MyCarousel from "./components/carousel";
 import MyTitleMessage from "./components/titleMessage.jsx";
 import ProjectsTimeline from "./components/projects-timeline";
+import EducationTimeline from "./components/education-timeline";
 import FooterPanel from "./components/footer";
 
 // Pages
@@ -93,6 +94,15 @@ function App() {
             <Slide bottom duration={500}>
               <hr className="hr-projects" />
               <ProjectsTimeline />
+            </Slide>
+          </Container>
+        </div>
+        {/* ============================ EducationTimeline ============================== */}
+        <div>
+          <Container className="container-box rounded">
+            <Slide bottom duration={500}>
+              <hr className="hr-projects" />
+              <EducationTimeline />
             </Slide>
           </Container>
         </div>

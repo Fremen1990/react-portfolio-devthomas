@@ -38,6 +38,9 @@ const MyNavbar = () => {
               <Nav.Link className="nav-link-item" href="#projects">
                 Projects
               </Nav.Link>
+              <Nav.Link className="nav-link-item" href="#education">
+                Education
+              </Nav.Link>
               <Nav.Link className="nav-link-item" href="#contact">
                 Contact
               </Nav.Link>
