@@ -63,6 +63,7 @@ export const skills = {
       imgAltText: "JavaScript",
       imgSrc: L_JAVASCRIPT,
       skillName: "JavaScript",
+      points:152
     },
 
     {
@@ -70,6 +71,8 @@ export const skills = {
       imgAltText: "React JS",
       imgSrc: L_REACT,
       skillName: "React JS",
+      points:110
+
     },
     {
       link: "https://reacttraining.com/react-router/",
@@ -124,6 +127,7 @@ export const skills = {
       imgAltText: "Node.js",
       imgSrc: L_NODE_JS,
       skillName: "Node.js",
+      points:156
     },
     {
       link: "https://expressjs.com/",
