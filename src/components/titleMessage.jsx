@@ -44,9 +44,8 @@ const MyTitleMessage = () => {
               options={{
                 strings: [
                   "Web Developer",
-                  "Mobile developer",
                   "IT lover",
-                  "2D game programmer",
+                  "Self-taught",
                 ],
                 autoStart: true,
                 loop: true,

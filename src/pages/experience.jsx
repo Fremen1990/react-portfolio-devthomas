@@ -30,13 +30,14 @@ const Experience = () => {
               </Card.Header>
               <Card.Body className="d-flex justify-content-center flex-column">
                 <div>
-                  <Card.Title className="text-center">Senior General Ledger Analyst</Card.Title>
+                  <Card.Title className="text-center ">Senior General Ledger Analyst</Card.Title>
                 </div>
                 <div>
-                  <Card.Text className="text-left style">
-                    <strong className="body-title-style ">
-                    Analyzing accounting data
-                    </strong>
+                  <Card.Text className="text-center style">
+                    {/*<strong className="body-title-style ">*/}
+            Work on financial data analysis and cooperation with global stakeholders for problem solving
+                    {/*</strong>*/}
+                    <br />
                     <br />
                     <strong>Tech:</strong> Excel, VBA, Oracle, SQL
                     <br />
@@ -69,10 +70,11 @@ const Experience = () => {
                   <Card.Title className="text-center">Senior General Ledger Analyst</Card.Title>
                 </div>
                 <div>
-                  <Card.Text className="text-left style">
-                    <strong className="body-title-style ">
-                     Cooperation with financial controllers
-                    </strong>
+                  <Card.Text className="text-center style">
+                    {/*<strong className="body-title-style ">*/}
+                     Cooperation with European Financial Controllers to deliver high performance financial services.
+                    {/*</strong>*/}
+                    <br />
                     <br />
                     <strong>Tech:</strong> Oracle, Excel, VBA
                     <br />
@@ -105,10 +107,11 @@ const Experience = () => {
                   <Card.Title className="text-center">Credit Management Ananlyst</Card.Title>
                 </div>
                 <div>
-                  <Card.Text className="text-left style">
-                    <strong className="body-title-style ">
-                  Working with 3rd party client
-                    </strong>
+                  <Card.Text className="text-center style">
+                    {/*<strong className="body-title-style ">*/}
+   Work on US Market with 3rd party clients financial data, analysis of credit ratios for limits setup.
+                    {/*</strong>*/}
+                    <br />
                     <br />
                     <strong>Tech:</strong> SAP, Excel, VBA
                     <br />

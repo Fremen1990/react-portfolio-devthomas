@@ -1,16 +1,21 @@
 import L_HTML5 from "../assets/img/skills/html-5.svg";
 import L_CSS3 from "../assets/img/skills/css3.svg";
 import L_SASS from "../assets/img/skills/sass-1.svg";
-import L_WEBPACK from "../assets/img/skills/web-pack.svg";
+// import L_WEBPACK from "../assets/img/skills/web-pack.svg";
+import L_TAILWIND from "../assets/img/skills/tailwind.svg";
 import L_BOOTSTRAP from "../assets/img/skills/bootstrap-4.svg";
 import L_REACT from "../assets/img/skills/react.svg";
+import L_NEXTJS from "../assets/img/skills/nextjs.svg";
 import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
-// import L_MATERIALUI from "../assets/img/skills/material-ui-1.svg";
-import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
+import L_MATERIALUI from "../assets/img/skills/material-ui-1.svg";
+// import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
 import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
 import L_NODE_JS from "../assets/img/skills/nodejs.svg";
 import L_EXPRESS from "../assets/img/skills/express.svg";
+import L_NESTJS from "../assets/img/skills/nestjs.svg";
+
+
 import L_VBA from "../assets/img/skills/vba.webp";
 // import L_DJANGO from "../assets/img/skills/django.svg";
 // import L_FLASK from "../assets/img/skills/flask.svg";
@@ -23,7 +28,7 @@ import L_GIT from "../assets/img/skills/git-icon.svg";
 import L_OVH from "../assets/img/skills/ovh.svg";
 
 import L_HEROKU from "../assets/img/skills/heroku.svg";
-// import L_DIGITAL_OCEAN from "../assets/img/skills/digital-ocean.svg";
+import L_DIGITAL_OCEAN from "../assets/img/skills/digital-ocean.svg";
 import L_NETLIFY from "../assets/img/skills/netlify.svg";
 
 import L_GITHUB_PAGES from "../assets/img/skills/github.svg";
@@ -52,12 +57,12 @@ export const skills = {
       imgSrc: L_SASS,
       skillName: "Sass",
     },
-    {
-      link: "https://webpack.js.org/",
-      imgAltText: "Web-pack",
-      imgSrc: L_WEBPACK,
-      skillName: "Web-Pack",
-    },
+    // {
+    //   link: "https://webpack.js.org/",
+    //   imgAltText: "Web-pack",
+    //   imgSrc: L_WEBPACK,
+    //   skillName: "Web-Pack",
+    // },
     {
       link: "https://www.javascript.com/",
       imgAltText: "JavaScript",
@@ -88,19 +93,30 @@ export const skills = {
       skillName: "Redux",
     },
 
+    {
+      link: "https://material-ui.com/",
+      imgAltText: "Material-UI",
+      imgSrc: L_MATERIALUI,
+      skillName: "Material-UI",
+    },
     // {
-    //   link: "https://material-ui.com/",
-    //   imgAltText: "Material-UI",
-    //   imgSrc: L_MATERIALUI,
-    //   skillName: "Material-UI",
+    //   link: "https://react-bootstrap.github.io/",
+    //   imgAltText: "React Bootstrap",
+    //   imgSrc: L_REACT_BOOTSTRAP,
+    //   skillName: "React Bootstrap",
     // },
     {
-      link: "https://react-bootstrap.github.io/",
-      imgAltText: "React Bootstrap",
-      imgSrc: L_REACT_BOOTSTRAP,
-      skillName: "React Bootstrap",
+      link: "https://nextjs.org/",
+      imgAltText: "Next.js",
+      imgSrc: L_NEXTJS,
+      skillName: "Next.js",
     },
-
+    {
+      link: "https://tailwindcss.com/",
+      imgAltText: "Tailwind",
+      imgSrc: L_TAILWIND,
+      skillName: "Tailwind",
+    },
     {
       link: "https://getbootstrap.com/",
       imgAltText: "Bootstrap",
@@ -134,7 +150,13 @@ export const skills = {
       imgAltText: "Express",
       imgSrc: L_EXPRESS,
       skillName: "Express",
+    },    {
+      link: "https://nestjs.com/",
+      imgAltText: "Nestjs",
+      imgSrc: L_NESTJS,
+      skillName: "nestJS - in progress",
     },
+
     {
       link: "https://phaser.io/",
       imgAltText: "Phaser",
@@ -167,12 +189,12 @@ export const skills = {
       imgSrc: L_HEROKU,
       skillName: "Heroku",
     },
-    // {
-    //     link: "https://www.digitalocean.com/",
-    //     imgAltText: "Digital Ocean",
-    //     imgSrc: L_DIGITAL_OCEAN,
-    //     skillName: "Digital Ocean",
-    //   },
+    {
+        link: "https://www.digitalocean.com/",
+        imgAltText: "Digital Ocean",
+        imgSrc: L_DIGITAL_OCEAN,
+        skillName: "Digital Ocean",
+      },
     {
       link: "https://www.netlify.com/",
       imgAltText: "Netlify",

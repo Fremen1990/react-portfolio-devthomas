@@ -20,7 +20,7 @@ import L_TITLE_NODE from "../assets/img/education/node/title_node.PNG";
 // --------------SKILLS TO BE USED IN PROJECTS TIMELINE--------------------
 
 import {skills} from "../pages/skills-data"
-import {education} from "../pages/education-data"
+import {educationBIAnalyst, educationNode, educationReact} from "../pages/education-data"
 
 import L_HTML5 from "../assets/img/skills/html-5.svg";
 import L_CSS3 from "../assets/img/skills/css3.svg";
@@ -28,6 +28,7 @@ import L_SASS from "../assets/img/skills/sass-1.svg";
 // import L_WEBPACK from "../assets/img/skills/web-pack.svg";
 // import L_BOOTSTRAP4 from "../assets/img/skills/bootstrap-4.svg";
 import L_REACT from "../assets/img/skills/react.svg";
+import L_NESTJS from "../assets/img/skills/nestjs.svg"
 // import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
 // import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
@@ -54,6 +55,7 @@ import L_MYSQL from "../assets/img/skills/mySql.svg";
 
 import "./projects-timeline.css";
 import Tilt from "react-tilt/dist/tilt";
+import Button from "react-bootstrap/Button";
 
 const EducationTimeline = () => {
     return (
@@ -71,7 +73,7 @@ const EducationTimeline = () => {
                     {/* Education: Pluralsight - Learning platform for professional programmers */}
 
                     <ImageEvent
-                        date="15/06/2021"
+                        date="15/09/2021"
                         className="text-center"
                         text="Pluralsight - Technology platform for programmers"
                         src={L_PLURALSIGHT}
@@ -101,7 +103,24 @@ const EducationTimeline = () => {
 
 
                                                 <div className="row h-25">
+
+                                                    <strong className="col-8">Assessments results: </strong>
+                                                    <br/>
+                                                    <br/>
                                                     <strong className="col-8">Node Web Developer IQ Role: </strong>
+
+                                                    <br/>
+                                                    <div>
+                                                        <a
+                                                            href="https://app.pluralsight.com/profile/tomasz-stanisz"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
+                                                            <Button className="m-2" variant="outline-danger">
+                                                                Check details
+                                                            </Button>
+                                                        </a>
+                                                    </div>
                                                     {/*<div className="container-fluid col-2">*/}
                                                     {/*    <img alt=""*/}
                                                     {/*         src="https://s2.pluralsight.com/roleiq-leader/badges/prod/badge_nodejs_developer.svg"*/}
@@ -116,9 +135,9 @@ const EducationTimeline = () => {
 
                                                 </div>
 
-                                                <ul className="list-unstyled pt-1 mt-5">
+                                                <ul className="list-unstyled pt-1 mt-2">
 
-                                                    {education.nodeWebDeveloper.map((learningPath, index) => (
+                                                    {educationNode.map((learningPath, index) => (
                                                         <Tilt options={{max: 5}} className="bg-dark text-light m-2">
 
                                                             <li className="hovered" key={index}>
@@ -138,35 +157,42 @@ const EducationTimeline = () => {
                                                 <strong>React Developer: </strong>
                                                 <ul className="list-unstyled pt-1">
 
-                                                    {education.nodeWebDeveloper.map((learningPath, index) => (
-                                                        <li className="hovered" key={index}>
-                                                            <img
-                                                                src={learningPath.icon}
-                                                                alt={learningPath.pathName} className="h-25 w-25"/>
-                                                            <span>{learningPath.pathName}</span> <strong><span>
+                                                    {educationReact.map((learningPath, index) => (
+                                                        <Tilt options={{max: 5}} className="bg-dark text-light m-2">
+
+                                                            <li className="hovered" key={index}>
+                                                                <img
+                                                                    src={learningPath.icon}
+                                                                    alt={learningPath.pathName} className="h-25 w-25"/>
+                                                                <span>{learningPath.pathName}</span> <strong><span>
                             <CountUp end={learningPath.points} duration={7}/>
                             </span></strong>
-                                                        </li>
+                                                            </li>
+                                                        </Tilt>
                                                     ))}
                                                 </ul>
 
                                                 <hr/>
 
 
-                                                <strong>BI / Data Analyst </strong>
+                                                <strong>BI / Data Analyst (Microsoft Self-Service): </strong>
                                                 <ul className="list-unstyled pt-1">
 
-                                                    {education.nodeWebDeveloper.map((learningPath, index) => (
-                                                        <li className="hovered" key={index}>
-                                                            <img
-                                                                src={learningPath.icon}
-                                                                alt={learningPath.pathName} className="h-25 w-25"/>
-                                                            <span>{learningPath.pathName}</span> <strong><span>
+                                                    {educationBIAnalyst.map((learningPath, index) => (
+                                                        <Tilt options={{max: 5}} className="bg-dark text-light m-2">
+
+                                                            <li className="hovered" key={index}>
+                                                                <img
+                                                                    src={learningPath.icon}
+                                                                    alt={learningPath.pathName} className="h-25 w-25"/>
+                                                                <span>{learningPath.pathName}</span> <strong><span>
                             <CountUp end={learningPath.points} duration={7}/>
                             </span></strong>
-                                                        </li>
+                                                            </li>
+                                                        </Tilt>
                                                     ))}
                                                 </ul>
+
 
                                                 <hr/>
 
@@ -327,6 +353,18 @@ const EducationTimeline = () => {
                                   style={{height: 75, width: 75}}
                               ></Image>{" "}
                                 React
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_NESTJS}
+                                  alt="nestjs"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 75, width: 75}}
+                              ></Image>{" "}
+                                nestjs
                             </span>
                                                     </li>
                                                 </ul>
