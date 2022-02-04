@@ -8,9 +8,8 @@ import Image from "react-bootstrap/Image";
 // projects
 import L_CryptoVerse from "../assets/img/projects/crypto-chart.PNG";
 import L_SpotyTom from "../assets/img/projects/Project2-SpotiTom clone.webp";
-import L_TomPhase from "../assets/img/projects/Project3-PhaserGame.webp";
-import L_CryptoTracker from "../assets/img/projects/Project4-CryptoCurrencyTracker.webp";
-import L_E_Commerce from "../assets/img/projects/Project-5-E-Commerce.PNG";
+import L_TomPhase from "../assets/img/projects/PhaserGame.webp";
+import L_E_Commerce from "../assets/img/projects/ecommerce.webp";
 
 // --------------SKILLS TO BE USED IN PROJECTS TIMELINE--------------------
 import L_HTML5 from "../assets/img/skills/html-5.svg";
@@ -219,7 +218,7 @@ const ProjectsTimeline = () => {
                                     href="http://ecommerce.devthomas.pl/"
                                     target="_blank"
                                 >
-                                    SEE LIVE
+                                 --  SEE LIVE --
                                 </UrlButton>
                                 <UrlButton
                                     href="https://github.com/Fremen1990/E-Commerce-MERN-NODE-REACT"
@@ -328,7 +327,7 @@ const ProjectsTimeline = () => {
                                     href="https://cryptoapplicationreactjs.netlify.app/"
                                     target="_blank"
                                 >
-                                    SEE LIVE
+                                  -- SEE LIVE --
                                 </UrlButton>
                                 <UrlButton
                                     href="https://github.com/Fremen1990/CryptoVerse-App"
@@ -441,7 +440,7 @@ const ProjectsTimeline = () => {
                                     href="https://spoty-tom.herokuapp.com/"
                                     target="_blank"
                                 >
-                                    SEE LIVE
+                                   -- SEE LIVE --
                                 </UrlButton>
                                 <UrlButton
                                     href="https://github.com/Fremen1990/TS_Music_Player"
@@ -584,10 +583,10 @@ const ProjectsTimeline = () => {
                             </div>
                             <div className="d-flex justify-content-between flex-nowrap text-center">
                                 <UrlButton
-                                    href="https://elegant-payne-bbcaf8.netlify.app/"
+                                    href="https://dev-thomas-thom-phase-game.netlify.app"
                                     target="_blank"
                                 >
-                                    SEE LIVE
+                                   -- SEE LIVE --
                                 </UrlButton>
                                 <UrlButton
                                     href="https://github.com/Fremen1990/The-Game---Phaser-2d"
@@ -602,7 +601,7 @@ const ProjectsTimeline = () => {
                         </div>
                     </ImageEvent>
 
-              
+
                 </Events>
             </Timeline>
         </div>

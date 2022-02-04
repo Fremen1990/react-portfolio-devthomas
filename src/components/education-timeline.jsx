@@ -86,7 +86,7 @@ const EducationTimeline = () => {
                                         <Accordion.Toggle
                                             as={Card.Header}
                                             eventKey="0"
-                                            className="p-2 text-center accordian-main"
+                                            className="p-2 text-center accordian-main h-xs-1"
                                         >
                                             Role IQs and TECH details
                                         </Accordion.Toggle>
@@ -104,10 +104,19 @@ const EducationTimeline = () => {
 
                                                 <div className="row h-25">
 
-                                                    <strong className="col-8">Assessments results: </strong>
+                                                    <strong className="col-8 h3">Role IQ Assessments: </strong>
                                                     <br/>
                                                     <br/>
-                                                    <strong className="col-8">Node Web Developer IQ Role: </strong>
+                                                    <br/>
+                                                    <div>
+                                                        <strong className="col-8 h3">Node Web Developer </strong>
+
+                                                        <img className="w-25"
+                                                             src="https://s2.pluralsight.com/roleiq-leader/badges/prod/badge_nodejs_developer.svg"
+                                                             alt="Node"/>
+
+                                                    </div>
+
 
                                                     <br/>
                                                     <div>
@@ -154,7 +163,12 @@ const EducationTimeline = () => {
 
                                                 <hr/>
 
-                                                <strong>React Developer: </strong>
+                                                <div>
+                                                    <strong className="h3">React Developer </strong>
+
+                                                    <img className="w-25 " src="https://s2.pluralsight.com/roleiq-leader/badges/prod/badge_react_developer.svg" alt="React"/>
+                                                </div>
+
                                                 <ul className="list-unstyled pt-1">
 
                                                     {educationReact.map((learningPath, index) => (
@@ -175,7 +189,14 @@ const EducationTimeline = () => {
                                                 <hr/>
 
 
-                                                <strong>BI / Data Analyst (Microsoft Self-Service): </strong>
+
+                                                <div>
+                                                    <strong className="h3">BI / Data Analyst  </strong>
+
+                                                    <img className="w-25 " src="https://s2.pluralsight.com/roleiq-leader/badges/prod/badge_dataAnalystMicrosoftSelfService2.svg" alt="React"/>
+                                                </div>
+
+
                                                 <ul className="list-unstyled pt-1">
 
                                                     {educationBIAnalyst.map((learningPath, index) => (
