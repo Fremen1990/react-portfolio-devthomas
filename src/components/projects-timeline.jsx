@@ -10,6 +10,7 @@ import L_CryptoVerse from "../assets/img/projects/crypto-chart.PNG";
 import L_SpotyTom from "../assets/img/projects/Project2-SpotiTom clone.webp";
 import L_TomPhase from "../assets/img/projects/PhaserGame.webp";
 import L_E_Commerce from "../assets/img/projects/ecommerce.webp";
+import L_UI_KIT from "../assets/img/projects/ui-kit.webp";
 
 // --------------SKILLS TO BE USED IN PROJECTS TIMELINE--------------------
 import L_HTML5 from "../assets/img/skills/html-5.svg";
@@ -18,6 +19,8 @@ import L_SASS from "../assets/img/skills/sass-1.svg";
 // import L_WEBPACK from "../assets/img/skills/web-pack.svg";
 // import L_BOOTSTRAP4 from "../assets/img/skills/bootstrap-4.svg";
 import L_REACT from "../assets/img/skills/react.svg";
+import L_TYPESCRIPT from "../assets/img/skills/typescript.svg";
+import L_STORYBOOK from "../assets/img/skills/storybook-icon.svg";
 // import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
 // import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
@@ -54,7 +57,159 @@ const ProjectsTimeline = () => {
 
             <Timeline>
                 <Events>
+
                     {/* ============================== FIRST PROJECT ===================================== */}
+
+                    {/* =================   UI KIT Storybook  ================= */}
+
+                    {/* Project: UI KIT Storybook React&TypeScript */}
+                    <ImageEvent
+                        date="22/03/2022"
+                        className="text-center"
+                        text="🧐 UI KIT Storybook DevThomas 🤖"
+                        src={L_UI_KIT}
+                        alt="MERN Full Stack E-Commerce"
+                    >
+                        <div className="d-flex justify-content-between flex-column mt-1">
+                            <div>
+                                <Accordion>
+                                    <Card>
+                                        <Accordion.Toggle
+                                            as={Card.Header}
+                                            eventKey="0"
+                                            className="p-2 text-center accordian-main"
+                                        >
+                                            PROJECT DETAILS
+                                        </Accordion.Toggle>
+
+                                        <Accordion.Collapse eventKey="0" className="text-left">
+                                            <Card.Body>
+                                                <strong>Description:</strong> UI KIT with use of Storybook for React components, views and pages
+                                                Place for all small ideas and projects -> second brain 😀
+                                                <hr/>
+                                                <strong>Features:</strong>
+                                                <ul className="list-styles pt-1">
+                                                    <li>Storybook is customized with logo, dark theme and helpful addons </li>
+                                                    <li>Documentation</li>
+                                                    <li>
+                                                     Options to cutomize each component
+                                                    </li>
+                                                    <li>Pages</li>
+                                                    <li>Views</li>
+                                                </ul>
+                                                <hr/>
+                                                <strong>Tech used:</strong>
+                                                <ul>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_HTML5}
+                                  alt="HTML 5"
+                                  rounded
+                                  className="image-style m-1"
+                              ></Image>{" "}
+                                HTML5
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_SASS}
+                                  alt="SASS"
+                                  rounded
+                                  className="image-style m-1"
+                              ></Image>{" "}
+                              SASS
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_JAVASCRIPT}
+                                  alt="Django"
+                                  rounded
+                                  className="image-style m-1"
+                              ></Image>{" "}
+                                JavaScript
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REACT}
+                                  alt="React"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                React
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_TYPESCRIPT}
+                                  alt="TypeScript"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                TypeScript
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_STORYBOOK}
+                                  alt="Storybook"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                               Storybook
+                            </span>
+                                                    </li>
+
+
+                                                </ul>
+                                                <hr/>
+                                                <em>
+                                                    <strong>Quick summary:</strong>
+                                                    <br/>
+                                                    <br/>
+                                       Creating this project was all the time process of learning new technology from scratch, first steps and going through documentation, tutorial doing more and more, this was a challange to get known new tech and create project in the same time, best way to learn for me is learning by doing 🙂
+                                                    <br/>
+                                                    Keep tracking, there will be more upgrades and
+                                                    ehhancements here :)
+                                                    <br/>
+                                                    <br/>
+                                                </em>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </div>
+                            <div className="d-flex justify-content-between flex-nowrap text-center">
+                                <UrlButton
+                                    href="http://ecommerce.devthomas.pl/"
+                                    target="_blank"
+                                >
+                                    --  SEE LIVE --
+                                </UrlButton>
+                                <UrlButton
+                                    href="https://github.com/Fremen1990/E-Commerce-MERN-NODE-REACT"
+                                    target="_blank"
+                                >
+                                    SOURCE CODE
+                                </UrlButton>
+                                {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
+                  WATCH VIDEO
+                </UrlButton> */}
+                            </div>
+                        </div>
+                    </ImageEvent>
+
+
+
+                    {/* ============================== SECOND PROJECT ===================================== */}
 
                     {/* =================   MERN E-COMMERCE ================= */}
 
@@ -233,7 +388,7 @@ const ProjectsTimeline = () => {
                         </div>
                     </ImageEvent>
 
-                    {/* ============================== SECOND PROJECT ===================================== */}
+                    {/* ============================== THIRD PROJECT ===================================== */}
 
                     {/*--------- Project: CryptoVerse - ------ */}
 
@@ -346,7 +501,7 @@ const ProjectsTimeline = () => {
                     </ImageEvent>
 
 
-                    {/* ============================== THIRD  PROJECT ===================================== */}
+                    {/* ============================== FOURTH  PROJECT ===================================== */}
 
 
                     {/* Project: SpotiTom - Spotify Clone */}
@@ -459,7 +614,7 @@ const ProjectsTimeline = () => {
                     </ImageEvent>
 
 
-                    {/* =========================FOURTH PROJECT - PHASER GAME ======================== */}
+                    {/* =========================FIFTH PROJECT - PHASER GAME ======================== */}
 
                     {/* Project: TomPhase - Phaser Engine 2d Game */}
                     <ImageEvent
