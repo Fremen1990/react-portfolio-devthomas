@@ -1,7 +1,6 @@
 import L_HTML5 from "../assets/img/skills/html-5.svg";
 import L_CSS3 from "../assets/img/skills/css3.svg";
 import L_SASS from "../assets/img/skills/sass-1.svg";
-// import L_WEBPACK from "../assets/img/skills/web-pack.svg";
 import L_TAILWIND from "../assets/img/skills/tailwind.svg";
 import L_BOOTSTRAP from "../assets/img/skills/bootstrap-4.svg";
 import L_REACT from "../assets/img/skills/react.svg";
@@ -23,19 +22,29 @@ import L_MONGODB from "../assets/img/skills/mongodb.svg";
 import L_PHASER from "../assets/img/skills/phaser.svg";
 // import L_POSTGRESQL from "../assets/img/skills/postgresql.svg";
 // import L_MSSQL from "../assets/img/skills/mssql.svg";
+import L_FIREBASE_DATABASE from "../assets/img/skills/firebase-realtime-database.png";
 import L_MYSQL from "../assets/img/skills/mySql.svg";
 import L_GIT from "../assets/img/skills/git-icon.svg";
 import L_OVH from "../assets/img/skills/ovh.svg";
 
+import L_FIREBASE_HOSTING from "../assets/img/skills/firebase-hosting.png";
 import L_HEROKU from "../assets/img/skills/heroku.svg";
 import L_DIGITAL_OCEAN from "../assets/img/skills/digital-ocean.svg";
 import L_NETLIFY from "../assets/img/skills/netlify.svg";
+import L_FIREBASE from "../assets/img/skills/firebase-icon.png";
 
 import L_GITHUB_PAGES from "../assets/img/skills/github.svg";
 import L_JAVASCRIPT from "../assets/img/skills/javascript.svg";
 import L_TYPESCRIPT from "../assets/img/skills/typescript.svg";
 // import L_GOLANG from "../assets/img/skills/go-6.svg";
 // import L_PYTHON from "../assets/img/skills/python.svg";
+
+// --------------- TESTING
+import L_REACT_TESTING_LIBRARY from "../assets/img/skills/react-testing-library.png"
+import L_JEST from "../assets/img/skills/testing_jest.webp"
+import L_CYPRESS from "../assets/img/skills/testing_cypress.png"
+import L_MOCHA from "../assets/img/skills/testing_mocha.png"
+import L_CHAI from "../assets/img/skills/testing_chai.png"
 
 export const skills = {
   frontend: [
@@ -68,7 +77,7 @@ export const skills = {
       imgAltText: "JavaScript",
       imgSrc: L_JAVASCRIPT,
       skillName: "JavaScript",
-      points:152
+      points: 152
     },
 
     {
@@ -76,7 +85,7 @@ export const skills = {
       imgAltText: "React JS",
       imgSrc: L_REACT,
       skillName: "React JS",
-      points:110
+      points: 110
 
     },
     {
@@ -132,29 +141,35 @@ export const skills = {
   ],
 
   backend: [
-    {
-      link: "https://pl.wikipedia.org/wiki/Visual_Basic_for_Applications",
-      imgAltText: "VBA",
-      imgSrc: L_VBA,
-      skillName: "VBA",
-    },
+    // {
+    //   link: "https://pl.wikipedia.org/wiki/Visual_Basic_for_Applications",
+    //   imgAltText: "VBA",
+    //   imgSrc: L_VBA,
+    //   skillName: "VBA",
+    // },
     {
       link: "https://nodejs.org/en/",
       imgAltText: "Node.js",
       imgSrc: L_NODE_JS,
       skillName: "Node.js",
-      points:156
+      points: 156
     },
     {
       link: "https://expressjs.com/",
       imgAltText: "Express",
       imgSrc: L_EXPRESS,
       skillName: "Express",
-    },    {
+    }, {
       link: "https://nestjs.com/",
       imgAltText: "Nestjs",
       imgSrc: L_NESTJS,
       skillName: "nestJS - in progress",
+    },
+    {
+      link: "https://firebase.google.com/",
+      imgAltText: "Firebase",
+      imgSrc: L_FIREBASE,
+      skillName: "Firebase",
     },
 
     {
@@ -178,6 +193,12 @@ export const skills = {
   ],
   hostingPlatforms: [
     {
+      link: "https://firebase.google.com/",
+      imgAltText: "Firebase Hosting",
+      imgSrc: L_FIREBASE_HOSTING,
+      skillName: "Firebase Hosting",
+    },
+    {
       link: "https://www.ovh.com/",
       imgAltText: "Ovh",
       imgSrc: L_OVH,
@@ -190,11 +211,11 @@ export const skills = {
       skillName: "Heroku",
     },
     {
-        link: "https://www.digitalocean.com/",
-        imgAltText: "Digital Ocean",
-        imgSrc: L_DIGITAL_OCEAN,
-        skillName: "Digital Ocean",
-      },
+      link: "https://www.digitalocean.com/",
+      imgAltText: "Digital Ocean",
+      imgSrc: L_DIGITAL_OCEAN,
+      skillName: "Digital Ocean",
+    },
     {
       link: "https://www.netlify.com/",
       imgAltText: "Netlify",
@@ -259,6 +280,12 @@ export const skills = {
       imgSrc: L_MONGODB,
       skillName: "MongoDB",
     },
+    {
+      link: "https://firebase.google.com/",
+      imgAltText: "Firebase Database",
+      imgSrc: L_FIREBASE_DATABASE,
+      skillName: "Firebase RealtimeDB",
+    },
   ],
   versionControl: [
     {
@@ -268,4 +295,37 @@ export const skills = {
       skillName: "GIT",
     },
   ],
-};
+  testing: [
+    {
+      link: "https://testing-library.com/docs/react-testing-library/intro/",
+      imgAltText: "React Testing Library",
+      imgSrc: L_REACT_TESTING_LIBRARY,
+      skillName: "React Testing Library",
+    },
+    {
+      link: "https://jestjs.io/",
+      imgAltText: "JEST",
+      imgSrc: L_JEST,
+      skillName: "JEST",
+    },
+    {
+      link: "https://www.cypress.io/",
+      imgAltText: "Cypress",
+      imgSrc: L_CYPRESS,
+      skillName: "Cypress",
+    },
+    {
+      link: "https://mochajs.org/",
+      imgAltText: "Mocha",
+      imgSrc: L_MOCHA,
+      skillName: "MOCHA",
+    },
+    {
+      link: "https://www.chaijs.com/",
+      imgAltText: "Chai",
+      imgSrc: L_CHAI,
+      skillName: "Chai",
+    }
+
+  ]
+}

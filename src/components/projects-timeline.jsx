@@ -11,6 +11,7 @@ import L_SpotyTom from "../assets/img/projects/Project2-SpotiTom clone.webp";
 import L_TomPhase from "../assets/img/projects/PhaserGame.webp";
 import L_E_Commerce from "../assets/img/projects/ecommerce.webp";
 import L_UI_KIT from "../assets/img/projects/ui-kit.webp";
+import L_NETFLIX_CLONE from "../assets/img/projects/netflix-clone.webp";
 
 // --------------SKILLS TO BE USED IN PROJECTS TIMELINE--------------------
 import L_HTML5 from "../assets/img/skills/html-5.svg";
@@ -24,7 +25,11 @@ import L_STORYBOOK from "../assets/img/skills/storybook-icon.svg";
 // import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
 // import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
-// import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
+import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
+import L_FIREBASE from "../assets/img/skills/firebase-icon.png";
+import L_REACT_TESTING_LIBRARY from "../assets/img/skills/react-testing-library.png"
+import L_JEST from "../assets/img/skills/testing_jest.webp"
+
 // import L_NODE_JS from "../assets/img/skills/nodejs.svg";
 // import L_EXPRESS from "../assets/img/skills/express.svg";
 // import L_VBA from "../assets/img/skills/vba.png";
@@ -58,7 +63,152 @@ const ProjectsTimeline = () => {
             <Timeline>
                 <Events>
 
-                    {/* ============================== FIRST PROJECT ===================================== */}
+                    {/* ============================== NEWEST  PROJECT ===================================== */}
+
+                    {/* =================   NETFLIX CLONE  ================= */}
+
+                    {/* Project: Netflix Clone with React + Firebase + Styled Components */}
+                    <ImageEvent
+                        date="15/05/2022"
+                        className="text-center"
+                        text="😏 Netflix Clone React+Firebase+Testing 👽"
+                        src={L_NETFLIX_CLONE}
+                        alt="Netflix Clone with React + Firebase"
+                    >
+                        <div className="d-flex justify-content-between flex-column mt-1">
+                            <div>
+                                <Accordion>
+                                    <Card>
+                                        <Accordion.Toggle
+                                            as={Card.Header}
+                                            eventKey="0"
+                                            className="p-2 text-center accordian-main"
+                                        >
+                                            PROJECT DETAILS
+                                        </Accordion.Toggle>
+
+                                        <Accordion.Collapse eventKey="0" className="text-left">
+                                            <Card.Body>
+                                                <strong>Description:</strong> Netflix clone in Styled Components with React, Firebase authentication, Firebase Database and Firebase hosting.
+                                                <hr/>
+                                                <strong>Features:</strong>
+                                                <ul className="list-styles pt-1">
+                                                    <li>Login and Signin page with new user creation in Firebase </li>
+                                                    <li>Searching with FUSE JS</li>
+                                                    <li>Animated search input  </li>
+                                                    <li>Accordion in main page with FAQ</li>
+                                                        <li>Testing for 90% coverage</li>
+                                                </ul>
+                                                <hr/>
+                                                <strong>Tech used:</strong>
+                                                <ul>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_JAVASCRIPT}
+                                  alt="Django"
+                                  rounded
+                                  className="image-style m-1"
+                              ></Image>{" "}
+                                JavaScript
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REACT}
+                                  alt="React"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                React
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_STYLED_COMPONENTS}
+                                  alt="Styled Components"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                Styled Components
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_FIREBASE}
+                                  alt="Firebase"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                Firebase
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REACT_TESTING_LIBRARY}
+                                  alt="React Testing Library"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                React Testing Library
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_JEST}
+                                  alt="JEST"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+JEST                            </span>
+                                                    </li>
+
+
+                                                </ul>
+                                                <hr/>
+                                                <em>
+                                                    <strong>Quick summary:</strong>
+                                                    <br/>
+                                                    <br/>
+                                               This was my first experience with Styled Components as a new tech. and it was cool experience to go through all solutions and test all components in JEST 🙂
+                                                    <br/>
+
+                                                    <br/>
+                                                </em>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </div>
+                            <div className="d-flex justify-content-between flex-nowrap text-center">
+                                <UrlButton
+                                    href="https://netflix-app-69791.web.app/"
+                                    target="_blank"
+                                >
+                                    --  SEE LIVE --
+                                </UrlButton>
+                                <UrlButton
+                                    href="https://github.com/Fremen1990/netflix-clone"
+                                    target="_blank"
+                                >
+                                    SOURCE CODE
+                                </UrlButton>
+                                {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
+                  WATCH VIDEO
+                </UrlButton> */}
+                            </div>
+                        </div>
+                    </ImageEvent>
+
+
 
                     {/* =================   UI KIT Storybook  ================= */}
 
@@ -189,13 +339,13 @@ const ProjectsTimeline = () => {
                             </div>
                             <div className="d-flex justify-content-between flex-nowrap text-center">
                                 <UrlButton
-                                    href="http://ecommerce.devthomas.pl/"
+                                    href="https://ui-kit-devthomas.netlify.app/"
                                     target="_blank"
                                 >
                                     --  SEE LIVE --
                                 </UrlButton>
                                 <UrlButton
-                                    href="https://github.com/Fremen1990/E-Commerce-MERN-NODE-REACT"
+                                    href="https://github.com/Fremen1990/UI_KIT"
                                     target="_blank"
                                 >
                                     SOURCE CODE
