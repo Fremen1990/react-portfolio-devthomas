@@ -8,6 +8,7 @@ import L_NEXTJS from "../assets/img/skills/nextjs.svg";
 import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
 import L_MATERIALUI from "../assets/img/skills/material-ui-1.svg";
+import L_TYPEORM from "../assets/img/skills/typeorm.png"
 // import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
 import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
 import L_NODE_JS from "../assets/img/skills/nodejs.svg";
@@ -72,54 +73,37 @@ export const skills = {
     //   imgSrc: L_WEBPACK,
     //   skillName: "Web-Pack",
     // },
-    {
-      link: "https://www.javascript.com/",
-      imgAltText: "JavaScript",
-      imgSrc: L_JAVASCRIPT,
-      skillName: "JavaScript",
-      points: 152
-    },
+    // {
+    //   link: "https://www.javascript.com/",
+    //   imgAltText: "JavaScript",
+    //   imgSrc: L_JAVASCRIPT,
+    //   skillName: "JavaScript",
+    //   points: 152
+    // },
 
-    {
-      link: "https://reactjs.org/",
-      imgAltText: "React JS",
-      imgSrc: L_REACT,
-      skillName: "React JS",
-      points: 110
 
-    },
-    {
-      link: "https://reacttraining.com/react-router/",
-      imgAltText: "React Router",
-      imgSrc: L_REACT_ROUTER,
-      skillName: "React Router",
-    },
+    // {
+    //   link: "https://reacttraining.com/react-router/",
+    //   imgAltText: "React Router",
+    //   imgSrc: L_REACT_ROUTER,
+    //   skillName: "React Router",
+    // },
 
-    {
-      link: "https://redux.js.org/",
-      imgAltText: "Redux",
-      imgSrc: L_REDUX,
-      skillName: "Redux",
-    },
 
-    {
-      link: "https://material-ui.com/",
-      imgAltText: "Material-UI",
-      imgSrc: L_MATERIALUI,
-      skillName: "Material-UI",
-    },
+
+
     // {
     //   link: "https://react-bootstrap.github.io/",
     //   imgAltText: "React Bootstrap",
     //   imgSrc: L_REACT_BOOTSTRAP,
     //   skillName: "React Bootstrap",
     // },
-    {
-      link: "https://nextjs.org/",
-      imgAltText: "Next.js",
-      imgSrc: L_NEXTJS,
-      skillName: "Next.js",
-    },
+    // {
+    //   link: "https://nextjs.org/",
+    //   imgAltText: "Next.js",
+    //   imgSrc: L_NEXTJS,
+    //   skillName: "Next.js",
+    // },
     {
       link: "https://tailwindcss.com/",
       imgAltText: "Tailwind",
@@ -133,10 +117,30 @@ export const skills = {
       skillName: "Bootstrap",
     },
     {
+      link: "https://material-ui.com/",
+      imgAltText: "Material-UI",
+      imgSrc: L_MATERIALUI,
+      skillName: "Material-UI",
+    },
+    {
       link: "https://styled-components.com/",
       imgAltText: "styled-components",
       imgSrc: L_STYLED_COMPONENTS,
       skillName: "styled-components",
+    },
+    {
+      link: "https://reactjs.org/",
+      imgAltText: "React JS",
+      imgSrc: L_REACT,
+      skillName: "React JS",
+      points: 110
+
+    },
+    {
+      link: "https://redux.js.org/",
+      imgAltText: "Redux",
+      imgSrc: L_REDUX,
+      skillName: "Redux Toolkit",
     },
   ],
 
@@ -163,14 +167,14 @@ export const skills = {
       link: "https://nestjs.com/",
       imgAltText: "Nestjs",
       imgSrc: L_NESTJS,
-      skillName: "nestJS - in progress",
+      skillName: "NestJS",
     },
-    {
-      link: "https://firebase.google.com/",
-      imgAltText: "Firebase",
-      imgSrc: L_FIREBASE,
-      skillName: "Firebase",
-    },
+    // {
+    //   link: "https://firebase.google.com/",
+    //   imgAltText: "Firebase",
+    //   imgSrc: L_FIREBASE,
+    //   skillName: "Firebase",
+    // },
 
     {
       link: "https://phaser.io/",
@@ -273,6 +277,12 @@ export const skills = {
       imgAltText: "My-SQL",
       imgSrc: L_MYSQL,
       skillName: "My-SQL",
+    },
+    {
+      link: "https://typeorm.io/",
+      imgAltText: "TypeORM",
+      imgSrc: L_TYPEORM,
+      skillName: "TypeORM",
     },
     {
       link: "https://www.mongodb.com/",

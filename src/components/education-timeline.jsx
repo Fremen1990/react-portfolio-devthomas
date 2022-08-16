@@ -29,10 +29,10 @@ import L_SASS from "../assets/img/skills/sass-1.svg";
 // import L_BOOTSTRAP4 from "../assets/img/skills/bootstrap-4.svg";
 import L_REACT from "../assets/img/skills/react.svg";
 import L_NESTJS from "../assets/img/skills/nestjs.svg"
-// import L_REDUX from "../assets/img/skills/redux.svg";
+import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
 // import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
-// import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
+import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
 import L_NODE_JS from "../assets/img/skills/nodejs.svg";
 import L_EXPRESS from "../assets/img/skills/express.svg";
 // import L_VBA from "../assets/img/skills/vba.png";
@@ -51,6 +51,8 @@ import L_JAVA from "../assets/img/skills/Java.png";
 import L_ARDUINO from "../assets/img/skills/Arduino.png";
 import L_TYPESCRIPT from "../assets/img/skills/typescript.svg";
 import L_MYSQL from "../assets/img/skills/mySql.svg";
+import L_REACT_TESTING_LIBRARY from "../assets/img/skills/react-testing-library.png"
+import L_JEST from "../assets/img/skills/testing_jest.webp"
 
 
 import "./projects-timeline.css";
@@ -69,6 +71,318 @@ const EducationTimeline = () => {
 
             <Timeline>
                 <Events>
+
+                    {/* Education: MEGAK - one year back-end bootcamp */}
+
+                    <ImageEvent
+                        date="15/06/2021"
+                        className="text-center"
+                        text="MEGAK - one year Full-Stack Bootcamp"
+                        src={L_MEGAK}
+                        alt="MEGAK - one year full-stack bootcamp"
+                    >
+                        <div className="d-flex justify-content-between flex-column mt-1">
+                            <div>
+                                <Accordion>
+                                    <Card>
+                                        <Accordion.Toggle
+                                            as={Card.Header}
+                                            eventKey="0"
+                                            className="p-2 text-center accordian-main"
+                                        >
+                                            BOOTCAMP DETAILS
+                                        </Accordion.Toggle>
+
+                                        <Accordion.Collapse eventKey="0" className="text-left">
+                                            <Card.Body>
+                                                <strong>Description:</strong> MEGAK it is one year Full Stack bootcamp
+                                                which will include JavaScript, Node,
+                                                Express, MongoDB, TypeScript, React and full stack
+                                                project with participation of software house guests.
+                                                <hr/>
+                                                <strong>Bootcamp agenda:</strong>
+                                                <ul className="list-styles pt-1">
+                                                    <li>Stage 1 - JavaScript</li>
+                                                    <li>Stage 2 - NODE JS</li>
+                                                    <li>Stage 3 - Express</li>
+                                                    <li>Stage 4 - MongoDB</li>
+                                                    <li>Stage 5 - TypeScript</li>
+                                                    <li>Stage 6 - React</li>
+                                                    <li>Stage 7 - NODE Advanced</li>
+                                                    <li>Stage 8 - Final Project in Scrum</li>
+                                                </ul>
+                                                <hr/>
+                                                <strong>Tech learned:</strong>
+                                                <ul>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_JAVASCRIPT}
+                                  alt="JavaScript"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                JavaScript
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_NODE_JS}
+                                  alt="NODE JS"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                NODE JS
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_EXPRESS}
+                                  alt="EXPRESS"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                Express
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_MONGODB}
+                                  alt="MongoDB"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 75, width: 75}}
+                              ></Image>{" "}
+                                MongoDB
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_MYSQL}
+                                  alt="MySQL"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 75, width: 75}}
+                              ></Image>{" "}
+                                MySQL
+                            </span>
+                                                    </li>
+
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_TYPESCRIPT}
+                                  alt="TypeScript"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 75, width: 75}}
+                              ></Image>{" "}
+                                TypeScript
+                            </span>
+                                                    </li>
+
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REACT}
+                                  alt="React"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 75, width: 75}}
+                              ></Image>{" "}
+                                React
+                            </span>
+                                                    </li>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_NESTJS}
+                                  alt="nestjs"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 75, width: 75}}
+                              ></Image>{" "}
+                                NestJS
+                            </span>
+                                                    </li>
+                                                </ul>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </div>
+                            <div className="d-flex justify-content-between flex-nowrap text-center">
+                                <UrlButton href="https://www.megak.pl/" target="_blank">
+                                    Check agenda
+                                </UrlButton>
+                                {/* <UrlButton
+                  href=""
+                  target="_blank"
+                >
+                 Check promo
+                </UrlButton> */}
+                                <UrlButton
+                                    href="https://www.youtube.com/watch?v=JKUl2Vsc9p4"
+                                    target="_blank"
+                                >
+                                    WATCH VIDEO
+                                </UrlButton>
+                            </div>
+                        </div>
+                    </ImageEvent>
+
+                    {/* Education: KursReacta - 12 tyg Reacta - Michał Taszycki */}
+
+                    <ImageEvent
+                        date="15/10/2020"
+                        className="text-center"
+                        text="KursReacta - 12 tyg Reacta - Michał Taszycki"
+                        src={L_KursReacta}
+                        alt="KursReacta - 12 tyg Reacta - Michał Taszycki"
+                    >
+                        <div className="d-flex justify-content-between flex-column mt-1">
+                            <div>
+                                <Accordion>
+                                    <Card>
+                                        <Accordion.Toggle
+                                            as={Card.Header}
+                                            eventKey="0"
+                                            className="p-2 text-center accordian-main"
+                                        >
+                                            COURSE DETAILS
+                                        </Accordion.Toggle>
+
+                                        <Accordion.Collapse eventKey="0" className="text-left">
+                                            <Card.Body>
+                                                <strong>Description:</strong> React Course with Michal
+                                                Taszycki it is complete 12 weeks React course with all
+                                                React topic from raw react with class components, before
+                                                hooks until the newest libraries and solutions.
+                                                <hr/>
+                                                <strong>Course weeks:</strong>
+                                                <ul className="list-styles pt-1">
+                                                    <li>Week 1 - Quick start with spotify clone</li>
+                                                    <li>Week 2 - Components</li>
+                                                    <li>Week 3 - Lists and forms</li>
+                                                    <li>Week 4 - Styles</li>
+                                                    <li>Week 5 - Testing and error handling</li>
+                                                    <li>Week 6 - Integration with libraries</li>
+                                                    <li>Week 7 - Integration with REST API</li>
+                                                    <li>Week 8 - Advanced API React</li>
+                                                    <li>Week 9 - Advanced React patterns</li>
+                                                    <li>Week 10 - Optymalization</li>
+                                                    <li>Week 11 - Redux</li>
+                                                    <li>Week 12 - Deployment with React</li>
+                                                </ul>
+                                                <hr/>
+                                                <strong>Tech learned:</strong>
+                                                <br/>
+                                                <ul>
+                                                    <br/>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_JAVASCRIPT}
+                                  alt="JavaScript"
+                                  rounded
+                                  className="image-style1 m-1"
+                              ></Image>{" "}
+                                JavaScript
+                            </span>
+                                                    </li>
+                                                    <br/>
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REACT}
+                                  alt="React"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                React
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REDUX}
+                                  alt="Redux"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                Redux
+                            </span>
+                                                    </li>
+
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_JEST}
+                                  alt="Jest"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                Jest
+                            </span>
+                                                    </li>
+
+                                                    <li>
+                            <span className="p-2">
+                              <Image
+                                  src={L_REACT_TESTING_LIBRARY}
+                                  alt="React Testing Library"
+                                  rounded
+                                  className="image-style1 m-1"
+                                  style={{height: 60, width: 80}}
+                              ></Image>{" "}
+                                React Testing Library
+                            </span>
+                                                    </li>
+
+
+                                                </ul>
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+                                </Accordion>
+                            </div>
+                            <div className="d-flex justify-content-between flex-nowrap text-center">
+                                <UrlButton href="http://kursreacta.pl/" target="_blank">
+                                    Check agenda
+                                </UrlButton>
+                                {/* <UrlButton
+                  href=""
+                  target="_blank"
+                >
+                 Check promo
+                </UrlButton> */}
+                                {/* <UrlButton
+                  href="https://youtube.com"
+                  target="_blank"
+                >
+                  WATCH VIDEO
+                </UrlButton> */}
+                            </div>
+                        </div>
+                    </ImageEvent>
+
 
                     {/* Education: Pluralsight - Learning platform for professional programmers */}
 
@@ -244,175 +558,7 @@ const EducationTimeline = () => {
                     </ImageEvent>
 
 
-                    {/* Education: MEGAK - one year back-end bootcamp */}
 
-                    <ImageEvent
-                        date="15/06/2021"
-                        className="text-center"
-                        text="MEGAK - one year Full-Stack Bootcamp"
-                        src={L_MEGAK}
-                        alt="MEGAK - one year full-stack bootcamp"
-                    >
-                        <div className="d-flex justify-content-between flex-column mt-1">
-                            <div>
-                                <Accordion>
-                                    <Card>
-                                        <Accordion.Toggle
-                                            as={Card.Header}
-                                            eventKey="0"
-                                            className="p-2 text-center accordian-main"
-                                        >
-                                            BOOTCAMP DETAILS
-                                        </Accordion.Toggle>
-
-                                        <Accordion.Collapse eventKey="0" className="text-left">
-                                            <Card.Body>
-                                                <strong>Description:</strong> MEGAK it is one year Full Stack bootcamp
-                                                which will include JavaScript, Node,
-                                                Express, MongoDB, TypeScript, React and full stack
-                                                project with participation of software house guests.
-                                                <hr/>
-                                                <strong>Bootcamp agenda:</strong>
-                                                <ul className="list-styles pt-1">
-                                                    <li>Stage 1 - JavaScript</li>
-                                                    <li>Stage 2 - NODE JS</li>
-                                                    <li>Stage 3 - Express</li>
-                                                    <li>Stage 4 - MongoDB</li>
-                                                    <li>Stage 5 - TypeScript</li>
-                                                    <li>Stage 6 - React</li>
-                                                    <li>Stage 7 - NODE Advanced</li>
-                                                    <li>Stage 8 - Final Project in Scrum</li>
-                                                </ul>
-                                                <hr/>
-                                                <strong>Tech learned:</strong>
-                                                <ul>
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_JAVASCRIPT}
-                                  alt="JavaScript"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 60, width: 80}}
-                              ></Image>{" "}
-                                JavaScript
-                            </span>
-                                                    </li>
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_NODE_JS}
-                                  alt="NODE JS"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 60, width: 80}}
-                              ></Image>{" "}
-                                NODE JS
-                            </span>
-                                                    </li>
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_EXPRESS}
-                                  alt="EXPRESS"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 60, width: 80}}
-                              ></Image>{" "}
-                                Express
-                            </span>
-                                                    </li>
-
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_MONGODB}
-                                  alt="MongoDB"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 75, width: 75}}
-                              ></Image>{" "}
-                                MongoDB
-                            </span>
-                                                    </li>
-
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_MYSQL}
-                                  alt="MySQL"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 75, width: 75}}
-                              ></Image>{" "}
-                                MySQL
-                            </span>
-                                                    </li>
-
-
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_TYPESCRIPT}
-                                  alt="TypeScript"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 75, width: 75}}
-                              ></Image>{" "}
-                                TypeScript
-                            </span>
-                                                    </li>
-
-
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_REACT}
-                                  alt="React"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 75, width: 75}}
-                              ></Image>{" "}
-                                React
-                            </span>
-                                                    </li>
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_NESTJS}
-                                  alt="nestjs"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 75, width: 75}}
-                              ></Image>{" "}
-                                nestjs
-                            </span>
-                                                    </li>
-                                                </ul>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                </Accordion>
-                            </div>
-                            <div className="d-flex justify-content-between flex-nowrap text-center">
-                                <UrlButton href="https://www.megak.pl/" target="_blank">
-                                    Check agenda
-                                </UrlButton>
-                                {/* <UrlButton
-                  href=""
-                  target="_blank"
-                >
-                 Check promo
-                </UrlButton> */}
-                                <UrlButton
-                                    href="https://www.youtube.com/watch?v=JKUl2Vsc9p4"
-                                    target="_blank"
-                                >
-                                    WATCH VIDEO
-                                </UrlButton>
-                            </div>
-                        </div>
-                    </ImageEvent>
 
                     {/* Education: StudiujeIT - one year bootcamp */}
 
@@ -592,106 +738,7 @@ const EducationTimeline = () => {
                         </div>
                     </ImageEvent>
 
-                    {/* Education: KursReacta - 12 tyg Reacta - Michał Taszycki */}
 
-                    <ImageEvent
-                        date="15/10/2020"
-                        className="text-center"
-                        text="KursReacta - 12 tyg Reacta - Michał Taszycki"
-                        src={L_KursReacta}
-                        alt="KursReacta - 12 tyg Reacta - Michał Taszycki"
-                    >
-                        <div className="d-flex justify-content-between flex-column mt-1">
-                            <div>
-                                <Accordion>
-                                    <Card>
-                                        <Accordion.Toggle
-                                            as={Card.Header}
-                                            eventKey="0"
-                                            className="p-2 text-center accordian-main"
-                                        >
-                                            COURSE DETAILS
-                                        </Accordion.Toggle>
-
-                                        <Accordion.Collapse eventKey="0" className="text-left">
-                                            <Card.Body>
-                                                <strong>Description:</strong> React Course with Michal
-                                                Taszycki it is complete 12 weeks React course with all
-                                                React topic from raw react with class components, before
-                                                hooks until the newest libraries and solutions.
-                                                <hr/>
-                                                <strong>Course weeks:</strong>
-                                                <ul className="list-styles pt-1">
-                                                    <li>Week 1 - Quick start with spotify clone</li>
-                                                    <li>Week 2 - Components</li>
-                                                    <li>Week 3 - Lists and forms</li>
-                                                    <li>Week 4 - Styles</li>
-                                                    <li>Week 5 - Testing and error handling</li>
-                                                    <li>Week 6 - Integration with libraries</li>
-                                                    <li>Week 7 - Integration with REST API</li>
-                                                    <li>Week 8 - Advanced API React</li>
-                                                    <li>Week 9 - Advanced React patterns</li>
-                                                    <li>Week 10 - Optymalization</li>
-                                                    <li>Week 11 - Redux</li>
-                                                    <li>Week 12 - Deployment with React</li>
-                                                </ul>
-                                                <hr/>
-                                                <strong>Tech learned:</strong>
-                                                <br/>
-                                                <ul>
-                                                    <br/>
-
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_JAVASCRIPT}
-                                  alt="JavaScript"
-                                  rounded
-                                  className="image-style1 m-1"
-                              ></Image>{" "}
-                                JavaScript
-                            </span>
-                                                    </li>
-                                                    <br/>
-                                                    <li>
-                            <span className="p-2">
-                              <Image
-                                  src={L_REACT}
-                                  alt="React"
-                                  rounded
-                                  className="image-style1 m-1"
-                                  style={{height: 60, width: 80}}
-                              ></Image>{" "}
-                                React
-                            </span>
-                                                    </li>
-
-
-                                                </ul>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                </Accordion>
-                            </div>
-                            <div className="d-flex justify-content-between flex-nowrap text-center">
-                                <UrlButton href="http://kursreacta.pl/" target="_blank">
-                                    Check agenda
-                                </UrlButton>
-                                {/* <UrlButton
-                  href=""
-                  target="_blank"
-                >
-                 Check promo
-                </UrlButton> */}
-                                {/* <UrlButton
-                  href="https://youtube.com"
-                  target="_blank"
-                >
-                  WATCH VIDEO
-                </UrlButton> */}
-                            </div>
-                        </div>
-                    </ImageEvent>
 
                     {/* Education: WebSamuraj - Front End Developer */}
 

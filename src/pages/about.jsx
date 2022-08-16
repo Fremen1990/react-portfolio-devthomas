@@ -33,19 +33,19 @@ const About = () => {
                         <Row className=" align-items-start p-2 my-details rounded text-justify">
                             Hi there! My name is <strong>&nbsp;Tomasz Stanisz</strong>
                             <br/>I am Tech lover, highly motivated with creation websites and
-                            applications. Born in the Villige in central Poland. I am
+                            applications. Born in the Village in central Poland. I am
                             Financial Analyst with love for programming, interested about Front-End and a Back-End as
                             well, as i like to know how things works.
 
                             <br/>
                             <br/>
-                            In 2019 i have decided that i will learn programming, and the
-                            never ending journey has started, enjoing the process.
+                            In 2020 i have decided that i will learn programming, and the
+                            never ending journey has started, enjoying the process.
 
                             <br/>
                             <br/>
                             I love learning about new technologies and problem solving. Already finished 1 year IT
-                            bootcamp called StudiujeIT and currently im in the middle of Full-Stack 1 year bootcamp MEGA-K.
+                            bootcamp called StudiujeIT and just finished Full-Stack JavaScript 1 year bootcamp MEGA-K with NestJS, React and TypeScript in Tech Stack.
                             <br/> <br/>
                             {/*==================== Buttons =================== */}
                             <Col className="d-flex justify-content-center flex-wrap">
@@ -67,6 +67,21 @@ const About = () => {
                                         </Button>
                                     </a>
                                 </div>
+
+                                <div>
+
+                                    <a
+                                        href="https://www.linkedin.com/in/tomasz-stanisz-85818683/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Button className="m-2" variant="outline-info">
+                                            LinkedIn
+                                        </Button>
+                                    </a>
+                                </div>
+
+
                                 <div>
                                     <a
                                         href="https://github.com/Fremen1990"
@@ -89,18 +104,7 @@ const About = () => {
                                         </Button>
                                     </a>
                                 </div>
-                                <div>
 
-                                    <a
-                                        href="https://www.linkedin.com/in/tomasz-stanisz-85818683/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <Button className="m-2" variant="outline-info">
-                                            LinkedIn
-                                        </Button>
-                                    </a>
-                                </div>
 
                                 <div>
 
@@ -111,6 +115,18 @@ const About = () => {
                                     >
                                         <Button className="m-2" variant="outline-success">
                                             HackerRank
+                                        </Button>
+                                    </a>
+                                </div>
+
+                                <div>
+                                    <a
+                                        href="https://www.codewars.com/users/ThomasDevs"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Button className="m-2" variant="outline-danger">
+                                            CodeWars
                                         </Button>
                                     </a>
                                 </div>
