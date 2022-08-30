@@ -58,7 +58,7 @@ const About = () => {
                                 </div>
                                 <div>
                                     <a
-                                        href="https://resume.codethomas.com"
+                                        href="https://www.resume.devthomas.pl/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
