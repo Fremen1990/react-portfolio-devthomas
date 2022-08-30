@@ -58,7 +58,7 @@ const About = () => {
                                 </div>
                                 <div>
                                     <a
-                                        href="https://www.devthomas.pl/tomasz-stanisz-web-developer-cv/"
+                                        href="https://resume.codethomas.com"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
