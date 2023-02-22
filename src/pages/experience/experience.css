@@ -1,0 +1,47 @@
+.img-resize {
+  width: 5.5em;
+}
+
+.style {
+  font-size: 20px;
+}
+
+.pt-3 {
+  color: #212529;
+}
+
+.jumbo-style {
+  /* background-image: linear-gradient(
+    -225deg,
+    #2cd8d5 0%,
+    #6b8dd6 48%,
+    #8e37d7 100%
+  ); */
+
+  background-image: linear-gradient(45deg, #1f4d1f 0%, #b8b4b4 100%);
+}
+
+.body-title-style {
+  font-size: 25px;
+  font-weight: 800;
+}
+
+@media screen and (max-width: 680px) {
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .react-parallax-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.ext-center li {
+  text-align: center;
+}

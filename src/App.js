@@ -1,7 +1,5 @@
 import React from "react";
 
-// HEROKU ADDED $ heroku buildpacks:add mars/create-raect-app
-
 // bootstrap libraries ! :)
 import Fade from "react-reveal/Fade";
 import Slide from "react-reveal/Slide";
@@ -21,7 +19,7 @@ import FooterPanel from "./components/footer";
 // Pages
 import About from "./pages/about";
 import Skills from "./pages/skills";
-import Experience from "./pages/experience";
+import Experience from "./pages/experience/experience";
 import Contact from "./pages/contactForm";
 
 // Styles
