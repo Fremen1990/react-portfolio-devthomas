@@ -16,9 +16,13 @@ jobs:
           node-version: 16.x
 
       - name: Install all dependencies
-        run: npm ci
+        with:
+          node-version: 16.x
+        run: npm install
 
       - name: Build
+        with:
+          node-version: 16.x
         run: CI=false npm run build # The build command of your project
 
       - name: Push
