@@ -58,12 +58,12 @@ const About = () => {
                                 </div>
                                 <div>
                                     <a
-                                        href="https://www.resume.devthomas.pl/"
+                                        href="https://www.cv.devthomas.pl/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
                                         <Button className="m-2" variant="outline-success">
-                                            My Resume
+                                            My CV
                                         </Button>
                                     </a>
                                 </div>
