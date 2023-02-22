@@ -2,7 +2,11 @@
   "name": "react-portfolio-devthomas",
   "homepage": ".",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "engines" : {
+    "npm" : ">=8.0.0 <9.0.0",
+    "node" : ">=16.0.0 <17.0.0"
+  },
   "dependencies": {
     "@merc/react-timeline": "^0.1.42",
     "@testing-library/jest-dom": "^4.2.4",
