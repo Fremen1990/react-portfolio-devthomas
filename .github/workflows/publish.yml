@@ -12,17 +12,11 @@ jobs:
     steps:
       - name: git-checkout
         uses: actions/checkout@v2
-        with:
-          node-version: 16.x
 
       - name: Install all dependencies
-        with:
-          node-version: 16.x
         run: npm install
 
       - name: Build
-        with:
-          node-version: 16.x
         run: CI=false npm run build # The build command of your project
 
       - name: Push

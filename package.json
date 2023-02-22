@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "private": false,
   "engines" : {
-    "npm" : ">=8.0.0 <9.0.0",
-    "node" : ">=16.0.0 <17.0.0"
+    "npm" : "9.3.1",
+    "node" : "18.14.1"
   },
   "dependencies": {
     "@merc/react-timeline": "^0.1.42",
@@ -29,8 +29,8 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
