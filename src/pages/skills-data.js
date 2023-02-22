@@ -26,7 +26,6 @@ import L_PHASER from "../assets/img/skills/phaser.svg";
 import L_FIREBASE_DATABASE from "../assets/img/skills/firebase-realtime-database.png";
 import L_MYSQL from "../assets/img/skills/mySql.svg";
 import L_GIT from "../assets/img/skills/git-icon.svg";
-import L_OVH from "../assets/img/skills/ovh.svg";
 
 import L_FIREBASE_HOSTING from "../assets/img/skills/firebase-hosting.png";
 import L_HEROKU from "../assets/img/skills/heroku.svg";
@@ -201,12 +200,6 @@ export const skills = {
       imgAltText: "Firebase Hosting",
       imgSrc: L_FIREBASE_HOSTING,
       skillName: "Firebase Hosting",
-    },
-    {
-      link: "https://www.ovh.com/",
-      imgAltText: "Ovh",
-      imgSrc: L_OVH,
-      skillName: "OVH Cloud",
     },
     {
       link: "https://www.heroku.com/",

@@ -461,7 +461,7 @@ const EducationTimeline = () => {
                                                 <ul className="list-unstyled pt-1 mt-2">
 
                                                     {educationNode.map((learningPath, index) => (
-                                                        <Tilt options={{max: 5}} className="bg-dark text-light m-2">
+                                                        <Tilt key={index} options={{max: 5}} className="bg-dark text-light m-2">
 
                                                             <li className="hovered" key={index}>
                                                                 <img
@@ -486,7 +486,7 @@ const EducationTimeline = () => {
                                                 <ul className="list-unstyled pt-1">
 
                                                     {educationReact.map((learningPath, index) => (
-                                                        <Tilt options={{max: 5}} className="bg-dark text-light m-2">
+                                                        <Tilt key={index} options={{max: 5}} className="bg-dark text-light m-2">
 
                                                             <li className="hovered" key={index}>
                                                                 <img
@@ -514,7 +514,7 @@ const EducationTimeline = () => {
                                                 <ul className="list-unstyled pt-1">
 
                                                     {educationBIAnalyst.map((learningPath, index) => (
-                                                        <Tilt options={{max: 5}} className="bg-dark text-light m-2">
+                                                        <Tilt key={index} options={{max: 5}} className="bg-dark text-light m-2">
 
                                                             <li className="hovered" key={index}>
                                                                 <img
