@@ -6,14 +6,10 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [ ubuntu-latest ]
-        node-version: [ 16.x ]
-    name: Build and Push
-    steps:
+    run-in-container:
+      runs-on: ubuntu-latest
+      container: node:16-alpine
+      steps:
       - name: git-checkout
         uses: actions/checkout@v2
 
