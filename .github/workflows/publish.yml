@@ -6,15 +6,17 @@ on:
       - main
 
 jobs:
-    run-in-container:
-      runs-on: ubuntu-latest
-      container: node:16-alpine
-      steps:
+  build:
+    runs-on: ubuntu-latest
+    name: Build and Push
+    steps:
       - name: git-checkout
         uses: actions/checkout@v2
+        with:
+          node-version: 16.x
 
       - name: Install all dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: CI=false npm run build # The build command of your project
