@@ -58,7 +58,7 @@ const About = () => {
                                 </div>
                                 <div>
                                     <a
-                                        href="https://www.cv.devthomas.pl/"
+                                        href="https://cv.devthomas.pl/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
