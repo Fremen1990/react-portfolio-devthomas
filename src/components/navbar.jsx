@@ -20,6 +20,7 @@ const MyNavbar = () => {
           </Navbar.Brand>
         </div>
         <div>
+          TEST
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto ">
