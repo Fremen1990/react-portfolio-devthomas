@@ -16,8 +16,6 @@ const Skills = () => {
       <CardDeck>
         <Row className="d-flex justify-content-around">
           <Col md={4}>
-
-
             {/* Programming Languages */}
             <Card className="focus mt-2 mb-2">
               <Card.Body>
@@ -27,18 +25,18 @@ const Skills = () => {
                 <hr />
                 <Card.Text className="card-text d-flex justify-content-start flex-column">
                   {skills.programmingLanguages.map((skill, index) => (
-                      <span className="p-2" key={index}>
+                    <span className="p-2" key={index}>
                       <a
-                          className="text-dark text-decoration-none"
-                          href={skill.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        className="text-dark text-decoration-none"
+                        href={skill.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         <Image
-                            src={skill.imgSrc}
-                            alt={skill.imgAltText}
-                            rounded
-                            className="image-style m-1"
+                          src={skill.imgSrc}
+                          alt={skill.imgAltText}
+                          rounded
+                          className="image-style m-1"
                         ></Image>{" "}
                         {skill.skillName}
                       </a>
@@ -47,7 +45,6 @@ const Skills = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-
 
             {/* Frontend */}
 
@@ -123,18 +120,18 @@ const Skills = () => {
                 <hr />
                 <Card.Text className="card-text d-flex justify-content-start flex-column">
                   {skills.testing.map((skill, index) => (
-                      <span className="p-2" key={index}>
+                    <span className="p-2" key={index}>
                       <a
-                          className="text-dark text-decoration-none"
-                          href={skill.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        className="text-dark text-decoration-none"
+                        href={skill.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         <Image
-                            src={skill.imgSrc}
-                            alt={skill.imgAltText}
-                            rounded
-                            className="image-style m-1"
+                          src={skill.imgSrc}
+                          alt={skill.imgAltText}
+                          rounded
+                          className="image-style m-1"
                         ></Image>{" "}
                         {skill.skillName}
                       </a>
@@ -143,15 +140,9 @@ const Skills = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-
-
-
-
           </Col>
 
           <Col md={4}>
-
-
             {/* Database */}
 
             <Card className="focus mt-2 mb-2">
@@ -220,18 +211,18 @@ const Skills = () => {
                 <hr />
                 <Card.Text className="card-text d-flex justify-content-start flex-column">
                   {skills.hostingPlatforms.map((skill, index) => (
-                      <span className="p-2" key={index}>
+                    <span className="p-2" key={index}>
                       <a
-                          className="text-dark text-decoration-none"
-                          href={skill.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        className="text-dark text-decoration-none"
+                        href={skill.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         <Image
-                            src={skill.imgSrc}
-                            alt={skill.imgAltText}
-                            rounded
-                            className="image-style m-1"
+                          src={skill.imgSrc}
+                          alt={skill.imgAltText}
+                          rounded
+                          className="image-style m-1"
                         ></Image>{" "}
                         {skill.skillName}
                       </a>
@@ -240,7 +231,6 @@ const Skills = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-
           </Col>
         </Row>
       </CardDeck>

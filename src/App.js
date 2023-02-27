@@ -13,7 +13,7 @@ import MyNavbar from "./components/navbar";
 import MyCarousel from "./components/carousel";
 import MyTitleMessage from "./components/titleMessage.jsx";
 import ProjectsTimeline from "./components/projects-timeline";
-import EducationTimeline from "./components/education-timeline";
+import EducationTimeline from "./pages/education/education-timeline";
 import FooterPanel from "./components/footer";
 
 // Pages

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./scrollDown.module.css"
+import styles from "./scrollDown.module.css";
 
 // import styled from "styled-components";
 
@@ -21,16 +21,15 @@ import styles from "./scrollDown.module.css"
 // `;
 
 const ScrollDown = () => {
-    return (
-        // <MyScroll>
-        <div className={styles.myScroll}>
-
-            <div className={styles.turn}>
-                <span>&gt;</span>
-            </div>
-        </div>
-        // </MyScroll>
-    );
+  return (
+    // <MyScroll>
+    <div className={styles.myScroll}>
+      <div className={styles.turn}>
+        <span>&gt;</span>
+      </div>
+    </div>
+    // </MyScroll>
+  );
 };
 
 export default ScrollDown;

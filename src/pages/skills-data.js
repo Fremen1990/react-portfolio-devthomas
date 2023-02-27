@@ -8,13 +8,12 @@ import L_NEXTJS from "../assets/img/skills/nextjs.svg";
 import L_REDUX from "../assets/img/skills/redux.svg";
 import L_REACT_ROUTER from "../assets/img/skills/react-router.svg";
 import L_MATERIALUI from "../assets/img/skills/material-ui-1.svg";
-import L_TYPEORM from "../assets/img/skills/typeorm.png"
+import L_TYPEORM from "../assets/img/skills/typeorm.png";
 // import L_REACT_BOOTSTRAP from "../assets/img/skills/react-bootstrap.svg";
 import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
 import L_NODE_JS from "../assets/img/skills/nodejs.svg";
 import L_EXPRESS from "../assets/img/skills/express.svg";
 import L_NESTJS from "../assets/img/skills/nestjs.svg";
-
 
 import L_VBA from "../assets/img/skills/vba.webp";
 // import L_DJANGO from "../assets/img/skills/django.svg";
@@ -40,11 +39,11 @@ import L_TYPESCRIPT from "../assets/img/skills/typescript.svg";
 // import L_PYTHON from "../assets/img/skills/python.svg";
 
 // --------------- TESTING
-import L_REACT_TESTING_LIBRARY from "../assets/img/skills/react-testing-library.png"
-import L_JEST from "../assets/img/skills/testing_jest.webp"
-import L_CYPRESS from "../assets/img/skills/testing_cypress.png"
-import L_MOCHA from "../assets/img/skills/testing_mocha.png"
-import L_CHAI from "../assets/img/skills/testing_chai.png"
+import L_REACT_TESTING_LIBRARY from "../assets/img/skills/react-testing-library.png";
+import L_JEST from "../assets/img/skills/testing_jest.webp";
+import L_CYPRESS from "../assets/img/skills/testing_cypress.png";
+import L_MOCHA from "../assets/img/skills/testing_mocha.png";
+import L_CHAI from "../assets/img/skills/testing_chai.png";
 
 export const skills = {
   frontend: [
@@ -80,16 +79,12 @@ export const skills = {
     //   points: 152
     // },
 
-
     // {
     //   link: "https://reacttraining.com/react-router/",
     //   imgAltText: "React Router",
     //   imgSrc: L_REACT_ROUTER,
     //   skillName: "React Router",
     // },
-
-
-
 
     // {
     //   link: "https://react-bootstrap.github.io/",
@@ -132,8 +127,7 @@ export const skills = {
       imgAltText: "React JS",
       imgSrc: L_REACT,
       skillName: "React JS",
-      points: 110
-
+      points: 110,
     },
     {
       link: "https://redux.js.org/",
@@ -155,14 +149,15 @@ export const skills = {
       imgAltText: "Node.js",
       imgSrc: L_NODE_JS,
       skillName: "Node.js",
-      points: 156
+      points: 156,
     },
     {
       link: "https://expressjs.com/",
       imgAltText: "Express",
       imgSrc: L_EXPRESS,
       skillName: "Express",
-    }, {
+    },
+    {
       link: "https://nestjs.com/",
       imgAltText: "Nestjs",
       imgSrc: L_NESTJS,
@@ -328,7 +323,6 @@ export const skills = {
       imgAltText: "Chai",
       imgSrc: L_CHAI,
       skillName: "Chai",
-    }
-
-  ]
-}
+    },
+  ],
+};

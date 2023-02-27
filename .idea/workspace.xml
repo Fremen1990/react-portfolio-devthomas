@@ -5,7 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e9386d0-7213-45c0-bd88-bead83cbc62c" name="Changes" comment="Fix CV address bug">
+      <change afterPath="$PROJECT_DIR$/src/pages/education/pluralsight-education-data.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ExperienceCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ExperienceCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/carousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/carousel.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/carousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/carousel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/education-timeline.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/education/education-timeline.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/experienceCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/experienceCard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navbar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projects-timeline.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects-timeline.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projects-timeline.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projects-timeline.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/scrollDown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/scrollDown.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/scrollDown.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/scrollDown.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/titleMessage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/titleMessage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/about.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/about.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/about.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/about.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/contactForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactForm.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/contactForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/contactForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/education-data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/experience/experience.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/experience/experience.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/experience/experience.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/experience/experience.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/experience/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/experience/messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/skills-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/skills-data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/skills.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/skills.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/skills.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/skills.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/particlesOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/particlesOptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/themes/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/themes/theme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,27 +63,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/dev/devthomas/react-portfolio-devthomas/src/assets/img/experience&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2022.2.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/dev/devthomas/react-portfolio-devthomas/src/assets/img/education",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.2.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets\img\education" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets\img\experience" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\pages\education" />
+      <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\pages" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\pages\experience" />
     </key>
   </component>
@@ -59,6 +96,26 @@
       <command value="run" />
       <scripts>
         <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="prettier" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prettier" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="prettier:check" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="prettier:check" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -76,6 +133,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.prettier:check" />
+        <item itemvalue="npm.prettier" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
       </list>
@@ -99,6 +158,7 @@
       <workItem from="1677067839665" duration="266000" />
       <workItem from="1677084166491" duration="227000" />
       <workItem from="1677084496300" duration="198000" />
+      <workItem from="1677506927584" duration="7641000" />
     </task>
     <task id="LOCAL-00001" summary="Portfolio Update 08/2022">
       <created>1660690439916</created>
