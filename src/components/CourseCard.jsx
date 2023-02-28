@@ -6,7 +6,7 @@ import CountUp from "react-countup";
 export const CourseCard = ({ name, image, time, certificate, link }) => (
   <Tilt
     options={{ max: 5, transition: true, speed: 500 }}
-    className="col focus border mt-4"
+    className="col focus border mt-4 p-5"
   >
     <Card>
       <a

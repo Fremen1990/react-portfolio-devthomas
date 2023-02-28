@@ -28,6 +28,29 @@ import U_REACT_ADVANCED_PATTERNS from "../../assets/img/education/udemy_courses/
 import C_REACT_ADVANCED_PATTERNS from "../../assets/Programming Certificates/The Complete Guide to Advanced React Component Patterns.pdf";
 import U_POLYMORPHIC_COMPONENTS from "../../assets/img/education/udemy_courses/Build Polymorphic Components with React and Typescript.jpg";
 import C_POLYMORPHIC_COMPONENTS from "../../assets/Programming Certificates/Build Polymorphic Components with React and TypeScript.jpg";
+import U_CYPRESS from "../../assets/img/education/udemy_courses/The Complete Cypress 12 Course From Zero to Expert.jpg";
+import C_CYPRESS from "../../assets/Programming Certificates/The Complete Cypress 12 Course From Zero to Expert.pdf";
+import U_HOW_TO_BECOME_SENIOR from "../../assets/img/education/udemy_courses/How to Become a Senior Developer - Beyond coding skills.jpg";
+import C_HOW_TO_BECOME_SENIOR from "../../assets/Programming Certificates/How to Become a Senior Developer - Beyond coding skills.pdf";
+import U_SOFTWARE_DEVELOPMENT_MINDSETS from "../../assets/img/education/udemy_courses/Software Development Mindsets For Successful Career.jpg";
+import C_SOFTWARE_DEVELOPMENT_MINDSETS from "../../assets/Programming Certificates/Software Development Mindsets For Successful Career.pdf";
+import U_REACT_TDD from "../../assets/img/education/udemy_courses/React with Test Driven Development.jpg";
+import C_REACT_TDD from "../../assets/Programming Certificates/React with Test Driven Development.pdf";
+import U_AWS_LAMBDA from "../../assets/img/education/udemy_courses/AWS Lambda and the Serverless Framework - Hands On Learning.jpg";
+import C_AWS_LAMBDA from "../../assets/Programming Certificates/AWS Lambda and the Serverless Framework - Hands On Learning.pdf";
+import U_FACEBOOK_CLONE from "../../assets/img/education/udemy_courses/Build Facebook clone with REACT JS AND THE MERN STACK 2023.jpg";
+import C_FACEBOOK_CLONE from "../../assets/Programming Certificates/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf";
+import U_RTL from "../../assets/img/education/udemy_courses/The React Testing Library Bootcamp - The Developer Guide.jpg";
+import C_RTL from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
+import U_CSS_ANIMATION from "../../assets/img/education/udemy_courses/Next Level CSS Creative Hover & Animation Effects.jpg";
+import C_CSS_ANIMATION from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
+import U_NEST_JS from "../../assets/img/education/udemy_courses/Opanuj NestJS i zostań profesjonalnym programistą NodeJS.jpg";
+import C_NEST_JS from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
+import U_MERN_ECOMMERCE from "../../assets/img/education/udemy_courses/MERN Stack React Node Ecommerce from Scratch to Deployment.jpg";
+import C_MERN_ECOMMERCE from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
+import U_REACT_TESTING_FOR_ENGINEERS from "../../assets/img/education/udemy_courses/Testing react applications for professional engineers.jpg";
+import C_REACT_TESTING_FOR_ENGINEERS from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
+
 export const messages = {
   headerTextContent: "EDUCATION",
 
@@ -41,13 +64,12 @@ export const messages = {
     leftBottomButtonTitle: "Check Agenda",
     leftBottomButtonURL: "https://www.udemy.com/",
     techStack: [
-      // TODO add all courses with certificates and links to them and courses as well as screenshots
       {
-        name: "Node js with Test Driven Development",
-        image: U_NODE_TDD,
-        time: 22,
-        certificate: C_NODE_TDD,
-        link: "https://www.udemy.com/course/test-driven-development-with-nodejs/",
+        name: "Testing react applications for professional engineers",
+        image: U_REACT_TESTING_FOR_ENGINEERS,
+        time: 2.5,
+        certificate: C_REACT_TESTING_FOR_ENGINEERS,
+        link: "https://www.udemy.com/course/testing-react-applications/",
       },
       {
         name: "The Complete Guide to Advanced React Component Patterns",
@@ -62,6 +84,83 @@ export const messages = {
         time: 2.5,
         certificate: C_POLYMORPHIC_COMPONENTS,
         link: "https://www.udemy.com/course/build-polymorphic-components-with-react-and-typescript/",
+      },
+      {
+        name: "Software Development Mindsets For Successful Career",
+        image: U_SOFTWARE_DEVELOPMENT_MINDSETS,
+        time: 1,
+        certificate: C_SOFTWARE_DEVELOPMENT_MINDSETS,
+        link: "https://www.udemy.com/course/software-development-mindsets-for-successful-career/",
+      },
+      {
+        name: "How to Become a Senior Developer - Beyond coding skills",
+        image: U_HOW_TO_BECOME_SENIOR,
+        time: 2.5,
+        certificate: C_HOW_TO_BECOME_SENIOR,
+        link: "https://www.udemy.com/course/junior-to-senior-software-developer/",
+      },
+      {
+        name: "The Complete Cypress 12+ Course: From Zero to Expert!",
+        image: U_CYPRESS,
+        time: 10.5,
+        certificate: C_CYPRESS,
+        link: "https://www.udemy.com/course/the-complete-cypress-10-e2e-course/",
+      },
+      {
+        name: "React with Test Driven Development",
+        image: U_REACT_TDD,
+        time: 15,
+        certificate: C_REACT_TDD,
+        link: "https://www.udemy.com/course/react-with-test-driven-development/",
+      },
+      {
+        name: "Node js with Test Driven Development",
+        image: U_NODE_TDD,
+        time: 22,
+        certificate: C_NODE_TDD,
+        link: "https://www.udemy.com/course/test-driven-development-with-nodejs/",
+      },
+      {
+        name: "The React Testing Library Bootcamp - The Developer Guide",
+        image: U_RTL,
+        time: 5,
+        certificate: C_RTL,
+        link: "https://www.udemy.com/course/the-react-testing-library-bootcamp/",
+      },
+      {
+        name: "Opanuj NestJS i zostań profesjonalnym programistą Node.js",
+        image: U_NEST_JS,
+        time: 16,
+        certificate: C_NEST_JS,
+        link: "https://www.udemy.com/course/draft/3265906",
+      },
+      {
+        name: "Build Facebook clone with REACT JS AND THE MERN STACK 2023",
+        image: U_FACEBOOK_CLONE,
+        time: 35,
+        certificate: C_FACEBOOK_CLONE,
+        link: "https://www.udemy.com/course/build-facebook-clone-and-master-react-js-mern-stack-2022/",
+      },
+      {
+        name: "AWS Lambda and the Serverless Framework - Hands On Learning!",
+        image: U_AWS_LAMBDA,
+        time: 10.5,
+        certificate: C_AWS_LAMBDA,
+        link: "https://www.udemy.com/course/aws-lambda-serverless/",
+      },
+      {
+        name: "MERN Stack React Node Ecommerce from Scratch to Deployment",
+        image: U_MERN_ECOMMERCE,
+        time: 16,
+        certificate: C_MERN_ECOMMERCE,
+        link: "https://www.udemy.com/course/react-node-ecommerce/",
+      },
+      {
+        name: "Next Level CSS Creative Hover & Animation Effects",
+        image: U_CSS_ANIMATION,
+        time: 2.5,
+        certificate: C_CSS_ANIMATION,
+        link: "https://www.udemy.com/course/css-hover-animation-effects-from-beginners-to-expert/",
       },
     ],
   },
