@@ -1,8 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.1666b5d0.css",
-    "main.js": "/static/js/main.6dbdfa80.js",
+    "main.js": "/static/js/main.22e9ff11.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
+    "static/media/Build Polymorphic Components with React and TypeScript.jpg": "/static/media/Build Polymorphic Components with React and TypeScript.e6b5fa4a93d131c88db2.jpg",
+    "static/media/The Complete Guide to Advanced React Component Patterns.pdf": "/static/media/The Complete Guide to Advanced React Component Patterns.7436302bb4a76001ff63.pdf",
+    "static/media/Node JS with Test Drived Development.pdf": "/static/media/Node JS with Test Drived Development.30d1f9e9b372cf4497f1.pdf",
     "static/media/crypto-chart.PNG": "/static/media/crypto-chart.ad8aab691ade39e5d8b4.PNG",
     "static/media/slide1.webp": "/static/media/slide1.14619b040f52684f1d90.webp",
     "static/media/head_hunter.png": "/static/media/head_hunter.6b891a64cb0dafacfb06.png",
@@ -18,7 +21,6 @@
     "static/media/slide2.webp": "/static/media/slide2.d58e7971f0d52b4f27b3.webp",
     "static/media/netflix-clone.webp": "/static/media/netflix-clone.85314bf450583e5b8e81.webp",
     "static/media/testing_chai.png": "/static/media/testing_chai.62b153a32b2787993cdf.png",
-    "static/media/title_node.PNG": "/static/media/title_node.9c5d1ed836e51ab6e09c.PNG",
     "static/media/testing_cypress.png": "/static/media/testing_cypress.1503bb82a282b51d9997.png",
     "static/media/C++.png": "/static/media/C++.2e49125db9535fd3acde.png",
     "static/media/nextjs.svg": "/static/media/nextjs.6b8250f0f0ef11efff717301d41c6c66.svg",
@@ -65,10 +67,10 @@
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.1666b5d0.css.map": "/static/css/main.1666b5d0.css.map",
-    "main.6dbdfa80.js.map": "/static/js/main.6dbdfa80.js.map"
+    "main.22e9ff11.js.map": "/static/js/main.22e9ff11.js.map"
   },
   "entrypoints": [
     "static/css/main.1666b5d0.css",
-    "static/js/main.6dbdfa80.js"
+    "static/js/main.22e9ff11.js"
   ]
 }
