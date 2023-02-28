@@ -1,11 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.1666b5d0.css",
-    "main.js": "/static/js/main.22e9ff11.js",
+    "main.js": "/static/js/main.08df137c.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
+    "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
+    "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
     "static/media/Build Polymorphic Components with React and TypeScript.jpg": "/static/media/Build Polymorphic Components with React and TypeScript.e6b5fa4a93d131c88db2.jpg",
     "static/media/The Complete Guide to Advanced React Component Patterns.pdf": "/static/media/The Complete Guide to Advanced React Component Patterns.7436302bb4a76001ff63.pdf",
+    "static/media/How to Become a Senior Developer - Beyond coding skills.pdf": "/static/media/How to Become a Senior Developer - Beyond coding skills.2b7d2e496a43cc1a0fc1.pdf",
+    "static/media/Software Development Mindsets For Successful Career.pdf": "/static/media/Software Development Mindsets For Successful Career.a82831afc9b1a25c5395.pdf",
+    "static/media/The React Testing Library Bootcamp - The Developer Guide.pdf": "/static/media/The React Testing Library Bootcamp - The Developer Guide.940ce241e7065a2b93ed.pdf",
+    "static/media/The Complete Cypress 12 Course From Zero to Expert.pdf": "/static/media/The Complete Cypress 12 Course From Zero to Expert.84d8e2a2a088d0c1bd9d.pdf",
     "static/media/Node JS with Test Drived Development.pdf": "/static/media/Node JS with Test Drived Development.30d1f9e9b372cf4497f1.pdf",
+    "static/media/React with Test Driven Development.pdf": "/static/media/React with Test Driven Development.3fae0330298c49ade68c.pdf",
     "static/media/crypto-chart.PNG": "/static/media/crypto-chart.ad8aab691ade39e5d8b4.PNG",
     "static/media/slide1.webp": "/static/media/slide1.14619b040f52684f1d90.webp",
     "static/media/head_hunter.png": "/static/media/head_hunter.6b891a64cb0dafacfb06.png",
@@ -36,10 +43,16 @@
     "static/media/nestjs.svg": "/static/media/nestjs.284b54b2dfd0d02feb7ba5541b29c09c.svg",
     "static/media/kursreacta.png": "/static/media/kursreacta.163c0353f0ce6fc54da3.png",
     "static/media/ui-kit.webp": "/static/media/ui-kit.ac67bf8592b8f142afb9.webp",
+    "static/media/MERN Stack React Node Ecommerce from Scratch to Deployment.jpg": "/static/media/MERN Stack React Node Ecommerce from Scratch to Deployment.4b3bbc04459e65a35229.jpg",
+    "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.jpg": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.65f572634e7b8c2bd84a.jpg",
     "static/media/mmc.webp": "/static/media/mmc.0839dd93543b1407b2bc.webp",
     "static/media/testing_jest.webp": "/static/media/testing_jest.412f11842a0658bf0855.webp",
+    "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2023.jpg": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2023.5a2a1828c72ea78cb613.jpg",
     "static/media/vba.webp": "/static/media/vba.1f018045b375ed49b9b5.webp",
     "static/media/typeorm.png": "/static/media/typeorm.f3094d8aa22bb5198454.png",
+    "static/media/How to Become a Senior Developer - Beyond coding skills.jpg": "/static/media/How to Become a Senior Developer - Beyond coding skills.4e117bd484047815ec39.jpg",
+    "static/media/Next Level CSS Creative Hover & Animation Effects.jpg": "/static/media/Next Level CSS Creative Hover & Animation Effects.342c91ecfd41c218c7cd.jpg",
+    "static/media/The Complete Cypress 12 Course From Zero to Expert.jpg": "/static/media/The Complete Cypress 12 Course From Zero to Expert.1d75ed2eede8c96c1be5.jpg",
     "static/media/mongodb.svg": "/static/media/mongodb.d89a6eebb2b81e487ffc99f69a3f6ea4.svg",
     "static/media/pluralsight.webp": "/static/media/pluralsight.1d6a4ca5d32ec79d2ffa.webp",
     "static/media/nodejs.svg": "/static/media/nodejs.52cbf9a89f44655c0375b9e9f88bf9c5.svg",
@@ -67,10 +80,10 @@
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.1666b5d0.css.map": "/static/css/main.1666b5d0.css.map",
-    "main.22e9ff11.js.map": "/static/js/main.22e9ff11.js.map"
+    "main.08df137c.js.map": "/static/js/main.08df137c.js.map"
   },
   "entrypoints": [
     "static/css/main.1666b5d0.css",
-    "static/js/main.22e9ff11.js"
+    "static/js/main.08df137c.js"
   ]
 }
