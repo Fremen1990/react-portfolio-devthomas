@@ -7,11 +7,17 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        node-version: [18.x, 19.x]
     runs-on: ubuntu-latest
     name: Build and Push
     steps:
       - name: git-checkout
         uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
 
       - name: Install all dependencies
         run: yarn install
