@@ -49,7 +49,9 @@ import C_NEST_JS from "../../assets/Programming Certificates/The React Testing L
 import U_MERN_ECOMMERCE from "../../assets/img/education/udemy_courses/MERN Stack React Node Ecommerce from Scratch to Deployment.jpg";
 import C_MERN_ECOMMERCE from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
 import U_REACT_TESTING_FOR_ENGINEERS from "../../assets/img/education/udemy_courses/Testing react applications for professional engineers.jpg";
-import C_REACT_TESTING_FOR_ENGINEERS from "../../assets/Programming Certificates/The React Testing Library Bootcamp - The Developer Guide.pdf";
+import C_REACT_TESTING_FOR_ENGINEERS from "../../assets/Programming Certificates/Testing react applications for professional engineers.jpg";
+import U_ADVANCED_REACT_ENTERPRISE from "../../assets/img/education/udemy_courses/Advanced React For Enterprise React for senior engineers.jpg";
+import C_ADVANCED_REACT_ENTERPRISE from "../../assets/Programming Certificates/Testing react applications for professional engineers.jpg";
 
 export const messages = {
   headerTextContent: "EDUCATION",
@@ -64,6 +66,13 @@ export const messages = {
     leftBottomButtonTitle: "Check Agenda",
     leftBottomButtonURL: "https://www.udemy.com/",
     techStack: [
+      {
+        name: "Advanced React For Enterprise: React for senior engineers",
+        image: U_ADVANCED_REACT_ENTERPRISE,
+        time: 6,
+        certificate: C_REACT_TESTING_FOR_ENGINEERS,
+        link: "https://www.udemy.com/course/react-for-senior-engineers/",
+      },
       {
         name: "Testing react applications for professional engineers",
         image: U_REACT_TESTING_FOR_ENGINEERS,

@@ -41,6 +41,8 @@ import L_GITHUB_ACTIONS from "../assets/img/skills/github-actions.png";
 import L_GITLAB from "../assets/img/skills/gitlab.png";
 import L_DOCKER from "../assets/img/skills/docker.webp";
 import L_NX from "../assets/img/skills/nx.webp";
+// import L_KUBERNETES from "../assets/img/skills/nx.webp";
+// import L_TERRAFORM from "../assets/img/skills/nx.webp";
 
 
 // TODO - add icons and links to new skills here
@@ -276,5 +278,17 @@ export const skills = {
       imgSrc: L_NX,
       skillName: "NX",
     },
+    // {
+    //   link: "https://kubernetes.io/",
+    //   imgAltText: "Kubernetes",
+    //   imgSrc: L_NX,
+    //   skillName: "Kubernetes",
+    // },
+    // {
+    //   link: "https://www.terraform.io/",
+    //   imgAltText: "Terrafom",
+    //   imgSrc: L_NX,
+    //   skillName: "Terrafom",
+    // },
   ],
 };

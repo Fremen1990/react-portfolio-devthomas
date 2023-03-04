@@ -1,0 +1,14 @@
+.skillCard{
+    border-radius: 10px;
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, #ffffff 100%);
+}
+
+.skillCard:hover{
+    background-image: linear-gradient(45deg, #1f4d1f 0%, #b8b4b4 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    transition:  background-image .4s linear;
+    cursor: pointer;
+    font-weight: bold;
+
+}
