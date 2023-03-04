@@ -17,8 +17,8 @@ import FooterPanel from "./components/footer";
 
 // Pages
 import About from "./pages/about";
-import Skills from "./pages/skills";
 import Experience from "./pages/experience/experience";
+import {Skills} from "./pages/skills";
 import Contact from "./pages/contactForm";
 
 // Styles
