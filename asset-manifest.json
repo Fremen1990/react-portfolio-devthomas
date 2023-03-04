@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.818db297.css",
-    "main.js": "/static/js/main.dd521946.js",
+    "main.css": "/static/css/main.8eb41658.css",
+    "main.js": "/static/js/main.c6ec829c.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
@@ -11,6 +11,7 @@
     "static/media/Software Development Mindsets For Successful Career.pdf": "/static/media/Software Development Mindsets For Successful Career.a82831afc9b1a25c5395.pdf",
     "static/media/The React Testing Library Bootcamp - The Developer Guide.pdf": "/static/media/The React Testing Library Bootcamp - The Developer Guide.940ce241e7065a2b93ed.pdf",
     "static/media/The Complete Cypress 12 Course From Zero to Expert.pdf": "/static/media/The Complete Cypress 12 Course From Zero to Expert.84d8e2a2a088d0c1bd9d.pdf",
+    "static/media/Testing react applications for professional engineers.jpg": "/static/media/Testing react applications for professional engineers.8a34e1757515955e3b87.jpg",
     "static/media/Node JS with Test Drived Development.pdf": "/static/media/Node JS with Test Drived Development.30d1f9e9b372cf4497f1.pdf",
     "static/media/React with Test Driven Development.pdf": "/static/media/React with Test Driven Development.3fae0330298c49ade68c.pdf",
     "static/media/crypto-chart.PNG": "/static/media/crypto-chart.ad8aab691ade39e5d8b4.PNG",
@@ -82,11 +83,11 @@
     "static/media/typescript.svg": "/static/media/typescript.a6305a733dd55243980aec55f96f70c5.svg",
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
-    "main.818db297.css.map": "/static/css/main.818db297.css.map",
-    "main.dd521946.js.map": "/static/js/main.dd521946.js.map"
+    "main.8eb41658.css.map": "/static/css/main.8eb41658.css.map",
+    "main.c6ec829c.js.map": "/static/js/main.c6ec829c.js.map"
   },
   "entrypoints": [
-    "static/css/main.818db297.css",
-    "static/js/main.dd521946.js"
+    "static/css/main.8eb41658.css",
+    "static/js/main.c6ec829c.js"
   ]
 }
