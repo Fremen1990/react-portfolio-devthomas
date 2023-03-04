@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1666b5d0.css",
-    "main.js": "/static/js/main.08df137c.js",
+    "main.js": "/static/js/main.b822ded5.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
@@ -48,7 +48,6 @@
     "static/media/mmc.webp": "/static/media/mmc.0839dd93543b1407b2bc.webp",
     "static/media/testing_jest.webp": "/static/media/testing_jest.412f11842a0658bf0855.webp",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2023.jpg": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2023.5a2a1828c72ea78cb613.jpg",
-    "static/media/vba.webp": "/static/media/vba.1f018045b375ed49b9b5.webp",
     "static/media/typeorm.png": "/static/media/typeorm.f3094d8aa22bb5198454.png",
     "static/media/How to Become a Senior Developer - Beyond coding skills.jpg": "/static/media/How to Become a Senior Developer - Beyond coding skills.4e117bd484047815ec39.jpg",
     "static/media/Next Level CSS Creative Hover & Animation Effects.jpg": "/static/media/Next Level CSS Creative Hover & Animation Effects.342c91ecfd41c218c7cd.jpg",
@@ -72,7 +71,6 @@
     "static/media/redux.svg": "/static/media/redux.0e4fb1c819ac4c060c92343147d4ccf7.svg",
     "static/media/react-router.svg": "/static/media/react-router.a87b722746890c8dcd6e20f04b6d53cd.svg",
     "static/media/bootstrap-4.svg": "/static/media/bootstrap-4.997c463dca63c915b9a51f1caedef8e1.svg",
-    "static/media/github.svg": "/static/media/github.740db6be1c6248ce6abab3577896d4d9.svg",
     "static/media/html-5.svg": "/static/media/html-5.821ba738922e8952e57422f7b8a20362.svg",
     "static/media/javascript.svg": "/static/media/javascript.ba40d6a9629bf521391e764a593f9df3.svg",
     "index.html": "/index.html",
@@ -80,10 +78,10 @@
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.1666b5d0.css.map": "/static/css/main.1666b5d0.css.map",
-    "main.08df137c.js.map": "/static/js/main.08df137c.js.map"
+    "main.b822ded5.js.map": "/static/js/main.b822ded5.js.map"
   },
   "entrypoints": [
     "static/css/main.1666b5d0.css",
-    "static/js/main.08df137c.js"
+    "static/js/main.b822ded5.js"
   ]
 }
