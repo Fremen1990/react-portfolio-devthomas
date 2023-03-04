@@ -206,11 +206,11 @@ const Skills = () => {
             <Card className="focus mt-2 mb-2 ">
               <Card.Body>
                 <Card.Title className="text-center  card-title">
-                  Hosting Platforms
+                  DevOps
                 </Card.Title>
                 <hr />
                 <Card.Text className="card-text d-flex justify-content-start flex-column">
-                  {skills.hostingPlatforms.map((skill, index) => (
+                  {skills.devOps.map((skill, index) => (
                     <span className="p-2" key={index}>
                       <a
                         className="text-dark text-decoration-none"
