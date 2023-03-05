@@ -41,254 +41,313 @@ import L_GITHUB_ACTIONS from "../assets/img/skills/github-actions.png";
 import L_GITLAB from "../assets/img/skills/gitlab.png";
 import L_DOCKER from "../assets/img/skills/docker.webp";
 import L_NX from "../assets/img/skills/nx.webp";
+import L_ARDUINO from "../assets/img/skills/Arduino.png";
+import L_Cplusplus from "../assets/img/skills/C++.png";
+import L_PYTHON from "../assets/img/skills/Python.png";
+import L_JAVA from "../assets/img/skills/Java.png";
 // import L_KUBERNETES from "../assets/img/skills/nx.webp";
 // import L_TERRAFORM from "../assets/img/skills/nx.webp";
 
 
-// TODO - add icons and links to new skills here
 export const skills = {
-  programmingLanguages: [
-    {
-      link: "https://www.javascript.com/",
-      imgAltText: "JavaScript",
-      imgSrc: L_JAVASCRIPT,
-      skillName: "JavaScript",
-    },
-    {
-      link: "https://www.typescriptlang.org/",
-      imgAltText: "TypeScript",
-      imgSrc: L_TYPESCRIPT,
-      skillName: "TypeScript",
-    },
-    // {
-    //   link: "https://golang.org/",
-    //   imgAltText: "Golang",
-    //   imgSrc: L_GOLANG,
-    //   skillName: "GO",
-    // },
-    // {
-    //   link: "https://www.python.org/",
-    //   imgAltText: "Python",
-    //   imgSrc: L_PYTHON,
-    //   skillName: "Python",
-    // },
+    programmingLanguages: [
+        {
+            link: "https://www.javascript.com/",
+            imgAltText: "JavaScript",
+            imgSrc: L_JAVASCRIPT,
+            skillName: "JavaScript",
+            education: ["MegaK", "KursReacta","StudiujeIT", "Websamuraj"],
+        },
+        {
+            link: "https://www.typescriptlang.org/",
+            imgAltText: "TypeScript",
+            imgSrc: L_TYPESCRIPT,
+            skillName: "TypeScript",
+            education: ["MegaK"],
+        },
+        // {
+        //   link: "https://golang.org/",
+        //   imgAltText: "Golang",
+        //   imgSrc: L_GOLANG,
+        //   skillName: "GO",
+        // },
+        // {
+        //   link: "https://www.python.org/",
+        //   imgAltText: "Python",
+        //   imgSrc: L_PYTHON,
+        //   skillName: "Python",
+        // },
 
-  ],
-  frontend: [
-    {
-      link: "https://en.wikipedia.org/wiki/HTML5",
-      imgAltText: "HTML 5",
-      imgSrc: L_HTML5,
-      skillName: "HTML5",
-    },
-    {
-      link: "https://medium.com/beginners-guide-to-mobile-web-development/whats-new-in-css-3-dcd7fa6122e1",
-      imgAltText: "CSS 3",
-      imgSrc: L_CSS3,
-      skillName: "CSS3",
-    },
-    {
-      link: "https://getbootstrap.com/",
-      imgAltText: "Bootstrap",
-      imgSrc: L_BOOTSTRAP,
-      skillName: "Bootstrap",
-    },
-    {
-      link: "https://material-ui.com/",
-      imgAltText: "Material-UI",
-      imgSrc: L_MATERIALUI,
-      skillName: "Material-UI",
-    },
-    {
-      link: "https://styled-components.com/",
-      imgAltText: "styled-components",
-      imgSrc: L_STYLED_COMPONENTS,
-      skillName: "styled-components",
-    },
-    {
-      link: "https://reactjs.org/",
-      imgAltText: "React JS",
-      imgSrc: L_REACT,
-      skillName: "React JS",
-      points: 110,
-    },
-    {
-      link: "https://redux.js.org/",
-      imgAltText: "Redux",
-      imgSrc: L_REDUX,
-      skillName: "Redux Toolkit",
-    },
-    {
-      link: "https://react-query-v3.tanstack.com/",
-      imgAltText: "React Query",
-      imgSrc: L_REACT_QUERY,
-      skillName: "React Query",
-    },
-    // {
-    //   link: "https://nextjs.org/",
-    //   imgAltText: "Next.js",
-    //   imgSrc: L_NEXTJS,
-    //   skillName: "Next.js",
-    // },
-    // {
-    //   link: "https://threejs.org/",
-    //   imgAltText: "Three.js
-    //   imgSrc: L_THREEJS,
-    //   skillName: "Three.js
-    // },
-  ],
+    ],
+    frontend: [
+        {
+            link: "https://en.wikipedia.org/wiki/HTML5",
+            imgAltText: "HTML 5",
+            imgSrc: L_HTML5,
+            skillName: "HTML5",
+            education: ["MegaK", "StudiujeIT", "Websamuraj"],
+        },
+        {
+            link: "https://medium.com/beginners-guide-to-mobile-web-development/whats-new-in-css-3-dcd7fa6122e1",
+            imgAltText: "CSS 3",
+            imgSrc: L_CSS3,
+            skillName: "CSS3",
+            education: ["MegaK","StudiujeIT", "Websamuraj"],
+        },
+        {
+            link: "https://getbootstrap.com/",
+            imgAltText: "Bootstrap",
+            imgSrc: L_BOOTSTRAP,
+            skillName: "Bootstrap",
+            education: [""],
+        },
+        {
+            link: "https://material-ui.com/",
+            imgAltText: "Material-UI",
+            imgSrc: L_MATERIALUI,
+            skillName: "Material-UI",
+            education: ["Udemy"],
+        },
+        {
+            link: "https://styled-components.com/",
+            imgAltText: "styled-components",
+            imgSrc: L_STYLED_COMPONENTS,
+            skillName: "styled-components",
+            education: ["MegaK"],
+        },
+        {
+            link: "https://reactjs.org/",
+            imgAltText: "React JS",
+            imgSrc: L_REACT,
+            skillName: "React JS",
+            education: ["MegaK", "KursReacta", "Pluralsight", "Websamuraj"],
+            points: 110,
+        },
+        {
+            link: "https://redux.js.org/",
+            imgAltText: "Redux",
+            imgSrc: L_REDUX,
+            skillName: "Redux Toolkit",
+            education: ["MegaK", "KursReacta"],
+        },
+        {
+            link: "https://react-query-v3.tanstack.com/",
+            imgAltText: "React Query",
+            imgSrc: L_REACT_QUERY,
+            skillName: "React Query",
+            education: ["Udemy"],
+        },
+        // {
+        //   link: "https://nextjs.org/",
+        //   imgAltText: "Next.js",
+        //   imgSrc: L_NEXTJS,
+        //   skillName: "Next.js",
+        // },
+        // {
+        //   link: "https://threejs.org/",
+        //   imgAltText: "Three.js
+        //   imgSrc: L_THREEJS,
+        //   skillName: "Three.js
+        // },
+    ],
 
-  backend: [
-    {
-      link: "https://nodejs.org/en/",
-      imgAltText: "Node.js",
-      imgSrc: L_NODE_JS,
-      skillName: "Node.js",
-      points: 156,
-    },
-    {
-      link: "https://expressjs.com/",
-      imgAltText: "Express",
-      imgSrc: L_EXPRESS,
-      skillName: "Express",
-    },
-    {
-      link: "https://nestjs.com/",
-      imgAltText: "Nestjs",
-      imgSrc: L_NESTJS,
-      skillName: "NestJS",
-    },
-    // {
-    //     link: "https://graphql.org/",
-    //     imgAltText: "GraphQL",
-    //     imgSrc: L_GRAPHQL,
-    //     skillName: "GraphQL",
-    // },
-    // {
-    //   link: "https://firebase.google.com/",
-    //   imgAltText: "Firebase",
-    //   imgSrc: L_FIREBASE,
-    //   skillName: "Gin (GO)",
-    // },
-    // {
-    //   link: "https://firebase.google.com/",
-    //   imgAltText: "Firebase",
-    //   imgSrc: L_FIREBASE,
-    //   skillName: "AWS Lambda",
-    // },
-  ],
-  testing: [
-    {
-      link: "https://en.wikipedia.org/wiki/Test-driven_development",
-      imgAltText: "TDD",
-      imgSrc: L_TDD,
-      skillName: "TDD",
-    },
-    {
-      link: "https://jestjs.io/",
-      imgAltText: "JEST",
-      imgSrc: L_JEST,
-      skillName: "Jest",
-    },
-    {
-      link: "https://vitest.dev/",
-      imgAltText: "VITEST",
-      imgSrc: L_VITEST,
-      skillName: "Vitest",
-    },
-    {
-      link: "https://testing-library.com/docs/react-testing-library/intro/",
-      imgAltText: "React Testing Library",
-      imgSrc: L_REACT_TESTING_LIBRARY,
-      skillName: "React Testing Library",
-    },
-    {
-      link: "https://www.cypress.io/",
-      imgAltText: "Cypress",
-      imgSrc: L_CYPRESS,
-      skillName: "Cypress",
-    },
-    {
-      link: "https://cucumber.io/",
-      imgAltText: "Cucumber",
-      imgSrc: L_CUCUMBER,
-      skillName: "Cucumber",
-    },
-  ],
-  databases: [
-    // {
-    //   link: "https://www.postgresql.org/",
-    //   imgAltText: "PostgreSQL",
-    //   imgSrc: L_POSTGRESQL,
-    //   skillName: "PostgreSQL",
-    // },
-    {
-      link: "https://www.mysql.com/",
-      imgAltText: "My-SQL",
-      imgSrc: L_MYSQL,
-      skillName: "My-SQL",
-    },
-    {
-      link: "https://typeorm.io/",
-      imgAltText: "TypeORM",
-      imgSrc: L_TYPEORM,
-      skillName: "TypeORM",
-    },
-    {
-      link: "https://www.mongodb.com/",
-      imgAltText: "MongoDB",
-      imgSrc: L_MONGODB,
-      skillName: "MongoDB",
-    },
-    // {
-    //   link: "https://firebase.google.com/",
-    //   imgAltText: "Firebase Database",
-    //   imgSrc: L_FIREBASE_DATABASE,
-    //   skillName: "AWS DynamoDB",
-    // },
-  ],
-  devOps: [
-    {
-      link: "https://git-scm.com",
-      imgAltText: "GIT",
-      imgSrc: L_GIT,
-      skillName: "GIT",
-    },
-    {
-      link: "https://github.com/features/actions",
-      imgAltText: "GitHub Actions",
-      imgSrc: L_GITHUB_ACTIONS,
-      skillName: "GitHub Actions",
-    },
-    {
-      link: "https://docs.gitlab.com/ee/ci/",
-      imgAltText: "GitLab CI/CD",
-      imgSrc: L_GITLAB,
-      skillName: "GitLab CI/CD",
-    },
-    {
-      link: "https://docs.docker.com/",
-      imgAltText: "Docker",
-      imgSrc: L_DOCKER,
-      skillName: "Docker",
-    },
-    {
-      link: "https://nx.dev",
-      imgAltText: "NX",
-      imgSrc: L_NX,
-      skillName: "NX",
-    },
-    // {
-    //   link: "https://kubernetes.io/",
-    //   imgAltText: "Kubernetes",
-    //   imgSrc: L_NX,
-    //   skillName: "Kubernetes",
-    // },
-    // {
-    //   link: "https://www.terraform.io/",
-    //   imgAltText: "Terrafom",
-    //   imgSrc: L_NX,
-    //   skillName: "Terrafom",
-    // },
-  ],
+    backend: [
+        {
+            link: "https://nodejs.org/en/",
+            imgAltText: "Node.js",
+            imgSrc: L_NODE_JS,
+            skillName: "Node.js",
+            education: ["MegaK", "Websamuraj"],
+            points: 156,
+        },
+        {
+            link: "https://expressjs.com/",
+            imgAltText: "Express",
+            imgSrc: L_EXPRESS,
+            education: ["MegaK", "Websamuraj"],
+            skillName: "Express",
+        },
+        {
+            link: "https://nestjs.com/",
+            imgAltText: "Nestjs",
+            imgSrc: L_NESTJS,
+            education: ["MegaK"],
+            skillName: "NestJS",
+        },
+        // {
+        //     link: "https://graphql.org/",
+        //     imgAltText: "GraphQL",
+        //     imgSrc: L_GRAPHQL,
+        //     skillName: "GraphQL",
+        // },
+        // {
+        //   link: "https://firebase.google.com/",
+        //   imgAltText: "Firebase",
+        //   imgSrc: L_FIREBASE,
+        //   skillName: "Gin (GO)",
+        // },
+        // {
+        //   link: "https://firebase.google.com/",
+        //   imgAltText: "Firebase",
+        //   imgSrc: L_FIREBASE,
+        //   skillName: "AWS Lambda",
+        // },
+    ],
+    testing: [
+        {
+            link: "https://en.wikipedia.org/wiki/Test-driven_development",
+            imgAltText: "TDD",
+            imgSrc: L_TDD,
+            skillName: "TDD",
+            education: ["Udemy", "KursReacta"],
+        },
+        {
+            link: "https://jestjs.io/",
+            imgAltText: "JEST",
+            imgSrc: L_JEST,
+            skillName: "Jest",
+            education: ["Udemy", "KursReacta"],
+        },
+        {
+            link: "https://vitest.dev/",
+            imgAltText: "VITEST",
+            imgSrc: L_VITEST,
+            skillName: "Vitest",
+            education: ["Udemy"],
+        },
+        {
+            link: "https://testing-library.com/docs/react-testing-library/intro/",
+            imgAltText: "React Testing Library",
+            imgSrc: L_REACT_TESTING_LIBRARY,
+            skillName: "React Testing Library",
+            education: ["Udemy", "KursReacta"],
+        },
+        {
+            link: "https://www.cypress.io/",
+            imgAltText: "Cypress",
+            imgSrc: L_CYPRESS,
+            skillName: "Cypress",
+            education: ["Udemy"],
+        },
+        {
+            link: "https://cucumber.io/",
+            imgAltText: "Cucumber",
+            imgSrc: L_CUCUMBER,
+            skillName: "Cucumber",
+            education: ["Udemy"],
+        },
+    ],
+    databases: [
+        // {
+        //   link: "https://www.postgresql.org/",
+        //   imgAltText: "PostgreSQL",
+        //   imgSrc: L_POSTGRESQL,
+        //   skillName: "PostgreSQL",
+        // },
+        {
+            link: "https://www.mysql.com/",
+            imgAltText: "My-SQL",
+            imgSrc: L_MYSQL,
+            education: ["MegaK"],
+            skillName: "My-SQL",
+        },
+        {
+            link: "https://typeorm.io/",
+            imgAltText: "TypeORM",
+            imgSrc: L_TYPEORM,
+            education: ["MegaK"],
+            skillName: "TypeORM",
+        },
+        {
+            link: "https://www.mongodb.com/",
+            imgAltText: "MongoDB",
+            imgSrc: L_MONGODB,
+            skillName: "MongoDB",
+            education: ["Udemy", "Websamuraj"],
+        },
+        // {
+        //   link: "https://firebase.google.com/",
+        //   imgAltText: "Firebase Database",
+        //   imgSrc: L_FIREBASE_DATABASE,
+        //   skillName: "AWS DynamoDB",
+        // },
+    ],
+    devOps: [
+        {
+            link: "https://git-scm.com",
+            imgAltText: "GIT",
+            imgSrc: L_GIT,
+            education: ["MegaK", "Pluralsight"],
+            skillName: "GIT",
+        },
+        {
+            link: "https://github.com/features/actions",
+            imgAltText: "GitHub Actions",
+            imgSrc: L_GITHUB_ACTIONS,
+            skillName: "GitHub Actions",
+            education: ["Udemy", "Pluralsight"],
+        },
+        {
+            link: "https://docs.gitlab.com/ee/ci/",
+            imgAltText: "GitLab CI/CD",
+            imgSrc: L_GITLAB,
+            skillName: "GitLab CI/CD",
+            education: ["Udemy"],
+        },
+        {
+            link: "https://docs.docker.com/",
+            imgAltText: "Docker",
+            imgSrc: L_DOCKER,
+            skillName: "Docker",
+            education: ["Udemy", "Pluralsight"],
+        },
+        {
+            link: "https://nx.dev",
+            imgAltText: "NX",
+            imgSrc: L_NX,
+            skillName: "NX",
+            education: ["Udemy"],
+        },
+        // {
+        //   link: "https://kubernetes.io/",
+        //   imgAltText: "Kubernetes",
+        //   imgSrc: L_NX,
+        //   skillName: "Kubernetes",
+        // },
+        // {
+        //   link: "https://www.terraform.io/",
+        //   imgAltText: "Terrafom",
+        //   imgSrc: L_NX,
+        //   skillName: "Terrafom",
+        // },
+    ],
+    studiujeIT: [
+        {
+            link: "https://www.arduino.cc/",
+            imgAltText: "Arduino",
+            imgSrc: L_ARDUINO,
+            education: ["StudiujeIT"],
+            skillName: "Arduino",
+        },
+        {
+            link: "https://cplusplus.com/",
+            imgAltText: "C++",
+            imgSrc: L_Cplusplus,
+            education: ["StudiujeIT"],
+            skillName: "C++",
+        },
+        {
+            link: "https://www.python.org/",
+            imgAltText: "Python",
+            imgSrc: L_PYTHON,
+            education: ["StudiujeIT"],
+            skillName: "Python",
+        },
+        {
+            link: "https://www.java.com/",
+            imgAltText: "Java",
+            imgSrc: L_JAVA,
+            education: ["StudiujeIT"],
+            skillName: "Java",
+        }]
 };

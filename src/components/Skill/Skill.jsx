@@ -2,9 +2,9 @@ import Image from "react-bootstrap/Image";
 import style from "./style.module.css";
 import {bootstrapClasses} from "./bootstrapClasses";
 
-export const Skill = ({skill}) => (
+export const Skill = ({skill, additionalBootstrap=""}) => (
     <a
-        className={`${bootstrapClasses.cardSkillLink} ${style.skillCard}`}
+        className={`${bootstrapClasses.cardSkillLink} ${style.skillCard} ${additionalBootstrap}`}
         href={skill.link}
         target="_blank"
         rel="noopener noreferrer"
