@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e9386d0-7213-45c0-bd88-bead83cbc62c" name="Changes" comment="Add certificate 'Testing react applications for professional engineers'">
+    <list default="true" id="6e9386d0-7213-45c0-bd88-bead83cbc62c" name="Changes" comment="Update skills in all Education as polimorfic component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SkillsCard/SkillsCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SkillsCard/SkillsCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SkillsCard/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SkillsCard/bootstrapClasses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/education/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/education/messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/skills-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/skills-data.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,8 +103,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.prettier:check" />
         <item itemvalue="npm.prettier" />
       </list>
@@ -141,7 +137,7 @@
       <workItem from="1677928648577" duration="709000" />
       <workItem from="1677929521183" duration="4437000" />
       <workItem from="1677951576302" duration="12000" />
-      <workItem from="1677954565731" duration="3834000" />
+      <workItem from="1677954565731" duration="16072000" />
     </task>
     <task id="LOCAL-00001" summary="Portfolio Update 08/2022">
       <created>1660690439916</created>
@@ -255,7 +251,21 @@
       <option name="project" value="LOCAL" />
       <updated>1677957966267</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Upgrade Skills Cards with cool hover">
+      <created>1677961078331</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1677961078331</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Update skills in all Education as polimorfic component">
+      <created>1678000178758</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1678000178758</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,6 +297,8 @@
     <MESSAGE value=":memo: Update Node Version in package json and publish.yml" />
     <MESSAGE value=":rocket: Update all skills and refactor skillCard component" />
     <MESSAGE value="Add certificate 'Testing react applications for professional engineers'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add certificate 'Testing react applications for professional engineers'" />
+    <MESSAGE value="Upgrade Skills Cards with cool hover" />
+    <MESSAGE value="Update skills in all Education as polimorfic component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update skills in all Education as polimorfic component" />
   </component>
 </project>
