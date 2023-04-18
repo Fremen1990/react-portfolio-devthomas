@@ -1,5 +1,6 @@
 import {Timeline, Events} from "@merc/react-timeline";
 import {
+    EducationDetailsGraphQLMastery,
     EducationDetailsKursReacta,
     EducationDetailsMegaK,
     EducationDetailsPluralsight,
@@ -56,6 +57,36 @@ export const EducationTimeline = () => {
                         details={<EducationDetailsPluralsight/>}
                         leftBottomButtonTitle={messages.Pluralsight.leftBottomButtonTitle}
                         leftBottomButtonURL={messages.Pluralsight.leftBottomButtonURL}
+                    />
+
+                    <EducationCard
+                        title={messages.GraphQL_Mastery.title}
+                        date={messages.GraphQL_Mastery.date}
+                        image={messages.GraphQL_Mastery.image}
+                        description={messages.GraphQL_Mastery.description}
+                        detailsButtonTitle={messages.GraphQL_Mastery.detailsButtonTitle}
+                        details={<EducationDetailsGraphQLMastery/>}
+                        techStackList={messages.GraphQL_Mastery.techStack.map((tech, index) => (
+                            // <TechImage
+                            //     key={index}
+                            //     title={tech.name}
+                            //     image={tech.image}
+                            //     height={tech.height}
+                            //     width={tech.width}
+                            // />
+
+                            <li
+                                style={{listStyleType: "none", width: "80%"}}
+                            >
+                                <Skill
+                                    skill={tech}
+                                    additionalBootstrap="m-1 p-2 d-inline-block w-100"
+                                />
+                            </li>
+
+                        ))}
+                        leftBottomButtonTitle={messages.GraphQL_Mastery.leftBottomButtonTitle}
+                        leftBottomButtonURL={messages.GraphQL_Mastery.leftBottomButtonURL}
                     />
 
                     <EducationCard

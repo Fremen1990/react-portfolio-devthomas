@@ -1,6 +1,8 @@
 
 import L_MEGAK from "../../assets/img/education/megak.webp";
 import L_KursReacta from "../../assets/img/education/kursreacta.png";
+import L_GraphQL_Mastery from "../../assets/img/education/graphql_mastery.webp";
+
 import L_UDEMY from "../../assets/img/education/udemy.png";
 import L_PLURALSIGHT from "../../assets/img/education/pluralsight.webp";
 import L_StudiujeIt from "../../assets/img/education/studiuje-it.webp";
@@ -192,6 +194,18 @@ export const messages = {
         detailsButtonTitle: "Role IQs and TECH details",
         leftBottomButtonTitle: "My Pluralsight Profile",
         leftBottomButtonURL: "https://app.pluralsight.com/profile/tomasz-stanisz",
+    },
+
+    GraphQL_Mastery: {
+        title: "GraphQL Mastery - Michał Taszycki",
+        date: "15/03/2023",
+        image: L_GraphQL_Mastery,
+        description:
+            "Full Stack GraphQL in practice with Michal Taszycki it is complete course with all GraphQL topic from raw GraphQL backend and frontend.",
+        detailsButtonTitle: "COURSE DETAILS",
+        leftBottomButtonTitle: "Check Agenda",
+        leftBottomButtonURL: "https://graphqlmastery.pl/",
+        techStack: getSkillsByEducationName(allSkillsArray, "GraphQL_Mastery")
     },
 
     MegaK: {

@@ -24,6 +24,21 @@ export const EducationDetailsMegaK = () => (
   </>
 );
 
+export const EducationDetailsGraphQLMastery = () => (
+    <>
+        <strong>Course modules:</strong>
+        <ul className="list-styles pt-1">
+            <li>Module 1 - Quick start Full Stack App</li>
+            <li>Module 2 - Getting data from APIs Full Stack</li>
+            <li>Module 3 - Arguments, variables and fragments</li>
+            <li>Module 4 - Domain Mutations</li>
+            <li>Module 5 - CRUD Mutations</li>
+            <li>Module 6 - Authorization and Authentication</li>
+            <li>Module 7 - Pagination and API versioning</li>
+        </ul>
+    </>
+);
+
 export const EducationDetailsKursReacta = () => (
   <>
     <strong>Course weeks:</strong>

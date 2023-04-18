@@ -16,7 +16,7 @@ import ProjectsTimeline from "./components/projects-timeline";
 import FooterPanel from "./components/footer";
 
 // Pages
-import About from "./pages/about";
+import About from "./pages/about/about";
 import Experience from "./pages/experience/experience";
 import {Skills} from "./pages/skills";
 import Contact from "./pages/contactForm";

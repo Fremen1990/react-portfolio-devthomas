@@ -7,20 +7,23 @@ import L_TYPESCRIPT from "../assets/img/skills/typescript.svg";
 // FRONTEND
 import L_HTML5 from "../assets/img/skills/html-5.svg";
 import L_CSS3 from "../assets/img/skills/css3.svg";
-import L_BOOTSTRAP from "../assets/img/skills/bootstrap-4.svg";
+// import L_BOOTSTRAP from "../assets/img/skills/bootstrap-4.svg";
 import L_MATERIALUI from "../assets/img/skills/material-ui-1.svg";
 import L_STYLED_COMPONENTS from "../assets/img/skills/styled-components.svg";
 import L_REACT from "../assets/img/skills/react.svg";
 import L_REACT_QUERY from "../assets/img/skills/react-queyr.webp";
 import L_REDUX from "../assets/img/skills/redux.svg";
-import L_NEXTJS from "../assets/img/skills/nextjs.svg";
-import L_THREEJS from "../assets/img/skills/threejs.webp";
+import L_APOLLO_CLIENT from "../assets/img/skills/apollo.png";
+// import L_NEXTJS from "../assets/img/skills/nextjs.svg";
+// import L_REACT_NATIVE from "../assets/img/skills/react-native1.svg";
+// import L_THREEJS from "../assets/img/skills/threejs.webp";
 
 // BACKEND
 import L_NODE_JS from "../assets/img/skills/nodejs.svg";
 import L_EXPRESS from "../assets/img/skills/express.svg";
 import L_NESTJS from "../assets/img/skills/nestjs.svg";
-// import L_GRAPHQL from "../assets/img/skills/graphql.svg";
+import L_JSONSCHEMA from "../assets/img/skills/json-schema.svg";
+import L_GRAPHQL from "../assets/img/skills/graphql.png";
 
 // TESTING
 import L_TDD from "../assets/img/skills/tdd.png";
@@ -56,7 +59,7 @@ export const skills = {
             imgAltText: "JavaScript",
             imgSrc: L_JAVASCRIPT,
             skillName: "JavaScript",
-            education: ["MegaK", "KursReacta","StudiujeIT", "Websamuraj"],
+            education: ["MegaK", "KursReacta", "StudiujeIT", "Websamuraj"],
         },
         {
             link: "https://www.typescriptlang.org/",
@@ -92,15 +95,15 @@ export const skills = {
             imgAltText: "CSS 3",
             imgSrc: L_CSS3,
             skillName: "CSS3",
-            education: ["MegaK","StudiujeIT", "Websamuraj"],
+            education: ["MegaK", "StudiujeIT", "Websamuraj"],
         },
-        {
-            link: "https://getbootstrap.com/",
-            imgAltText: "Bootstrap",
-            imgSrc: L_BOOTSTRAP,
-            skillName: "Bootstrap",
-            education: [""],
-        },
+        // {
+        //     link: "https://getbootstrap.com/",
+        //     imgAltText: "Bootstrap",
+        //     imgSrc: L_BOOTSTRAP,
+        //     skillName: "Bootstrap",
+        //     education: [""],
+        // },
         {
             link: "https://material-ui.com/",
             imgAltText: "Material-UI",
@@ -137,11 +140,31 @@ export const skills = {
             skillName: "React Query",
             education: ["Udemy"],
         },
+        {
+            link: "https://www.apollographql.com/docs/",
+            imgAltText: "Apollo Client",
+            imgSrc: L_APOLLO_CLIENT,
+            skillName: "Apollo Client",
+            education: ["GraphQL_Mastery"],
+        },
         // {
         //   link: "https://nextjs.org/",
         //   imgAltText: "Next.js",
         //   imgSrc: L_NEXTJS,
         //   skillName: "Next.js",
+        // },
+        // {
+        //   link: "https://www.gatsbyjs.com/",
+        //   imgAltText: "Gatsby",
+        //   imgSrc: L_GATSBY,
+        //   skillName: "Gatsby.js",
+        // },
+        // {
+        //     link: "https://reactnative.dev/",
+        //     imgAltText: "React Native",
+        //     imgSrc: L_REACT_NATIVE,
+        //     skillName: "ReactNative",
+        //     education: ["Udemy", "Pluralsight"],
         // },
         // {
         //   link: "https://threejs.org/",
@@ -164,22 +187,30 @@ export const skills = {
             link: "https://expressjs.com/",
             imgAltText: "Express",
             imgSrc: L_EXPRESS,
-            education: ["MegaK", "Websamuraj"],
             skillName: "Express",
+            education: ["MegaK", "Websamuraj"],
         },
         {
             link: "https://nestjs.com/",
             imgAltText: "Nestjs",
             imgSrc: L_NESTJS,
-            education: ["MegaK"],
             skillName: "NestJS",
+            education: ["MegaK"],
         },
-        // {
-        //     link: "https://graphql.org/",
-        //     imgAltText: "GraphQL",
-        //     imgSrc: L_GRAPHQL,
-        //     skillName: "GraphQL",
-        // },
+        {
+            link: "https://json-schema.org/",
+            imgAltText: "JSON Schema",
+            imgSrc: L_JSONSCHEMA,
+            skillName: "JSON Schema",
+            education: ["OrangeLab"],
+        },
+        {
+            link: "https://graphql.org/",
+            imgAltText: "GraphQL",
+            imgSrc: L_GRAPHQL,
+            skillName: "GraphQL",
+            education: ["GraphQL_Mastery"],
+        },
         // {
         //   link: "https://firebase.google.com/",
         //   imgAltText: "Firebase",
