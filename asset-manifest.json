@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.8eb41658.css",
-    "main.js": "/static/js/main.d66d50d6.js",
+    "main.js": "/static/js/main.b8118409.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
@@ -85,10 +85,10 @@
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.8eb41658.css.map": "/static/css/main.8eb41658.css.map",
-    "main.d66d50d6.js.map": "/static/js/main.d66d50d6.js.map"
+    "main.b8118409.js.map": "/static/js/main.b8118409.js.map"
   },
   "entrypoints": [
     "static/css/main.8eb41658.css",
-    "static/js/main.d66d50d6.js"
+    "static/js/main.b8118409.js"
   ]
 }
