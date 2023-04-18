@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.8eb41658.css",
-    "main.js": "/static/js/main.97bd26c1.js",
+    "main.js": "/static/js/main.a58d83a9.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
@@ -15,6 +15,7 @@
     "static/media/Node JS with Test Drived Development.pdf": "/static/media/Node JS with Test Drived Development.30d1f9e9b372cf4497f1.pdf",
     "static/media/React with Test Driven Development.pdf": "/static/media/React with Test Driven Development.3fae0330298c49ade68c.pdf",
     "static/media/crypto-chart.PNG": "/static/media/crypto-chart.ad8aab691ade39e5d8b4.PNG",
+    "static/media/graphql.png": "/static/media/graphql.fc6b9451733c620ceb86.png",
     "static/media/slide1.webp": "/static/media/slide1.14619b040f52684f1d90.webp",
     "static/media/head_hunter.png": "/static/media/head_hunter.6b891a64cb0dafacfb06.png",
     "static/media/Java.png": "/static/media/Java.fdabd4e11f1235e4e8e0.png",
@@ -30,7 +31,6 @@
     "static/media/netflix-clone.webp": "/static/media/netflix-clone.85314bf450583e5b8e81.webp",
     "static/media/testing_cypress.png": "/static/media/testing_cypress.1503bb82a282b51d9997.png",
     "static/media/C++.png": "/static/media/C++.2e49125db9535fd3acde.png",
-    "static/media/nextjs.svg": "/static/media/nextjs.6b8250f0f0ef11efff717301d41c6c66.svg",
     "static/media/slide3_mobile.webp": "/static/media/slide3_mobile.0a1a3309a3277e42dab0.webp",
     "static/media/websamuraj.webp": "/static/media/websamuraj.17e57d20c4618eef19eb.webp",
     "static/media/Project2-SpotiTom clone.webp": "/static/media/Project2-SpotiTom clone.78cf5cb6b6ffa7fbb467.webp",
@@ -47,6 +47,7 @@
     "static/media/MERN Stack React Node Ecommerce from Scratch to Deployment.jpg": "/static/media/MERN Stack React Node Ecommerce from Scratch to Deployment.4b3bbc04459e65a35229.jpg",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.jpg": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.65f572634e7b8c2bd84a.jpg",
     "static/media/mmc.webp": "/static/media/mmc.0839dd93543b1407b2bc.webp",
+    "static/media/apollo.png": "/static/media/apollo.9c0a3f6b2fe9b4330bd2.png",
     "static/media/testing_jest.webp": "/static/media/testing_jest.412f11842a0658bf0855.webp",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2023.jpg": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2023.5a2a1828c72ea78cb613.jpg",
     "static/media/typeorm.png": "/static/media/typeorm.f3094d8aa22bb5198454.png",
@@ -54,6 +55,7 @@
     "static/media/Next Level CSS Creative Hover & Animation Effects.jpg": "/static/media/Next Level CSS Creative Hover & Animation Effects.342c91ecfd41c218c7cd.jpg",
     "static/media/The Complete Cypress 12 Course From Zero to Expert.jpg": "/static/media/The Complete Cypress 12 Course From Zero to Expert.1d75ed2eede8c96c1be5.jpg",
     "static/media/docker.webp": "/static/media/docker.5f61240c04591def2d54.webp",
+    "static/media/graphql_mastery.webp": "/static/media/graphql_mastery.2cf141d961442954ba06.webp",
     "static/media/mongodb.svg": "/static/media/mongodb.d89a6eebb2b81e487ffc99f69a3f6ea4.svg",
     "static/media/pluralsight.webp": "/static/media/pluralsight.1d6a4ca5d32ec79d2ffa.webp",
     "static/media/nodejs.svg": "/static/media/nodejs.52cbf9a89f44655c0375b9e9f88bf9c5.svg",
@@ -63,8 +65,8 @@
     "static/media/express.svg": "/static/media/express.75fff9be2f3b289ba7be1f43a08f7a4c.svg",
     "static/media/mySql.svg": "/static/media/mySql.68c8655ee4a0bef4ec99192c22346b09.svg",
     "static/media/styled-components.svg": "/static/media/styled-components.a5fa325c3653c2f92589ca5c601a52c8.svg",
-    "static/media/threejs.webp": "/static/media/threejs.6ab44d3bda51edde3e08.webp",
     "static/media/react.svg": "/static/media/react.add74742e9e8f8827f7fa666dca760db.svg",
+    "static/media/json-schema.svg": "/static/media/json-schema.57e47605344de8f6c2786da12d4d07fc.svg",
     "static/media/cucumber.webp": "/static/media/cucumber.06c4992f5fe094339db1.webp",
     "static/media/TS.webp": "/static/media/TS.0fe13d94ae11b766c99d.webp",
     "static/media/digital-ocean.svg": "/static/media/digital-ocean.744a69736c6a24a3a3debe11e39da702.svg",
@@ -76,7 +78,6 @@
     "static/media/heroku.svg": "/static/media/heroku.73be03b36a36dcffd909327a314c859b.svg",
     "static/media/redux.svg": "/static/media/redux.0e4fb1c819ac4c060c92343147d4ccf7.svg",
     "static/media/react-router.svg": "/static/media/react-router.a87b722746890c8dcd6e20f04b6d53cd.svg",
-    "static/media/bootstrap-4.svg": "/static/media/bootstrap-4.997c463dca63c915b9a51f1caedef8e1.svg",
     "static/media/html-5.svg": "/static/media/html-5.821ba738922e8952e57422f7b8a20362.svg",
     "static/media/javascript.svg": "/static/media/javascript.ba40d6a9629bf521391e764a593f9df3.svg",
     "index.html": "/index.html",
@@ -84,10 +85,10 @@
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.8eb41658.css.map": "/static/css/main.8eb41658.css.map",
-    "main.97bd26c1.js.map": "/static/js/main.97bd26c1.js.map"
+    "main.a58d83a9.js.map": "/static/js/main.a58d83a9.js.map"
   },
   "entrypoints": [
     "static/css/main.8eb41658.css",
-    "static/js/main.97bd26c1.js"
+    "static/js/main.a58d83a9.js"
   ]
 }
