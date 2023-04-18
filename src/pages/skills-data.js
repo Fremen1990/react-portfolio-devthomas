@@ -29,6 +29,7 @@ import L_GRAPHQL from "../assets/img/skills/graphql.png";
 import L_TDD from "../assets/img/skills/tdd.png";
 import L_JEST from "../assets/img/skills/testing_jest.webp";
 import L_VITEST from "../assets/img/skills/vitest.png";
+import L_SUPERTEST from "../assets/img/skills/supertest.png";
 import L_REACT_TESTING_LIBRARY from "../assets/img/skills/react-testing-library.png";
 import L_CYPRESS from "../assets/img/skills/testing_cypress.png";
 import L_CUCUMBER from "../assets/img/skills/cucumber.webp";
@@ -244,6 +245,13 @@ export const skills = {
             imgAltText: "VITEST",
             imgSrc: L_VITEST,
             skillName: "Vitest",
+            education: ["Udemy"],
+        },
+        {
+            link: "https://www.npmjs.com/package/supertest",
+            imgAltText: "Supertest",
+            imgSrc: L_SUPERTEST,
+            skillName: "Supertest",
             education: ["Udemy"],
         },
         {
