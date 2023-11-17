@@ -23,6 +23,12 @@ const MyNavbar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto ">
+              <Nav.Link
+                className="nav-link-item"
+                href="https://3d-portfolio.devthomas.pl/"
+              >
+                3D Portfolio
+              </Nav.Link>
               <Nav.Link className="nav-link-item" href="#home">
                 Home
               </Nav.Link>
