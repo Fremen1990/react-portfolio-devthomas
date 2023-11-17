@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.8eb41658.css",
-    "main.js": "/static/js/main.b8118409.js",
+    "main.js": "/static/js/main.1cbbc5cb.js",
     "static/media/dev-social-media.png": "/static/media/dev-social-media.7ff8238936914d056e9b.png",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
@@ -78,17 +78,17 @@
     "static/media/heroku.svg": "/static/media/heroku.73be03b36a36dcffd909327a314c859b.svg",
     "static/media/redux.svg": "/static/media/redux.0e4fb1c819ac4c060c92343147d4ccf7.svg",
     "static/media/react-router.svg": "/static/media/react-router.a87b722746890c8dcd6e20f04b6d53cd.svg",
+    "index.html": "/index.html",
     "static/media/html-5.svg": "/static/media/html-5.821ba738922e8952e57422f7b8a20362.svg",
     "static/media/javascript.svg": "/static/media/javascript.ba40d6a9629bf521391e764a593f9df3.svg",
-    "index.html": "/index.html",
     "static/media/typescript.svg": "/static/media/typescript.a6305a733dd55243980aec55f96f70c5.svg",
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.8eb41658.css.map": "/static/css/main.8eb41658.css.map",
-    "main.b8118409.js.map": "/static/js/main.b8118409.js.map"
+    "main.1cbbc5cb.js.map": "/static/js/main.1cbbc5cb.js.map"
   },
   "entrypoints": [
     "static/css/main.8eb41658.css",
-    "static/js/main.b8118409.js"
+    "static/js/main.1cbbc5cb.js"
   ]
 }
