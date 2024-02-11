@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c116c593.css",
-    "main.js": "/static/js/main.6833644a.js",
+    "main.js": "/static/js/main.55907de5.js",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
     "static/media/Build Polymorphic Components with React and TypeScript.jpg": "/static/media/Build Polymorphic Components with React and TypeScript.e6b5fa4a93d131c88db2.jpg",
@@ -82,10 +82,10 @@
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.c116c593.css.map": "/static/css/main.c116c593.css.map",
-    "main.6833644a.js.map": "/static/js/main.6833644a.js.map"
+    "main.55907de5.js.map": "/static/js/main.55907de5.js.map"
   },
   "entrypoints": [
     "static/css/main.c116c593.css",
-    "static/js/main.6833644a.js"
+    "static/js/main.55907de5.js"
   ]
 }
