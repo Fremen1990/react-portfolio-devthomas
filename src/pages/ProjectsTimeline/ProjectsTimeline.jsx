@@ -8,6 +8,7 @@ import { DareDrop } from "./projects/DareDrop";
 import { OTG } from "./projects/OTG";
 import { E2eAutomation } from "./projects/E2eAutomation";
 import { Batman } from "./projects/Batman";
+import { customTheme } from "../Education/EducationTimeline";
 
 const ProjectsTimeline = () => {
   return (
@@ -19,7 +20,7 @@ const ProjectsTimeline = () => {
         PROJECTS
       </h1>
 
-      <Timeline>
+      <Timeline theme={customTheme}>
         <Events>
           <OTG />
           <E2eAutomation />

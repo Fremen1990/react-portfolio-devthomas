@@ -1,4 +1,4 @@
-import { Timeline, Events } from "@merc/react-timeline";
+import { Timeline, Events, createTheme, themes } from "@merc/react-timeline";
 import {
   EducationDetailsGraphQLMastery,
   EducationDetailsJSMasteryNextJSUltimate,
@@ -17,6 +17,25 @@ import { messages } from "./messages";
 import { CourseCard } from "../../components/Cards/CourseCard";
 import { Skill } from "../../components/Skill";
 
+// Custom timline theme
+export const customTheme = createTheme(themes.default, {
+  card: {
+    backgroundColor: "#fff",
+  },
+  date: {
+    backgroundColor: "rgba(255, 255, 255, .2)",
+  },
+  marker: {
+    borderColor: "rgba(255, 255, 255, .2)",
+  },
+  timelineTrack: {
+    backgroundColor: "#fff",
+  },
+  urlButton: {
+    backgroundColor: "gray",
+  },
+});
+
 export const EducationTimeline = () => {
   return (
     <div id="education">
@@ -27,7 +46,7 @@ export const EducationTimeline = () => {
         {messages.headerTextContent}
       </h1>
 
-      <Timeline>
+      <Timeline theme={customTheme}>
         <Events>
           <EducationCard
             title={messages.JS_Mastery_NextJS_Ultimate.title}
