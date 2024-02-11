@@ -9,26 +9,26 @@ import Particles from "react-particles-js";
 import { particlesOptions } from "./particlesOptions";
 
 // Components---------------------------------
-import MyNavbar from "./components/navbar";
-import MyCarousel from "./components/carousel";
+import NavBar from "./components/NavBar/NavBar";
+import MyCarousel from "./components/MyCarousel/carousel";
 import MyTitleMessage from "./components/titleMessage.jsx";
-import ProjectsTimeline from "./components/projects-timeline";
-import FooterPanel from "./components/footer";
+import ProjectsTimeline from "./pages/ProjectsTimeline/ProjectsTimeline";
+import FooterPanel from "./FooterPanel/FooterPanel";
 
 // Pages
-import About from "./pages/about/about";
-import Experience from "./pages/experience/experience";
-import {Skills} from "./pages/skills";
-import Contact from "./pages/contactForm";
+import About from "./pages/About/about";
+import Experience from "./pages/Experience/Experience";
+import { Skills } from "./pages/Skills";
+import Contact from "./pages/Contact/Contact";
 
 // Styles
 import "./App.css";
-import { EducationTimeline } from "./pages/education/education-timeline";
+import { EducationTimeline } from "./pages/Education/EducationTimeline";
 
 export const App = () => (
   <div className="App" style={{ position: "relative" }}>
     {/* ======================== Navbar ========================== */}
-    <MyNavbar />
+    <NavBar />
     {/* =========================== Home ===================== */}
     <Fade duration={1500}>
       <MyCarousel />

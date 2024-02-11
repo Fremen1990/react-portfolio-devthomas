@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import "./contactForm.css";
+import "./Contact.css";
 
 const Contact = () => {
   return (

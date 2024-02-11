@@ -8,6 +8,41 @@ import {
   educationReact,
 } from "./pluralsight-education-data";
 
+export const EducationDetailsJSMasteryNextJSUltimate = () => (
+  <>
+    <ul>
+      <li>
+        <strong>161 lessons</strong>
+      </li>
+      <li>
+        <strong>52 hours</strong>
+      </li>
+    </ul>
+
+    <strong>Course modules:</strong>
+    <ul className="list-styles pt-1">
+      <li>Module 1 - Getting Started ✅</li>
+      <li>Module 2 - Routing, Core Concepts, and UI Mastery ✅</li>
+      <li>Module 3 - Form Handling, Backend Integration and Database</li>
+      <li>Module 4 - Real-Time Events and Community Features</li>
+      <li>Module 4 - User Profiles and Interactions</li>
+      <li>Module 4 - Advanced Features and Optimization</li>
+    </ul>
+  </>
+);
+
+export const EducationDetailsNextJSMasters = () => (
+  <>
+    <strong>Course modules:</strong>
+    <ul className="list-styles pt-1">
+      <li>Module 1 - NextJS 14 Environment</li>
+      <li>Module 2 - App Router Architecture</li>
+      <li>Module 3 - NextJS 14 Advanced aspects - optimalization</li>
+      <li>Module 4 - Payments, users and self-hosting</li>
+    </ul>
+  </>
+);
+
 export const EducationDetailsMegaK = () => (
   <>
     <strong>Bootcamp agenda:</strong>
@@ -25,18 +60,18 @@ export const EducationDetailsMegaK = () => (
 );
 
 export const EducationDetailsGraphQLMastery = () => (
-    <>
-        <strong>Course modules:</strong>
-        <ul className="list-styles pt-1">
-            <li>Module 1 - Quick start Full Stack App</li>
-            <li>Module 2 - Getting data from APIs Full Stack</li>
-            <li>Module 3 - Arguments, variables and fragments</li>
-            <li>Module 4 - Domain Mutations</li>
-            <li>Module 5 - CRUD Mutations</li>
-            <li>Module 6 - Authorization and Authentication</li>
-            <li>Module 7 - Pagination and API versioning</li>
-        </ul>
-    </>
+  <>
+    <strong>Course modules:</strong>
+    <ul className="list-styles pt-1">
+      <li>Module 1 - Quick start Full Stack App</li>
+      <li>Module 2 - Getting data from APIs Full Stack</li>
+      <li>Module 3 - Arguments, variables and fragments</li>
+      <li>Module 4 - Domain Mutations</li>
+      <li>Module 5 - CRUD Mutations</li>
+      <li>Module 6 - Authorization and Authentication</li>
+      <li>Module 7 - Pagination and API versioning</li>
+    </ul>
+  </>
 );
 
 export const EducationDetailsKursReacta = () => (

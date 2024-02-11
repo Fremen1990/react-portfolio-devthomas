@@ -13,7 +13,7 @@ import { messages } from "./messages";
 const About = () => {
   return (
     <div className="about" id="about">
-      <h1 className="pt-3 text-center font-details pb-3">About Me</h1>
+      <h1 className="pt-3 text-center font-details-black pb-3">ABOUT ME</h1>
       <Container>
         <Row className="pt-3 pb-5 align-items-center">
           {/* Profile picture */}

@@ -2,13 +2,14 @@ import Tilt from "react-tilt";
 import Card from "react-bootstrap/Card";
 
 import "./experienceCard.css";
-import "../pages/experience/experience.css";
+import "../../pages/Experience/Experience.css";
 
 export const ExperienceCard = ({
   logo,
   title,
   description,
   techStack,
+  timeline,
   duration,
 }) => (
   <Tilt
@@ -34,6 +35,8 @@ export const ExperienceCard = ({
             <br />
             <br />
             <strong>Tech:</strong> {techStack}
+            <br />
+            <strong>Timeline:</strong> {timeline}
             <br />
             <strong>Duration:</strong> {duration}
             <br />

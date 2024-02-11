@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Logo from "../assets/icons/TS.webp";
+import Logo from "../../assets/icons/TS.webp";
 
 import "./navbar.css";
 
-const MyNavbar = () => {
+const NavBar = () => {
   return (
     <>
       <Navbar
@@ -38,7 +38,7 @@ const MyNavbar = () => {
               <Nav.Link className="nav-link-item" href="#skills">
                 Skills
               </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#experience">
+              <Nav.Link className="nav-link-item " href="#experience">
                 Experience
               </Nav.Link>
               <Nav.Link className="nav-link-item" href="#projects">
@@ -58,4 +58,4 @@ const MyNavbar = () => {
   );
 };
 
-export default MyNavbar;
+export default NavBar;

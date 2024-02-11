@@ -1,13 +1,13 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 
-import Slide1 from "../assets/img/carousal/slide1.webp";
-import Slide1_mobile from "../assets/img/carousal/slide1_mobile.webp";
-import Slide2 from "../assets/img/carousal/slide2.webp";
-import Slide2_mobile from "../assets/img/carousal/slide2_mobile.webp";
-import Slide3 from "../assets/img/carousal/slide3.webp";
-import Slide3_mobile from "../assets/img/carousal/slide3_mobile.webp";
-import ScrollDown from "../components/scrollDown.jsx";
+import Slide1 from "../../assets/img/carousal/slide1.webp";
+import Slide1_mobile from "../../assets/img/carousal/slide1_mobile.webp";
+import Slide2 from "../../assets/img/carousal/slide2.webp";
+import Slide2_mobile from "../../assets/img/carousal/slide2_mobile.webp";
+import Slide3 from "../../assets/img/carousal/slide3.webp";
+import Slide3_mobile from "../../assets/img/carousal/slide3_mobile.webp";
+import ScrollDown from "../ScrollDown/scrollDown.jsx";
 
 import "./carousel.css";
 
