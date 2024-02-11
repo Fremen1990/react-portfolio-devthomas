@@ -13,7 +13,7 @@ export const messages = {
   headHunter: {
     title: "Scrum Master & Full Stack Dev",
     description:
-      "One month group project, where I had a change to test myself as a scrum masterfor the team of 6 developers, also as a full stack developer on learnedtechnologies, learning in the meantime missing pieces. Quite an adventure 😊",
+      "Two months group project, where I had a chance to test myself as a scrum master for the team of 6 developers, also as a full stack developer on learned technologies, learning in the meantime missing pieces. Quite an adventure 😊",
     techStack: "NestJS, React JS, TypeScript, MySQL + TypeORM",
     duration: "07/2022 - 08/2022",
   },
