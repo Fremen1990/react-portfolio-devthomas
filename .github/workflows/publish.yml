@@ -1,5 +1,7 @@
 name: Generate a build and push to another branch
 
+#TODO: To be modified from Hostinger publish to GCP App Engine publish
+
 on:
   push:
     branches:
