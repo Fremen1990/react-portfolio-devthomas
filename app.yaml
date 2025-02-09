@@ -1,0 +1,18 @@
+runtime: nodejs18
+env: standard
+
+handlers:
+  # Serve static assets correctly
+  - url: /static
+    static_dir: build/static
+
+  # Serve media files (images, videos, etc.)
+  - url: /(.+\.(png|jpg|jpeg|svg|webp|gif|mp4|webm|ogg|mp3|wav|ico|txt))
+    static_files: build/\1
+    upload: build/(.+\.(png|jpg|jpeg|svg|webp|gif|mp4|webm|ogg|mp3|wav|ico|txt))
+
+  # Serve index.html for React Router (important)
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+    secure: always
