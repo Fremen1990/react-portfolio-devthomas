@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.91b7dc20.css",
-    "main.js": "/static/js/main.a51cda68.js",
+    "main.js": "/static/js/main.de5308dd.js",
     "static/media/AWS Lambda and the Serverless Framework - Hands On Learning.pdf": "/static/media/AWS Lambda and the Serverless Framework - Hands On Learning.74e2bbfb8f987d4f68bc.pdf",
     "static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.pdf": "/static/media/Build Facebook clone with REACT JS AND THE MERN STACK 2022.ae48924174343a865056.pdf",
     "static/media/Build Polymorphic Components with React and TypeScript.jpg": "/static/media/Build Polymorphic Components with React and TypeScript.e6b5fa4a93d131c88db2.jpg",
@@ -20,7 +20,6 @@
     "static/media/NextJS_Ultimate_Course.webp": "/static/media/NextJS_Ultimate_Course.f99b5f92473c66e6856b.webp",
     "static/media/Java.png": "/static/media/Java.fdabd4e11f1235e4e8e0.png",
     "static/media/gin.png": "/static/media/gin.f34e1b261ec47c4ccb7d.png",
-    "static/media/Python.png": "/static/media/Python.f0c9d64775aac23759fe.png",
     "static/media/Arduino.png": "/static/media/Arduino.a28a5821a7b79b53cda1.png",
     "static/media/slide3.webp": "/static/media/slide3.ea32b5ab7ffc78454ce0.webp",
     "static/media/background.webp": "/static/media/background.f68146215cd63c0647c5.webp",
@@ -36,6 +35,7 @@
     "static/media/slide2_mobile.webp": "/static/media/slide2_mobile.65aedc0da6e1c6a5cdfd.webp",
     "static/media/tdd.png": "/static/media/tdd.6ce33c02156edccfcda1.png",
     "static/media/megak.webp": "/static/media/megak.1c3843537c55d3f82c1c.webp",
+    "static/media/go-8.webp": "/static/media/go-8.6a6d19728fe6750f54f5.webp",
     "static/media/accenture.webp": "/static/media/accenture.637587d4845d8cfbd5e4.webp",
     "static/media/tailwind.svg": "/static/media/tailwind.755b44d0255b3ad6b92e3f33b686a336.svg",
     "static/media/nestjs.svg": "/static/media/nestjs.284b54b2dfd0d02feb7ba5541b29c09c.svg",
@@ -74,18 +74,19 @@
     "static/media/orange_labs.webp": "/static/media/orange_labs.bcbc6d09c4919bbd05e7.webp",
     "static/media/studiuje-it.webp": "/static/media/studiuje-it.16d8b582845170c317fd.webp",
     "static/media/redux.svg": "/static/media/redux.0e4fb1c819ac4c060c92343147d4ccf7.svg",
-    "static/media/go-6.svg": "/static/media/go-6.4c88fbf92cd36c4790582de373b6ee4f.svg",
+    "static/media/python.svg": "/static/media/python.e6d7dc739a91892bbf1f6262412046dd.svg",
     "index.html": "/index.html",
+    "static/media/react-native1.svg": "/static/media/react-native1.903d77ad940b12efaddde2484397ad4a.svg",
     "static/media/html-5.svg": "/static/media/html-5.821ba738922e8952e57422f7b8a20362.svg",
     "static/media/javascript.svg": "/static/media/javascript.ba40d6a9629bf521391e764a593f9df3.svg",
     "static/media/typescript.svg": "/static/media/typescript.a6305a733dd55243980aec55f96f70c5.svg",
     "static/media/git-icon.svg": "/static/media/git-icon.c60b7e5ae8ec2562f23fdddcab300026.svg",
     "static/media/material-ui-1.svg": "/static/media/material-ui-1.fd510ed8518b192069590b04e2e6348a.svg",
     "main.91b7dc20.css.map": "/static/css/main.91b7dc20.css.map",
-    "main.a51cda68.js.map": "/static/js/main.a51cda68.js.map"
+    "main.de5308dd.js.map": "/static/js/main.de5308dd.js.map"
   },
   "entrypoints": [
     "static/css/main.91b7dc20.css",
-    "static/js/main.a51cda68.js"
+    "static/js/main.de5308dd.js"
   ]
 }
