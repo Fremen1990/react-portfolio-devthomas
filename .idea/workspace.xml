@@ -5,40 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e9386d0-7213-45c0-bd88-bead83cbc62c" name="Changes" comment=":sparkles: Add meta to head and 3D Portfolio link">
-      <change afterPath="$PROJECT_DIR$/src/pages/Education/EducationTimeline.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CourseCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/CourseCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EducationCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/EducationCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ExperienceCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/ExperienceCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/carousel.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyCarousel/carousel.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/carousel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyCarousel/carousel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/experienceCard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cards/experienceCard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/FooterPanel/footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/FooterPanel/FooterPanel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navbar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBar/NavBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects-timeline.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectsTimeline/ProjectsTimeline.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projects-timeline.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProjectsTimeline/ProjectsTimeline.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/scrollDown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ScrollDown/scrollDown.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/scrollDown.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ScrollDown/scrollDown.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/about/about.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/About/about.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/about/about.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/About/about.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/about/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/About/messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Contact/Contact.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/contactForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Contact/Contact.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/education/education-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Education/education-details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/education/education-timeline.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/education/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Education/messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/education/pluralsight-education-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Education/pluralsight-education-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/experience/experience.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experience/Experience.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/experience/experience.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experience/Experience.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/experience/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Experience/messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/skills-data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/skills-data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/skills/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Skills/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/skills/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Skills/messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/skills/skills.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Skills/Skills.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/skills/skills.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Skills/Skills.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,9 +39,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/dev/devthomas/react-portfolio-devthomas/src/assets/img/education",
+    "last_opened_file_path": "/Users/devthomas/devthomas/projects/react-portfolio-devthomas/src/assets/img/skills",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,11 +58,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/img/skills" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets\img\education" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets\img\skills" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\pages\ProjectsTimeline\projects" />
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets\img\projects" />
-      <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\assets\icons" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\pages\ProjectsTimeline\projects\oldProjects" />
@@ -101,7 +72,7 @@
       <recent name="D:\dev\devthomas\react-portfolio-devthomas\src\FooterPanel" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.start">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -151,6 +122,13 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-WS-251.25410.117" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -186,6 +164,7 @@
       <workItem from="1700231502123" duration="2941000" />
       <workItem from="1700469649538" duration="314000" />
       <workItem from="1707667319088" duration="14553000" />
+      <workItem from="1747646328657" duration="411000" />
     </task>
     <task id="LOCAL-00001" summary="Portfolio Update 08/2022">
       <created>1660690439916</created>
@@ -382,12 +361,12 @@
     <MESSAGE value=":sparkles: Add meta to head and 3D Portfolio link" />
     <option name="LAST_COMMIT_MESSAGE" value=":sparkles: Add meta to head and 3D Portfolio link" />
   </component>
-  <component name="WfRunsListSearchHistory"><![CDATA[{
-  "history": [
+  <component name="WfRunsListSearchHistory">{
+  &quot;history&quot;: [
     {
     }
   ],
-  "lastFilter": {
+  &quot;lastFilter&quot;: {
   }
-}]]></component>
+}</component>
 </project>

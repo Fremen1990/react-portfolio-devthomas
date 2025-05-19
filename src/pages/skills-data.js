@@ -1,8 +1,8 @@
 // PROGRAMMING LANGUAGES
 import L_JAVASCRIPT from "../assets/img/skills/javascript.svg";
 import L_TYPESCRIPT from "../assets/img/skills/typescript.svg";
-import L_GOLANG from "../assets/img/skills/go-6.svg";
-// import L_PYTHON from "../assets/img/skills/python.svg";
+import L_GOLANG from "../assets/img/skills/go-8.webp";
+import L_PYTHON from "../assets/img/skills/python.svg";
 
 // FRONTEND
 import L_HTML5 from "../assets/img/skills/html-5.svg";
@@ -16,7 +16,7 @@ import L_REACT_QUERY from "../assets/img/skills/react-queyr.webp";
 import L_REDUX from "../assets/img/skills/redux.svg";
 import L_APOLLO_CLIENT from "../assets/img/skills/apollo.png";
 import L_NEXTJS from "../assets/img/skills/nextjs.svg";
-// import L_REACT_NATIVE from "../assets/img/skills/react-native1.svg";
+import L_REACT_NATIVE from "../assets/img/skills/react-native1.svg";
 // import L_THREEJS from "../assets/img/skills/threejs.webp";
 
 // BACKEND
@@ -51,7 +51,7 @@ import L_DOCKER from "../assets/img/skills/docker.webp";
 import L_NX from "../assets/img/skills/nx.webp";
 import L_ARDUINO from "../assets/img/skills/Arduino.png";
 import L_Cplusplus from "../assets/img/skills/C++.png";
-import L_PYTHON from "../assets/img/skills/Python.png";
+// import L_PYTHON from "../assets/img/skills/Python.png";
 import L_JAVA from "../assets/img/skills/Java.png";
 // import L_KUBERNETES from "../assets/img/skills/nx.webp";
 // import L_TERRAFORM from "../assets/img/skills/nx.webp";
@@ -79,18 +79,18 @@ export const skills = {
       skillName: "TypeScript",
       education: ["MegaK", "NextJS_Masters", "JS_Mastery_NextJS_Ultimate"],
     },
-    // {
-    //   link: "https://golang.org/",
-    //   imgAltText: "Golang",
-    //   imgSrc: L_GOLANG,
-    //   skillName: "GO",
-    // },
-    // {
-    //   link: "https://www.python.org/",
-    //   imgAltText: "Python",
-    //   imgSrc: L_PYTHON,
-    //   skillName: "Python",
-    // },
+    {
+      link: "https://www.python.org/",
+      imgAltText: "Python",
+      imgSrc: L_PYTHON,
+      skillName: "Python",
+    },
+    {
+      link: "https://golang.org/",
+      imgAltText: "Golang",
+      imgSrc: L_GOLANG,
+      skillName: "GO",
+    },
   ],
   frontend: [
     {
@@ -144,6 +144,13 @@ export const skills = {
       points: 110,
     },
     {
+      link: "https://reactnative.dev/",
+      imgAltText: "React Native",
+      imgSrc: L_REACT_NATIVE,
+      skillName: "ReactNative",
+      education: ["Udemy", "Pluralsight"],
+    },
+    {
       link: "https://nextjs.org/",
       imgAltText: "Next.js",
       imgSrc: L_NEXTJS,
@@ -176,13 +183,6 @@ export const skills = {
     //   imgAltText: "Gatsby",
     //   imgSrc: L_GATSBY,
     //   skillName: "Gatsby.js",
-    // },
-    // {
-    //     link: "https://reactnative.dev/",
-    //     imgAltText: "React Native",
-    //     imgSrc: L_REACT_NATIVE,
-    //     skillName: "ReactNative",
-    //     education: ["Udemy", "Pluralsight"],
     // },
     // {
     //   link: "https://threejs.org/",
