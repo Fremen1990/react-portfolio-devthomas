@@ -84,12 +84,14 @@ export const skills = {
       imgAltText: "Python",
       imgSrc: L_PYTHON,
       skillName: "Python",
+      education: ["OrangeLab"],
     },
     {
       link: "https://golang.org/",
       imgAltText: "Golang",
       imgSrc: L_GOLANG,
       skillName: "GO",
+      education: ["OrangeLab"],
     },
   ],
   frontend: [

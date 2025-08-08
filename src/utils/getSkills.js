@@ -19,5 +19,5 @@ export const allSkillsArray = flattenObject(skills);
 
 
 export const getSkillsByEducationName = (skillsArray, educationName) => {
-    return skillsArray.filter(skill => skill.education.includes(educationName))
+    return skillsArray.filter(skill => skill.education && skill.education.includes(educationName))
 }
