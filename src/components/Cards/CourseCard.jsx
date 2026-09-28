@@ -1,11 +1,13 @@
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import { Card } from "react-bootstrap";
 import React from "react";
 import CountUp from "react-countup";
 
 export const CourseCard = ({ name, image, time, certificate, link }) => (
   <Tilt
-    options={{ max: 5, transition: true, speed: 500 }}
+    tiltMaxAngleX={5}
+    tiltMaxAngleY={5}
+    transitionSpeed={500}
     className="col focus border mt-4 p-5"
   >
     <Card>

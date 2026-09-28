@@ -1,4 +1,4 @@
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import Card from "react-bootstrap/Card";
 
 import "./experienceCard.css";
@@ -13,7 +13,9 @@ export const ExperienceCard = ({
   duration,
 }) => (
   <Tilt
-    options={{ max: 5, transition: true, speed: 500 }}
+    tiltMaxAngleX={5}
+    tiltMaxAngleY={5}
+    transitionSpeed={500}
     className="col focus"
   >
     <Card>

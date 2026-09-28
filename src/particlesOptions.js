@@ -1,10 +1,11 @@
 export const particlesOptions = {
+  fpsLimit: 60,
   particles: {
     number: {
       value: 60,
       density: {
         enable: true,
-        value_area: 2000,
+        area: 2000,
       },
     },
     color: {
@@ -17,7 +18,7 @@ export const particlesOptions = {
         color: "#000000",
       },
       polygon: {
-        nb_sides: 5,
+        sides: 5,
       },
       image: {
         src: "img/github.svg",
@@ -28,24 +29,24 @@ export const particlesOptions = {
     opacity: {
       value: 0.5,
       random: false,
-      anim: {
+      animation: {
         enable: false,
         speed: 1,
-        opacity_min: 0.1,
+        minimumValue: 0.1,
         sync: false,
       },
     },
     size: {
       value: 3,
       random: true,
-      anim: {
+      animation: {
         enable: false,
         speed: 20,
-        size_min: 0.1,
+        minimumValue: 0.1,
         sync: false,
       },
     },
-    line_linked: {
+    links: {
       enable: true,
       distance: 150,
       color: "#ffffff",
@@ -54,11 +55,13 @@ export const particlesOptions = {
     },
     move: {
       enable: true,
-      speed: 6,
+      speed: 1.5,
       direction: "none",
       random: false,
       straight: false,
-      out_mode: "out",
+      outModes: {
+        default: "out",
+      },
       bounce: false,
       attract: {
         enable: false,
@@ -68,13 +71,13 @@ export const particlesOptions = {
     },
   },
   interactivity: {
-    detect_on: "canvas",
+    detectsOn: "canvas",
     events: {
-      onhover: {
+      onHover: {
         enable: true,
         mode: "repulse",
       },
-      onclick: {
+      onClick: {
         enable: true,
         mode: "push",
       },
@@ -83,7 +86,7 @@ export const particlesOptions = {
     modes: {
       grab: {
         distance: 400,
-        line_linked: {
+        links: {
           opacity: 1,
         },
       },
@@ -99,12 +102,12 @@ export const particlesOptions = {
         duration: 0.4,
       },
       push: {
-        particles_nb: 4,
+        quantity: 4,
       },
       remove: {
-        particles_nb: 2,
+        quantity: 2,
       },
     },
   },
-  retina_detect: true,
+  detectRetina: true,
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import Tilt from "react-tilt";
+import Tilt from "react-parallax-tilt";
 import CountUp from "react-countup";
 import Button from "react-bootstrap/Button";
 import {
@@ -128,7 +128,8 @@ export const EducationDetailsPluralsight = () => (
       {educationNode.map((learningPath, index) => (
         <Tilt
           key={index}
-          options={{ max: 5 }}
+          tiltMaxAngleX={5}
+          tiltMaxAngleY={5}
           className="bg-dark text-light m-2"
         >
           <li className="hovered" key={index}>
@@ -161,7 +162,8 @@ export const EducationDetailsPluralsight = () => (
       {educationReact.map((learningPath, index) => (
         <Tilt
           key={index}
-          options={{ max: 5 }}
+          tiltMaxAngleX={5}
+          tiltMaxAngleY={5}
           className="bg-dark text-light m-2"
         >
           <li className="hovered" key={index}>
@@ -194,7 +196,8 @@ export const EducationDetailsPluralsight = () => (
       {educationBIAnalyst.map((learningPath, index) => (
         <Tilt
           key={index}
-          options={{ max: 5 }}
+          tiltMaxAngleX={5}
+          tiltMaxAngleY={5}
           className="bg-dark text-light m-2"
         >
           <li className="hovered" key={index}>

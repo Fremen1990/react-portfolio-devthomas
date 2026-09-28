@@ -1,11 +1,10 @@
 import React from "react";
 
-// bootstrap libraries ! :)
-import Fade from "react-reveal/Fade";
-import Slide from "react-reveal/Slide";
+import { Fade } from "react-awesome-reveal";
 import { Parallax } from "react-parallax";
 import Container from "react-bootstrap/Container";
-import Particles from "react-particles-js";
+import Particles, { ParticlesProvider } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
 import { particlesOptions } from "./particlesOptions";
 
 // Components---------------------------------
@@ -25,94 +24,111 @@ import Contact from "./pages/Contact/Contact";
 import "./App.css";
 import { EducationTimeline } from "./pages/Education/EducationTimeline";
 
-export const App = () => (
-  <div className="App" style={{ position: "relative" }}>
-    {/* ======================== Navbar ========================== */}
-    <NavBar />
-    {/* =========================== Home ===================== */}
-    <Fade duration={1500}>
-      <MyCarousel />
-    </Fade>
-    <MyTitleMessage />
+const initParticles = async (engine) => {
+  await loadSlim(engine);
+};
 
-    {/* =============checking if mobile - if yes then we cannot use Particles  ==================*/}
+export const App = () => {
+  return (
+    <div className="App" style={{ position: "relative" }}>
+      {/* ======================== Navbar ========================== */}
+      <NavBar />
+      {/* =========================== Home ===================== */}
+      <Fade duration={1500} triggerOnce>
+        <MyCarousel />
+      </Fade>
+      <MyTitleMessage />
 
-    {/* ------ Particles effect ------- */}
-    {window.innerWidth < 720 ? (
-      ""
-    ) : (
-      <Particles
-        className="particles particles-box"
-        params={particlesOptions}
-      />
-    )}
-    {/* ========================== About ============================= */}
-    <div>
+      {/* =============checking if mobile - if yes then we cannot use Particles  ==================*/}
+
+      {/* ------ Particles effect ------- */}
+      {window.innerWidth >= 720 && (
+        <ParticlesProvider init={initParticles}>
+          <Particles
+            id="tsparticles"
+            className="particles particles-box"
+            options={particlesOptions}
+          />
+        </ParticlesProvider>
+      )}
+      {/* ========================== About ============================= */}
+      <div>
+        <Parallax
+          blur={{ min: -30, max: 30 }}
+          bgImage={require("./assets/img/parallex/background.webp")}
+          bgImageAlt=""
+          strength={-200}
+        >
+          <Container className="container-box rounded">
+            <Fade duration={1000} triggerOnce>
+              <About />
+            </Fade>
+          </Container>
+        </Parallax>
+      </div>
+      {/* ============================== Skills =========================== */}
+      <div>
+        <Container className="container-box rounded">
+          <Fade duration={750} triggerOnce>
+            <div>
+              <hr className="hr-skills" />
+              <Skills />
+            </div>
+          </Fade>
+        </Container>
+      </div>
+      {/* ============================ Experience ============================== */}
       <Parallax
         blur={{ min: -30, max: 30 }}
         bgImage={require("./assets/img/parallex/background.webp")}
         bgImageAlt=""
         strength={-200}
       >
-        <Container className="container-box rounded">
-          <Fade duration={1000}>
-            <About />
+        <Container className="container-box rounded ">
+          <Fade duration={500} triggerOnce>
+            <div>
+              <hr />
+              <Experience />
+            </div>
           </Fade>
         </Container>
       </Parallax>
+      {/* ============================ ProjectsTimeline ============================== */}
+      <div>
+        <Container className="container-box rounded">
+          <Fade duration={500} triggerOnce>
+            <div>
+              <hr className="hr-projects" />
+              <ProjectsTimeline />
+            </div>
+          </Fade>
+        </Container>
+      </div>
+      {/* ============================ EducationTimeline ============================== */}
+      <div>
+        <Container className="container-box rounded">
+          <Fade duration={500} triggerOnce>
+            <div>
+              <hr className="hr-projects" />
+              <EducationTimeline />
+            </div>
+          </Fade>
+        </Container>
+      </div>
+      {/* ============================ Contact ============================== */}
+      <div>
+        <Container className="container-box rounded contact-container">
+          <Fade duration={500} triggerOnce>
+            <div>
+              <hr className="hr-contact" />
+              <Contact />
+            </div>
+          </Fade>
+        </Container>
+      </div>
+      {/* ============================ Footer ============================== */}
+      <hr className="hr-footer" />
+      <FooterPanel />
     </div>
-    {/* ============================== Skills =========================== */}
-    <div>
-      <Container className="container-box rounded">
-        <Slide bottom duration={750}>
-          <hr className="hr-skills" />
-          <Skills />
-        </Slide>
-      </Container>
-    </div>
-    {/* ============================ Experience ============================== */}
-    <Parallax
-      blur={{ min: -30, max: 30 }}
-      bgImage={require("./assets/img/parallex/background.webp")}
-      bgImageAlt=""
-      strength={-200}
-    >
-      <Container className="container-box rounded ">
-        <Fade duration={500}>
-          <hr />
-          <Experience />
-        </Fade>
-      </Container>
-    </Parallax>
-    {/* ============================ ProjectsTimeline ============================== */}
-    <div>
-      <Container className="container-box rounded">
-        <Slide bottom duration={500}>
-          <hr className="hr-projects" />
-          <ProjectsTimeline />
-        </Slide>
-      </Container>
-    </div>
-    {/* ============================ EducationTimeline ============================== */}
-    <div>
-      <Container className="container-box rounded">
-        <Slide bottom duration={500}>
-          <hr className="hr-projects" />
-          <EducationTimeline />
-        </Slide>
-      </Container>
-    </div>
-    {/* ============================ Contact ============================== */}
-    <div>
-      <Container className="container-box rounded contact-container">
-        <Fade bottom duration={500}>
-          <hr className="hr-contact" />
-          <Contact />
-        </Fade>
-      </Container>
-    </div>
-    {/* ============================ Footer ============================== */}
-    <hr className="hr-footer" />
-    <FooterPanel />
-  </div>
-);
+  );
+};
