@@ -1,8 +1,11 @@
+import { currentSkin } from "./skin";
+
 export const THEME_KEY = "portfolio-theme";
 
+// Browser-chrome colour for each skin and theme; matches each --canvas.
 const THEME_COLORS = {
-  light: "#f7f8fa",
-  dark: "#10161b",
+  default: { light: "#f7f8fa", dark: "#10161b" },
+  terminal: { light: "#f3f1e7", dark: "#07090a" },
 };
 
 export const readStoredTheme = () => {
@@ -33,10 +36,11 @@ export const currentTheme = () => {
   return systemPrefersDark() ? "dark" : "light";
 };
 
-const paintThemeColor = (theme) => {
+export const paintThemeColor = (theme = currentTheme()) => {
+  const colors = THEME_COLORS[currentSkin()] || THEME_COLORS.default;
   document
     .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", THEME_COLORS[theme]);
+    ?.setAttribute("content", colors[theme]);
 };
 
 export const applyTheme = (theme, { persist = false } = {}) => {

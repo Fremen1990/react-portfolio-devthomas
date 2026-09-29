@@ -40,6 +40,7 @@ The publish step pushes the `build/` directory to the `build` branch. That actio
 - `src/components/NavBar/` — section navigation, mobile menu, and theme control
 - `src/utils/scrollToSection.js` — in-page navigation, fragment history, and destination focus
 - `src/utils/theme.js` — light/dark choice in `localStorage`, otherwise the operating-system preference
+- `src/utils/skin.js` — standard or Terminal style in `localStorage`; `src/design/skin-terminal.css` holds every Terminal rule, scoped under `html.skin-terminal`
 - `src/pages/Work/`, `src/pages/Experience/`, `src/pages/Background/`, `src/pages/Contact/` — the four sections after the hero
 - `src/FooterPanel/` — copyright and GitHub
 
@@ -53,6 +54,7 @@ Older practice components, including the carousel, skills wall, and timeline pag
 - Escape closes the mobile menu only while focus is inside that open menu, then returns focus to Menu. Escape elsewhere does not move focus.
 - Below 801px the closed menu is not in the tab order. At 801px and above the section links stay available, including after a resize from an open or closed mobile menu.
 - The theme button stores `dark` or `light` under `portfolio-theme`. With nothing stored, the page follows `prefers-color-scheme`.
+- The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `public/index.html` applies a saved skin before first paint. JetBrains Mono loads only when Terminal is used.
 - Each "Scope and approach" control is a native disclosure. All three start closed and can stay open independently. The same is true of Earlier projects and Earlier training.
 - Without JavaScript, the fallback in `public/index.html` still shows the name, role, CV, and email.
 

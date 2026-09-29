@@ -22,6 +22,21 @@
           if (theme === "light") {
             document.documentElement.classList.add("light-theme");
           }
+          if (localStorage.getItem("portfolio-skin") === "terminal") {
+            document.documentElement.classList.add("skin-terminal");
+            var font = document.createElement("link");
+            font.rel = "stylesheet";
+            font.href =
+              "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap";
+            font.setAttribute("data-skin-font", "terminal");
+            document.head.appendChild(font);
+            document
+              .querySelector('meta[name="theme-color"]')
+              .setAttribute(
+                "content",
+                theme === "dark" ? "#07090a" : "#f3f1e7"
+              );
+          }
         } catch (error) {}
       })();
     </script>

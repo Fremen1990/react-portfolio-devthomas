@@ -75,6 +75,7 @@
   margin-left: auto;
 }
 
+.skin-toggle,
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -90,9 +91,18 @@
   cursor: pointer;
 }
 
+.skin-toggle:hover,
 .theme-toggle:hover {
   color: var(--accent-hover);
   border-color: var(--accent);
+}
+
+.skin-toggle {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .theme-icon {
@@ -167,7 +177,7 @@
 }
 
 @media (min-width: 801px) {
-  .theme-toggle {
+  .skin-toggle {
     margin-left: 4px;
   }
 

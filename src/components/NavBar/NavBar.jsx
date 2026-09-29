@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { profile } from "../../content/publicProfile";
 import { scrollToSection } from "../../utils/scrollToSection";
-import { applyTheme, currentTheme, readStoredTheme } from "../../utils/theme";
+import {
+  applyTheme,
+  currentTheme,
+  paintThemeColor,
+  readStoredTheme,
+} from "../../utils/theme";
+import { applySkin, currentSkin } from "../../utils/skin";
 import "./navbar.css";
 
 const links = [
@@ -83,6 +89,7 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [dark, setDark] = useState(() => currentTheme() === "dark");
+  const [terminal, setTerminal] = useState(() => currentSkin() === "terminal");
   const [isDesktop, setIsDesktop] = useState(readDesktopNav);
   const menuButtonRef = useRef(null);
 
@@ -201,6 +208,13 @@ const NavBar = () => {
     setDark(next === "dark");
   };
 
+  const toggleSkin = () => {
+    const next = terminal ? "default" : "terminal";
+    applySkin(next);
+    paintThemeColor();
+    setTerminal(next === "terminal");
+  };
+
   return (
     <header className="site-header">
       <div className="page-wrap site-header-inner">
@@ -262,6 +276,18 @@ const NavBar = () => {
             View CV
           </a>
         </nav>
+        <button
+          type="button"
+          className="skin-toggle"
+          aria-pressed={terminal}
+          aria-label={
+            terminal ? "Switch to standard style" : "Switch to terminal style"
+          }
+          title={terminal ? "Standard style" : "Terminal style"}
+          onClick={toggleSkin}
+        >
+          <span aria-hidden="true">{terminal ? "Aa" : ">_"}</span>
+        </button>
         <button
           type="button"
           className="theme-toggle"

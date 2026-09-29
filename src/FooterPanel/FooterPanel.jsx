@@ -7,6 +7,9 @@ const FooterPanel = () => {
     <footer className="site-footer">
       <div className="page-wrap site-footer-inner">
         <p>© Tomasz Stanisz {new Date().getFullYear()}</p>
+        <p className="footer-note">
+          Two skins, one codebase · switch with the &gt;_ button
+        </p>
         <a
           href={profile.links.github}
           target="_blank"
