@@ -1,53 +1,109 @@
-.logo {
-  height: 9vh;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--header-height);
+  background: rgba(247, 248, 250, 0.94);
+  border-bottom: 1px solid var(--separator);
 }
 
-.nav-theme {
-  height: 10vh;
-  background-color: #101018f8;
-  font-size: 20px;
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: 16px;
 }
 
-.nav-link-item {
-  margin-left: 1vw;
-  margin-right: 1vw;
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
 }
 
-.animate-navbar {
-  box-shadow: 1px 1px 1px #222;
-  animation: moveDown 0.5s ease-in-out;
+.brand:hover {
+  color: var(--text);
+  text-decoration: none;
 }
 
-@keyframes moveDown {
-  from {
-    transform: translateY(-5rem);
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.nav-toggle {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--separator);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px 20px;
+}
+
+.site-nav a {
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--accent-hover);
+}
+
+@media (max-width: 800px) {
+  .nav-toggle {
+    display: inline-flex;
   }
-  to {
-    transform: translateY(0rem);
-  }
-}
 
-@media screen and (max-width: 640px) {
-  .logo {
-    height: 9vh;
-    position: fixed;
-    top: 0;
-  }
-
-  .navbar-toggler {
-    position: fixed;
-    right: 15px;
-    top: 15px;
-  }
-
-  .navbar-collapse {
-    margin-top: 9vh;
-    display: flex;
-    justify-content: space-between;
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 12px 16px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--separator);
+  }
 
-    background-color: rgba(16, 16, 24, 0.973);
-    padding: 3vw;
-    width: 40vw;
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 801px) {
+  .nav-toggle {
+    display: none;
   }
 }

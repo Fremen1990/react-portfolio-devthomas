@@ -8,6 +8,12 @@ import {
   educationReact,
 } from "./pluralsight-education-data";
 
+const countDuration =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? 0
+    : 7;
+
 export const EducationDetailsJSMasteryNextJSUltimate = () => (
   <>
     <ul>
@@ -141,7 +147,7 @@ export const EducationDetailsPluralsight = () => (
             <span>{learningPath.pathName}</span>{" "}
             <strong>
               <span>
-                <CountUp end={learningPath.points} duration={7} />
+                <CountUp end={learningPath.points} duration={countDuration} />
               </span>
             </strong>
           </li>
@@ -175,7 +181,7 @@ export const EducationDetailsPluralsight = () => (
             <span>{learningPath.pathName}</span>{" "}
             <strong>
               <span>
-                <CountUp end={learningPath.points} duration={7} />
+                <CountUp end={learningPath.points} duration={countDuration} />
               </span>
             </strong>
           </li>
@@ -189,7 +195,7 @@ export const EducationDetailsPluralsight = () => (
       <img
         className="w-25 "
         src="https://s2.pluralsight.com/roleiq-leader/badges/prod/badge_dataAnalystMicrosoftSelfService2.svg"
-        alt="React"
+        alt=""
       />
     </div>
     <ul className="list-unstyled pt-1">
@@ -209,7 +215,7 @@ export const EducationDetailsPluralsight = () => (
             <span>{learningPath.pathName}</span>{" "}
             <strong>
               <span>
-                <CountUp end={learningPath.points} duration={7} />
+                <CountUp end={learningPath.points} duration={countDuration} />
               </span>
             </strong>
           </li>

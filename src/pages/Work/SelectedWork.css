@@ -1,0 +1,94 @@
+.contribution {
+  display: grid;
+  gap: 16px;
+  padding: 32px 0;
+  border-top: 1px solid var(--separator);
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+.contribution-number {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.contribution-heading {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.contribution--featured .contribution-heading {
+  font-size: 26px;
+}
+
+.contribution-summary,
+.contribution-list {
+  max-width: 68ch;
+}
+
+.contribution-list {
+  margin: 16px 0 0;
+  padding-left: 1.1rem;
+}
+
+.contribution-list li + li {
+  margin-top: 8px;
+}
+
+.contribution-tech {
+  margin: 16px 0 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.contribution-status {
+  margin: 8px 0 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.scope {
+  margin-top: 16px;
+}
+
+.scope summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.scope-list {
+  margin: 12px 0 0;
+  padding-left: 1.1rem;
+  max-width: 68ch;
+}
+
+@media (min-width: 801px) {
+  .contribution {
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    gap: 32px 48px;
+    padding: 40px 0;
+  }
+
+  .contribution--featured .contribution-heading {
+    font-size: 30px;
+  }
+}

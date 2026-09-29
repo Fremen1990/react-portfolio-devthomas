@@ -1,0 +1,50 @@
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease,
+    border-color 150ms ease;
+}
+
+.action-link--solid {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.action-link--solid:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.action-link--quiet {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--separator);
+}
+
+.action-link--quiet:hover {
+  background: var(--surface);
+  color: var(--accent-hover);
+  border-color: var(--accent);
+  text-decoration: none;
+}

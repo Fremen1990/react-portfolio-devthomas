@@ -1,0 +1,88 @@
+.professional-history {
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+
+.role-row {
+  display: grid;
+  gap: 4px 24px;
+  padding: 16px 0;
+  border-top: 1px solid var(--separator);
+}
+
+.role-row h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.role-row p {
+  margin: 0;
+}
+
+.role-row .role-formal,
+.role-row .role-note {
+  margin: 4px 0 0;
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.finance-heading {
+  margin: 48px 0 8px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+@media (min-width: 801px) {
+  .role-row {
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+
+.credential-list,
+.archive-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.credential-list li,
+.archive-row {
+  padding: 12px 0;
+  border-top: 1px solid var(--separator);
+}
+
+.archive {
+  margin-top: 24px;
+  border-top: 1px solid var(--separator);
+}
+
+.archive summary {
+  cursor: pointer;
+  padding: 16px 0;
+  font-weight: 600;
+}
+
+.archive-row h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.archive-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.archive-links a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.archive-links a:hover {
+  color: var(--accent-hover);
+}

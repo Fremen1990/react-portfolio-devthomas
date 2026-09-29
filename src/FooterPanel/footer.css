@@ -1,7 +1,26 @@
-.footer-style {
-  background-color: #101018f8;
-  color: #fff;
-  font-size: 1.5em;
-  border: 2px solid #101018f8;
-  border-top-left-radius: 3px;
+.site-footer {
+  border-top: 1px solid var(--separator);
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: center;
+  padding: 24px 0 32px;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer a {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  color: var(--accent-hover);
 }

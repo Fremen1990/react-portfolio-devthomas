@@ -1,36 +1,23 @@
 import React from "react";
-
 import { Timeline, Events } from "@merc/react-timeline";
-
 import "./ProjectsTimeline.css";
 import { HeadHunter } from "./projects/HeadHunter";
-import { DareDrop } from "./projects/DareDrop";
-import { OTG } from "./projects/OTG";
-import { E2eAutomation } from "./projects/E2eAutomation";
-import { Batman } from "./projects/Batman";
 import { customTheme } from "../Education/EducationTimeline";
+import { DevSocialMedia } from "./projects/oldProjects/DevSocialMedia";
+import { MernEcommerce } from "./projects/oldProjects/MernEcommerce";
+import { PhaserGame } from "./projects/oldProjects/PhaserGame";
 
-const ProjectsTimeline = () => {
+export const EarlierProjects = () => {
   return (
-    <div id="projects">
-      <h1
-        className="pt-3 text-center font-details-b pb-3"
-        style={{ color: "#ffffff" }}
-      >
-        PROJECTS
-      </h1>
-
-      <Timeline theme={customTheme}>
-        <Events>
-          <OTG />
-          <E2eAutomation />
-          <Batman />
-          <HeadHunter />
-          <DareDrop />
-        </Events>
-      </Timeline>
-    </div>
+    <Timeline theme={customTheme}>
+      <Events>
+        <HeadHunter />
+        <DevSocialMedia />
+        <MernEcommerce />
+        <PhaserGame />
+      </Events>
+    </Timeline>
   );
 };
 
-export default ProjectsTimeline;
+export default EarlierProjects;
