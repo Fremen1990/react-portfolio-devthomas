@@ -92,7 +92,15 @@ const renderPage = () =>
 
 beforeEach(() => {
   localStorage.removeItem("portfolio-theme");
-  document.documentElement.classList.remove("dark-theme", "light-theme");
+  localStorage.removeItem("portfolio-skin");
+  document.documentElement.classList.remove(
+    "dark-theme",
+    "light-theme",
+    "skin-terminal"
+  );
+  document
+    .querySelectorAll("link[data-skin-font]")
+    .forEach((link) => link.remove());
   window.history.replaceState(
     null,
     "",
@@ -299,6 +307,66 @@ test("theme control stores the chosen appearance", () => {
 
   localStorage.removeItem("portfolio-theme");
   document.documentElement.classList.remove("dark-theme", "light-theme");
+});
+
+test("the standard style is the default and loads no extra font", () => {
+  render(<NavBar />);
+
+  const skin = screen.getByRole("button", {
+    name: "Switch to terminal style",
+  });
+  expect(skin).toHaveAttribute("aria-pressed", "false");
+  expect(document.documentElement).not.toHaveClass("skin-terminal");
+  expect(document.querySelector("link[data-skin-font]")).toBeNull();
+});
+
+test("style control switches to terminal, stores it, and switches back", () => {
+  render(<NavBar />);
+
+  const skin = screen.getByRole("button", {
+    name: "Switch to terminal style",
+  });
+  fireEvent.click(skin);
+  expect(document.documentElement).toHaveClass("skin-terminal");
+  expect(skin).toHaveAttribute("aria-pressed", "true");
+  expect(skin).toHaveAttribute("aria-label", "Switch to standard style");
+  expect(localStorage.getItem("portfolio-skin")).toBe("terminal");
+  expect(
+    document.querySelectorAll('link[data-skin-font="terminal"]')
+  ).toHaveLength(1);
+
+  fireEvent.click(skin);
+  expect(document.documentElement).not.toHaveClass("skin-terminal");
+  expect(skin).toHaveAttribute("aria-pressed", "false");
+  expect(localStorage.getItem("portfolio-skin")).toBeNull();
+
+  fireEvent.click(skin);
+  expect(
+    document.querySelectorAll('link[data-skin-font="terminal"]')
+  ).toHaveLength(1);
+});
+
+test("style and theme are independent choices", () => {
+  render(<NavBar />);
+
+  fireEvent.click(
+    screen.getByRole("button", { name: "Switch to terminal style" })
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Switch to dark theme" }));
+
+  expect(document.documentElement).toHaveClass("skin-terminal");
+  expect(document.documentElement).toHaveClass("dark-theme");
+  expect(localStorage.getItem("portfolio-skin")).toBe("terminal");
+  expect(localStorage.getItem("portfolio-theme")).toBe("dark");
+});
+
+test("a saved terminal style is shown as selected", () => {
+  document.documentElement.classList.add("skin-terminal");
+  render(<NavBar />);
+
+  expect(
+    screen.getByRole("button", { name: "Switch to standard style" })
+  ).toHaveAttribute("aria-pressed", "true");
 });
 
 test("choosing a section link closes the menu, focuses its heading, and sets the hash", () => {

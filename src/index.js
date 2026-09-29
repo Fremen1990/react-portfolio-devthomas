@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import "./index.css";
 import { theme } from "./themes/theme";
 import { App } from "./App";
+import "./design/skin-terminal.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
