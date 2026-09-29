@@ -9,23 +9,24 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        node-version: [18.x, 19.x]
     runs-on: ubuntu-latest
     name: Build and Push
     steps:
       - name: git-checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
+        with:
+          # package.json allows Node <= 22.14.0 and npm < 10, and .npmrc sets engine-strict.
+          # 18.18.2 is the last 18.18 release that still bundles npm 9.
+          node-version: "18.18.2"
 
       - name: Install all dependencies
-        run: yarn install
+        run: npm ci
 
       - name: Build
-        run: CI=false yarn run build # The build command of your project
+        run: CI=false npm run build
 
       - name: Push
         uses: s0/git-publish-subdir-action@develop
