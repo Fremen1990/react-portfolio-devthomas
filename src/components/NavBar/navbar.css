@@ -19,7 +19,9 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
   min-height: 44px;
+  flex: 0 1 auto;
   color: var(--text);
   font-weight: 600;
   text-decoration: none;
@@ -34,6 +36,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 36px;
   width: 36px;
   height: 36px;
   border-radius: 8px;
@@ -44,7 +47,13 @@
   line-height: 1;
 }
 
+.brand-name {
+  min-width: 0;
+  line-height: 1.2;
+}
+
 .nav-toggle {
+  flex: 0 0 auto;
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid var(--separator);
@@ -70,6 +79,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 44px;
   width: 44px;
   height: 44px;
   padding: 0;
@@ -108,7 +118,21 @@
   border-bottom: 2px solid var(--accent);
 }
 
+.site-nav-links[hidden] {
+  display: none !important;
+}
+
 @media (max-width: 800px) {
+  .site-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 0;
+    margin: 0;
+    overflow: visible;
+  }
+
   .nav-toggle {
     display: inline-flex;
   }

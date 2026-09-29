@@ -12,10 +12,9 @@ export const profile = {
     cv: "https://cv.devthomas.pl/",
     portfolio: "https://devthomas.pl/",
     linkedin: "https://www.linkedin.com/in/tomasz-stanisz/",
-    email: "mailto:tomasz.stanisz@devthomas.pl",
-    emailLabel: "tomasz.stanisz@devthomas.pl",
+    email: "mailto:thomas.dev666@gmail.com",
+    emailLabel: "thomas.dev666@gmail.com",
     github: "https://github.com/Fremen1990",
-    portfolio3d: "https://3d-portfolio.devthomas.pl/",
   },
   contributions: [
     {
@@ -28,19 +27,16 @@ export const profile = {
       summary:
         "I lead application architecture and development across TheEventa's Next.js frontend, NestJS backend, internal admin panel and Playwright E2E project.",
       bullets: [
-        "Lead development of workflows for event objects and spaces, organizations, assets, wizard forms and pricing that recalculates from selected options.",
-        "Own the frontend design system and Storybook, alongside the landing page and blog.",
-        "Review code, feature implementations and manual and automated tests, using agent-assisted workflows with personal oversight.",
+        "Lead development spanning authentication and SSO, event objects and their related spaces, organizations, image management, and pricing that recalculates as selected options change.",
+        "Own frontend wizard forms, the frontend design system and Storybook, alongside the landing page and blog.",
+        "Review code, feature implementations, and manual and automated tests, with personal oversight of agent-assisted workflows.",
       ],
       technologies: "Next.js, NestJS, TypeScript, Playwright, Storybook",
       featured: true,
       scopeTitle: "Scope and approach",
       scope: [
-        "Authentication and SSO, event objects and related spaces, organizations, and image assets.",
-        "Frontend wizard forms, with pricing recalculated from selected options.",
-        "Shared frontend design-system work and Storybook, alongside the landing page and blog.",
-        "Personal review of code, functionality, and tests, supported by agent-assisted workflows.",
-        "Collaboration with the DevOps engineer responsible for infrastructure, monitoring, and server administration.",
+        "Agent-assisted workflows cover design preparation, implementation, and review of code, design, business analysis, and architecture.",
+        "Infrastructure, monitoring, and server administration are handled by a separate DevOps collaborator.",
       ],
     },
     {
@@ -188,13 +184,14 @@ export const profile = {
       ],
     },
   ],
+  // Start dates only where current study was not confirmed. Do not invent an end date.
   training: [
-    { title: "NextJS 14 Ultimate", date: "January 2024–Present" },
+    { title: "NextJS 14 Ultimate", date: "Started January 2024" },
     { title: "NextJS Masters", date: "September 2023–October 2023" },
-    { title: "Udemy Courses and Certificates", date: "2020–Present" },
+    { title: "Udemy Courses and Certificates", date: "Started 2020" },
     {
       title: "Pluralsight - Technology platform for programmers",
-      date: "September 2021–Present",
+      date: "Started September 2021",
     },
     { title: "GraphQL Mastery - Michał Taszycki", date: "March 2023" },
     { title: "MEGAK - one year Full-Stack Bootcamp", date: "June 2022" },

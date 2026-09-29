@@ -89,6 +89,12 @@ summary:focus-visible {
   outline-offset: 3px;
 }
 
+h2.section-heading.nav-target[tabindex="-1"],
+h1.hero-name.nav-target[tabindex="-1"] {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 3px !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

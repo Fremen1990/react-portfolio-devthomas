@@ -18,18 +18,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          # package.json allows Node <= 22.14.0 and npm < 10, and .npmrc sets engine-strict.
-          # 18.18.2 is the last 18.18 release that still bundles npm 9.
-          node-version: "18.18.2"
+          # Node 24 is the Active LTS line (Krypton). 24.21.0 bundles npm 11.19.0,
+          # which satisfies package.json engines and .npmrc engine-strict.
+          # Node 18 is end of life and is no longer used.
+          node-version: "24.21.0"
 
       - name: Install all dependencies
         run: npm ci
 
+      - name: Test
+        run: npm test -- --watchAll=false --runInBand
+
       - name: Build
-        run: CI=false npm run build
+        run: npm run build
 
       - name: Push
-        uses: s0/git-publish-subdir-action@develop
+        # develop@ac113f6 (2025-02-13). Same REPO/BRANCH/FOLDER/GITHUB_TOKEN/MESSAGE
+        # contract as the previous @develop pin; the tag does not float.
+        uses: s0/git-publish-subdir-action@ac113f6bfe8896e85a373534242c949a7ea74c98
         env:
           REPO: self
           BRANCH: build # The branch name where you want to push the assets

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { profile } from "../../content/publicProfile";
 import { scrollToSection } from "../../utils/scrollToSection";
 import { applyTheme, currentTheme, readStoredTheme } from "../../utils/theme";
@@ -12,6 +12,15 @@ const links = [
 ];
 
 const sectionIds = links.map((link) => link.href.slice(1));
+const DESKTOP_NAV_QUERY = "(min-width: 801px)";
+
+const readDesktopNav = () => {
+  try {
+    return window.matchMedia(DESKTOP_NAV_QUERY).matches;
+  } catch (error) {
+    return true;
+  }
+};
 
 const currentSectionId = () => {
   const header = document.querySelector(".site-header");
@@ -74,6 +83,8 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [dark, setDark] = useState(() => currentTheme() === "dark");
+  const [isDesktop, setIsDesktop] = useState(readDesktopNav);
+  const menuButtonRef = useRef(null);
 
   useEffect(() => {
     if (!open) {
@@ -81,14 +92,51 @@ const NavBar = () => {
     }
 
     const onKeyDown = (event) => {
-      if (event.key === "Escape") {
-        setOpen(false);
+      if (event.key !== "Escape" || isDesktop) {
+        return;
       }
+      const menu = document.getElementById("site-nav-links");
+      if (!menu?.contains(document.activeElement)) {
+        return;
+      }
+      event.preventDefault();
+      setOpen(false);
+      menuButtonRef.current?.focus();
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, isDesktop]);
+
+  useEffect(() => {
+    const onPopState = () => {
+      const hash = window.location.hash;
+      if (!hash) {
+        return;
+      }
+      scrollToSection(null, hash, { updateHistory: false });
+    };
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    let media;
+    try {
+      media = window.matchMedia(DESKTOP_NAV_QUERY);
+    } catch (error) {
+      return undefined;
+    }
+    if (!media || typeof media.addEventListener !== "function") {
+      return undefined;
+    }
+
+    const onChange = (event) => setIsDesktop(event.matches);
+    setIsDesktop(media.matches);
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     let frame = 0;
@@ -134,6 +182,19 @@ const NavBar = () => {
 
   const close = () => setOpen(false);
 
+  const closeOnPlainClick = (event) => {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
+    }
+    close();
+  };
+
   const toggleTheme = () => {
     const next = dark ? "light" : "dark";
     applyTheme(next, { persist: true });
@@ -147,17 +208,22 @@ const NavBar = () => {
           className="brand"
           href="#home"
           onClick={(event) => {
-            scrollToSection(event, "#home");
-            close();
+            if (scrollToSection(event, "#home")) {
+              close();
+            }
           }}
         >
           <span className="brand-mark" aria-hidden="true">
             TS
           </span>
-          <span>{profile.name}</span>
+          <span className="brand-name">{profile.name}</span>
         </a>
         <nav id="site-nav" className={open ? "site-nav is-open" : "site-nav"}>
-          <div className="site-nav-links">
+          <div
+            id="site-nav-links"
+            className="site-nav-links"
+            hidden={!isDesktop && !open}
+          >
             {links.map((link) => {
               const current = activeSection === link.href.slice(1);
               return (
@@ -167,8 +233,9 @@ const NavBar = () => {
                   className={current ? "is-current" : undefined}
                   aria-current={current ? "true" : undefined}
                   onClick={(event) => {
-                    scrollToSection(event, link.href);
-                    close();
+                    if (scrollToSection(event, link.href)) {
+                      close();
+                    }
                   }}
                 >
                   {link.label}
@@ -180,7 +247,7 @@ const NavBar = () => {
               href={profile.links.cv}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={close}
+              onClick={closeOnPlainClick}
             >
               View CV
             </a>
@@ -190,7 +257,7 @@ const NavBar = () => {
             href={profile.links.cv}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={close}
+            onClick={closeOnPlainClick}
           >
             View CV
           </a>
@@ -207,6 +274,7 @@ const NavBar = () => {
         <button
           type="button"
           className="nav-toggle"
+          ref={menuButtonRef}
           aria-expanded={open}
           aria-controls="site-nav"
           onClick={() => setOpen((current) => !current)}

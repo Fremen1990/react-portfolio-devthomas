@@ -14,13 +14,6 @@ const FooterPanel = () => {
         >
           GitHub
         </a>
-        <a
-          href={profile.links.portfolio3d}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          3D portfolio
-        </a>
       </div>
     </footer>
   );

@@ -2,9 +2,109 @@ import React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import NavBar from "./NavBar";
+import { Hero } from "../Hero/Hero";
+import { SectionBand } from "../SectionBand/SectionBand";
 
-test("menu reports expanded state and closes on Escape", () => {
-  render(<NavBar />);
+const mediaState = {
+  desktop: true,
+  reduce: false,
+  dark: false,
+};
+
+const installMatchMedia = (overrides = {}) => {
+  Object.assign(mediaState, {
+    desktop: true,
+    reduce: false,
+    dark: false,
+    ...overrides,
+  });
+  const listeners = [];
+  window.matchMedia = (query) => {
+    const list = {
+      media: query,
+      addEventListener: (type, listener) => {
+        if (type === "change") {
+          listeners.push({ query, listener });
+        }
+      },
+      removeEventListener: (type, listener) => {
+        const index = listeners.findIndex(
+          (item) => item.query === query && item.listener === listener
+        );
+        if (index >= 0) {
+          listeners.splice(index, 1);
+        }
+      },
+      addListener() {},
+      removeListener() {},
+      dispatchEvent() {
+        return false;
+      },
+    };
+    Object.defineProperty(list, "matches", {
+      get() {
+        if (query.includes("min-width: 801px")) {
+          return mediaState.desktop;
+        }
+        if (query.includes("prefers-reduced-motion")) {
+          return mediaState.reduce;
+        }
+        if (query.includes("prefers-color-scheme: dark")) {
+          return mediaState.dark;
+        }
+        return false;
+      },
+    });
+    return list;
+  };
+
+  return {
+    setDesktop(desktop) {
+      mediaState.desktop = desktop;
+      listeners
+        .filter((item) => item.query.includes("min-width: 801px"))
+        .forEach((item) =>
+          item.listener({ matches: desktop, media: item.query })
+        );
+    },
+  };
+};
+
+const renderPage = () =>
+  render(
+    <>
+      <NavBar />
+      <Hero />
+      <SectionBand id="work" title="Selected work">
+        <p>Work body</p>
+      </SectionBand>
+      <SectionBand id="approach" title="How I work">
+        <p>Approach body</p>
+      </SectionBand>
+      <SectionBand id="about" title="Background">
+        <p>Background body</p>
+      </SectionBand>
+      <SectionBand id="contact" title="Contact">
+        <p>Contact body</p>
+      </SectionBand>
+    </>
+  );
+
+beforeEach(() => {
+  localStorage.removeItem("portfolio-theme");
+  document.documentElement.classList.remove("dark-theme", "light-theme");
+  window.history.replaceState(
+    null,
+    "",
+    `${window.location.pathname}${window.location.search}`
+  );
+  Element.prototype.scrollIntoView = jest.fn();
+  installMatchMedia();
+});
+
+test("Escape inside the open menu closes it and returns focus to Menu", () => {
+  installMatchMedia({ desktop: false });
+  renderPage();
 
   const menu = screen.getByRole("button", { name: "Menu" });
   expect(menu).toHaveAttribute("aria-expanded", "false");
@@ -12,8 +112,59 @@ test("menu reports expanded state and closes on Escape", () => {
   fireEvent.click(menu);
   expect(menu).toHaveAttribute("aria-expanded", "true");
 
-  fireEvent.keyDown(document, { key: "Escape" });
+  const work = screen.getByRole("link", { name: "Work" });
+  work.focus();
+  expect(work).toHaveFocus();
+
+  fireEvent.keyDown(work, { key: "Escape" });
   expect(menu).toHaveAttribute("aria-expanded", "false");
+  expect(menu).toHaveFocus();
+});
+
+test("Escape outside the open menu does not close it or move focus", () => {
+  installMatchMedia({ desktop: false });
+  renderPage();
+
+  const menu = screen.getByRole("button", { name: "Menu" });
+  const theme = screen.getByRole("button", { name: "Switch to dark theme" });
+  fireEvent.click(menu);
+  theme.focus();
+
+  fireEvent.keyDown(theme, { key: "Escape" });
+  expect(menu).toHaveAttribute("aria-expanded", "true");
+  expect(theme).toHaveFocus();
+});
+
+test("a closed mobile menu is removed from keyboard navigation", () => {
+  installMatchMedia({ desktop: false });
+  render(<NavBar />);
+
+  expect(screen.queryByRole("link", { name: "Work" })).not.toBeInTheDocument();
+  expect(document.getElementById("site-nav-links")).toHaveAttribute("hidden");
+
+  fireEvent.click(screen.getByRole("button", { name: "Menu" }));
+  expect(screen.getByRole("link", { name: "Work" })).toBeInTheDocument();
+  expect(document.getElementById("site-nav-links")).not.toHaveAttribute(
+    "hidden"
+  );
+});
+
+test("desktop links stay available after resizing an open or closed mobile menu", () => {
+  const media = installMatchMedia({ desktop: false });
+  render(<NavBar />);
+
+  expect(screen.queryByRole("link", { name: "Work" })).not.toBeInTheDocument();
+  act(() => media.setDesktop(true));
+  expect(screen.getByRole("link", { name: "Work" })).toBeInTheDocument();
+
+  act(() => media.setDesktop(false));
+  fireEvent.click(screen.getByRole("button", { name: "Menu" }));
+  expect(screen.getByRole("link", { name: "Approach" })).toBeInTheDocument();
+  act(() => media.setDesktop(true));
+  expect(screen.getByRole("link", { name: "Approach" })).toBeInTheDocument();
+  expect(document.getElementById("site-nav-links")).not.toHaveAttribute(
+    "hidden"
+  );
 });
 
 test("navigation points at work, approach, background, contact, and the CV", () => {
@@ -115,6 +266,17 @@ test("marks the section currently below the header", async () => {
   sections.forEach((section) => section.remove());
 });
 
+test("without a saved choice, the control follows the OS color scheme", () => {
+  installMatchMedia({ dark: true });
+  render(<NavBar />);
+
+  const toggle = screen.getByRole("button", { name: "Switch to light theme" });
+  expect(toggle).toHaveAttribute("aria-pressed", "true");
+  expect(localStorage.getItem("portfolio-theme")).toBeNull();
+  expect(document.documentElement).not.toHaveClass("dark-theme");
+  expect(document.documentElement).not.toHaveClass("light-theme");
+});
+
 test("theme control stores the chosen appearance", () => {
   localStorage.removeItem("portfolio-theme");
   document.documentElement.classList.remove("dark-theme", "light-theme");
@@ -139,13 +301,84 @@ test("theme control stores the chosen appearance", () => {
   document.documentElement.classList.remove("dark-theme", "light-theme");
 });
 
-test("choosing a link closes the open menu", () => {
-  render(<NavBar />);
+test("choosing a section link closes the menu, focuses its heading, and sets the hash", () => {
+  installMatchMedia({ desktop: false });
+  const focus = jest.spyOn(HTMLElement.prototype, "focus");
+  renderPage();
 
   const menu = screen.getByRole("button", { name: "Menu" });
   fireEvent.click(menu);
-  expect(menu).toHaveAttribute("aria-expanded", "true");
+  Element.prototype.scrollIntoView.mockClear();
+  focus.mockClear();
 
   fireEvent.click(screen.getByRole("link", { name: "Approach" }));
+
   expect(menu).toHaveAttribute("aria-expanded", "false");
+  expect(document.getElementById("approach-heading")).toHaveFocus();
+  expect(document.getElementById("approach-heading")).toHaveClass("nav-target");
+  expect(window.location.hash).toBe("#approach");
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledTimes(1);
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({
+    behavior: "smooth",
+    block: "start",
+  });
+  expect(focus).toHaveBeenCalledWith({ preventScroll: true });
+  focus.mockRestore();
+});
+
+test("modified clicks keep native link behavior", () => {
+  renderPage();
+  const work = screen.getByRole("link", { name: "Work" });
+
+  expect(fireEvent.click(work, { metaKey: true })).toBe(true);
+  expect(window.location.hash).toBe("");
+  expect(document.getElementById("work-heading")).not.toHaveFocus();
+
+  expect(fireEvent.click(work, { ctrlKey: true })).toBe(true);
+  expect(fireEvent.click(work, { shiftKey: true })).toBe(true);
+  expect(fireEvent.click(work, { altKey: true })).toBe(true);
+  expect(fireEvent.click(work, { button: 1 })).toBe(true);
+  expect(window.location.hash).toBe("");
+  expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
+});
+
+test("reduced motion scrolls instantly and still focuses the heading", () => {
+  installMatchMedia({ reduce: true });
+  renderPage();
+
+  fireEvent.click(screen.getByRole("link", { name: "Work" }));
+
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledWith({
+    behavior: "auto",
+    block: "start",
+  });
+  expect(document.getElementById("work-heading")).toHaveFocus();
+});
+
+test("the browser Back button restores the previous fragment and focus", async () => {
+  renderPage();
+
+  fireEvent.click(screen.getByRole("link", { name: "Work" }));
+  fireEvent.click(screen.getByRole("link", { name: "Contact" }));
+  expect(window.location.hash).toBe("#contact");
+
+  // jsdom traverses history on a nested timeout.
+  await act(async () => {
+    window.history.back();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  });
+
+  expect(window.location.hash).toBe("#work");
+  expect(document.getElementById("work-heading")).toHaveFocus();
+});
+
+test("the home brand link focuses the hero heading", () => {
+  renderPage();
+
+  fireEvent.click(screen.getByRole("link", { name: "Tomasz Stanisz" }));
+
+  expect(window.location.hash).toBe("#home");
+  expect(document.getElementById("home-heading")).toHaveFocus();
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledTimes(1);
 });

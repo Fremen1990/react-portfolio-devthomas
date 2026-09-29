@@ -1,26 +1,73 @@
-export const scrollToSection = (event, href) => {
-  if (!href || href.charAt(0) !== "#") {
-    return;
-  }
-
-  const target = document.getElementById(href.slice(1));
-  if (!target) {
-    return;
-  }
-
-  event.preventDefault();
-  let reduce = false;
+const prefersReducedMotion = () => {
   try {
-    reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   } catch (error) {
-    reduce = false;
+    return false;
   }
+};
+
+const isPlainActivation = (event) => {
+  if (!event) {
+    return true;
+  }
+  if (event.defaultPrevented) {
+    return false;
+  }
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+    return false;
+  }
+  if (typeof event.button === "number" && event.button !== 0) {
+    return false;
+  }
+  return true;
+};
+
+export const destinationFocusTarget = (id) =>
+  document.getElementById(`${id}-heading`) || document.getElementById(id);
+
+export const scrollToSection = (event, href, { updateHistory = true } = {}) => {
+  if (!isPlainActivation(event)) {
+    return false;
+  }
+  if (!href || href.charAt(0) !== "#") {
+    return false;
+  }
+
+  const id = href.slice(1);
+  const target = document.getElementById(id);
+  if (!target) {
+    return false;
+  }
+
+  if (event) {
+    event.preventDefault();
+  }
+
   target.scrollIntoView({
-    behavior: reduce ? "auto" : "smooth",
+    behavior: prefersReducedMotion() ? "auto" : "smooth",
     block: "start",
   });
 
-  if (window.location.hash !== href) {
+  const focusTarget = destinationFocusTarget(id);
+  if (focusTarget && typeof focusTarget.focus === "function") {
+    document.querySelectorAll(".nav-target").forEach((node) => {
+      node.classList.remove("nav-target");
+    });
+    focusTarget.classList.add("nav-target");
+    focusTarget.addEventListener(
+      "blur",
+      () => {
+        focusTarget.classList.remove("nav-target");
+      },
+      { once: true }
+    );
+    // preventScroll keeps the scroll-margin position from scrollIntoView.
+    focusTarget.focus({ preventScroll: true });
+  }
+
+  if (updateHistory && window.location.hash !== href) {
     window.history.pushState(null, "", href);
   }
+
+  return true;
 };

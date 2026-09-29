@@ -9,7 +9,9 @@ const MyTitleMessage = () => {
     <div className="hero" id="home">
       <div className="page-wrap hero-grid">
         <div className="hero-heading">
-          <h1 className="hero-name">{profile.name}</h1>
+          <h1 id="home-heading" className="hero-name" tabIndex={-1}>
+            {profile.name}
+          </h1>
           <p className="hero-role">{profile.headline}</p>
         </div>
         <img
