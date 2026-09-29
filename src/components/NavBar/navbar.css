@@ -72,6 +72,13 @@
   color: var(--accent-hover);
 }
 
+.site-nav a.is-current {
+  color: var(--accent);
+  font-weight: 600;
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--accent);
+}
+
 @media (max-width: 800px) {
   .nav-toggle {
     display: inline-flex;

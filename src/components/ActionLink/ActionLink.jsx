@@ -7,6 +7,7 @@ export const ActionLink = ({
   variant = "solid",
   external = false,
   label,
+  onClick,
 }) => {
   const externalProps = external
     ? { target: "_blank", rel: "noopener noreferrer" }
@@ -17,6 +18,7 @@ export const ActionLink = ({
       className={`action-link action-link--${variant}`}
       href={href}
       aria-label={label}
+      onClick={onClick}
       {...externalProps}
     >
       {children}
