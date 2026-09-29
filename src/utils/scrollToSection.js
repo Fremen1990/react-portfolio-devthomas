@@ -9,7 +9,12 @@ export const scrollToSection = (event, href) => {
   }
 
   event.preventDefault();
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let reduce = false;
+  try {
+    reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  } catch (error) {
+    reduce = false;
+  }
   target.scrollIntoView({
     behavior: reduce ? "auto" : "smooth",
     block: "start",

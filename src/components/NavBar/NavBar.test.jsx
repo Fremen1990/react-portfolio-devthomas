@@ -35,10 +35,9 @@ test("navigation points at work, approach, background, contact, and the CV", () 
     "href",
     "#contact"
   );
-  expect(screen.getByRole("link", { name: "View CV" })).toHaveAttribute(
-    "href",
-    "https://cv.devthomas.pl/"
-  );
+  screen.getAllByRole("link", { name: "View CV" }).forEach((link) => {
+    expect(link).toHaveAttribute("href", "https://cv.devthomas.pl/");
+  });
   expect(
     screen.queryByRole("link", { name: "Experience" })
   ).not.toBeInTheDocument();
@@ -109,11 +108,35 @@ test("marks the section currently below the header", async () => {
   expect(screen.getByRole("link", { name: "Approach" })).not.toHaveAttribute(
     "aria-current"
   );
-  expect(screen.getByRole("link", { name: "View CV" })).not.toHaveAttribute(
-    "aria-current"
-  );
+  screen.getAllByRole("link", { name: "View CV" }).forEach((link) => {
+    expect(link).not.toHaveAttribute("aria-current");
+  });
 
   sections.forEach((section) => section.remove());
+});
+
+test("theme control stores the chosen appearance", () => {
+  localStorage.removeItem("portfolio-theme");
+  document.documentElement.classList.remove("dark-theme", "light-theme");
+
+  render(<NavBar />);
+
+  const toggle = screen.getByRole("button", { name: "Switch to dark theme" });
+  expect(toggle).toHaveAttribute("aria-pressed", "false");
+
+  fireEvent.click(toggle);
+  expect(document.documentElement).toHaveClass("dark-theme");
+  expect(toggle).toHaveAttribute("aria-pressed", "true");
+  expect(toggle).toHaveAttribute("aria-label", "Switch to light theme");
+  expect(localStorage.getItem("portfolio-theme")).toBe("dark");
+
+  fireEvent.click(toggle);
+  expect(document.documentElement).toHaveClass("light-theme");
+  expect(document.documentElement).not.toHaveClass("dark-theme");
+  expect(localStorage.getItem("portfolio-theme")).toBe("light");
+
+  localStorage.removeItem("portfolio-theme");
+  document.documentElement.classList.remove("dark-theme", "light-theme");
 });
 
 test("choosing a link closes the open menu", () => {

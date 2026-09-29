@@ -9,6 +9,22 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#F7F8FA" />
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("portfolio-theme");
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark-theme");
+            document
+              .querySelector('meta[name="theme-color"]')
+              .setAttribute("content", "#10161b");
+          }
+          if (theme === "light") {
+            document.documentElement.classList.add("light-theme");
+          }
+        } catch (error) {}
+      })();
+    </script>
     <title>Tomasz Stanisz, Software Engineer &amp; Tech Lead</title>
     <meta
       name="description"

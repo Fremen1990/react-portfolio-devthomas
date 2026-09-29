@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { profile } from "../../content/publicProfile";
 import { scrollToSection } from "../../utils/scrollToSection";
+import { applyTheme, currentTheme, readStoredTheme } from "../../utils/theme";
 import "./navbar.css";
 
 const links = [
@@ -33,9 +34,46 @@ const currentSectionId = () => {
   return current;
 };
 
+const ThemeIcon = ({ name }) => {
+  if (name === "sun") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="theme-icon">
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        />
+        <path
+          d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="theme-icon">
+      <path
+        d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [dark, setDark] = useState(() => currentTheme() === "dark");
 
   useEffect(() => {
     if (!open) {
@@ -74,7 +112,33 @@ const NavBar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let media;
+    try {
+      media = window.matchMedia("(prefers-color-scheme: dark)");
+    } catch (error) {
+      return undefined;
+    }
+
+    const onChange = (event) => {
+      if (readStoredTheme()) {
+        return;
+      }
+      applyTheme(event.matches ? "dark" : "light");
+      setDark(event.matches);
+    };
+
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
   const close = () => setOpen(false);
+
+  const toggleTheme = () => {
+    const next = dark ? "light" : "dark";
+    applyTheme(next, { persist: true });
+    setDark(next === "dark");
+  };
 
   return (
     <header className="site-header">
@@ -92,6 +156,54 @@ const NavBar = () => {
           </span>
           <span>{profile.name}</span>
         </a>
+        <nav id="site-nav" className={open ? "site-nav is-open" : "site-nav"}>
+          <div className="site-nav-links">
+            {links.map((link) => {
+              const current = activeSection === link.href.slice(1);
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={current ? "is-current" : undefined}
+                  aria-current={current ? "true" : undefined}
+                  onClick={(event) => {
+                    scrollToSection(event, link.href);
+                    close();
+                  }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+            <a
+              className="nav-cv-menu"
+              href={profile.links.cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={close}
+            >
+              View CV
+            </a>
+          </div>
+          <a
+            className="nav-cv"
+            href={profile.links.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={close}
+          >
+            View CV
+          </a>
+        </nav>
+        <button
+          type="button"
+          className="theme-toggle"
+          aria-pressed={dark}
+          aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+          onClick={toggleTheme}
+        >
+          <ThemeIcon name={dark ? "sun" : "moon"} />
+        </button>
         <button
           type="button"
           className="nav-toggle"
@@ -101,33 +213,6 @@ const NavBar = () => {
         >
           Menu
         </button>
-        <nav id="site-nav" className={open ? "site-nav is-open" : "site-nav"}>
-          {links.map((link) => {
-            const current = activeSection === link.href.slice(1);
-            return (
-              <a
-                key={link.href}
-                href={link.href}
-                className={current ? "is-current" : undefined}
-                aria-current={current ? "true" : undefined}
-                onClick={(event) => {
-                  scrollToSection(event, link.href);
-                  close();
-                }}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-          <a
-            href={profile.links.cv}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={close}
-          >
-            View CV
-          </a>
-        </nav>
       </div>
     </header>
   );

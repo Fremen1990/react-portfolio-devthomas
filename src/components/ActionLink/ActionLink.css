@@ -25,14 +25,14 @@
 
 .action-link--solid {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--on-accent);
   border-color: var(--accent);
 }
 
 .action-link--solid:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
-  color: #ffffff;
+  color: var(--on-accent);
   text-decoration: none;
 }
 

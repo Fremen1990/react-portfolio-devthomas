@@ -57,6 +57,7 @@
   height: 180px;
   object-fit: cover;
   object-position: center 42%;
+  border: 1px solid var(--separator);
   border-radius: 12px;
 }
 
