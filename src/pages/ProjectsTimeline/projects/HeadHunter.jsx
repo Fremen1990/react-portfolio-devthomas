@@ -29,7 +29,8 @@ export const HeadHunter = () => {
           <Accordion>
             <Card>
               <Accordion.Toggle
-                as={Card.Header}
+                as="button"
+                type="button"
                 eventKey="0"
                 className="p-2 text-center accordian-main"
               >
@@ -84,7 +85,7 @@ export const HeadHunter = () => {
                       <span className="p-2">
                         <Image
                           src={L_JAVASCRIPT}
-                          alt="Django"
+                          alt=""
                           rounded
                           className="image-style m-1"
                         ></Image>{" "}
@@ -207,11 +208,10 @@ export const HeadHunter = () => {
                     <br />
                     {/*Quick three sentences about summary of building full stack*/}
                     {/*app from the ground and managing team as a scrum master:*/}
-                    The project was a great opportunity to learn how to manage a
-                    team of developers and how to work in a team. I was
-                    responsible for frontend as well as backend and choosing
-                    tech stack as tech lead of the project. It was a pleasure
-                    and great boost for my productivity and knowledge.
+                    The project was a bootcamp team exercise. I worked on the
+                    frontend and backend and took part in choosing the tech
+                    stack. It was a chance to practice working with other
+                    developers.
                     <br />
                   </em>
                 </Card.Body>
@@ -224,21 +224,21 @@ export const HeadHunter = () => {
             href="https://github.com/Fremen1990/head-hunter-frontend"
             target="_blank"
           >
-            FrondEnd{" "}
+            Frontend source
           </UrlButton>
 
           <UrlButton
             href="https://www.youtube.com/watch?v=TStajdI8jhw"
             target="_blank"
           >
-            DEMO{" "}
+            Watch the demo
           </UrlButton>
 
           <UrlButton
             href="https://github.com/Fremen1990/head-hunter-backend"
             target="_blank"
           >
-            BackEnd
+            Backend source
           </UrlButton>
         </div>
       </div>

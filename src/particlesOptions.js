@@ -1,4 +1,7 @@
 export const particlesOptions = {
+  fullScreen: {
+    enable: false,
+  },
   fpsLimit: 60,
   particles: {
     number: {

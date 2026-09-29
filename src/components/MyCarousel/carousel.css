@@ -1,4 +1,33 @@
+.home-carousel {
+  position: relative;
+  z-index: 3;
+}
+
+.home-carousel picture {
+  display: block;
+}
+
 .custom-img {
-  height: 100vh;
+  height: min(42vh, 26rem);
+  min-height: 12rem;
   object-fit: cover;
+}
+
+.carousel-pause {
+  position: absolute;
+  z-index: 4;
+  top: calc(10vh + 0.75rem);
+  right: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid #ffffff;
+  border-radius: 0.25rem;
+  background: #101018;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.carousel-pause:hover {
+  background: #ffffff;
+  color: #101018;
 }

@@ -12,12 +12,6 @@ import L_TYPESCRIPT from "../../../../assets/img/skills/typescript.svg";
 import L_JEST from "../../../../assets/img/skills/testing_jest.webp";
 import React from "react";
 
-{
-  /* =================   DEV SOCIAL MEDIA  ================= */
-}
-{
-  /* Project: Dev Social Media */
-}
 export const DevSocialMedia = () => {
   return (
     <ImageEvent
@@ -32,7 +26,8 @@ export const DevSocialMedia = () => {
           <Accordion>
             <Card>
               <Accordion.Toggle
-                as={Card.Header}
+                as="button"
+                type="button"
                 eventKey="0"
                 className="p-2 text-center accordian-main"
               >
@@ -101,7 +96,7 @@ export const DevSocialMedia = () => {
                       <span className="p-2">
                         <Image
                           src={L_JAVASCRIPT}
-                          alt="Django"
+                          alt=""
                           rounded
                           className="image-style m-1"
                         ></Image>{" "}
@@ -205,13 +200,13 @@ export const DevSocialMedia = () => {
             href="https://github.com/Fremen1990/DevSocialMedia-frontend"
             target="_blank"
           >
-            FrondEnd{" "}
+            Frontend source
           </UrlButton>
           <UrlButton
             href="https://github.com/Fremen1990/DevSocialMedia-backend"
             target="_blank"
           >
-            BackEnd
+            Backend source
           </UrlButton>
           {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
                   WATCH VIDEO

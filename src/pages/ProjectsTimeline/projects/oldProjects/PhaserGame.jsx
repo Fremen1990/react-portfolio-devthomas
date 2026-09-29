@@ -10,14 +10,6 @@ import L_NETLIFY from "../../../../assets/img/skills/netlify.svg";
 import L_GIT from "../../../../assets/img/skills/git-icon.svg";
 import React from "react";
 
-{
-  /* ========================= FIFTH PROJECT - PHASER GAME ======================== */
-}
-
-{
-  /* Project: TomPhase - Phaser Engine 2d Game */
-}
-
 export const PhaserGame = () => {
   return (
     <ImageEvent
@@ -32,7 +24,8 @@ export const PhaserGame = () => {
           <Accordion>
             <Card>
               <Accordion.Toggle
-                as={Card.Header}
+                as="button"
+                type="button"
                 eventKey="0"
                 className="p-2 text-center accordian-main"
               >
@@ -87,7 +80,7 @@ export const PhaserGame = () => {
                       <span className="p-2">
                         <Image
                           src={L_JAVASCRIPT}
-                          alt="Django"
+                          alt=""
                           rounded
                           className="image-style m-1"
                         ></Image>{" "}
@@ -141,13 +134,13 @@ export const PhaserGame = () => {
             href="https://dev-thomas-thom-phase-game.netlify.app"
             target="_blank"
           >
-            -- SEE LIVE --
+            See the live game
           </UrlButton>
           <UrlButton
             href="https://github.com/Fremen1990/The-Game---Phaser-2d"
             target="_blank"
           >
-            SOURCE CODE
+            Source code
           </UrlButton>
           {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
                   WATCH VIDEO

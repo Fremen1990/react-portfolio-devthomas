@@ -1,61 +1,33 @@
 import React from "react";
-import Typewriter from "typewriter-effect";
-import styled from "styled-components";
-
-const MyTitleMessageStyled = styled.h1`
-  position: absolute;
-  width: 100%;
-  top: 22rem;
-  z-index: 1;
-  margin-top: -125px;
-  text-align: center;
-  strong {
-    font-size: 1.25em;
-  }
-  div {
-    color: ${(props) => props.theme.textColor};
-    text-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-    font-weight: 100;
-    letter-spacing: 8px;
-    .main {
-      font-size: 60px;
-    }
-    .sub {
-      font-size: 40px;
-      letter-spacing: 2px;
-    }
-  }
-`;
+import { profile } from "../content/publicProfile";
+import Profile from "../assets/img/profile/portrait.jpg";
+import { ActionLink } from "./ActionLink/ActionLink";
 
 const MyTitleMessage = () => {
   return (
-    <MyTitleMessageStyled>
-      <div className="titleMessage">
-        <div className="heading">
-          <div className="main text-center mb-3">
-            Hi, I am
-            <br />
-            <span>
-              <strong>Tomasz Stanisz</strong>
-            </span>
-          </div>
-          <div className="sub">
-            <Typewriter
-              options={{
-                strings: [
-                  "Front-End Developer",
-                  "IT lover",
-                  "Full Stack Developer",
-                ],
-                autoStart: true,
-                loop: true,
-                delay: 50,
-              }}
-            />
+    <div className="hero" id="home">
+      <div className="page-wrap hero-grid">
+        <div className="hero-copy">
+          <h1 className="hero-name">{profile.name}</h1>
+          <p className="hero-role">{profile.headline}</p>
+          <p className="hero-intro">{profile.introduction}</p>
+          <p className="hero-availability">{profile.availability}</p>
+          <div className="action-row">
+            <ActionLink href="#work">Explore selected work</ActionLink>
+            <ActionLink href={profile.links.cv} external variant="quiet">
+              View CV
+            </ActionLink>
           </div>
         </div>
+        <img
+          className="hero-portrait"
+          src={Profile}
+          width="1024"
+          height="682"
+          alt="Portrait of Tomasz Stanisz"
+        />
       </div>
-    </MyTitleMessageStyled>
+    </div>
   );
 };
 

@@ -29,7 +29,8 @@ export const EducationCard = ({
           <Accordion>
             <Card>
               <Accordion.Toggle
-                as={Card.Header}
+                as="button"
+                type="button"
                 eventKey="0"
                 className="p-2 text-center accordian-main"
               >

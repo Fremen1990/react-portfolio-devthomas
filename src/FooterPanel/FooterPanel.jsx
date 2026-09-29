@@ -1,13 +1,28 @@
 import React from "react";
+import { profile } from "../content/publicProfile";
 import "./footer.css";
 
 const FooterPanel = () => {
   return (
-    <div>
-      <div className="py-2 text-center footer-style">
-        © DevTomas Tomasz Stanisz &nbsp; {new Date().getFullYear()}
+    <footer className="site-footer">
+      <div className="page-wrap site-footer-inner">
+        <p>© Tomasz Stanisz {new Date().getFullYear()}</p>
+        <a
+          href={profile.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+        <a
+          href={profile.links.portfolio3d}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          3D portfolio
+        </a>
       </div>
-    </div>
+    </footer>
   );
 };
 

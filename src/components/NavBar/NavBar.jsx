@@ -1,60 +1,69 @@
-import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Logo from "../../assets/icons/TS.webp";
-
+import React, { useEffect, useState } from "react";
+import { profile } from "../../content/publicProfile";
 import "./navbar.css";
 
+const links = [
+  { href: "#work", label: "Work" },
+  { href: "#approach", label: "Approach" },
+  { href: "#about", label: "Background" },
+  { href: "#contact", label: "Contact" },
+];
+
 const NavBar = () => {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  const close = () => setOpen(false);
+
   return (
-    <>
-      <Navbar
-        fixed="top"
-        variant="dark"
-        expand="md"
-        className="animate-navbar nav-theme justify-content-between"
-      >
-        <div>
-          <Navbar.Brand href="#home">
-            <img className="logo" src={Logo} alt="" />
-          </Navbar.Brand>
-        </div>
-        <div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto ">
-              <Nav.Link
-                className="nav-link-item"
-                href="https://3d-portfolio.devthomas.pl/"
-              >
-                3D Portfolio
-              </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#home">
-                Home
-              </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#about">
-                About
-              </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#skills">
-                Skills
-              </Nav.Link>
-              <Nav.Link className="nav-link-item " href="#experience">
-                Experience
-              </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#projects">
-                Projects
-              </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#education">
-                Education
-              </Nav.Link>
-              <Nav.Link className="nav-link-item" href="#contact">
-                Contact
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </div>
-      </Navbar>
-    </>
+    <header className="site-header">
+      <div className="page-wrap site-header-inner">
+        <a className="brand" href="#home" onClick={close}>
+          <span className="brand-mark" aria-hidden="true">
+            TS
+          </span>
+          <span>{profile.name}</span>
+        </a>
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-expanded={open}
+          aria-controls="site-nav"
+          onClick={() => setOpen((current) => !current)}
+        >
+          Menu
+        </button>
+        <nav id="site-nav" className={open ? "site-nav is-open" : "site-nav"}>
+          {links.map((link) => (
+            <a key={link.href} href={link.href} onClick={close}>
+              {link.label}
+            </a>
+          ))}
+          <a
+            href={profile.links.cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={close}
+          >
+            View CV
+          </a>
+        </nav>
+      </div>
+    </header>
   );
 };
 

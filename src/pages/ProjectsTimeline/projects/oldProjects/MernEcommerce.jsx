@@ -1,13 +1,3 @@
-{
-  /* ============================== SECOND PROJECT ===================================== */
-}
-
-{
-  /* Project: MERN E-Commerce  */
-}
-{
-  /* =================   MERN E-COMMERCE ================= */
-}
 import { ImageEvent, UrlButton } from "@merc/react-timeline";
 import L_E_Commerce from "../../../../assets/img/projects/ecommerce.webp";
 import Accordion from "react-bootstrap/Accordion";
@@ -37,7 +27,8 @@ export const MernEcommerce = () => {
           <Accordion>
             <Card>
               <Accordion.Toggle
-                as={Card.Header}
+                as="button"
+                type="button"
                 eventKey="0"
                 className="p-2 text-center accordian-main"
               >
@@ -91,7 +82,7 @@ export const MernEcommerce = () => {
                       <span className="p-2">
                         <Image
                           src={L_JAVASCRIPT}
-                          alt="Django"
+                          alt=""
                           rounded
                           className="image-style m-1"
                         ></Image>{" "}
@@ -189,7 +180,7 @@ export const MernEcommerce = () => {
             href="https://github.com/Fremen1990/E-Commerce-MERN-NODE-REACT"
             target="_blank"
           >
-            SOURCE CODE
+            Source code
           </UrlButton>
           {/* <UrlButton href="https://youtu.be/PCwEuW4OmWA" target="_blank">
                   WATCH VIDEO

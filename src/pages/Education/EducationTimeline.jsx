@@ -12,7 +12,6 @@ import {
 
 import "../ProjectsTimeline/ProjectsTimeline.css";
 import { EducationCard } from "../../components/Cards/EducationCard";
-import { TechImage } from "../../components/TechImage";
 import { messages } from "./messages";
 import { CourseCard } from "../../components/Cards/CourseCard";
 import { Skill } from "../../components/Skill";
@@ -39,13 +38,6 @@ export const customTheme = createTheme(themes.default, {
 export const EducationTimeline = () => {
   return (
     <div id="education">
-      <h1
-        className="pt-3 text-center font-details-b pb-3"
-        style={{ color: "#ffffff" }}
-      >
-        {messages.headerTextContent}
-      </h1>
-
       <Timeline theme={customTheme}>
         <Events>
           <EducationCard
