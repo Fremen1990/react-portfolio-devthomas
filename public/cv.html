@@ -35,7 +35,12 @@
       content="Frontend architecture, full-stack development and technical leadership. Based in Poland."
     />
     <meta name="twitter:image" content="https://devthomas.pl/og-cv-share.png" />
-    <meta http-equiv="refresh" content="0; url=https://cv.devthomas.pl/" />
+    <!-- No meta-refresh: LinkedIn follows it to cv.devthomas.pl and scrapes the old portrait OG. -->
+    <script>
+      window.setTimeout(function () {
+        window.location.replace("https://cv.devthomas.pl/");
+      }, 1200);
+    </script>
   </head>
   <body>
     <main>
