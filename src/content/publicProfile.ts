@@ -101,7 +101,7 @@ export const profile: Profile = {
         "At Orange Polska, I design and develop the frontend architecture of an internal CMS. Its React and TypeScript interface is generated from JSON schemas and backend-supplied configuration.",
       bullets: [
         "Build frontend behavior for configured navigation, forms, data grids and actions, including bulk operations.",
-        "Provide technical guidance and code review for three developers working on the CMS.",
+        "Provide technical guidance and code review on the CMS, and review code across the department's React projects.",
         "Contribute to a streaming platform, including a feedback form and backend submission flow that makes user opinions available to the Product Owner.",
       ],
       technologies:
