@@ -122,9 +122,10 @@
   font-weight: 600;
 }
 
+/* Always at the top, just below the sticky header. */
 .palette-toast {
   position: fixed;
-  bottom: 24px;
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-height) + 12px);
   left: 50%;
   z-index: 40;
   max-width: calc(100% - 32px);
@@ -134,9 +135,10 @@
   background: var(--text);
   color: var(--canvas);
   font-weight: 600;
+  overflow-wrap: anywhere;
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, 16px);
+  transform: translate(-50%, -12px);
   transition:
     opacity 150ms ease,
     transform 150ms ease;
@@ -145,6 +147,12 @@
 .palette-toast.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+/* A failed copy shows the text to copy by hand, so it can be selected. */
+.palette-toast.is-failed {
+  pointer-events: auto;
+  user-select: text;
 }
 
 @media (max-width: 520px) {

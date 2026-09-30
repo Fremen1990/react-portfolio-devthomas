@@ -5,8 +5,10 @@ import React, {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { createPortal } from "react-dom";
 import { usePathname, useRouter } from "next/navigation";
 import {
   CLOSE_INPUTS,
@@ -22,12 +24,26 @@ import { scrollToSection } from "../../utils/scrollToSection";
 import { applyTheme } from "../../utils/theme";
 import { applySkin } from "../../utils/skin";
 import { usePreferences } from "../../utils/preferences";
+import { copyToClipboard } from "../../utils/clipboard";
 
 type CommandPaletteProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isHome: boolean;
 };
+
+// How long a message stays up. A failed copy shows the text to copy by hand,
+// so it stays longer.
+const TOAST_MS = { done: 6000, failed: 15000 };
+
+// True only in the browser, so the toast can be portalled into <body>.
+const noSubscription = () => () => {};
+const useIsClient = () =>
+  useSyncExternalStore(
+    noSubscription,
+    () => true,
+    () => false
+  );
 
 const isEditable = (target: EventTarget | null) =>
   target instanceof HTMLElement &&
@@ -74,7 +90,8 @@ export const CommandPalette = ({
   );
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
-  const [toast, setToast] = useState("");
+  const [toast, setToast] = useState({ message: "", failed: false });
+  const isClient = useIsClient();
 
   const results = useMemo(
     () => filterCommands(commands, query, { theme, skin }),
@@ -144,19 +161,21 @@ export const CommandPalette = ({
 
   useEffect(() => () => clearTimeout(toastTimerRef.current), []);
 
-  const showToast = (message: string) => {
+  const showToast = (message: string, { failed = false } = {}) => {
     clearTimeout(toastTimerRef.current);
-    setToast(message);
-    toastTimerRef.current = setTimeout(() => setToast(""), 4000);
+    setToast({ message, failed });
+    toastTimerRef.current = setTimeout(
+      () => setToast({ message: "", failed: false }),
+      failed ? TOAST_MS.failed : TOAST_MS.done
+    );
   };
 
-  // Clipboard access can be refused; then show the text so it can be copied.
+  // If the browser refuses both copy methods, show the text to copy by hand.
   const copyText = async (text: string, copied: string, fallback: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
+    if (await copyToClipboard(text)) {
       showToast(copied);
-    } catch {
-      showToast(`Couldn't copy. ${fallback} ${text}`);
+    } else {
+      showToast(`Couldn't copy. ${fallback} ${text}`, { failed: true });
     }
   };
 
@@ -311,12 +330,25 @@ export const CommandPalette = ({
           </p>
         </div>
       </dialog>
-      <p
-        className={toast ? "palette-toast is-visible" : "palette-toast"}
-        role="status"
-      >
-        {toast}
-      </p>
+      {/* Rendered into <body>: inside the header, a backdrop-filter (the
+          Terminal skin has one) would make the header the toast's
+          positioning box. */}
+      {isClient &&
+        createPortal(
+          <p
+            className={[
+              "palette-toast",
+              toast.message && "is-visible",
+              toast.failed && "is-failed",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            role="status"
+          >
+            {toast.message}
+          </p>,
+          document.body
+        )}
     </>
   );
 };
