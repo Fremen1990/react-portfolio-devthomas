@@ -7,6 +7,7 @@ import type { Skin } from "./utils/skin";
 // data and can be tested without a browser.
 export type CommandContext = {
   goToSection: (id: string) => void;
+  goToPage: (path: string) => void;
   openExternal: (url: string) => void;
   copyEmail: () => void;
   setTheme: (theme: Theme) => void;
@@ -23,7 +24,7 @@ export type Command = {
   alias: string;
   keywords: string[];
   /** What kind of thing the command is, shown beside its title. */
-  group: "Section" | "Link" | "Setting" | "Action";
+  group: "Section" | "Page" | "Link" | "Setting" | "Action";
   /** Hide the command when it would change nothing, e.g. the current theme. */
   available?: (state: CommandState) => boolean;
   run: (context: CommandContext) => void;
@@ -46,6 +47,14 @@ export const commands: Command[] = [
     group: "Section",
     run: (context) => context.goToSection(section.id),
   })),
+  {
+    id: "colophon",
+    title: "How this site is built",
+    alias: "cat README.md",
+    keywords: ["colophon", "stack", "source", "tests", "architecture"],
+    group: "Page",
+    run: (context) => context.goToPage("/colophon/"),
+  },
   {
     id: "cv",
     title: "Open CV",

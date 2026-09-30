@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 // Every exported page. Add new routes here as they ship.
-const PAGES = ["/"];
+const PAGES = ["/", "/colophon/"];
 
 const SKINS = ["standard", "terminal"] as const;
 const THEMES = ["light", "dark"] as const;
@@ -187,38 +187,40 @@ test("the hero link scrolls to Selected work and focuses its heading", async ({
   ).toBeFocused();
 });
 
-for (const skin of SKINS) {
-  for (const theme of THEMES) {
-    for (const width of [320, 801]) {
-      test(`no sideways scroll at ${width}px (${skin}, ${theme})`, async ({
+for (const path of PAGES) {
+  for (const skin of SKINS) {
+    for (const theme of THEMES) {
+      for (const width of [320, 801]) {
+        test(`${path} has no sideways scroll at ${width}px (${skin}, ${theme})`, async ({
+          page,
+        }) => {
+          await usePreferences(page, skin, theme);
+          await page.setViewportSize({ width, height: 700 });
+          await page.goto(path);
+          await page.evaluate(() =>
+            document.querySelectorAll("details").forEach((d) => (d.open = true))
+          );
+          const overflow = await page.evaluate(
+            () => document.documentElement.scrollWidth - window.innerWidth
+          );
+          expect(overflow).toBeLessThanOrEqual(0);
+        });
+      }
+
+      test(`${path} has no accessibility violations (${skin}, ${theme})`, async ({
         page,
       }) => {
         await usePreferences(page, skin, theme);
-        await page.setViewportSize({ width, height: 700 });
-        await page.goto("/");
+        await page.goto(path);
         await page.evaluate(() =>
           document.querySelectorAll("details").forEach((d) => (d.open = true))
         );
-        const overflow = await page.evaluate(
-          () => document.documentElement.scrollWidth - window.innerWidth
-        );
-        expect(overflow).toBeLessThanOrEqual(0);
+        const results = await new AxeBuilder({ page })
+          .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+          .analyze();
+        expect(results.violations).toEqual([]);
       });
     }
-
-    test(`no accessibility violations (${skin}, ${theme})`, async ({
-      page,
-    }) => {
-      await usePreferences(page, skin, theme);
-      await page.goto("/");
-      await page.evaluate(() =>
-        document.querySelectorAll("details").forEach((d) => (d.open = true))
-      );
-      const results = await new AxeBuilder({ page })
-        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-        .analyze();
-      expect(results.violations).toEqual([]);
-    });
   }
 }
 
@@ -369,3 +371,25 @@ for (const skin of SKINS) {
     });
   }
 }
+
+test("the build notes page is linked from the footer and the palette", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "How this site is built" }).click();
+  await expect(page).toHaveURL(/\/colophon\/$/);
+  await expect(
+    page.getByRole("heading", { level: 1, name: "How this site is built" })
+  ).toBeVisible();
+
+  // Off the home page, the header leads back to the sections.
+  await page.getByRole("link", { name: "Work", exact: true }).click();
+  await expect(page).toHaveURL(/\/#work$/);
+
+  await page.keyboard.press("ControlOrMeta+k");
+  await page
+    .getByRole("combobox", { name: "Search commands" })
+    .fill("how this site");
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/colophon\/$/);
+});

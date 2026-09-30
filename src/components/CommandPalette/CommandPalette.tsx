@@ -156,6 +156,7 @@ export const CommandPalette = ({
         router.push(id === "home" ? "/" : `/#${id}`);
       }
     },
+    goToPage: (path) => router.push(path),
     openExternal: (url) => {
       window.open(url, "_blank", "noopener,noreferrer");
     },

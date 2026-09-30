@@ -51,6 +51,7 @@ describe("filterCommands", () => {
 test("commands call the matching action", () => {
   const context: CommandContext = {
     goToSection: vi.fn(),
+    goToPage: vi.fn(),
     openExternal: vi.fn(),
     copyEmail: vi.fn(),
     setTheme: vi.fn(),
@@ -61,6 +62,8 @@ test("commands call the matching action", () => {
 
   run("section-approach");
   expect(context.goToSection).toHaveBeenCalledWith("approach");
+  run("colophon");
+  expect(context.goToPage).toHaveBeenCalledWith("/colophon/");
   run("cv");
   expect(context.openExternal).toHaveBeenCalledWith("https://cv.devthomas.pl/");
   run("email");
