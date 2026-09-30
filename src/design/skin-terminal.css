@@ -808,3 +808,49 @@ html.skin-terminal.dark-theme .hero-portrait {
 :where(html.skin-terminal) .prose td {
   border-bottom-style: dashed;
 }
+
+/* ---------- Case studies ---------- */
+
+:where(html.skin-terminal) .case-study-facts {
+  border-top-style: dashed;
+  border-bottom-style: dashed;
+}
+
+:where(html.skin-terminal) .case-study-facts dt {
+  color: var(--accent-2);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:where(html.skin-terminal) .case-study-facts dt::after {
+  content: " =" / "";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .case-study-back {
+  border-top-style: dashed;
+}
+
+:where(html.skin-terminal) .contribution-case-study a::before {
+  content: "$ open " / "";
+  opacity: 0.7;
+}
+
+:where(html.skin-terminal) .flow-step {
+  border-style: dashed;
+  border-radius: 2px;
+}
+
+:where(html.skin-terminal) .flow-title {
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .flow-title::before {
+  content: "[" counter(flow) "] ";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .flow-caption::before {
+  content: "// " / "";
+  color: var(--accent);
+}

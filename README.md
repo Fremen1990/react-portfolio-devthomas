@@ -45,6 +45,7 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 - `src/app/layout.tsx` — the page shell: fonts (`next/font`, self-hosted at build), the inline script that applies a saved theme and skin before first paint, the header and footer, and every stylesheet in cascade order
 - `src/app/page.tsx` — the home page: Hero, Selected work, How I work, Background, Contact
 - `src/app/colophon/page.mdx` — "How this site is built", linked from the footer and the palette. Its performance table is a dated snapshot; re-measure before changing it.
+- `src/app/work/[slug]/page.tsx` — case study pages. Facts and the published flag live in `src/content/work/studies.ts`, the text in `src/content/work/<slug>.mdx` (mapped in `bodies.ts`). A published study gets its page, a "Read the case study" link under its project, and a palette command (`cat work/<slug>.md`). `src/components/Flow/` draws the step diagrams.
 - `src/app/not-found.tsx` — exported as `out/404.html`
 - `src/mdx-components.tsx` — how MDX pages render: one article in the prose style (`src/components/Prose/prose.css`), tables that scroll on their own, and external links in a new tab
 - `src/lib/metadata.ts` — title, description, canonical and Open Graph tags for each page

@@ -1,0 +1,111 @@
+/* Case study pages (/work/<slug>/) and the Flow diagram they use. */
+
+.case-study-kicker {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.case-study-facts {
+  display: grid;
+  gap: 10px 24px;
+  margin: 24px 0 40px;
+  padding: 20px 0;
+  border-top: 1px solid var(--separator);
+  border-bottom: 1px solid var(--separator);
+}
+
+.case-study-facts div {
+  display: grid;
+  gap: 2px;
+}
+
+.case-study-facts dt {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.case-study-facts dd {
+  margin: 0;
+}
+
+.case-study-back {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--separator);
+  font-weight: 600;
+}
+
+.contribution-case-study {
+  margin: 16px 0 0;
+  font-weight: 600;
+}
+
+.flow {
+  margin: 8px 0 24px;
+}
+
+.flow-steps {
+  display: grid;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: flow;
+}
+
+.prose .flow-step + .flow-step {
+  margin-top: 0;
+}
+
+.flow-step {
+  position: relative;
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+  counter-increment: flow;
+}
+
+.flow-title::before {
+  content: counter(flow) ". ";
+  color: var(--accent);
+}
+
+.flow-text {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+/* Arrow from the previous step. */
+.flow-step + .flow-step::before {
+  content: "↓" / "";
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  color: var(--accent);
+  font-weight: 700;
+  transform: translateX(-50%);
+}
+
+.flow-caption {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+@media (min-width: 801px) {
+  .case-study-facts {
+    grid-template-columns: max-content 1fr;
+  }
+
+  .case-study-facts div {
+    display: contents;
+  }
+}
