@@ -163,7 +163,9 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
   );
 };
 
-const TerminalCard = ({ look }: { look: Look }) => {
+// Matches the site's Terminal hero: text on the left, the photo inside the
+// window on the right, tinted like the site (green in dark, greyscale in light).
+const TerminalCard = ({ look, portrait }: { look: Look; portrait: string }) => {
   const c = TERMINAL[look.theme];
   return (
     <div
@@ -208,54 +210,92 @@ const TerminalCard = ({ look }: { look: Look }) => {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
             flex: 1,
-            justifyContent: "center",
-            padding: "0 56px",
+            alignItems: "center",
+            padding: "0 48px",
           }}
         >
-          <div style={{ fontSize: 30, color: c.secondary }}>$ whoami</div>
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              marginTop: 12,
-              fontSize: 82,
-              fontWeight: 800,
-              letterSpacing: -3,
-              color: c.accent,
+              flexDirection: "column",
+              flex: 1,
+              paddingRight: 40,
             }}
           >
-            {profile.name}
+            <div style={{ fontSize: 26, color: c.secondary }}>$ whoami</div>
             <div
               style={{
-                width: 40,
-                height: 72,
-                marginLeft: 12,
-                background: c.accent,
+                display: "flex",
+                alignItems: "center",
+                marginTop: 10,
+                fontSize: 62,
+                fontWeight: 800,
+                letterSpacing: -2,
+                color: c.accent,
               }}
-            />
+            >
+              {profile.name}
+              <div
+                style={{
+                  width: 30,
+                  height: 54,
+                  marginLeft: 10,
+                  background: c.accent,
+                }}
+              />
+            </div>
+            <div style={{ marginTop: 16, fontSize: 29, color: c.amber }}>
+              {`> ${profile.headline}`}
+            </div>
+            <div
+              style={{
+                marginTop: 26,
+                fontSize: 23,
+                lineHeight: 1.45,
+                color: c.violet,
+              }}
+            >
+              {`# ${TAGLINE}`}
+            </div>
+            <div style={{ marginTop: 28, fontSize: 24, color: c.text }}>
+              {"$ open devthomas.pl"}
+            </div>
           </div>
-          <div style={{ marginTop: 18, fontSize: 38, color: c.amber }}>
-            {`> ${profile.headline}`}
-          </div>
-          <div
-            style={{
-              marginTop: 30,
-              fontSize: 26,
-              lineHeight: 1.45,
-              color: c.violet,
-            }}
-          >
-            {`# ${TAGLINE}`}
-          </div>
-          <div style={{ marginTop: 34, fontSize: 28, color: c.text }}>
-            {"$ open devthomas.pl"}
-          </div>
+          {/* next/og renders plain <img> only; next/image does not apply here. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={portrait}
+            width={300}
+            height={380}
+            alt=""
+            style={{ border: `2px solid ${c.separator}`, borderRadius: 2 }}
+          />
         </div>
       </div>
     </div>
   );
+};
+
+// The site tints the Terminal photo with CSS filters, which next/og can't
+// apply, so the tint is baked in here: greyscale for light, and a soft green
+// wash for dark (greyscale and tint in one sharp pipeline don't combine).
+const terminalPortrait = async (source: Buffer, look: Look) => {
+  const grey = await sharp(source)
+    .resize({ width: 300, height: 380, fit: "cover", position: "centre" })
+    .greyscale()
+    .linear(
+      look.theme === "dark" ? 1.2 : 1.15,
+      look.theme === "dark" ? -22 : -10
+    )
+    .toColourspace("srgb")
+    .png()
+    .toBuffer();
+  const tinted =
+    look.theme === "dark"
+      ? await sharp(grey).tint({ r: 182, g: 226, b: 192 }).png().toBuffer()
+      : grey;
+  return `data:image/png;base64,${tinted.toString("base64")}`;
 };
 
 export async function GET(
@@ -277,7 +317,10 @@ export async function GET(
 
   const png = new ImageResponse(
     look.skin === "terminal" ? (
-      <TerminalCard look={look} />
+      <TerminalCard
+        look={look}
+        portrait={await terminalPortrait(portrait, look)}
+      />
     ) : (
       <StandardCard
         look={look}
