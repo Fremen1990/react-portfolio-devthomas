@@ -102,6 +102,52 @@ test("a saved skin and theme apply before the page renders", async ({
   ).toHaveAttribute("aria-pressed", "true");
 });
 
+test("a ?skin= link opens in that style, saves it, and can switch back", async ({
+  page,
+}) => {
+  const html = page.locator("html");
+
+  await page.goto("/?skin=terminal");
+  await expect(html).toHaveClass(/skin-terminal/);
+  expect(
+    await page.evaluate(() => localStorage.getItem("portfolio-skin"))
+  ).toBe("terminal");
+
+  await page.goto("/");
+  await expect(html).toHaveClass(/skin-terminal/);
+
+  await page.goto("/?skin=standard");
+  await expect(html).not.toHaveClass(/skin-terminal/);
+  expect(
+    await page.evaluate(() => localStorage.getItem("portfolio-skin"))
+  ).toBeNull();
+});
+
+test("a ?skin= link still applies when storage is blocked", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "localStorage", {
+      get() {
+        throw new Error("storage blocked");
+      },
+    });
+  });
+  await page.goto("/?skin=terminal");
+  await expect(page.locator("html")).toHaveClass(/skin-terminal/);
+});
+
+test("developers get a console greeting in production", async ({ page }) => {
+  const logs: string[] = [];
+  page.on("console", (message) => {
+    if (message.type() === "log") logs.push(message.text());
+  });
+  await page.goto("/");
+  await expect
+    .poll(() => logs.join("\n"))
+    .toContain("github.com/Fremen1990/react-portfolio-devthomas");
+});
+
 test("theme and skin controls switch and persist across reloads", async ({
   page,
 }) => {

@@ -37,6 +37,7 @@ export type Profile = {
     email: string;
     emailLabel: string;
     github: string;
+    source: string;
   };
   contributions: Contribution[];
   roles: Role[];
@@ -65,6 +66,7 @@ export const profile: Profile = {
     email: "mailto:thomas.dev666@gmail.com",
     emailLabel: "thomas.dev666@gmail.com",
     github: "https://github.com/Fremen1990",
+    source: "https://github.com/Fremen1990/react-portfolio-devthomas",
   },
   contributions: [
     {

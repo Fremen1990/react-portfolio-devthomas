@@ -66,8 +66,10 @@ All CSS is imported in `src/app/layout.tsx` and nowhere else, with `skin-termina
 - Below 801px the closed menu is not in the tab order. At 801px and above the section links stay available, including after a resize from an open or closed mobile menu.
 - The theme button stores `dark` or `light` under `portfolio-theme`. With nothing stored, the page follows `prefers-color-scheme`.
 - The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `src/app/layout.tsx` applies a saved skin before first paint. JetBrains Mono is self-hosted and not preloaded, so the browser downloads it only when Terminal is used.
+- A link with `?skin=terminal` opens the page in the Terminal style and saves that choice. `?skin=standard` returns to the standard style. This works even when storage is blocked, for that visit.
 - The inline script also creates the `theme-color` meta tag for the current skin and theme, and `paintThemeColor` updates it. It is not part of Next's metadata, because React replaces a server-rendered meta tag whose content changed.
 - Each "Scope and approach" control is a native disclosure. All three start closed and can stay open independently. The same is true of Earlier projects and Earlier training.
+- In production, the browser console shows a short greeting with a link to this repository (`src/utils/consoleGreeting.ts`).
 - Every page is pre-rendered HTML, so the whole page reads without JavaScript. The theme and style controls need it.
 
 ## Verification

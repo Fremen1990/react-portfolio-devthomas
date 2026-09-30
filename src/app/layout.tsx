@@ -45,18 +45,38 @@ export const metadata: Metadata = {
 // Applies the saved theme and skin before first paint, so a returning visitor
 // never sees the other look flash, and adds the theme-color meta tag.
 //
+// ?skin=terminal or ?skin=standard in the URL picks the skin and saves it, so
+// a shared link opens in that style. It still applies when storage is blocked.
+//
 // theme-color is deliberately not in Next's metadata: this script has to set
 // it before paint, and React replaces a server-rendered meta tag whose content
 // changed, leaving two. paintThemeColor() in src/utils/theme.ts owns it after
 // hydration; the colours here match THEME_COLORS there.
 const applySavedPreferences = `(function () {
+  var root = document.documentElement;
+  var theme = null;
+  var storedSkin = null;
+  var linkedSkin = null;
   try {
-    var root = document.documentElement;
-    var theme = localStorage.getItem("portfolio-theme");
-    var terminal = localStorage.getItem("portfolio-skin") === "terminal";
-    if (theme === "dark") root.classList.add("dark-theme");
-    if (theme === "light") root.classList.add("light-theme");
-    if (terminal) root.classList.add("skin-terminal");
+    linkedSkin = new URLSearchParams(window.location.search).get("skin");
+  } catch (error) {}
+  try {
+    theme = localStorage.getItem("portfolio-theme");
+    if (linkedSkin === "terminal") {
+      localStorage.setItem("portfolio-skin", "terminal");
+    }
+    if (linkedSkin === "standard") {
+      localStorage.removeItem("portfolio-skin");
+    }
+    storedSkin = localStorage.getItem("portfolio-skin");
+  } catch (error) {}
+  var terminal =
+    linkedSkin === "terminal" ||
+    (linkedSkin !== "standard" && storedSkin === "terminal");
+  if (theme === "dark") root.classList.add("dark-theme");
+  if (theme === "light") root.classList.add("light-theme");
+  if (terminal) root.classList.add("skin-terminal");
+  try {
     var dark =
       theme === "dark" ||
       (theme !== "light" &&
