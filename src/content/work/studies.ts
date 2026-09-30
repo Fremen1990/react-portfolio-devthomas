@@ -28,7 +28,7 @@ export const caseStudies: CaseStudy[] = [
       "How I designed a schema-driven CMS at Orange Polska in front of a growing set of legacy systems, and what it cost and gained.",
     company: "Orange Polska",
     role: "I chose the stack and designed the frontend architecture",
-    period: "Since 2022",
+    period: "Since late 2022",
     team: "5 developers (including me), 3 testers, 1 product manager",
     stack: "React, TypeScript, MUI, JSON Schema, React JSON Schema Form (RJSF)",
     published: true,
