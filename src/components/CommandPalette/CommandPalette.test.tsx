@@ -224,3 +224,55 @@ test('"Copy link to this look" copies a link to this page, style and theme', asy
   );
   expect(screen.getByText("Link copied")).toBeInTheDocument();
 });
+
+test("messages stay up for 6 seconds, or 15 when the copy failed", async () => {
+  vi.useFakeTimers();
+  const writeText = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    value: { writeText },
+  });
+  renderPage();
+  const toast = () => document.querySelector(".palette-toast");
+
+  pressShortcut();
+  fireEvent.change(input(), { target: { value: "share" } });
+  await act(async () => {
+    fireEvent.keyDown(input(), { key: "Enter" });
+  });
+  expect(toast()).toHaveTextContent("Link copied");
+  act(() => vi.advanceTimersByTime(5900));
+  expect(toast()).toHaveTextContent("Link copied");
+  act(() => vi.advanceTimersByTime(200));
+  expect(toast()).toBeEmptyDOMElement();
+
+  writeText.mockRejectedValueOnce(new Error("denied"));
+  document.execCommand = vi.fn(() => false);
+  pressShortcut();
+  fireEvent.change(input(), { target: { value: "share" } });
+  await act(async () => {
+    fireEvent.keyDown(input(), { key: "Enter" });
+  });
+  expect(toast()).toHaveClass("is-failed");
+  act(() => vi.advanceTimersByTime(14000));
+  expect(toast()).toHaveTextContent("Couldn't copy.");
+  act(() => vi.advanceTimersByTime(1100));
+  expect(toast()).toBeEmptyDOMElement();
+  vi.useRealTimers();
+});
+
+test("the message is rendered outside the header", async () => {
+  Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    value: { writeText: vi.fn().mockResolvedValue(undefined) },
+  });
+  renderPage();
+  pressShortcut();
+  fireEvent.change(input(), { target: { value: "copy email" } });
+  await act(async () => {
+    fireEvent.keyDown(input(), { key: "Enter" });
+  });
+  const toast = screen.getByText("Email address copied");
+  expect(toast.closest("header")).toBeNull();
+  expect(toast.parentElement).toBe(document.body);
+});

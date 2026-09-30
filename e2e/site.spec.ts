@@ -259,6 +259,48 @@ test.describe("share links", () => {
     await expect(html(page)).toHaveClass(/dark-theme/);
   });
 
+  test("copying still works when the Clipboard API is refused", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.addInitScript(() => {
+      navigator.clipboard.writeText = () =>
+        Promise.reject(new DOMException("denied", "NotAllowedError"));
+    });
+    await page.goto("/");
+    await openPalette(page);
+    await page.getByRole("combobox", { name: "Search commands" }).fill("share");
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Link copied")).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      "https://devthomas.pl/?skin=standard&theme=light"
+    );
+  });
+
+  for (const skin of SKINS) {
+    test(`the message appears at the top, below the header (${skin})`, async ({
+      page,
+      context,
+    }) => {
+      await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+      await usePreferences(page, skin, "dark");
+      await page.goto("/");
+      await openPalette(page);
+      await page
+        .getByRole("combobox", { name: "Search commands" })
+        .fill("copy email");
+      await page.keyboard.press("Enter");
+      const toast = page.getByText("Email address copied");
+      await expect(toast).toBeVisible();
+      const header = await page.locator(".site-header").boundingBox();
+      await expect
+        .poll(async () => (await toast.boundingBox())?.y ?? -1)
+        .toBeGreaterThanOrEqual((header?.y ?? 0) + (header?.height ?? 0));
+      expect((await toast.boundingBox())?.y).toBeLessThan(200);
+    });
+  }
+
   test("the palette copies a link to the current look", async ({
     page,
     context,
