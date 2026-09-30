@@ -517,3 +517,12 @@ test("without a saved or linked theme, a system change is followed", () => {
     screen.getByRole("button", { name: "Switch to light theme" })
   ).toBeInTheDocument();
 });
+
+test("on a look page, section links stay on the page", () => {
+  vi.mocked(usePathname).mockReturnValue("/look/terminal-dark/");
+  render(<NavBar />);
+  expect(screen.getByRole("link", { name: "Work" })).toHaveAttribute(
+    "href",
+    "#work"
+  );
+});

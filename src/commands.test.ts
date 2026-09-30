@@ -86,13 +86,19 @@ test("commands call the matching action", () => {
 });
 
 describe("buildShareUrl", () => {
-  test("names the exact skin and theme, for any page", () => {
+  test("the home page links to the look's own page, which has its preview card", () => {
     expect(buildShareUrl("/", { theme: "dark", skin: "terminal" })).toBe(
-      "https://devthomas.pl/?skin=terminal&theme=dark"
+      "https://devthomas.pl/look/terminal-dark/"
     );
     expect(buildShareUrl("/", { theme: "light", skin: "default" })).toBe(
-      "https://devthomas.pl/?skin=standard&theme=light"
+      "https://devthomas.pl/look/standard-light/"
     );
+    expect(
+      buildShareUrl("/look/terminal-dark/", { theme: "light", skin: "default" })
+    ).toBe("https://devthomas.pl/look/standard-light/");
+  });
+
+  test("other pages name the look with ?skin= and ?theme=", () => {
     expect(
       buildShareUrl("/colophon/", { theme: "light", skin: "terminal" })
     ).toBe("https://devthomas.pl/colophon/?skin=terminal&theme=light");

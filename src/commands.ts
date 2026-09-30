@@ -2,6 +2,7 @@ import { profile } from "./content/publicProfile";
 import { SITE_URL } from "./lib/metadata";
 import { sections } from "./content/navigation";
 import { caseStudyPath, publishedCaseStudies } from "./content/work/studies";
+import { isHomePath, lookPath } from "./content/looks";
 import type { Theme } from "./utils/theme";
 import type { Skin } from "./utils/skin";
 
@@ -154,9 +155,14 @@ export const commands: Command[] = [
 
 /**
  * A link that opens `path` in exactly this skin and theme, for that visit.
- * The layout's inline script reads the parameters.
+ * The home page has one address per look (/look/<slug>/), each with its own
+ * preview image; other pages use ?skin= and ?theme=. The layout's inline
+ * script reads both.
  */
 export const buildShareUrl = (path: string, { theme, skin }: CommandState) => {
+  if (isHomePath(path)) {
+    return `${SITE_URL}${lookPath(skin, theme)}`;
+  }
   const params = new URLSearchParams({
     skin: skin === "terminal" ? "terminal" : "standard",
     theme,

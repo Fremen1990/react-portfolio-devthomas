@@ -11,6 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "../../content/publicProfile";
 import { sections } from "../../content/navigation";
+import { isHomePath } from "../../content/looks";
 import { CommandPalette } from "../CommandPalette/CommandPalette";
 import { scrollToSection } from "../../utils/scrollToSection";
 import {
@@ -104,7 +105,7 @@ const ThemeIcon = ({ name }: { name: "sun" | "moon" }) => {
 
 const NavBar = () => {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome = isHomePath(pathname);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { theme, skin } = usePreferences();

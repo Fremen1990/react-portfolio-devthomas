@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 // Applies the theme and skin before first paint, so a visitor never sees the
 // other look flash, and adds the theme-color meta tag.
 //
-// Precedence: ?skin= / ?theme= in the URL, then a look opened from such a link
+// Precedence: ?skin= / ?theme= in the URL (or a /look/<skin>-<theme>/ page), then a look opened from such a link
 // earlier in this tab (sessionStorage), then the visitor's saved choice
 // (localStorage), then the system setting. The URL counts only when the link
 // is actually opened: on a reload or Back/Forward the parameters are still in
@@ -76,8 +76,19 @@ const applySavedPreferences = `(function () {
   var pick = function (value, allowed) {
     return allowed.indexOf(value) === -1 ? null : value;
   };
-  var linkSkin = params && pick(params.get("skin"), ["terminal", "standard"]);
-  var linkTheme = params && pick(params.get("theme"), ["dark", "light"]);
+  // /look/<skin>-<theme>/ works like ?skin=&theme=, under the same rule.
+  var look = null;
+  if (params) {
+    look = window.location.pathname.match(
+      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+    );
+  }
+  var linkSkin =
+    (params && pick(params.get("skin"), ["terminal", "standard"])) ||
+    (look && look[1]);
+  var linkTheme =
+    (params && pick(params.get("theme"), ["dark", "light"])) ||
+    (look && look[2]);
   var read = function (storage, key) {
     try {
       return window[storage].getItem(key);

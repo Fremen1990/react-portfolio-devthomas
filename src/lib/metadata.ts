@@ -17,6 +17,10 @@ type PageMetadataInput = {
   /** Page title; omit for the home page's full title. */
   title?: string;
   description?: string;
+  /** Canonical path when it differs from `path` (e.g. /look/ copies of /). */
+  canonical?: string;
+  /** Preview image when it differs from the site-wide one. */
+  image?: { url: string; alt: string };
 };
 
 // Next merges `openGraph` and `twitter` shallowly, so every page gets the full
@@ -25,25 +29,28 @@ export const pageMetadata = ({
   path,
   title,
   description = profile.introduction,
+  canonical = path,
+  image,
 }: PageMetadataInput): Metadata => {
   const fullTitle = title ? `${title} · ${profile.name}` : SITE_TITLE;
+  const shareImage = image ? { ...SHARE_IMAGE, ...image } : SHARE_IMAGE;
 
   return {
     title: fullTitle,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical },
     openGraph: {
       type: "website",
       url: path,
       title: fullTitle,
       description,
-      images: [SHARE_IMAGE],
+      images: [shareImage],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [SHARE_IMAGE.url],
+      images: [shareImage.url],
     },
   };
 };
