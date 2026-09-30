@@ -1,0 +1,105 @@
+1:"$Sreact.fragment"
+3:I[63831,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"default"]
+4:I[39756,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"default"]
+5:I[37457,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"default"]
+f:I[68027,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"default",1]
+:HL["/_next/static/chunks/2v-_xmhirg8w2.css","style"]
+:HL["/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+2:T8ee,(function () {
+  var root = document.documentElement;
+  var params = null;
+  var navigation = "navigate";
+  try {
+    navigation = performance.getEntriesByType("navigation")[0].type;
+  } catch (error) {}
+  try {
+    if (navigation !== "reload" && navigation !== "back_forward") {
+      params = new URLSearchParams(window.location.search);
+    }
+  } catch (error) {}
+  var pick = function (value, allowed) {
+    return allowed.indexOf(value) === -1 ? null : value;
+  };
+  // /look/<skin>-<theme>/ works like ?skin=&theme=, under the same rule.
+  var look = null;
+  if (params) {
+    look = window.location.pathname.match(
+      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+    );
+  }
+  var linkSkin =
+    (params && pick(params.get("skin"), ["terminal", "standard"])) ||
+    (look && look[1]);
+  var linkTheme =
+    (params && pick(params.get("theme"), ["dark", "light"])) ||
+    (look && look[2]);
+  var read = function (storage, key) {
+    try {
+      return window[storage].getItem(key);
+    } catch (error) {
+      return null;
+    }
+  };
+  try {
+    if (linkSkin) sessionStorage.setItem("portfolio-link-skin", linkSkin);
+    if (linkTheme) sessionStorage.setItem("portfolio-link-theme", linkTheme);
+  } catch (error) {}
+  var skin =
+    linkSkin ||
+    pick(read("sessionStorage", "portfolio-link-skin"), ["terminal", "standard"]) ||
+    (read("localStorage", "portfolio-skin") === "terminal" ? "terminal" : "standard");
+  var theme =
+    linkTheme ||
+    pick(read("sessionStorage", "portfolio-link-theme"), ["dark", "light"]) ||
+    pick(read("localStorage", "portfolio-theme"), ["dark", "light"]);
+  var terminal = skin === "terminal";
+  if (theme === "dark") root.classList.add("dark-theme");
+  if (theme === "light") root.classList.add("light-theme");
+  if (terminal) root.classList.add("skin-terminal");
+  try {
+    var dark =
+      theme === "dark" ||
+      (theme !== "light" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var colors = terminal
+      ? { light: "#f3f1e7", dark: "#07090a" }
+      : { light: "#f7f8fa", dark: "#10161b" };
+    var meta = document.createElement("meta");
+    meta.name = "theme-color";
+    meta.content = dark ? colors.dark : colors.light;
+    document.head.appendChild(meta);
+  } catch (error) {}
+})();d:X
+0:{"P":null,"c":["","work","orange-e2e-testing",""],"q":"","i":false,"f":[[["",{"children":["work",{"children":[["slug","orange-e2e-testing","d",[]],{"children":["__PAGE__",{},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4624],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2v-_xmhirg8w2.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/3fntmmi971322.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/3ufyof0jy0tas.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","translate":"no","className":"inter_c15e96cb-module__0bjUvq__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]}],["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L3",null,{}],["$","main",null,{"id":"main","children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":["$L6","$L7","$L8"]}]}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],"$L9"]}]}]]}]]}],{"children":["$La",{"children":["$Lb",{"children":["$Lc",{},null,false,null]},null,false,"$d"]},null,false,"$d"]},null,false,null],"$Le",false]],"m":"$undefined","G":["$f",["$L10"]],"S":true,"h":null,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"tb07FM5NCKlmG0R6JR8Va"}
+11:I[22016,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],""]
+13:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"OutletBoundary"]
+14:"$Sreact.suspense"
+16:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"ViewportBoundary"]
+18:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"MetadataBoundary"]
+6:["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}]
+7:["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}]
+8:["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]
+9:["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$L11",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]
+a:["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+b:["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+c:["$","$1","c",{"children":["$L12",null,["$","$L13",null,{"children":["$","$14",null,{"name":"Next.MetadataOutlet","children":"$@15"}]}]]}]
+e:["$","$1","h",{"children":[null,["$","$L16",null,{"children":"$L17"}],["$","div",null,{"hidden":true,"children":["$","$L18",null,{"children":["$","$14",null,{"name":"Next.Metadata","children":"$L19"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+10:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2v-_xmhirg8w2.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+d:C
+12:["$","article",null,{"className":"page-section case-study","children":["$","div",null,{"className":"page-wrap prose","children":[["$","p",null,{"className":"case-study-kicker","children":[["$","$L11",null,{"href":"/#work","children":"Selected work"}]," · Case study"]}],["$","h1",null,{"children":"From days of manual regression to under an hour"}],["$","dl",null,{"className":"case-study-facts","children":[["$","div","Company",{"children":[["$","dt",null,{"children":"Company"}],["$","dd",null,{"children":"Orange Polska"}]]}],["$","div","My role",{"children":[["$","dt",null,{"children":"My role"}],["$","dd",null,{"children":"I introduced automated end-to-end testing, built the test architecture and trained two testers"}]]}],["$","div","When",{"children":[["$","dt",null,{"children":"When"}],["$","dd",null,{"children":"Since 2022"}]]}],["$","div","Team",{"children":[["$","dt",null,{"children":"Team"}],["$","dd",null,{"children":"Me, one newly hired automation tester, and one manual tester who moved into automation"}]]}],["$","div","Stack",{"children":[["$","dt",null,{"children":"Stack"}],["$","dd",null,{"children":"Cypress, TypeScript, Page Object Model"}]]}]]}],[["$","h2",null,{"children":"The situation"}],"\n",["$","p",null,{"children":"I joined Orange Polska to work on the Orange TV GO streaming platform. At the time, every end-to-end scenario was checked by hand by manual testers. A full regression campaign covered more than 100 scenarios and took at least one to three days."}],"\n",["$","h2",null,{"children":"How it started"}],"\n",["$","p",null,{"children":"I was taking a Cypress course at the time and wanted to put it into practice. Over lunch, I told my manager about end-to-end automation and how I would approach it. Then, instead of writing a proposal, I built it: a separate repository with the full setup, TypeScript and linting, and a first set of working tests. When my manager saw it working, he started looking for an automation tester to hire."}],"\n",["$","h2",null,{"children":"Options I considered"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Selenium:"}]," too complicated, with too much setup for the team we had."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Playwright:"}]," promising, but not mature enough at the time."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Cypress:"}]," modern, widely used, and a good fit for testing a web application. I chose it."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"A separate repository."}]," The tests were written and owned by testers, not by the application's developers, so they lived in their own project."]}],"\n"]}],"\n",["$","h2",null,{"children":"Building the practice"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Training:"}]," everyone started with basic Cypress tutorials on their own. Then we wrote real tests together on my setup, and I reviewed every change during the first year. The team was one newly hired tester and one manual tester who moved into automation."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Page Objects:"}]," interactions with each part of the application live in reusable page objects, so a change in the interface is fixed in one place."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Shared helpers:"}]," common steps are written once and reused (DRY)."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Parallel runs:"}]," tests run side by side. That only works when each test is independent, so every test cleans up its own data through the API when it finishes."]}],"\n"]}],"\n",["$","figure",null,{"className":"flow","children":[["$","ol",null,{"className":"flow-steps","aria-label":"How a test runs: independent scenarios built from shared pieces, run in parallel.","children":[["$","li","Test scenario",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Test scenario"}],["$","span",null,{"className":"flow-text","children":"Describes one user journey, independent of every other test"}]]}],"$L1a","$L1b","$L1c"]}],"$L1d"]}],"\n","$L1e","\n","$L1f","\n","$L20","\n","$L21","\n","$L22","\n","$L23","\n","$L24"],"$L25"]}]}]
+1a:["$","li","Page Objects",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Page Objects"}],["$","span",null,{"className":"flow-text","children":"Reusable interactions with each part of the application"}]]}]
+1b:["$","li","Shared helpers",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Shared helpers"}],["$","span",null,{"className":"flow-text","children":"Common steps written once and reused"}]]}]
+1c:["$","li","Parallel run",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Parallel run"}],["$","span",null,{"className":"flow-text","children":"Scenarios run side by side; each cleans up its own data through the API"}]]}]
+1d:["$","figcaption",null,{"className":"flow-caption","children":"How a test runs: independent scenarios built from shared pieces, run in parallel."}]
+1e:["$","h2",null,{"children":"How it runs"}]
+1f:["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Orange TV GO:"}]," the suite runs in CI/CD on every feature merge request."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"The internal CMS:"}]," less than a year in, I moved to the internal CMS project, which got the same setup inside its frontend repository. That network is closed for security and its CI has no outside access, so the suite runs in parallel on a fast local machine instead."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Environments:"}]," in both projects, the tests also run against the development, test and pre-production environments."]}],"\n"]}]
+20:["$","h2",null,{"children":"The outcome"}]
+21:["$","div",null,{"className":"prose-table","children":["$","table",null,{"children":[["$","thead",null,{"children":["$","tr",null,{"children":[["$","th",null,{}],["$","th",null,{"children":"Before (manual)"}],["$","th",null,{"children":"Now (automated)"}]]}]}],["$","tbody",null,{"children":[["$","tr",null,{"children":[["$","td",null,{"children":"Orange TV GO, 100+ scenarios"}],["$","td",null,{"children":"1–3 days"}],["$","td",null,{"children":"about 1 hour"}]]}],["$","tr",null,{"children":[["$","td",null,{"children":"Internal CMS, about 80 scenarios"}],["$","td",null,{"children":"1–3 days"}],["$","td",null,{"children":"about 30 minutes"}]]}]]}]]}]}]
+22:["$","p",null,{"children":"Test data causes no trouble: the tests are isolated for parallel runs, and each one cleans up after itself."}]
+23:["$","h2",null,{"children":"What I'd do differently"}]
+24:["$","p",null,{"children":"Today I would choose Playwright with TypeScript. Its access to browser developer tools and its range of options make unusual scenarios easier to handle than in Cypress. Where the tests live should follow who writes them. I would keep them in the application's repository only if its developers write end-to-end tests themselves."}]
+25:["$","p",null,{"className":"case-study-back","children":["$","$L11",null,{"href":"/#work","children":"← Back to selected work"}]}]
+17:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+26:I[27201,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/3ufyof0jy0tas.js"],"IconMark"]
+15:null
+19:[["$","title","0",{"children":"From days of manual regression to under an hour · Tomasz Stanisz"}],["$","meta","1",{"name":"description","content":"How I introduced automated end-to-end testing at Orange Polska, trained two testers, and cut regression checks from days to under an hour."}],["$","link","2",{"rel":"canonical","href":"https://devthomas.pl/work/orange-e2e-testing/"}],["$","meta","3",{"property":"og:title","content":"From days of manual regression to under an hour · Tomasz Stanisz"}],["$","meta","4",{"property":"og:description","content":"How I introduced automated end-to-end testing at Orange Polska, trained two testers, and cut regression checks from days to under an hour."}],["$","meta","5",{"property":"og:url","content":"https://devthomas.pl/work/orange-e2e-testing/"}],["$","meta","6",{"property":"og:image","content":"https://devthomas.pl/og-share.png"}],["$","meta","7",{"property":"og:image:width","content":"1200"}],["$","meta","8",{"property":"og:image:height","content":"630"}],["$","meta","9",{"property":"og:image:alt","content":"Tomasz Stanisz portfolio — Software Engineer and Tech Lead"}],["$","meta","10",{"property":"og:type","content":"website"}],["$","meta","11",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","12",{"name":"twitter:title","content":"From days of manual regression to under an hour · Tomasz Stanisz"}],["$","meta","13",{"name":"twitter:description","content":"How I introduced automated end-to-end testing at Orange Polska, trained two testers, and cut regression checks from days to under an hour."}],["$","meta","14",{"name":"twitter:image","content":"https://devthomas.pl/og-share.png"}],["$","link","15",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L26","16",{}]]
