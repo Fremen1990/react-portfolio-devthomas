@@ -33,6 +33,19 @@ export const caseStudies: CaseStudy[] = [
     stack: "React, TypeScript, MUI, JSON Schema, React JSON Schema Form (RJSF)",
     published: true,
   },
+  {
+    slug: "orange-e2e-testing",
+    contributionId: "orange-e2e",
+    title: "From days of manual regression to under an hour",
+    description:
+      "How I introduced automated end-to-end testing at Orange Polska, trained two testers, and cut regression checks from days to under an hour.",
+    company: "Orange Polska",
+    role: "I introduced automated end-to-end testing, built the test architecture and trained two testers",
+    period: "Since 2022",
+    team: "Me, one newly hired automation tester, and one manual tester who moved into automation",
+    stack: "Cypress, TypeScript, Page Object Model",
+    published: true,
+  },
 ];
 
 export const publishedCaseStudies = caseStudies.filter(

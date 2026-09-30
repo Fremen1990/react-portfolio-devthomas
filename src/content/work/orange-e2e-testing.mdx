@@ -1,0 +1,64 @@
+import { Flow } from "@/components/Flow/Flow";
+
+## The situation
+
+I joined Orange Polska to work on the Orange TV GO streaming platform. At the time, every end-to-end scenario was checked by hand by manual testers. A full regression campaign covered more than 100 scenarios and took at least one to three days.
+
+## How it started
+
+I was taking a Cypress course at the time and wanted to put it into practice. Over lunch, I told my manager about end-to-end automation and how I would approach it. Then, instead of writing a proposal, I built it: a separate repository with the full setup, TypeScript and linting, and a first set of working tests. When my manager saw it working, he started looking for an automation tester to hire.
+
+## Options I considered
+
+- **Selenium:** too complicated, with too much setup for the team we had.
+- **Playwright:** promising, but not mature enough at the time.
+- **Cypress:** modern, widely used, and a good fit for testing a web application. I chose it.
+- **A separate repository.** The tests were written and owned by testers, not by the application's developers, so they lived in their own project.
+
+## Building the practice
+
+- **Training:** everyone started with basic Cypress tutorials on their own. Then we wrote real tests together on my setup, and I reviewed every change during the first year. The team was one newly hired tester and one manual tester who moved into automation.
+- **Page Objects:** interactions with each part of the application live in reusable page objects, so a change in the interface is fixed in one place.
+- **Shared helpers:** common steps are written once and reused (DRY).
+- **Parallel runs:** tests run side by side. That only works when each test is independent, so every test cleans up its own data through the API when it finishes.
+
+<Flow
+  label="How a test runs: independent scenarios built from shared pieces, run in parallel."
+  steps={[
+    {
+      title: "Test scenario",
+      text: "Describes one user journey, independent of every other test",
+    },
+    {
+      title: "Page Objects",
+      text: "Reusable interactions with each part of the application",
+    },
+    {
+      title: "Shared helpers",
+      text: "Common steps written once and reused",
+    },
+    {
+      title: "Parallel run",
+      text: "Scenarios run side by side; each cleans up its own data through the API",
+    },
+  ]}
+/>
+
+## How it runs
+
+- **Orange TV GO:** the suite runs in CI/CD on every feature merge request.
+- **The internal CMS:** less than a year in, I moved to the internal CMS project, which got the same setup inside its frontend repository. That network is closed for security and its CI has no outside access, so the suite runs in parallel on a fast local machine instead.
+- **Environments:** in both projects, the tests also run against the development, test and pre-production environments.
+
+## The outcome
+
+|                                  | Before (manual) | Now (automated)  |
+| -------------------------------- | --------------- | ---------------- |
+| Orange TV GO, 100+ scenarios     | 1–3 days        | about 1 hour     |
+| Internal CMS, about 80 scenarios | 1–3 days        | about 30 minutes |
+
+Test data causes no trouble: the tests are isolated for parallel runs, and each one cleans up after itself.
+
+## What I'd do differently
+
+Today I would choose Playwright with TypeScript. Its access to browser developer tools and its range of options make unusual scenarios easier to handle than in Cypress. Where the tests live should follow who writes them. I would keep them in the application's repository only if its developers write end-to-end tests themselves.
