@@ -220,7 +220,7 @@ test('"Copy link to this look" copies a link to this page, style and theme', asy
     fireEvent.keyDown(input(), { key: "Enter" });
   });
   expect(writeText).toHaveBeenCalledWith(
-    "https://devthomas.pl/?skin=terminal&theme=dark"
+    "https://devthomas.pl/look/terminal-dark/"
   );
   expect(screen.getByText("Link copied")).toBeInTheDocument();
 });

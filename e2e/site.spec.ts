@@ -274,7 +274,7 @@ test.describe("share links", () => {
     await page.keyboard.press("Enter");
     await expect(page.getByText("Link copied")).toBeVisible();
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-      "https://devthomas.pl/?skin=standard&theme=light"
+      "https://devthomas.pl/look/standard-light/"
     );
   });
 
@@ -613,4 +613,94 @@ test("a case study is linked from its project and from the palette", async ({
 test("an unpublished or unknown case study is a 404", async ({ page }) => {
   const response = await page.goto("/work/no-such-study/");
   expect(response?.status()).toBe(404);
+});
+
+test.describe("look pages", () => {
+  const html = (page: Page) => page.locator("html");
+
+  for (const slug of [
+    "standard-light",
+    "standard-dark",
+    "terminal-light",
+    "terminal-dark",
+  ]) {
+    test(`/look/${slug}/ has its own preview card and points search engines home`, async ({
+      page,
+      request,
+    }) => {
+      const response = await page.goto(`/look/${slug}/`);
+      expect(response?.status()).toBe(200);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+        "href",
+        "https://devthomas.pl/"
+      );
+      await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+        "content",
+        `https://devthomas.pl/look/${slug}/`
+      );
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+        "content",
+        `https://devthomas.pl/look/${slug}/card.png`
+      );
+      await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+        "content",
+        `https://devthomas.pl/look/${slug}/card.png`
+      );
+
+      const card = await request.get(`/look/${slug}/card.png`);
+      expect(card.status()).toBe(200);
+      expect(card.headers()["content-type"]).toContain("image/png");
+      const bytes = await card.body();
+      // PNG header: width and height are big-endian at bytes 16 and 20.
+      expect(bytes.readUInt32BE(16)).toBe(1200);
+      expect(bytes.readUInt32BE(20)).toBe(630);
+    });
+  }
+
+  test("a look page opens in its look, over the visitor's saved choice", async ({
+    page,
+  }) => {
+    await usePreferences(page, "standard", "light");
+    await page.goto("/look/terminal-dark/");
+    await expect(html(page)).toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/dark-theme/);
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Tomasz Stanisz" })
+    ).toBeVisible();
+  });
+
+  test("a choice made on a look page survives a reload", async ({ page }) => {
+    await page.goto("/look/terminal-dark/");
+    await page
+      .getByRole("button", { name: "Switch to standard style" })
+      .click();
+    await page.reload();
+    await expect(html(page)).not.toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/dark-theme/);
+  });
+
+  test("section links work in place on a look page", async ({ page }) => {
+    await page.goto("/look/standard-dark/");
+    await page.getByRole("link", { name: "Explore selected work" }).click();
+    await expect(page).toHaveURL(/\/look\/standard-dark\/#work$/);
+    await expect(
+      page.getByRole("heading", { level: 2, name: "Selected work" })
+    ).toBeFocused();
+  });
+
+  test("the palette on the home page copies the look page link", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await usePreferences(page, "terminal", "dark");
+    await page.goto("/");
+    await openPalette(page);
+    await page.getByRole("combobox", { name: "Search commands" }).fill("share");
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Link copied")).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      "https://devthomas.pl/look/terminal-dark/"
+    );
+  });
 });
