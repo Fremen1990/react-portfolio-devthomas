@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import {
+  buildShareUrl,
   commands,
   filterCommands,
   type CommandContext,
@@ -54,6 +55,7 @@ test("commands call the matching action", () => {
     goToPage: vi.fn(),
     openExternal: vi.fn(),
     copyEmail: vi.fn(),
+    copyShareLink: vi.fn(),
     setTheme: vi.fn(),
     setSkin: vi.fn(),
   };
@@ -68,8 +70,24 @@ test("commands call the matching action", () => {
   expect(context.openExternal).toHaveBeenCalledWith("https://cv.devthomas.pl/");
   run("email");
   expect(context.copyEmail).toHaveBeenCalled();
+  run("share");
+  expect(context.copyShareLink).toHaveBeenCalled();
   run("theme-dark");
   expect(context.setTheme).toHaveBeenCalledWith("dark");
   run("skin-terminal");
   expect(context.setSkin).toHaveBeenCalledWith("terminal");
+});
+
+describe("buildShareUrl", () => {
+  test("names the exact skin and theme, for any page", () => {
+    expect(buildShareUrl("/", { theme: "dark", skin: "terminal" })).toBe(
+      "https://devthomas.pl/?skin=terminal&theme=dark"
+    );
+    expect(buildShareUrl("/", { theme: "light", skin: "default" })).toBe(
+      "https://devthomas.pl/?skin=standard&theme=light"
+    );
+    expect(
+      buildShareUrl("/colophon/", { theme: "light", skin: "terminal" })
+    ).toBe("https://devthomas.pl/colophon/?skin=terminal&theme=light");
+  });
 });

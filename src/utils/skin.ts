@@ -1,6 +1,8 @@
 import { notifyPreferencesChanged } from "./preferenceEvents";
 
 export const SKIN_KEY = "portfolio-skin";
+// A skin opened from a shared link (?skin=), kept for this tab only.
+export const LINK_SKIN_KEY = "portfolio-link-skin";
 
 // "default" has no class. Every other skin maps to an html class. Fonts come
 // from next/font in the layout; a skin's font downloads only once it is used.
@@ -31,6 +33,8 @@ export const applySkin = (skin: Skin) => {
     } else {
       localStorage.removeItem(SKIN_KEY);
     }
+    // An explicit choice replaces a look opened from a shared link.
+    sessionStorage.removeItem(LINK_SKIN_KEY);
   } catch {
     // Storage can be unavailable in private browsing.
   }

@@ -102,39 +102,115 @@ test("a saved skin and theme apply before the page renders", async ({
   ).toHaveAttribute("aria-pressed", "true");
 });
 
-test("a ?skin= link opens in that style, saves it, and can switch back", async ({
-  page,
-}) => {
-  const html = page.locator("html");
+test.describe("share links", () => {
+  const html = (page: Page) => page.locator("html");
+  const themeColor = (page: Page) => page.locator('meta[name="theme-color"]');
 
-  await page.goto("/?skin=terminal");
-  await expect(html).toHaveClass(/skin-terminal/);
-  expect(
-    await page.evaluate(() => localStorage.getItem("portfolio-skin"))
-  ).toBe("terminal");
-
-  await page.goto("/");
-  await expect(html).toHaveClass(/skin-terminal/);
-
-  await page.goto("/?skin=standard");
-  await expect(html).not.toHaveClass(/skin-terminal/);
-  expect(
-    await page.evaluate(() => localStorage.getItem("portfolio-skin"))
-  ).toBeNull();
-});
-
-test("a ?skin= link still applies when storage is blocked", async ({
-  page,
-}) => {
-  await page.addInitScript(() => {
-    Object.defineProperty(window, "localStorage", {
-      get() {
-        throw new Error("storage blocked");
-      },
-    });
+  test("open the exact skin and theme, over the visitor's saved light theme", async ({
+    page,
+  }) => {
+    await usePreferences(page, "standard", "light");
+    await page.goto("/?skin=terminal&theme=dark");
+    await expect(html(page)).toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/dark-theme/);
+    await expect(themeColor(page)).toHaveCount(1);
+    await expect(themeColor(page)).toHaveAttribute("content", "#07090a");
+    // The visitor's own saved choice is untouched.
+    expect(
+      await page.evaluate(() => [
+        localStorage.getItem("portfolio-theme"),
+        localStorage.getItem("portfolio-skin"),
+      ])
+    ).toEqual(["light", null]);
   });
-  await page.goto("/?skin=terminal");
-  await expect(page.locator("html")).toHaveClass(/skin-terminal/);
+
+  test("the look holds for the visit: reloads and other pages", async ({
+    page,
+  }) => {
+    await page.goto("/?skin=terminal&theme=dark");
+    await page.reload();
+    await expect(html(page)).toHaveClass(/skin-terminal/);
+    await page.goto("/colophon/");
+    await expect(html(page)).toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/dark-theme/);
+  });
+
+  test("a new visit returns to the visitor's own look", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "light" });
+    const first = await context.newPage();
+    await first.goto("/?skin=terminal&theme=dark");
+    await expect(html(first)).toHaveClass(/skin-terminal/);
+
+    // A new tab has a fresh session; saved choices (none here) apply.
+    const second = await context.newPage();
+    await second.goto("/");
+    await expect(html(second)).not.toHaveClass(/skin-terminal/);
+    await expect(html(second)).not.toHaveClass(/dark-theme/);
+    await context.close();
+  });
+
+  test("the visitor's own choice replaces the linked look", async ({
+    page,
+  }) => {
+    await page.goto("/?skin=terminal&theme=dark");
+    await page.getByRole("button", { name: "Switch to light theme" }).click();
+    await page
+      .getByRole("button", { name: "Switch to standard style" })
+      .click();
+    await page.goto("/");
+    await expect(html(page)).not.toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/light-theme/);
+    expect(
+      await page.evaluate(() => localStorage.getItem("portfolio-theme"))
+    ).toBe("light");
+  });
+
+  test("one parameter works alone, and invalid values are ignored", async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ colorScheme: "dark" });
+    const page = await context.newPage();
+    await page.goto("/?theme=light");
+    await expect(html(page)).toHaveClass(/light-theme/);
+    await expect(html(page)).not.toHaveClass(/skin-terminal/);
+
+    const other = await context.newPage();
+    await other.goto("/?skin=neon&theme=purple");
+    await expect(html(other)).not.toHaveClass(/skin-terminal/);
+    await expect(html(other)).not.toHaveClass(/light-theme|dark-theme/);
+    await context.close();
+  });
+
+  test("still apply when storage is blocked", async ({ page }) => {
+    await page.addInitScript(() => {
+      for (const name of ["localStorage", "sessionStorage"]) {
+        Object.defineProperty(window, name, {
+          get() {
+            throw new Error("storage blocked");
+          },
+        });
+      }
+    });
+    await page.goto("/?skin=terminal&theme=dark");
+    await expect(html(page)).toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/dark-theme/);
+  });
+
+  test("the palette copies a link to the current look", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await usePreferences(page, "terminal", "dark");
+    await page.goto("/colophon/");
+    await page.keyboard.press("ControlOrMeta+k");
+    await page.getByRole("combobox", { name: "Search commands" }).fill("share");
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Link copied")).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      "https://devthomas.pl/colophon/?skin=terminal&theme=dark"
+    );
+  });
 });
 
 test("developers get a console greeting in production", async ({ page }) => {

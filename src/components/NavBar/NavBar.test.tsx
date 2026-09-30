@@ -62,6 +62,12 @@ const installMatchMedia = (overrides: Partial<typeof mediaState> = {}) => {
   };
 
   return {
+    setDark(dark: boolean) {
+      mediaState.dark = dark;
+      listeners
+        .filter((item) => item.query.includes("prefers-color-scheme: dark"))
+        .forEach((item) => item.listener({ matches: dark, media: item.query }));
+    },
     setDesktop(desktop: boolean) {
       mediaState.desktop = desktop;
       listeners
@@ -487,4 +493,27 @@ test("off the home page, the brand and section links lead back to the home page"
     expect(link).toHaveAttribute("href", href);
     expect(link).not.toHaveAttribute("aria-current");
   }
+});
+
+test("a system dark-mode change doesn't override a theme opened from a shared link", () => {
+  const media = installMatchMedia({ dark: false });
+  sessionStorage.setItem("portfolio-link-theme", "light");
+  document.documentElement.classList.add("light-theme");
+  render(<NavBar />);
+
+  act(() => media.setDark(true));
+  expect(document.documentElement).toHaveClass("light-theme");
+  expect(
+    screen.getByRole("button", { name: "Switch to dark theme" })
+  ).toBeInTheDocument();
+  sessionStorage.clear();
+});
+
+test("without a saved or linked theme, a system change is followed", () => {
+  const media = installMatchMedia({ dark: false });
+  render(<NavBar />);
+  act(() => media.setDark(true));
+  expect(
+    screen.getByRole("button", { name: "Switch to light theme" })
+  ).toBeInTheDocument();
 });

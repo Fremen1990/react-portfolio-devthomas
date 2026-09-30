@@ -2,6 +2,8 @@ import { currentSkin, type Skin } from "./skin";
 import { notifyPreferencesChanged } from "./preferenceEvents";
 
 export const THEME_KEY = "portfolio-theme";
+// A theme opened from a shared link (?theme=), kept for this tab only.
+export const LINK_THEME_KEY = "portfolio-link-theme";
 
 export type Theme = "light" | "dark";
 
@@ -14,6 +16,15 @@ const THEME_COLORS: Record<Skin, Record<Theme, string>> = {
 export const readStoredTheme = (): Theme | null => {
   try {
     const value = localStorage.getItem(THEME_KEY);
+    return value === "dark" || value === "light" ? value : null;
+  } catch {
+    return null;
+  }
+};
+
+export const readLinkedTheme = (): Theme | null => {
+  try {
+    const value = sessionStorage.getItem(LINK_THEME_KEY);
     return value === "dark" || value === "light" ? value : null;
   } catch {
     return null;
@@ -64,6 +75,8 @@ export const applyTheme = (
     root.classList.toggle("light-theme", theme === "light");
     try {
       localStorage.setItem(THEME_KEY, theme);
+      // An explicit choice replaces a look opened from a shared link.
+      sessionStorage.removeItem(LINK_THEME_KEY);
     } catch {
       // Storage can be unavailable in private browsing.
     }

@@ -16,6 +16,7 @@ import { scrollToSection } from "../../utils/scrollToSection";
 import {
   applyTheme,
   paintThemeColor,
+  readLinkedTheme,
   readStoredTheme,
 } from "../../utils/theme";
 import { applySkin } from "../../utils/skin";
@@ -215,7 +216,7 @@ const NavBar = () => {
     }
 
     const onChange = (event: MediaQueryListEvent) => {
-      if (readStoredTheme()) {
+      if (readStoredTheme() || readLinkedTheme()) {
         return;
       }
       applyTheme(event.matches ? "dark" : "light");

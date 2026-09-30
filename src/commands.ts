@@ -1,4 +1,5 @@
 import { profile } from "./content/publicProfile";
+import { SITE_URL } from "./lib/metadata";
 import { sections } from "./content/navigation";
 import type { Theme } from "./utils/theme";
 import type { Skin } from "./utils/skin";
@@ -10,6 +11,7 @@ export type CommandContext = {
   goToPage: (path: string) => void;
   openExternal: (url: string) => void;
   copyEmail: () => void;
+  copyShareLink: () => void;
   setTheme: (theme: Theme) => void;
   setSkin: (skin: Skin) => void;
 };
@@ -96,6 +98,14 @@ export const commands: Command[] = [
     run: (context) => context.copyEmail(),
   },
   {
+    id: "share",
+    title: "Copy link to this look",
+    alias: "share",
+    keywords: ["link", "url", "send", "skin", "theme"],
+    group: "Action",
+    run: (context) => context.copyShareLink(),
+  },
+  {
     id: "theme-dark",
     title: "Use dark theme",
     alias: "theme dark",
@@ -132,6 +142,18 @@ export const commands: Command[] = [
     run: (context) => context.setSkin("default"),
   },
 ];
+
+/**
+ * A link that opens `path` in exactly this skin and theme, for that visit.
+ * The layout's inline script reads the parameters.
+ */
+export const buildShareUrl = (path: string, { theme, skin }: CommandState) => {
+  const params = new URLSearchParams({
+    skin: skin === "terminal" ? "terminal" : "standard",
+    theme,
+  });
+  return `${SITE_URL}${path}?${params}`;
+};
 
 /** Inputs that the palette handles itself rather than as commands. */
 export const SHOW_ALL = "help";

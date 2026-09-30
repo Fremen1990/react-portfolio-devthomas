@@ -7,10 +7,11 @@ import React, {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   CLOSE_INPUTS,
   SHOW_ALL,
+  buildShareUrl,
   commands,
   filterCommands,
   type Command,
@@ -62,6 +63,7 @@ export const CommandPalette = ({
   isHome,
 }: CommandPaletteProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   const { theme, skin } = usePreferences();
   const terminal = skin === "terminal";
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -148,6 +150,16 @@ export const CommandPalette = ({
     toastTimerRef.current = setTimeout(() => setToast(""), 4000);
   };
 
+  // Clipboard access can be refused; then show the text so it can be copied.
+  const copyText = async (text: string, copied: string, fallback: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(copied);
+    } catch {
+      showToast(`Couldn't copy. ${fallback} ${text}`);
+    }
+  };
+
   const context: CommandContext = {
     goToSection: (id) => {
       if (isHome) {
@@ -160,14 +172,18 @@ export const CommandPalette = ({
     openExternal: (url) => {
       window.open(url, "_blank", "noopener,noreferrer");
     },
-    copyEmail: async () => {
-      try {
-        await navigator.clipboard.writeText(profile.links.emailLabel);
-        showToast("Email address copied");
-      } catch {
-        showToast(`Couldn't copy. The address is ${profile.links.emailLabel}`);
-      }
-    },
+    copyEmail: () =>
+      copyText(
+        profile.links.emailLabel,
+        "Email address copied",
+        "The address is"
+      ),
+    copyShareLink: () =>
+      copyText(
+        buildShareUrl(pathname, { theme, skin }),
+        "Link copied",
+        "The link is"
+      ),
     setTheme: (next) => applyTheme(next, { persist: true }),
     setSkin: (next) => applySkin(next),
   };
