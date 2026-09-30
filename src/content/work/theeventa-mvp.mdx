@@ -1,0 +1,81 @@
+import { Flow } from "@/components/Flow/Flow";
+
+## The situation
+
+When I joined TheEventa, an event-booking platform, the product was close to starting from zero: only authentication existed, and it wasn't finished. The team had changed many times, and each shift meant handovers and lost context.
+
+## Constraints
+
+- **Limited time.** I work on TheEventa on weekends and some evenings, alongside my full-time role.
+- **An MVP to ship,** with a product still taking shape.
+- **Communication and coordination** were taking more time than the work itself.
+
+## The decision
+
+I proposed making the team smaller, not bigger. Together with the CEO, we decided to take on the remaining work ourselves without bringing in more people: one senior tech lead covering architecture and full-stack development with AI agents, and design worked out directly with the CEO. A small team with AI costs far less coordination than a larger one.
+
+## How a feature gets built
+
+<Flow
+  label="How a feature gets built: the business is involved at every stage, and I sign off the code."
+  steps={[
+    {
+      title: "Design",
+      text: "A first version with an AI agent and Figma",
+    },
+    {
+      title: "Business review",
+      text: "A call with the CEO, then fixes and adjustments",
+    },
+    {
+      title: "Two reviews",
+      text: "The AI reviews the change, then the business reviews it",
+    },
+    {
+      title: "Build",
+      text: "The feature is implemented in increments",
+    },
+    {
+      title: "Engineering review",
+      text: "Code review, tests and fixes",
+    },
+    {
+      title: "Sign-off",
+      text: "Final adjustments with the business, a last code review and testing",
+    },
+  ]}
+/>
+
+I use **Cursor, Codex and Claude**, and they complement each other. I use them for planning, code review, engineering, architecture, testing, and stress-testing ideas before I commit to them.
+
+## Keeping quality high
+
+Quality is the point of the whole setup. The agents work inside a lot of structure:
+
+- documentation, framework rules and architecture docs,
+- style guides, recommendations and agent skills,
+- unit, integration and end-to-end tests, with a separate Playwright repository.
+
+Some things are never left to an agent. I push the final code myself, and I test every feature myself once it's implemented. Agents have no access to the servers or to production. Infrastructure, monitoring and server administration are handled by a separate DevOps collaborator.
+
+## Design without designers
+
+With a brand book, a design system and Storybook in place, design became much easier. All three are shared with the AI tools, so new screens come out consistent with the codebase. Even the CEO can design new features that fit what's already built.
+
+## Architecture
+
+The backend is a separate NestJS service, not part of the Next.js app. NestJS is more efficient at scale, and when TheEventa grows we plan to move to microservices, which would be awkward to do inside Next.js.
+
+## The outcome so far
+
+A large part of the MVP is built:
+
+- authentication and SSO,
+- organizations,
+- event objects and their spaces,
+- pricing that recalculates as options change,
+- a calendar and reservations.
+
+## What I'd do differently
+
+I'd keep the team as small as possible from the very start, and I'd avoid changing things that already work.
