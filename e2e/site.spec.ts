@@ -20,6 +20,18 @@ const usePreferences = async (page: Page, skin: Skin, theme: Theme) => {
   );
 };
 
+// The shortcut listener attaches after hydration, which can lag behind the
+// load event on a slow CI machine. Retry until the palette is open.
+const openPalette = async (page: Page) => {
+  const dialog = page.getByRole("dialog", { name: "Command palette" });
+  await expect(async () => {
+    if (!(await dialog.isVisible())) {
+      await page.keyboard.press("ControlOrMeta+k");
+    }
+    await expect(dialog).toBeVisible({ timeout: 1000 });
+  }).toPass();
+};
+
 for (const path of PAGES) {
   test(`${path} has a title, description, canonical and Open Graph tags`, async ({
     page,
@@ -203,7 +215,7 @@ test.describe("share links", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await usePreferences(page, "terminal", "dark");
     await page.goto("/colophon/");
-    await page.keyboard.press("ControlOrMeta+k");
+    await openPalette(page);
     await page.getByRole("combobox", { name: "Search commands" }).fill("share");
     await page.keyboard.press("Enter");
     await expect(page.getByText("Link copied")).toBeVisible();
@@ -305,7 +317,7 @@ test.describe("command palette", () => {
     page,
   }) => {
     await page.goto("/");
-    await page.keyboard.press("ControlOrMeta+k");
+    await openPalette(page);
     const dialog = page.getByRole("dialog", { name: "Command palette" });
     await expect(dialog).toBeVisible();
     const search = page.getByRole("combobox", { name: "Search commands" });
@@ -352,7 +364,7 @@ test.describe("command palette", () => {
   test("copies the email address", async ({ page, context }) => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/");
-    await page.keyboard.press("ControlOrMeta+k");
+    await openPalette(page);
     await page
       .getByRole("combobox", { name: "Search commands" })
       .fill("copy email");
@@ -366,7 +378,7 @@ test.describe("command palette", () => {
   test("is a shell prompt in the terminal skin", async ({ page }) => {
     await usePreferences(page, "terminal", "dark");
     await page.goto("/");
-    await page.keyboard.press("ControlOrMeta+k");
+    await openPalette(page);
     await expect(page.getByText("tomasz@devthomas:~$")).toBeVisible();
     await page.getByRole("combobox", { name: "Search commands" }).fill("nope");
     await expect(
@@ -387,7 +399,7 @@ test.describe("command palette", () => {
     }) => {
       await usePreferences(page, skin, "dark");
       await page.goto("/");
-      await page.keyboard.press("ControlOrMeta+k");
+      await openPalette(page);
       await expect(
         page.getByRole("dialog", { name: "Command palette" })
       ).toBeVisible();
@@ -462,7 +474,7 @@ test("the build notes page is linked from the footer and the palette", async ({
   await page.getByRole("link", { name: "Work", exact: true }).click();
   await expect(page).toHaveURL(/\/#work$/);
 
-  await page.keyboard.press("ControlOrMeta+k");
+  await openPalette(page);
   await page
     .getByRole("combobox", { name: "Search commands" })
     .fill("how this site");
@@ -497,7 +509,7 @@ test("a case study is linked from its project and from the palette", async ({
   await page.getByRole("link", { name: "← Back to selected work" }).click();
   await expect(page).toHaveURL(/\/#work$/);
 
-  await page.keyboard.press("ControlOrMeta+k");
+  await openPalette(page);
   await page
     .getByRole("combobox", { name: "Search commands" })
     .fill("cat work/orange-cms.md");
