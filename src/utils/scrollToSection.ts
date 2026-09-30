@@ -1,12 +1,23 @@
 const prefersReducedMotion = () => {
   try {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  } catch (error) {
+  } catch {
     return false;
   }
 };
 
-const isPlainActivation = (event) => {
+type Activation = Pick<
+  MouseEvent,
+  | "defaultPrevented"
+  | "metaKey"
+  | "ctrlKey"
+  | "shiftKey"
+  | "altKey"
+  | "button"
+  | "preventDefault"
+>;
+
+const isPlainActivation = (event: Activation | null) => {
   if (!event) {
     return true;
   }
@@ -22,10 +33,14 @@ const isPlainActivation = (event) => {
   return true;
 };
 
-export const destinationFocusTarget = (id) =>
+export const destinationFocusTarget = (id: string) =>
   document.getElementById(`${id}-heading`) || document.getElementById(id);
 
-export const scrollToSection = (event, href, { updateHistory = true } = {}) => {
+export const scrollToSection = (
+  event: Activation | null,
+  href: string,
+  { updateHistory = true }: { updateHistory?: boolean } = {}
+): boolean => {
   if (!isPlainActivation(event)) {
     return false;
   }

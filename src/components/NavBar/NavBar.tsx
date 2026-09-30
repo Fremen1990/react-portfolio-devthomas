@@ -1,6 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "../../content/publicProfile";
@@ -44,14 +49,14 @@ const currentSectionId = () => {
   return current;
 };
 
-const isModifiedClick = (event) =>
+const isModifiedClick = (event: ReactMouseEvent) =>
   event.metaKey ||
   event.ctrlKey ||
   event.shiftKey ||
   event.altKey ||
   event.button !== 0;
 
-const ThemeIcon = ({ name }) => {
+const ThemeIcon = ({ name }: { name: "sun" | "moon" }) => {
   if (name === "sun") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="theme-icon">
@@ -96,14 +101,14 @@ const NavBar = () => {
   const dark = theme === "dark";
   const terminal = skin === "terminal";
   const isDesktop = useMediaQuery(DESKTOP_NAV_QUERY, true);
-  const menuButtonRef = useRef(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) {
       return undefined;
     }
 
-    const onKeyDown = (event) => {
+    const onKeyDown = (event: KeyboardEvent) => {
       if (event.key !== "Escape" || isDesktop) {
         return;
       }
@@ -145,7 +150,7 @@ const NavBar = () => {
       return undefined;
     }
 
-    const onClick = (event) => {
+    const onClick = (event: MouseEvent) => {
       const link =
         event.target instanceof Element
           ? event.target.closest('a[href^="#"]')
@@ -153,7 +158,7 @@ const NavBar = () => {
       if (!link || link.closest(".site-header")) {
         return;
       }
-      const hash = link.getAttribute("href");
+      const hash = link.getAttribute("href") ?? "";
       if (!document.getElementById(`${hash.slice(1)}-heading`)) {
         return;
       }
@@ -194,11 +199,11 @@ const NavBar = () => {
     let media;
     try {
       media = window.matchMedia("(prefers-color-scheme: dark)");
-    } catch (error) {
+    } catch {
       return undefined;
     }
 
-    const onChange = (event) => {
+    const onChange = (event: MediaQueryListEvent) => {
       if (readStoredTheme()) {
         return;
       }
@@ -217,7 +222,7 @@ const NavBar = () => {
 
   const close = () => setOpen(false);
 
-  const closeOnPlainClick = (event) => {
+  const closeOnPlainClick = (event: ReactMouseEvent) => {
     if (isModifiedClick(event)) {
       return;
     }

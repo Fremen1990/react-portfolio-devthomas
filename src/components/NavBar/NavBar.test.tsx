@@ -1,7 +1,7 @@
 import React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { usePathname } from "next/navigation";
-import { vi } from "vitest";
+import { beforeEach, expect, test, vi, type Mock } from "vitest";
 import NavBar from "./NavBar";
 import { Hero } from "../Hero/Hero";
 import { SectionBand } from "../SectionBand/SectionBand";
@@ -12,23 +12,25 @@ const mediaState = {
   dark: false,
 };
 
-const installMatchMedia = (overrides = {}) => {
+type MediaListener = (event: { matches: boolean; media: string }) => void;
+
+const installMatchMedia = (overrides: Partial<typeof mediaState> = {}) => {
   Object.assign(mediaState, {
     desktop: true,
     reduce: false,
     dark: false,
     ...overrides,
   });
-  const listeners = [];
-  window.matchMedia = (query) => {
+  const listeners: { query: string; listener: MediaListener }[] = [];
+  window.matchMedia = (query: string) => {
     const list = {
       media: query,
-      addEventListener: (type, listener) => {
+      addEventListener: (type: string, listener: MediaListener) => {
         if (type === "change") {
           listeners.push({ query, listener });
         }
       },
-      removeEventListener: (type, listener) => {
+      removeEventListener: (_type: string, listener: MediaListener) => {
         const index = listeners.findIndex(
           (item) => item.query === query && item.listener === listener
         );
@@ -56,11 +58,11 @@ const installMatchMedia = (overrides = {}) => {
         return false;
       },
     });
-    return list;
+    return list as unknown as MediaQueryList;
   };
 
   return {
-    setDesktop(desktop) {
+    setDesktop(desktop: boolean) {
       mediaState.desktop = desktop;
       listeners
         .filter((item) => item.query.includes("min-width: 801px"))
@@ -225,7 +227,7 @@ test("marks the section currently below the header", async () => {
     return section;
   });
 
-  const tops = {
+  const tops: Record<string, number> = {
     work: 400,
     approach: 900,
     about: 1400,
@@ -367,7 +369,7 @@ test("choosing a section link closes the menu, focuses its heading, and sets the
 
   const menu = screen.getByRole("button", { name: "Menu" });
   fireEvent.click(menu);
-  Element.prototype.scrollIntoView.mockClear();
+  (Element.prototype.scrollIntoView as Mock).mockClear();
   focus.mockClear();
 
   fireEvent.click(screen.getByRole("link", { name: "Approach" }));

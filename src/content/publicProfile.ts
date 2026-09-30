@@ -1,4 +1,54 @@
-export const profile = {
+export type ExternalLink = { href: string; label: string };
+
+export type Contribution = {
+  id: string;
+  number: string;
+  employer: string;
+  heading: string;
+  meta: string;
+  status?: string;
+  summary: string;
+  bullets: string[];
+  technologies: string;
+  featured?: boolean;
+  scopeTitle: string;
+  scope: string[];
+};
+
+export type Role = {
+  employer: string;
+  title: string;
+  formalTitle?: string;
+  time: string;
+  note?: string;
+};
+
+export type Profile = {
+  name: string;
+  headline: string;
+  introduction: string;
+  availability: string;
+  contactInvitation: string;
+  financeSummary: string;
+  links: {
+    cv: string;
+    portfolio: string;
+    linkedin: string;
+    email: string;
+    emailLabel: string;
+    github: string;
+  };
+  contributions: Contribution[];
+  roles: Role[];
+  howIWork: { label: string; text: string }[];
+  additionalBreadth: string;
+  credentials: string[];
+  earlierProjectsNote: string;
+  earlierProjects: { title: string; summary: string; links: ExternalLink[] }[];
+  training: { title: string; date: string }[];
+};
+
+export const profile: Profile = {
   name: "Tomasz Stanisz",
   headline: "Software Engineer & Tech Lead",
   introduction:

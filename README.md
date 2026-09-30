@@ -8,7 +8,7 @@ CV: [https://cv.devthomas.pl/](https://cv.devthomas.pl/)
 
 ## Setup
 
-The site is built with Next.js (App Router) as a static export: `next build` writes one HTML file per page to `out/`, and Hostinger serves those files. Public copy lives in `src/content/publicProfile.js`.
+The site is built with Next.js (App Router) as a static export: `next build` writes one HTML file per page to `out/`, and Hostinger serves those files. Public copy lives in `src/content/publicProfile.ts`.
 
 Use Node.js 24, the current Active LTS (Krypton), and npm 11. `package.json` `engines` accepts Node `>=24.15.0 <25` and npm `>=11 <12`. `.npmrc` sets `engine-strict=true`. The lockfile is npm's `package-lock.json`; install with npm, not another package manager.
 
@@ -24,6 +24,7 @@ npm run dev
 
 ```bash
 npm run lint
+npm run typecheck
 npm run prettier:check
 npm test
 npm run build
@@ -31,7 +32,8 @@ npx playwright install chromium   # once
 npm run test:e2e
 ```
 
-- `npm run lint` runs ESLint with `eslint-config-next` (React, hooks, accessibility and Next.js rules).
+- `npm run lint` runs ESLint with `eslint-config-next` (React, hooks, accessibility, Next.js and TypeScript rules).
+- `npm run typecheck` runs `tsc --noEmit`. The code is TypeScript with `strict` on.
 - `npm test` runs the Vitest unit suite once (`npm run test:watch` keeps it running).
 - `npm run build` writes the static site to `out/`.
 - `npm run test:e2e` serves `out/` and runs the Playwright suite in `e2e/`: metadata and Open Graph tags on every page, the not-found page, reading without JavaScript, the saved skin and theme before paint, `theme-color`, the hero link, no console errors, no sideways scroll at 320px, and an axe accessibility scan in both skins and both themes. Build first.
@@ -44,12 +46,12 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 - `src/app/page.tsx` — the home page: Hero, Selected work, How I work, Background, Contact
 - `src/app/not-found.tsx` — exported as `out/404.html`
 - `src/lib/metadata.ts` — title, description, canonical and Open Graph tags for each page
-- `src/content/publicProfile.js` — the public wording and links
+- `src/content/publicProfile.ts` — the public wording and links
 - `src/components/NavBar/` — section navigation, mobile menu, and the theme and style controls (the only client component)
-- `src/utils/scrollToSection.js` — in-page navigation, fragment history, and destination focus
-- `src/utils/theme.js` — light/dark choice in `localStorage`, otherwise the operating-system preference
-- `src/utils/skin.js` — standard or Terminal style in `localStorage`; `src/design/skin-terminal.css` holds every Terminal rule, scoped under `html.skin-terminal`
-- `src/utils/preferences.js` — keeps controls in sync with the current theme and skin, and lets the server render before either is known
+- `src/utils/scrollToSection.ts` — in-page navigation, fragment history, and destination focus
+- `src/utils/theme.ts` — light/dark choice in `localStorage`, otherwise the operating-system preference
+- `src/utils/skin.ts` — standard or Terminal style in `localStorage`; `src/design/skin-terminal.css` holds every Terminal rule, scoped under `html.skin-terminal`
+- `src/utils/preferences.ts` — keeps controls in sync with the current theme and skin, and lets the server render before either is known
 - `src/sections/Work/`, `src/sections/Experience/`, `src/sections/Background/`, `src/sections/Contact/` — the four sections after the hero, rendered to static HTML
 - `src/components/FooterPanel/` — copyright and GitHub
 

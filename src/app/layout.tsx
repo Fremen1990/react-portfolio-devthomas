@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 //
 // theme-color is deliberately not in Next's metadata: this script has to set
 // it before paint, and React replaces a server-rendered meta tag whose content
-// changed, leaving two. paintThemeColor() in src/utils/theme.js owns it after
+// changed, leaving two. paintThemeColor() in src/utils/theme.ts owns it after
 // hydration; the colours here match THEME_COLORS there.
 const applySavedPreferences = `(function () {
   try {

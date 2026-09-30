@@ -14,6 +14,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "prettier": "prettier --write src e2e *.mjs *.mts *.ts .github",
     "prettier:check": "prettier --check src e2e *.mjs *.mts *.ts .github"
   },
