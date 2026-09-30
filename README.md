@@ -44,8 +44,6 @@ The publish step pushes the `build/` directory to the `build` branch. That actio
 - `src/pages/Work/`, `src/pages/Experience/`, `src/pages/Background/`, `src/pages/Contact/` — the four sections after the hero
 - `src/FooterPanel/` — copyright and GitHub
 
-Older practice components, including the carousel, skills wall, and timeline pages, are still in the repository and are not mounted. They are not the live page.
-
 ## Behavior
 
 - Section links keep their fragment URLs. A normal click moves focus to that section's heading and scrolls it below the sticky header. Modified clicks (Command, Control, Shift, Alt, or a non-primary button) are left to the browser.
