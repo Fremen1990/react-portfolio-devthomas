@@ -35,6 +35,12 @@ export const SelectedWork = () => {
             </div>
             <div>
               <p className="contribution-summary">{item.summary}</p>
+              {item.outcome && (
+                <p className="contribution-outcome">
+                  <strong>Outcome: </strong>
+                  {item.outcome}
+                </p>
+              )}
               {item.bullets.length > 0 && (
                 <ul className="contribution-list">
                   {item.bullets.map((bullet) => (

@@ -8,6 +8,8 @@ export type Contribution = {
   meta: string;
   status?: string;
   summary: string;
+  /** The measurable or visible result, shown highlighted under the summary. */
+  outcome?: string;
   bullets: string[];
   technologies: string;
   featured?: boolean;
@@ -78,6 +80,8 @@ export const profile: Profile = {
       status: "Concurrent role · MVP v1 under development",
       summary:
         "I lead application architecture and development across TheEventa's Next.js frontend, NestJS backend, internal admin panel and Playwright E2E project.",
+      outcome:
+        "Most of the MVP is built (authentication and SSO, organizations, event spaces, pricing, calendar and reservations) by a deliberately small team working with AI agents.",
       bullets: [
         "Lead development spanning authentication and SSO, event objects and their related spaces, organizations, image management, and pricing that recalculates as selected options change.",
         "Own frontend wizard forms, the frontend design system and Storybook, alongside the landing page and blog.",
@@ -99,6 +103,8 @@ export const profile: Profile = {
       meta: "Frontend architecture and development",
       summary:
         "At Orange Polska, I design and develop the frontend architecture of an internal CMS. Its React and TypeScript interface is generated from JSON schemas and backend-supplied configuration.",
+      outcome:
+        "Dozens of new resources have reached production without any frontend changes.",
       bullets: [
         "Build frontend behavior for configured navigation, forms, data grids and actions, including bulk operations.",
         "Provide technical guidance and code review on the CMS, and review code across the department's React projects.",
@@ -122,6 +128,8 @@ export const profile: Profile = {
       meta: "Test automation and mentoring",
       summary:
         "I established a separate Cypress E2E project from scratch, including its test architecture and parallel execution. I trained two junior testers and reviewed their code during the project's first year.",
+      outcome:
+        "Regression checks went from one to three days of manual testing to about an hour on Orange TV GO and about 30 minutes on the CMS.",
       bullets: [],
       technologies: "Cypress, TypeScript",
       scopeTitle: "Scope and approach",
