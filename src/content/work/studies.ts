@@ -46,6 +46,20 @@ export const caseStudies: CaseStudy[] = [
     stack: "Cypress, TypeScript, Page Object Model",
     published: true,
   },
+  {
+    slug: "theeventa-mvp",
+    contributionId: "theeventa",
+    title: "One tech lead, AI agents and an MVP rebuilt from almost zero",
+    description:
+      "How I proposed a smaller team for TheEventa and built most of its MVP as a tech lead working with AI agents, with quality kept under my control.",
+    company: "TheEventa",
+    role: "Tech lead: architecture, full-stack development and an AI-assisted delivery process",
+    period: "Since September 2025, alongside my role at Orange Polska",
+    team: "Me, the CEO, and a DevOps collaborator for infrastructure",
+    stack:
+      "Next.js, NestJS, TypeScript, Playwright, Storybook; Cursor, Codex and Claude",
+    published: true,
+  },
 ];
 
 export const publishedCaseStudies = caseStudies.filter(

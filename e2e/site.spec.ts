@@ -8,6 +8,7 @@ const PAGES = [
   "/colophon/",
   "/work/orange-cms/",
   "/work/orange-e2e-testing/",
+  "/work/theeventa-mvp/",
 ];
 
 const SKINS = ["standard", "terminal"] as const;
