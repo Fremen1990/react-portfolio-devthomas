@@ -177,6 +177,57 @@ test.describe("share links", () => {
     ).toBe("light");
   });
 
+  test("a choice made after opening the link survives a reload of that link", async ({
+    page,
+  }) => {
+    await page.goto("/?skin=terminal&theme=dark");
+    await page.getByRole("button", { name: "Switch to light theme" }).click();
+    await page
+      .getByRole("button", { name: "Switch to standard style" })
+      .click();
+
+    await page.reload();
+    expect(page.url()).toContain("?skin=terminal&theme=dark");
+    await expect(html(page)).not.toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/light-theme/);
+    await expect(themeColor(page)).toHaveAttribute("content", "#f7f8fa");
+  });
+
+  test("changing only one part keeps the other from the link after a reload", async ({
+    page,
+  }) => {
+    await page.goto("/?skin=terminal&theme=dark");
+    await page.getByRole("button", { name: "Switch to light theme" }).click();
+    await page.reload();
+    await expect(html(page)).toHaveClass(/skin-terminal/);
+    await expect(html(page)).toHaveClass(/light-theme/);
+  });
+
+  test("Back to the link page keeps the visitor's choice", async ({ page }) => {
+    await page.goto("/?skin=terminal&theme=dark");
+    await page
+      .getByRole("button", { name: "Switch to standard style" })
+      .click();
+    await page.goto("/colophon/");
+    await page.goBack();
+    expect(page.url()).toContain("?skin=terminal&theme=dark");
+    await expect(html(page)).not.toHaveClass(/skin-terminal/);
+  });
+
+  test("opening the link again in a new tab shows the linked look", async ({
+    page,
+    context,
+  }) => {
+    await page.goto("/?skin=terminal&theme=dark");
+    await page
+      .getByRole("button", { name: "Switch to standard style" })
+      .click();
+    const again = await context.newPage();
+    await again.goto("/?skin=terminal&theme=dark");
+    await expect(html(again)).toHaveClass(/skin-terminal/);
+    await expect(html(again)).toHaveClass(/dark-theme/);
+  });
+
   test("one parameter works alone, and invalid values are ignored", async ({
     browser,
   }) => {

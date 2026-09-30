@@ -50,7 +50,10 @@ export const metadata: Metadata = {
 //
 // Precedence: ?skin= / ?theme= in the URL, then a look opened from such a link
 // earlier in this tab (sessionStorage), then the visitor's saved choice
-// (localStorage), then the system setting. A shared link lasts only for the
+// (localStorage), then the system setting. The URL counts only when the link
+// is actually opened: on a reload or Back/Forward the parameters are still in
+// the address bar, and applying them again would undo a choice the visitor
+// made after arriving. A shared link lasts only for the
 // visit and never overwrites saved choices. It still applies when storage is
 // blocked. Keys and values match src/utils/theme.ts and src/utils/skin.ts.
 //
@@ -61,8 +64,14 @@ export const metadata: Metadata = {
 const applySavedPreferences = `(function () {
   var root = document.documentElement;
   var params = null;
+  var navigation = "navigate";
   try {
-    params = new URLSearchParams(window.location.search);
+    navigation = performance.getEntriesByType("navigation")[0].type;
+  } catch (error) {}
+  try {
+    if (navigation !== "reload" && navigation !== "back_forward") {
+      params = new URLSearchParams(window.location.search);
+    }
   } catch (error) {}
   var pick = function (value, allowed) {
     return allowed.indexOf(value) === -1 ? null : value;
