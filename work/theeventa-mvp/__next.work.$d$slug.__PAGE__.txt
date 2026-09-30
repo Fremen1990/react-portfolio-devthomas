@@ -1,0 +1,113 @@
+1:"$Sreact.fragment"
+2:I[22016,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],""]
+15:X
+1a:X
+1a:C
+0:{"buildId":"npDuXIBhm6-cvylYN1jtF","data":[{"rsc":["$","$1","c",{"children":[["$","article",null,{"className":"page-section case-study","children":["$","div",null,{"className":"page-wrap prose","children":[["$","p",null,{"className":"case-study-kicker","children":[["$","$L2",null,{"href":"/#work","children":"Selected work"}]," · Case study"]}],["$","h1",null,{"children":"One tech lead, AI agents and an MVP rebuilt from almost zero"}],["$","dl",null,{"className":"case-study-facts","children":[["$","div","Company",{"children":[["$","dt",null,{"children":"Company"}],["$","dd",null,{"children":"TheEventa"}]]}],["$","div","My role",{"children":[["$","dt",null,{"children":"My role"}],["$","dd",null,{"children":"Tech lead: architecture, full-stack development and an AI-assisted delivery process"}]]}],["$","div","When",{"children":[["$","dt",null,{"children":"When"}],["$","dd",null,{"children":"Since September 2025, alongside my role at Orange Polska"}]]}],["$","div","Team",{"children":[["$","dt",null,{"children":"Team"}],["$","dd",null,{"children":"Me, the CEO, and a DevOps collaborator for infrastructure"}]]}],["$","div","Stack",{"children":[["$","dt",null,{"children":"Stack"}],["$","dd",null,{"children":"Next.js, NestJS, TypeScript, Playwright, Storybook; Cursor, Codex and Claude"}]]}]]}],[["$","h2",null,{"children":"The situation"}],"\n",["$","p",null,{"children":"When I joined TheEventa, an event-booking platform, the product was close to starting from zero: only authentication existed, and it wasn't finished. The team had changed many times, and each shift meant handovers and lost context."}],"\n",["$","h2",null,{"children":"Constraints"}],"\n",["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Limited time."}]," I work on TheEventa on weekends and some evenings, alongside my full-time role."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"An MVP to ship,"}]," with a product still taking shape."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Communication and coordination"}]," were taking more time than the work itself."]}],"\n"]}],"\n",["$","h2",null,{"children":"The decision"}],"\n",["$","p",null,{"children":"I proposed making the team smaller, not bigger. Together with the CEO, we decided to take on the remaining work ourselves without bringing in more people: one senior tech lead covering architecture and full-stack development with AI agents, and design worked out directly with the CEO. A small team with AI costs far less coordination than a larger one."}],"\n",["$","h2",null,{"children":"How a feature gets built"}],"\n",["$","figure",null,{"className":"flow","children":[["$","ol",null,{"className":"flow-steps","aria-label":"How a feature gets built: the business is involved at every stage, and I sign off the code.","children":[["$","li","Design",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Design"}],["$","span",null,{"className":"flow-text","children":"A first version with an AI agent and Figma"}]]}],["$","li","Business review",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Business review"}],["$","span",null,{"className":"flow-text","children":"A call with the CEO, then fixes and adjustments"}]]}],["$","li","Two reviews",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Two reviews"}],["$","span",null,{"className":"flow-text","children":"The AI reviews the change, then the business reviews it"}]]}],["$","li","Build",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Build"}],["$","span",null,{"className":"flow-text","children":"The feature is implemented in increments"}]]}],["$","li","Engineering review",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Engineering review"}],["$","span",null,{"className":"flow-text","children":"Code review, tests and fixes"}]]}],["$","li","Sign-off",{"className":"flow-step","children":[["$","strong",null,{"className":"flow-title","children":"Sign-off"}],["$","span",null,{"className":"flow-text","children":"Final adjustments with the business, a last code review and testing"}]]}]]}],"$L3"]}],"\n","$L4","\n","$L5","\n","$L6","\n","$L7","\n","$L8","\n","$L9","\n","$La","\n","$Lb","\n","$Lc","\n","$Ld","\n","$Le","\n","$Lf","\n","$L10","\n","$L11"],"$L12"]}]}],null,"$L13"]}],"isPartial":"$@14","staleTime":"$15","varyParams":null},{"rsc":"$L16","isPartial":"$@17","staleTime":"$15","varyParams":null},{"rsc":"$L18","isPartial":"$@19","staleTime":"$15","varyParams":"$1a"},{"rsc":"$L1b","isPartial":"$@1c","staleTime":"$15","varyParams":"$1a"},{"rsc":"$L1d","isPartial":"$@1e","staleTime":"$15","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@1f","rootVaryParams":null,"needsRuntimeRequest":"$@20"}
+21:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"OutletBoundary"]
+22:"$Sreact.suspense"
+24:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"ViewportBoundary"]
+25:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"MetadataBoundary"]
+26:I[27201,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"IconMark"]
+27:I[39756,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"default"]
+28:I[37457,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"default"]
+2a:I[63831,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2cl8boxd-uu7b.js"],"default"]
+:HL["/_next/static/chunks/2v-_xmhirg8w2.css","style"]
+3:["$","figcaption",null,{"className":"flow-caption","children":"How a feature gets built: the business is involved at every stage, and I sign off the code."}]
+4:["$","p",null,{"children":["I use ",["$","strong",null,{"children":"Cursor, Codex and Claude"}],", and they complement each other. I use them for planning, code review, engineering, architecture, testing, and stress-testing ideas before I commit to them."]}]
+5:["$","h2",null,{"children":"Keeping quality high"}]
+6:["$","p",null,{"children":"Quality is the point of the whole setup. The agents work inside a lot of structure:"}]
+7:["$","ul",null,{"children":["\n",["$","li",null,{"children":"documentation, framework rules and architecture docs,"}],"\n",["$","li",null,{"children":"style guides, recommendations and agent skills,"}],"\n",["$","li",null,{"children":"unit, integration and end-to-end tests, with a separate Playwright repository."}],"\n"]}]
+8:["$","p",null,{"children":"Some things are never left to an agent. I push the final code myself, and I test every feature myself once it's implemented. Agents have no access to the servers or to production. Infrastructure, monitoring and server administration are handled by a separate DevOps collaborator."}]
+9:["$","h2",null,{"children":"Design without designers"}]
+a:["$","p",null,{"children":"With a brand book, a design system and Storybook in place, design became much easier. All three are shared with the AI tools, so new screens come out consistent with the codebase. Even the CEO can design new features that fit what's already built."}]
+b:["$","h2",null,{"children":"Architecture"}]
+c:["$","p",null,{"children":"The backend is a separate NestJS service, not part of the Next.js app. NestJS is more efficient at scale, and when TheEventa grows we plan to move to microservices, which would be awkward to do inside Next.js."}]
+d:["$","h2",null,{"children":"The outcome so far"}]
+e:["$","p",null,{"children":"A large part of the MVP is built:"}]
+f:["$","ul",null,{"children":["\n",["$","li",null,{"children":"authentication and SSO,"}],"\n",["$","li",null,{"children":"organizations,"}],"\n",["$","li",null,{"children":"event objects and their spaces,"}],"\n",["$","li",null,{"children":"pricing that recalculates as options change,"}],"\n",["$","li",null,{"children":"a calendar and reservations."}],"\n"]}]
+10:["$","h2",null,{"children":"What I'd do differently"}]
+11:["$","p",null,{"children":"I'd keep the team as small as possible from the very start, and I'd avoid changing things that already work."}]
+12:["$","p",null,{"className":"case-study-back","children":["$","$L2",null,{"href":"/#work","children":"← Back to selected work"}]}]
+13:["$","$L21",null,{"children":["$","$22",null,{"name":"Next.MetadataOutlet","children":"$@23"}]}]
+16:["$","$1","h",{"children":[null,["$","$L24",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L25",null,{"children":["$","$22",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"One tech lead, AI agents and an MVP rebuilt from almost zero · Tomasz Stanisz"}],["$","meta","1",{"name":"description","content":"How I proposed a smaller team for TheEventa and built most of its MVP as a tech lead working with AI agents, with quality kept under my control."}],["$","link","2",{"rel":"canonical","href":"https://devthomas.pl/work/theeventa-mvp/"}],["$","meta","3",{"property":"og:title","content":"One tech lead, AI agents and an MVP rebuilt from almost zero · Tomasz Stanisz"}],["$","meta","4",{"property":"og:description","content":"How I proposed a smaller team for TheEventa and built most of its MVP as a tech lead working with AI agents, with quality kept under my control."}],["$","meta","5",{"property":"og:url","content":"https://devthomas.pl/work/theeventa-mvp/"}],["$","meta","6",{"property":"og:image","content":"https://devthomas.pl/og-share.png"}],["$","meta","7",{"property":"og:image:width","content":"1200"}],["$","meta","8",{"property":"og:image:height","content":"630"}],["$","meta","9",{"property":"og:image:alt","content":"Tomasz Stanisz portfolio — Software Engineer and Tech Lead"}],["$","meta","10",{"property":"og:type","content":"website"}],["$","meta","11",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","12",{"name":"twitter:title","content":"One tech lead, AI agents and an MVP rebuilt from almost zero · Tomasz Stanisz"}],["$","meta","13",{"name":"twitter:description","content":"How I proposed a smaller team for TheEventa and built most of its MVP as a tech lead working with AI agents, with quality kept under my control."}],["$","meta","14",{"name":"twitter:image","content":"https://devthomas.pl/og-share.png"}],["$","link","15",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L26","16",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+18:["$","$1","c",{"children":[null,["$","$L27",null,{"parallelRouterKey":"children","template":["$","$L28",null,{}]}]]}]
+1b:["$","$1","c",{"children":[null,["$","$L27",null,{"parallelRouterKey":"children","template":["$","$L28",null,{}]}]]}]
+29:T8ee,(function () {
+  var root = document.documentElement;
+  var params = null;
+  var navigation = "navigate";
+  try {
+    navigation = performance.getEntriesByType("navigation")[0].type;
+  } catch (error) {}
+  try {
+    if (navigation !== "reload" && navigation !== "back_forward") {
+      params = new URLSearchParams(window.location.search);
+    }
+  } catch (error) {}
+  var pick = function (value, allowed) {
+    return allowed.indexOf(value) === -1 ? null : value;
+  };
+  // /look/<skin>-<theme>/ works like ?skin=&theme=, under the same rule.
+  var look = null;
+  if (params) {
+    look = window.location.pathname.match(
+      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+    );
+  }
+  var linkSkin =
+    (params && pick(params.get("skin"), ["terminal", "standard"])) ||
+    (look && look[1]);
+  var linkTheme =
+    (params && pick(params.get("theme"), ["dark", "light"])) ||
+    (look && look[2]);
+  var read = function (storage, key) {
+    try {
+      return window[storage].getItem(key);
+    } catch (error) {
+      return null;
+    }
+  };
+  try {
+    if (linkSkin) sessionStorage.setItem("portfolio-link-skin", linkSkin);
+    if (linkTheme) sessionStorage.setItem("portfolio-link-theme", linkTheme);
+  } catch (error) {}
+  var skin =
+    linkSkin ||
+    pick(read("sessionStorage", "portfolio-link-skin"), ["terminal", "standard"]) ||
+    (read("localStorage", "portfolio-skin") === "terminal" ? "terminal" : "standard");
+  var theme =
+    linkTheme ||
+    pick(read("sessionStorage", "portfolio-link-theme"), ["dark", "light"]) ||
+    pick(read("localStorage", "portfolio-theme"), ["dark", "light"]);
+  var terminal = skin === "terminal";
+  if (theme === "dark") root.classList.add("dark-theme");
+  if (theme === "light") root.classList.add("light-theme");
+  if (terminal) root.classList.add("skin-terminal");
+  try {
+    var dark =
+      theme === "dark" ||
+      (theme !== "light" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var colors = terminal
+      ? { light: "#f3f1e7", dark: "#07090a" }
+      : { light: "#f7f8fa", dark: "#10161b" };
+    var meta = document.createElement("meta");
+    meta.name = "theme-color";
+    meta.content = dark ? colors.dark : colors.light;
+    document.head.appendChild(meta);
+  } catch (error) {}
+})();1d:["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2v-_xmhirg8w2.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/3fntmmi971322.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/2cl8boxd-uu7b.js","async":true}]],["$","html",null,{"lang":"en","translate":"no","className":"inter_c15e96cb-module__0bjUvq__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$29"}}]}],["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L2a",null,{}],["$","main",null,{"id":"main","children":["$","$L27",null,{"parallelRouterKey":"children","template":["$","$L28",null,{}],"notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":["$L2b","$L2c"]}]]}]}],[]]}]}],"$L2d"]}]}]]}]]}]
+23:null
+2b:["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}]
+2c:["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]
+2d:["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$L2",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]
+20:true
+15:300
+15:C
+1f:0
+17:"$undefined"
+19:"$undefined"
+1c:"$undefined"
+1e:"$undefined"
+14:"$undefined"
