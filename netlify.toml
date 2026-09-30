@@ -1,0 +1,10 @@
+# Netlify builds a preview of every pull request. The live site is not on
+# Netlify: it is published to the build branch and served by Hostinger.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  # package.json engines and .npmrc engine-strict require Node 24 / npm 11.
+  NODE_VERSION = "24.21.0"
+  NEXT_TELEMETRY_DISABLED = "1"
