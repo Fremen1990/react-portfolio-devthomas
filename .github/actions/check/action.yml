@@ -1,0 +1,45 @@
+name: Install, check and build
+description: >
+  Installs dependencies, runs lint, formatting, unit tests, the static build
+  and the Playwright suite against it. Leaves the exported site in out/.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v7
+      with:
+        # Node 24 is the Active LTS line (Krypton). 24.21.0 bundles npm 11.19.0,
+        # which satisfies package.json engines and .npmrc engine-strict.
+        node-version: "24.21.0"
+        cache: npm
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Lint
+      shell: bash
+      run: npm run lint
+
+    - name: Check formatting
+      shell: bash
+      run: npm run prettier:check
+
+    - name: Unit tests
+      shell: bash
+      run: npm test
+
+    - name: Build
+      shell: bash
+      run: npm run build
+      env:
+        NEXT_TELEMETRY_DISABLED: "1"
+
+    - name: Install Playwright browser
+      shell: bash
+      run: npx playwright install --with-deps chromium
+
+    - name: End-to-end tests
+      shell: bash
+      run: npm run test:e2e

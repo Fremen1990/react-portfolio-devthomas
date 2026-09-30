@@ -1,0 +1,25 @@
+name: Checks
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Lint, test and build
+    steps:
+      - name: git-checkout
+        uses: actions/checkout@v7
+
+      - name: Install, check and build
+        uses: ./.github/actions/check
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

@@ -7,9 +7,17 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+/blob-report
+/playwright/.cache
 
 # production
+/out
 /build
+/.next
+next-env.d.ts
+*.tsbuildinfo
 
 # misc
 .DS_Store

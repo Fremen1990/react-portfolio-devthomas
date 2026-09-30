@@ -25,7 +25,8 @@ html.skin-terminal {
   --glow: none;
   --radius-control: 2px;
   --radius-surface: 4px;
-  --font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+  --font:
+    var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
     monospace;
 }
 
@@ -66,7 +67,9 @@ html.skin-terminal.dark-theme {
 :where(html.skin-terminal) body {
   font-size: 15px;
   line-height: 1.7;
-  font-feature-settings: "calt" 1, "liga" 1;
+  font-feature-settings:
+    "calt" 1,
+    "liga" 1;
 }
 
 @media (min-width: 801px) {
@@ -175,6 +178,12 @@ html.skin-terminal.dark-theme {
   background: transparent;
 }
 
+/* The standard skin sets the >_ button in the system monospace; here it
+   matches the rest of the page. */
+:where(html.skin-terminal) .skin-toggle {
+  font-family: var(--font);
+}
+
 /* ---------- Hero: a boot sequence ---------- */
 
 :where(html.skin-terminal) .hero {
@@ -187,7 +196,9 @@ html.skin-terminal.dark-theme {
   border: 1px solid var(--separator);
   border-radius: var(--radius-surface);
   background: var(--surface);
-  box-shadow: var(--glow), 0 30px 80px -40px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    var(--glow),
+    0 30px 80px -40px rgba(0, 0, 0, 0.6);
 }
 
 /* Window chrome: three dots and a title. */
@@ -387,7 +398,9 @@ html.skin-terminal.dark-theme .hero-portrait {
   border: 1px solid var(--separator);
   border-radius: var(--radius-surface);
   background: var(--surface);
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
 }
 
 :where(html.skin-terminal) .contribution:hover {

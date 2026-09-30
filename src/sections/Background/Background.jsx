@@ -1,6 +1,5 @@
 import React from "react";
 import { profile } from "../../content/publicProfile";
-import "./Background.css";
 
 const ArchiveLinks = ({ links }) => {
   if (!links.length) {

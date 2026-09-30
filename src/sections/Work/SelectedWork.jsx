@@ -1,6 +1,5 @@
 import React from "react";
 import { profile } from "../../content/publicProfile";
-import "./SelectedWork.css";
 
 export const SelectedWork = () => {
   return (

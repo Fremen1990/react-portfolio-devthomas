@@ -1,6 +1,7 @@
 import React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { usePathname } from "next/navigation";
+import { vi } from "vitest";
 import NavBar from "./NavBar";
 import { Hero } from "../Hero/Hero";
 import { SectionBand } from "../SectionBand/SectionBand";
@@ -98,15 +99,13 @@ beforeEach(() => {
     "light-theme",
     "skin-terminal"
   );
-  document
-    .querySelectorAll("link[data-skin-font]")
-    .forEach((link) => link.remove());
   window.history.replaceState(
     null,
     "",
     `${window.location.pathname}${window.location.search}`
   );
-  Element.prototype.scrollIntoView = jest.fn();
+  Element.prototype.scrollIntoView = vi.fn();
+  vi.mocked(usePathname).mockReturnValue("/");
   installMatchMedia();
 });
 
@@ -309,7 +308,7 @@ test("theme control stores the chosen appearance", () => {
   document.documentElement.classList.remove("dark-theme", "light-theme");
 });
 
-test("the standard style is the default and loads no extra font", () => {
+test("the standard style is the default", () => {
   render(<NavBar />);
 
   const skin = screen.getByRole("button", {
@@ -317,7 +316,7 @@ test("the standard style is the default and loads no extra font", () => {
   });
   expect(skin).toHaveAttribute("aria-pressed", "false");
   expect(document.documentElement).not.toHaveClass("skin-terminal");
-  expect(document.querySelector("link[data-skin-font]")).toBeNull();
+  expect(localStorage.getItem("portfolio-skin")).toBeNull();
 });
 
 test("style control switches to terminal, stores it, and switches back", () => {
@@ -331,19 +330,11 @@ test("style control switches to terminal, stores it, and switches back", () => {
   expect(skin).toHaveAttribute("aria-pressed", "true");
   expect(skin).toHaveAttribute("aria-label", "Switch to standard style");
   expect(localStorage.getItem("portfolio-skin")).toBe("terminal");
-  expect(
-    document.querySelectorAll('link[data-skin-font="terminal"]')
-  ).toHaveLength(1);
 
   fireEvent.click(skin);
   expect(document.documentElement).not.toHaveClass("skin-terminal");
   expect(skin).toHaveAttribute("aria-pressed", "false");
   expect(localStorage.getItem("portfolio-skin")).toBeNull();
-
-  fireEvent.click(skin);
-  expect(
-    document.querySelectorAll('link[data-skin-font="terminal"]')
-  ).toHaveLength(1);
 });
 
 test("style and theme are independent choices", () => {
@@ -371,7 +362,7 @@ test("a saved terminal style is shown as selected", () => {
 
 test("choosing a section link closes the menu, focuses its heading, and sets the hash", () => {
   installMatchMedia({ desktop: false });
-  const focus = jest.spyOn(HTMLElement.prototype, "focus");
+  const focus = vi.spyOn(HTMLElement.prototype, "focus");
   renderPage();
 
   const menu = screen.getByRole("button", { name: "Menu" });
@@ -449,4 +440,49 @@ test("the home brand link focuses the hero heading", () => {
   expect(window.location.hash).toBe("#home");
   expect(document.getElementById("home-heading")).toHaveFocus();
   expect(Element.prototype.scrollIntoView).toHaveBeenCalledTimes(1);
+});
+
+test("the hero's section link scrolls and focuses like the header links", () => {
+  renderPage();
+
+  const explore = screen.getByRole("link", { name: "Explore selected work" });
+  expect(fireEvent.click(explore)).toBe(false);
+
+  expect(window.location.hash).toBe("#work");
+  expect(document.getElementById("work-heading")).toHaveFocus();
+  expect(Element.prototype.scrollIntoView).toHaveBeenCalledTimes(1);
+});
+
+test("in-page links without a section heading keep native behavior", () => {
+  render(
+    <>
+      <a href="#main">Skip to content</a>
+      <NavBar />
+      <main id="main">Main content</main>
+    </>
+  );
+
+  const skip = screen.getByRole("link", { name: "Skip to content" });
+  expect(fireEvent.click(skip)).toBe(true);
+  expect(Element.prototype.scrollIntoView).not.toHaveBeenCalled();
+});
+
+test("off the home page, the brand and section links lead back to the home page", () => {
+  vi.mocked(usePathname).mockReturnValue("/work/example/");
+  render(<NavBar />);
+
+  expect(screen.getByRole("link", { name: "Tomasz Stanisz" })).toHaveAttribute(
+    "href",
+    "/"
+  );
+  for (const [name, href] of [
+    ["Work", "/#work"],
+    ["Approach", "/#approach"],
+    ["Background", "/#about"],
+    ["Contact", "/#contact"],
+  ]) {
+    const link = screen.getByRole("link", { name });
+    expect(link).toHaveAttribute("href", href);
+    expect(link).not.toHaveAttribute("aria-current");
+  }
 });

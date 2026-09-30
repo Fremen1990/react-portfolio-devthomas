@@ -13,24 +13,10 @@ jobs:
     name: Build and Push
     steps:
       - name: git-checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          # Node 24 is the Active LTS line (Krypton). 24.21.0 bundles npm 11.19.0,
-          # which satisfies package.json engines and .npmrc engine-strict.
-          # Node 18 is end of life and is no longer used.
-          node-version: "24.21.0"
-
-      - name: Install all dependencies
-        run: npm ci
-
-      - name: Test
-        run: npm test -- --watchAll=false --runInBand
-
-      - name: Build
-        run: npm run build
+      - name: Install, check and build
+        uses: ./.github/actions/check
 
       - name: Push
         # develop@ac113f6 (2025-02-13). Same REPO/BRANCH/FOLDER/GITHUB_TOKEN/MESSAGE
@@ -39,6 +25,6 @@ jobs:
         env:
           REPO: self
           BRANCH: build # The branch name where you want to push the assets
-          FOLDER: build # The directory where your assets are generated
+          FOLDER: out # next build writes the static export here
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ({sha}) {msg}" # The commit message

@@ -1,6 +1,5 @@
 import React from "react";
-import { profile } from "../content/publicProfile";
-import "./footer.css";
+import { profile } from "../../content/publicProfile";
 
 const FooterPanel = () => {
   return (

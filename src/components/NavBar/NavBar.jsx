@@ -1,32 +1,27 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { profile } from "../../content/publicProfile";
 import { scrollToSection } from "../../utils/scrollToSection";
 import {
   applyTheme,
-  currentTheme,
   paintThemeColor,
   readStoredTheme,
 } from "../../utils/theme";
-import { applySkin, currentSkin } from "../../utils/skin";
-import "./navbar.css";
+import { applySkin } from "../../utils/skin";
+import { useMediaQuery, usePreferences } from "../../utils/preferences";
 
 const links = [
-  { href: "#work", label: "Work" },
-  { href: "#approach", label: "Approach" },
-  { href: "#about", label: "Background" },
-  { href: "#contact", label: "Contact" },
+  { id: "work", label: "Work" },
+  { id: "approach", label: "Approach" },
+  { id: "about", label: "Background" },
+  { id: "contact", label: "Contact" },
 ];
 
-const sectionIds = links.map((link) => link.href.slice(1));
+const sectionIds = links.map((link) => link.id);
 const DESKTOP_NAV_QUERY = "(min-width: 801px)";
-
-const readDesktopNav = () => {
-  try {
-    return window.matchMedia(DESKTOP_NAV_QUERY).matches;
-  } catch (error) {
-    return true;
-  }
-};
 
 const currentSectionId = () => {
   const header = document.querySelector(".site-header");
@@ -48,6 +43,13 @@ const currentSectionId = () => {
   });
   return current;
 };
+
+const isModifiedClick = (event) =>
+  event.metaKey ||
+  event.ctrlKey ||
+  event.shiftKey ||
+  event.altKey ||
+  event.button !== 0;
 
 const ThemeIcon = ({ name }) => {
   if (name === "sun") {
@@ -86,11 +88,14 @@ const ThemeIcon = ({ name }) => {
 };
 
 const NavBar = () => {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
-  const [dark, setDark] = useState(() => currentTheme() === "dark");
-  const [terminal, setTerminal] = useState(() => currentSkin() === "terminal");
-  const [isDesktop, setIsDesktop] = useState(readDesktopNav);
+  const { theme, skin } = usePreferences();
+  const dark = theme === "dark";
+  const terminal = skin === "terminal";
+  const isDesktop = useMediaQuery(DESKTOP_NAV_QUERY, true);
   const menuButtonRef = useRef(null);
 
   useEffect(() => {
@@ -116,6 +121,10 @@ const NavBar = () => {
   }, [open, isDesktop]);
 
   useEffect(() => {
+    if (!isHome) {
+      return undefined;
+    }
+
     const onPopState = () => {
       const hash = window.location.hash;
       if (!hash) {
@@ -126,26 +135,40 @@ const NavBar = () => {
 
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
-  }, []);
+  }, [isHome]);
 
+  // Section links outside the header, such as the hero's "Explore selected
+  // work", are rendered on the server without handlers. Route them through the
+  // same scroll-and-focus behaviour as the header links.
   useEffect(() => {
-    let media;
-    try {
-      media = window.matchMedia(DESKTOP_NAV_QUERY);
-    } catch (error) {
-      return undefined;
-    }
-    if (!media || typeof media.addEventListener !== "function") {
+    if (!isHome) {
       return undefined;
     }
 
-    const onChange = (event) => setIsDesktop(event.matches);
-    setIsDesktop(media.matches);
-    media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
-  }, []);
+    const onClick = (event) => {
+      const link =
+        event.target instanceof Element
+          ? event.target.closest('a[href^="#"]')
+          : null;
+      if (!link || link.closest(".site-header")) {
+        return;
+      }
+      const hash = link.getAttribute("href");
+      if (!document.getElementById(`${hash.slice(1)}-heading`)) {
+        return;
+      }
+      scrollToSection(event, hash);
+    };
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [isHome]);
 
   useEffect(() => {
+    if (!isHome) {
+      return undefined;
+    }
+
     let frame = 0;
 
     const update = () => {
@@ -165,7 +188,7 @@ const NavBar = () => {
       window.removeEventListener("resize", update);
       window.removeEventListener("hashchange", update);
     };
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     let media;
@@ -180,58 +203,61 @@ const NavBar = () => {
         return;
       }
       applyTheme(event.matches ? "dark" : "light");
-      setDark(event.matches);
     };
 
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
   }, []);
 
+  // The server renders the light theme-color. Repaint it for the visitor's
+  // theme and skin after hydration, and after each page navigation.
+  useEffect(() => {
+    paintThemeColor();
+  }, [pathname, theme, skin]);
+
   const close = () => setOpen(false);
 
   const closeOnPlainClick = (event) => {
-    if (
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey ||
-      event.button !== 0
-    ) {
+    if (isModifiedClick(event)) {
       return;
     }
     close();
   };
 
   const toggleTheme = () => {
-    const next = dark ? "light" : "dark";
-    applyTheme(next, { persist: true });
-    setDark(next === "dark");
+    applyTheme(dark ? "light" : "dark", { persist: true });
   };
 
   const toggleSkin = () => {
-    const next = terminal ? "default" : "terminal";
-    applySkin(next);
-    paintThemeColor();
-    setTerminal(next === "terminal");
+    applySkin(terminal ? "default" : "terminal");
   };
 
   return (
     <header className="site-header">
       <div className="page-wrap site-header-inner">
-        <a
-          className="brand"
-          href="#home"
-          onClick={(event) => {
-            if (scrollToSection(event, "#home")) {
-              close();
-            }
-          }}
-        >
-          <span className="brand-mark" aria-hidden="true">
-            TS
-          </span>
-          <span className="brand-name">{profile.name}</span>
-        </a>
+        {isHome ? (
+          <a
+            className="brand"
+            href="#home"
+            onClick={(event) => {
+              if (scrollToSection(event, "#home")) {
+                close();
+              }
+            }}
+          >
+            <span className="brand-mark" aria-hidden="true">
+              TS
+            </span>
+            <span className="brand-name">{profile.name}</span>
+          </a>
+        ) : (
+          <Link className="brand" href="/" onClick={closeOnPlainClick}>
+            <span className="brand-mark" aria-hidden="true">
+              TS
+            </span>
+            <span className="brand-name">{profile.name}</span>
+          </Link>
+        )}
         <nav id="site-nav" className={open ? "site-nav is-open" : "site-nav"}>
           <div
             id="site-nav-links"
@@ -239,15 +265,26 @@ const NavBar = () => {
             hidden={!isDesktop && !open}
           >
             {links.map((link) => {
-              const current = activeSection === link.href.slice(1);
+              if (!isHome) {
+                return (
+                  <Link
+                    key={link.id}
+                    href={`/#${link.id}`}
+                    onClick={closeOnPlainClick}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+              const current = activeSection === link.id;
               return (
                 <a
-                  key={link.href}
-                  href={link.href}
+                  key={link.id}
+                  href={`#${link.id}`}
                   className={current ? "is-current" : undefined}
                   aria-current={current ? "true" : undefined}
                   onClick={(event) => {
-                    if (scrollToSection(event, link.href)) {
+                    if (scrollToSection(event, `#${link.id}`)) {
                       close();
                     }
                   }}
