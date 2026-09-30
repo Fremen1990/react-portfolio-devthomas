@@ -1,6 +1,6 @@
 # Fonts for link-preview cards
 
-Used only at build time by `src/app/look/[look]/card.png/route.tsx`, which
+Used only at build time by `src/app/look/[look]/card.jpg/route.tsx`, which
 renders the preview images with `next/og`. That renderer reads TTF, not the
 WOFF2 files `next/font` serves to browsers.
 

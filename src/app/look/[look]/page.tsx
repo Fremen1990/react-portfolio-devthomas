@@ -29,7 +29,7 @@ export async function generateMetadata({
     // Search engines should treat these as the home page.
     canonical: "/",
     image: {
-      url: `${path}card.png`,
+      url: `${path}card.jpg`,
       alt: `${profile.name}, ${profile.headline}. Portfolio in the ${look.label}.`,
     },
   });
