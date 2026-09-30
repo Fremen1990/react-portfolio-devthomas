@@ -3,7 +3,12 @@ import AxeBuilder from "@axe-core/playwright";
 import sharp from "sharp";
 
 // Every exported page. Add new routes here as they ship.
-const PAGES = ["/", "/colophon/", "/work/orange-cms/"];
+const PAGES = [
+  "/",
+  "/colophon/",
+  "/work/orange-cms/",
+  "/work/orange-e2e-testing/",
+];
 
 const SKINS = ["standard", "terminal"] as const;
 const THEMES = ["light", "dark"] as const;
