@@ -1,4 +1,5 @@
 import { currentSkin } from "./skin";
+import { notifyPreferencesChanged } from "./preferenceEvents";
 
 export const THEME_KEY = "portfolio-theme";
 
@@ -36,11 +37,16 @@ export const currentTheme = () => {
   return systemPrefersDark() ? "dark" : "light";
 };
 
+// The inline script in src/app/layout.tsx creates this tag before paint.
 export const paintThemeColor = (theme = currentTheme()) => {
   const colors = THEME_COLORS[currentSkin()] || THEME_COLORS.default;
-  document
-    .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", colors[theme]);
+  let meta = document.querySelector('meta[name="theme-color"]');
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "theme-color";
+    document.head.appendChild(meta);
+  }
+  meta.setAttribute("content", colors[theme]);
 };
 
 export const applyTheme = (theme, { persist = false } = {}) => {
@@ -59,4 +65,5 @@ export const applyTheme = (theme, { persist = false } = {}) => {
   }
 
   paintThemeColor(currentTheme());
+  notifyPreferencesChanged();
 };

@@ -98,8 +98,7 @@
 }
 
 .skin-toggle {
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
-    monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.02em;

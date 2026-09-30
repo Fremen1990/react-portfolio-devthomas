@@ -8,57 +8,69 @@ CV: [https://cv.devthomas.pl/](https://cv.devthomas.pl/)
 
 ## Setup
 
-The app is a React client built with Create React App (`react-scripts`). Public copy lives in `src/content/publicProfile.js`.
+The site is built with Next.js (App Router) as a static export: `next build` writes one HTML file per page to `out/`, and Hostinger serves those files. Public copy lives in `src/content/publicProfile.js`.
 
 Use Node.js 24, the current Active LTS (Krypton), and npm 11. `package.json` `engines` accepts Node `>=24.15.0 <25` and npm `>=11 <12`. `.npmrc` sets `engine-strict=true`. The lockfile is npm's `package-lock.json`; install with npm, not another package manager.
 
 ```bash
 nvm use 24
 npm ci
-npm start
+npm run dev
 ```
 
-`npm start` serves the development build at [http://localhost:3000](http://localhost:3000).
+`npm run dev` serves the development build at [http://localhost:3000](http://localhost:3000). `npm run preview` serves the last static build from `out/`.
 
 ## Checks
 
 ```bash
-npm test -- --watchAll=false
-npm run build
+npm run lint
 npm run prettier:check
+npm test
+npm run build
+npx playwright install chromium   # once
+npm run test:e2e
 ```
 
-`npm test` runs the navigation and theme suite once and exits. `npm run build` writes the production bundle to `build/`. GitHub Actions runs the tests before the build on Node 24.21.0. The workflow does not set `CI=false`.
+- `npm run lint` runs ESLint with `eslint-config-next` (React, hooks, accessibility and Next.js rules).
+- `npm test` runs the Vitest unit suite once (`npm run test:watch` keeps it running).
+- `npm run build` writes the static site to `out/`.
+- `npm run test:e2e` serves `out/` and runs the Playwright suite in `e2e/`: metadata and Open Graph tags on every page, the not-found page, reading without JavaScript, the saved skin and theme before paint, `theme-color`, the hero link, no console errors, no sideways scroll at 320px, and an axe accessibility scan in both skins and both themes. Build first.
 
-The publish step pushes the `build/` directory to the `build` branch. That action is pinned to commit `ac113f6bfe8896e85a373534242c949a7ea74c98`. Do not run it locally as part of a normal check.
+GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.github/actions/check/`. `ci.yml` runs them on every pull request. `publish.yml` runs them on `main` and then pushes `out/` to the `build` branch, which Hostinger serves. The publish action is pinned to commit `ac113f6bfe8896e85a373534242c949a7ea74c98`. Do not run it locally as part of a normal check.
 
 ## Active structure
 
-- `public/index.html` — document metadata, the saved-theme bootstrap, and a no-JavaScript fallback with name, role, CV, and email
-- `src/App.js` — Hero, Selected work, How I work, Background, Contact
+- `src/app/layout.tsx` — the page shell: fonts (`next/font`, self-hosted at build), the inline script that applies a saved theme and skin before first paint, the header and footer, and every stylesheet in cascade order
+- `src/app/page.tsx` — the home page: Hero, Selected work, How I work, Background, Contact
+- `src/app/not-found.tsx` — exported as `out/404.html`
+- `src/lib/metadata.ts` — title, description, canonical and Open Graph tags for each page
 - `src/content/publicProfile.js` — the public wording and links
-- `src/components/NavBar/` — section navigation, mobile menu, and theme control
+- `src/components/NavBar/` — section navigation, mobile menu, and the theme and style controls (the only client component)
 - `src/utils/scrollToSection.js` — in-page navigation, fragment history, and destination focus
 - `src/utils/theme.js` — light/dark choice in `localStorage`, otherwise the operating-system preference
 - `src/utils/skin.js` — standard or Terminal style in `localStorage`; `src/design/skin-terminal.css` holds every Terminal rule, scoped under `html.skin-terminal`
-- `src/pages/Work/`, `src/pages/Experience/`, `src/pages/Background/`, `src/pages/Contact/` — the four sections after the hero
-- `src/FooterPanel/` — copyright and GitHub
+- `src/utils/preferences.js` — keeps controls in sync with the current theme and skin, and lets the server render before either is known
+- `src/sections/Work/`, `src/sections/Experience/`, `src/sections/Background/`, `src/sections/Contact/` — the four sections after the hero, rendered to static HTML
+- `src/components/FooterPanel/` — copyright and GitHub
+
+All CSS is imported in `src/app/layout.tsx` and nowhere else, with `skin-terminal.css` last. The Terminal rules use `:where()`, so they win on order, not specificity. Next.js loads page-level CSS after layout CSS, so a component importing its own stylesheet would load after the skin and override it.
 
 ## Behavior
 
-- Section links keep their fragment URLs. A normal click moves focus to that section's heading and scrolls it below the sticky header. Modified clicks (Command, Control, Shift, Alt, or a non-primary button) are left to the browser.
+- Section links keep their fragment URLs. A normal click moves focus to that section's heading and scrolls it below the sticky header. This includes section links outside the header, such as the hero's "Explore selected work". Off the home page, the section links and the brand lead back to `/`. Modified clicks (Command, Control, Shift, Alt, or a non-primary button) are left to the browser.
 - Back returns to the previous fragment.
 - When the operating system asks for reduced motion, the same navigation jumps instead of animating.
 - Escape closes the mobile menu only while focus is inside that open menu, then returns focus to Menu. Escape elsewhere does not move focus.
 - Below 801px the closed menu is not in the tab order. At 801px and above the section links stay available, including after a resize from an open or closed mobile menu.
 - The theme button stores `dark` or `light` under `portfolio-theme`. With nothing stored, the page follows `prefers-color-scheme`.
-- The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `public/index.html` applies a saved skin before first paint. JetBrains Mono loads only when Terminal is used.
+- The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `src/app/layout.tsx` applies a saved skin before first paint. JetBrains Mono is self-hosted and not preloaded, so the browser downloads it only when Terminal is used.
+- The inline script also creates the `theme-color` meta tag for the current skin and theme, and `paintThemeColor` updates it. It is not part of Next's metadata, because React replaces a server-rendered meta tag whose content changed.
 - Each "Scope and approach" control is a native disclosure. All three start closed and can stay open independently. The same is true of Earlier projects and Earlier training.
-- Without JavaScript, the fallback in `public/index.html` still shows the name, role, CV, and email.
+- Every page is pre-rendered HTML, so the whole page reads without JavaScript. The theme and style controls need it.
 
 ## Verification
 
-Automated coverage is the Jest suite above, plus a production build. It checks focus after Escape and after choosing a section, hash updates, Back, reduced motion, closed-menu removal from keyboard navigation, desktop links after a resize, and the saved theme. It does not replace a browser pass.
+The Vitest suite checks focus after Escape and after choosing a section, hash updates, Back, reduced motion, closed-menu removal from keyboard navigation, desktop links after a resize, the saved theme and skin, the hero's section link, and links off the home page. The Playwright suite covers the built site in a real browser. Neither replaces a manual browser pass.
 
 Look at 1440, 768, 390, and 320px, and at both sides of the 801px navigation switch. Check both themes, zoom, the long email, open disclosures, and that the page does not scroll sideways.
 
