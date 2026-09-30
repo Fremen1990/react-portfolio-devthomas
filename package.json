@@ -19,6 +19,9 @@
     "prettier:check": "prettier --check src e2e *.mjs *.mts *.ts .github"
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.3.7",
     "next": "^16.3.7",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
@@ -29,6 +32,7 @@
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
+    "@types/mdx": "^2.0.14",
     "@types/node": "^26.6.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
@@ -37,6 +41,7 @@
     "eslint-config-next": "^16.3.7",
     "jsdom": "^30.1.1",
     "prettier": "^3.9.9",
+    "remark-gfm": "^4.0.1",
     "serve": "^14.2.6",
     "typescript": "^6.0.3",
     "vitest": "^5.0.2"

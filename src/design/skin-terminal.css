@@ -750,3 +750,61 @@ html.skin-terminal.dark-theme .hero-portrait {
   color: var(--accent);
   box-shadow: var(--glow);
 }
+
+/* ---------- Long-form pages: a README in the terminal ---------- */
+
+:where(html.skin-terminal) .prose h1 {
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .prose h1::before {
+  content: "# " / "";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .prose h2 {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+:where(html.skin-terminal) .prose h2::before {
+  content: "## " / "";
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .prose ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+:where(html.skin-terminal) .prose ul li {
+  position: relative;
+  padding-left: 1.6em;
+}
+
+:where(html.skin-terminal) .prose ul li::before {
+  content: "→" / "";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .prose strong {
+  color: var(--accent-2);
+}
+
+:where(html.skin-terminal) .prose code {
+  border-style: dashed;
+  border-radius: 2px;
+  background: var(--surface-2);
+  color: var(--accent-3);
+  font-family: var(--font);
+}
+
+:where(html.skin-terminal) .prose th,
+:where(html.skin-terminal) .prose td {
+  border-bottom-style: dashed;
+}

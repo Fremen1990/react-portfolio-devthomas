@@ -44,7 +44,9 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 
 - `src/app/layout.tsx` — the page shell: fonts (`next/font`, self-hosted at build), the inline script that applies a saved theme and skin before first paint, the header and footer, and every stylesheet in cascade order
 - `src/app/page.tsx` — the home page: Hero, Selected work, How I work, Background, Contact
+- `src/app/colophon/page.mdx` — "How this site is built", linked from the footer and the palette. Its performance table is a dated snapshot; re-measure before changing it.
 - `src/app/not-found.tsx` — exported as `out/404.html`
+- `src/mdx-components.tsx` — how MDX pages render: one article in the prose style (`src/components/Prose/prose.css`), tables that scroll on their own, and external links in a new tab
 - `src/lib/metadata.ts` — title, description, canonical and Open Graph tags for each page
 - `src/content/publicProfile.ts` — the public wording and links
 - `src/components/NavBar/` — section navigation, mobile menu, and the theme and style controls (the only client component)

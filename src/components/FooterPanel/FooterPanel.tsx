@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { profile } from "../../content/publicProfile";
 
 const FooterPanel = () => {
@@ -7,7 +8,8 @@ const FooterPanel = () => {
       <div className="page-wrap site-footer-inner">
         <p>© Tomasz Stanisz {new Date().getFullYear()}</p>
         <p className="footer-note">
-          Two skins, one codebase · switch with the &gt;_ button
+          Two skins, one codebase ·{" "}
+          <Link href="/colophon/">How this site is built</Link>
         </p>
         <a
           href={profile.links.github}
