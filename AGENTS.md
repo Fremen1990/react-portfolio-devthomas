@@ -55,7 +55,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - **Before-paint script.** The inline script in `layout.tsx` applies the theme and skin before paint (share-link `?skin=`/`?theme=` first, then the visit's link choice in `sessionStorage`, then saved choices), and owns the `theme-color` meta tag. Keep its colours in sync with `THEME_COLORS` in `src/utils/theme.ts`. Don't add `themeColor` to Next metadata, because React would duplicate the tag.
 - **Client code.** Keep content in Server Components. Add `"use client"` only where interaction needs it.
 - **Section links.** In-page section links go through `scrollToSection`, which moves focus to the section's heading. Off the home page they point to `/#id`.
-- **Per-page metadata.** Every page sets it with `pageMetadata()` from `src/lib/metadata.ts`.
+- **Per-page metadata.** Every page sets it with `pageMetadata()` from `src/lib/metadata.ts`. New public pages also belong in `src/app/sitemap.ts` (the Playwright suite checks the sitemap matches `PAGES`).
 - **Accessibility.** Keyboard access, visible focus, reduced motion, and no sideways scroll at 320px are all required. The axe scans must stay at zero violations.
 
 ## Content

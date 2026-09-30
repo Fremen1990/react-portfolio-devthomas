@@ -47,6 +47,8 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 - `src/app/colophon/page.mdx` — "How this site is built", linked from the footer and the palette. Its performance table is a dated snapshot; re-measure before changing it.
 - `src/app/work/[slug]/page.tsx` — case study pages. Facts and the published flag live in `src/content/work/studies.ts`, the text in `src/content/work/<slug>.mdx` (mapped in `bodies.ts`). A published study gets its page, a "Read the case study" link under its project, and a palette command (`cat work/<slug>.md`). `src/components/Flow/` draws the step diagrams.
 - `src/app/look/[look]/` — the home page per look (`page.tsx`) and its 1200×630 preview card (`card.jpg/route.tsx`, drawn with `next/og` using the subset TTF fonts in `src/assets/fonts/`). The looks are listed in `src/content/looks.ts`.
+- `src/app/sitemap.ts` — `out/sitemap.xml`: the home page, the case studies and the colophon (not the `/look/` copies). `public/robots.txt` points to it.
+- `src/lib/structuredData.ts` — schema.org JSON-LD: a `Person` and `WebSite` on the home page and its look copies, an `Article` on each case study. Rendered by `src/components/JsonLd/`, with `<` escaped.
 - `src/app/not-found.tsx` — exported as `out/404.html`
 - `src/mdx-components.tsx` — how MDX pages render: one article in the prose style (`src/components/Prose/prose.css`), tables that scroll on their own, and external links in a new tab
 - `src/lib/metadata.ts` — title, description, canonical and Open Graph tags for each page

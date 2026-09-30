@@ -716,3 +716,58 @@ test.describe("look pages", () => {
     );
   });
 });
+
+test.describe("search basics", () => {
+  test("the sitemap lists every page except the look copies", async ({
+    request,
+  }) => {
+    const response = await request.get("/sitemap.xml");
+    expect(response.status()).toBe(200);
+    const locations = [
+      ...(await response.text()).matchAll(/<loc>(.*?)<\/loc>/g),
+    ]
+      .map((match) => match[1])
+      .sort();
+    expect(locations).toEqual(
+      PAGES.map((path) => `https://devthomas.pl${path}`).sort()
+    );
+  });
+
+  test("robots.txt points to the sitemap", async ({ request }) => {
+    const robots = await (await request.get("/robots.txt")).text();
+    expect(robots).toContain("Sitemap: https://devthomas.pl/sitemap.xml");
+  });
+
+  const jsonLd = async (page: Page) =>
+    JSON.parse(
+      (await page
+        .locator('script[type="application/ld+json"]')
+        .textContent()) ?? "{}"
+    );
+
+  for (const path of ["/", "/look/terminal-dark/"]) {
+    test(`${path} describes Tomasz as a Person`, async ({ page }) => {
+      await page.goto(path);
+      const data = await jsonLd(page);
+      const person = data["@graph"].find(
+        (node: { "@type": string }) => node["@type"] === "Person"
+      );
+      expect(person).toMatchObject({
+        name: "Tomasz Stanisz",
+        jobTitle: "Software Engineer & Tech Lead",
+      });
+      expect(person.sameAs).toContain(
+        "https://www.linkedin.com/in/tomasz-stanisz/"
+      );
+    });
+  }
+
+  test("a case study is described as an Article", async ({ page }) => {
+    await page.goto("/work/orange-cms/");
+    expect(await jsonLd(page)).toMatchObject({
+      "@type": "Article",
+      headline: "A CMS the backend can extend without frontend changes",
+      author: { name: "Tomasz Stanisz" },
+    });
+  });
+});
