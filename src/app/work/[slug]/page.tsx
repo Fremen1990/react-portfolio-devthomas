@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { pageMetadata } from "@/lib/metadata";
 import { caseStudyPath, publishedCaseStudies } from "@/content/work/studies";
 import { caseStudyBodies } from "@/content/work/bodies";
+import { JsonLd } from "@/components/JsonLd/JsonLd";
+import { caseStudyStructuredData } from "@/lib/structuredData";
 
 type Params = { slug: string };
 
@@ -58,6 +60,7 @@ export default async function CaseStudyPage({
 
   return (
     <article className="page-section case-study">
+      <JsonLd data={caseStudyStructuredData(study)} />
       <div className="page-wrap prose">
         <p className="case-study-kicker">
           <Link href="/#work">Selected work</Link> · Case study
