@@ -17,6 +17,7 @@ import {
 } from "../../utils/theme";
 import { applySkin } from "../../utils/skin";
 import { useMediaQuery, usePreferences } from "../../utils/preferences";
+import { greetDevelopers } from "../../utils/consoleGreeting";
 
 const links = [
   { id: "work", label: "Work" },
@@ -212,6 +213,12 @@ const NavBar = () => {
 
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") {
+      greetDevelopers();
+    }
   }, []);
 
   // The server renders the light theme-color. Repaint it for the visitor's
