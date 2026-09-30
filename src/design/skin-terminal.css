@@ -5,7 +5,7 @@
  * work, kept restrained. Light theme reads as a green-bar printout.
  *
  * Optional skin: every rule is scoped under html.skin-terminal, which the
- * >_ button in the header toggles (src/utils/skin.js). Without that class
+ * >_ button in the header toggles (src/utils/skin.ts). Without that class
  * this file has no effect and the standard design shows.
  */
 

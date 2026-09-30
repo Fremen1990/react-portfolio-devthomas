@@ -1,7 +1,7 @@
 import React from "react";
-import { profile } from "../../content/publicProfile";
+import { profile, type ExternalLink } from "../../content/publicProfile";
 
-const ArchiveLinks = ({ links }) => {
+const ArchiveLinks = ({ links }: { links: ExternalLink[] }) => {
   if (!links.length) {
     return null;
   }

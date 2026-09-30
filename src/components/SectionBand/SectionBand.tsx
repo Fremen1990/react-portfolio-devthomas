@@ -1,6 +1,8 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 
-export const SectionBand = ({ id, title, children }) => {
+type SectionBandProps = { id: string; title: string; children: ReactNode };
+
+export const SectionBand = ({ id, title, children }: SectionBandProps) => {
   const headingId = `${id}-heading`;
 
   return (

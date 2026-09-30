@@ -1,19 +1,21 @@
-import { currentSkin } from "./skin";
+import { currentSkin, type Skin } from "./skin";
 import { notifyPreferencesChanged } from "./preferenceEvents";
 
 export const THEME_KEY = "portfolio-theme";
 
+export type Theme = "light" | "dark";
+
 // Browser-chrome colour for each skin and theme; matches each --canvas.
-const THEME_COLORS = {
+const THEME_COLORS: Record<Skin, Record<Theme, string>> = {
   default: { light: "#f7f8fa", dark: "#10161b" },
   terminal: { light: "#f3f1e7", dark: "#07090a" },
 };
 
-export const readStoredTheme = () => {
+export const readStoredTheme = (): Theme | null => {
   try {
     const value = localStorage.getItem(THEME_KEY);
     return value === "dark" || value === "light" ? value : null;
-  } catch (error) {
+  } catch {
     return null;
   }
 };
@@ -21,12 +23,12 @@ export const readStoredTheme = () => {
 export const systemPrefersDark = () => {
   try {
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  } catch (error) {
+  } catch {
     return false;
   }
 };
 
-export const currentTheme = () => {
+export const currentTheme = (): Theme => {
   const root = document.documentElement;
   if (root.classList.contains("dark-theme")) {
     return "dark";
@@ -38,9 +40,11 @@ export const currentTheme = () => {
 };
 
 // The inline script in src/app/layout.tsx creates this tag before paint.
-export const paintThemeColor = (theme = currentTheme()) => {
-  const colors = THEME_COLORS[currentSkin()] || THEME_COLORS.default;
-  let meta = document.querySelector('meta[name="theme-color"]');
+export const paintThemeColor = (theme: Theme = currentTheme()) => {
+  const colors = THEME_COLORS[currentSkin()];
+  let meta = document.querySelector<HTMLMetaElement>(
+    'meta[name="theme-color"]'
+  );
   if (!meta) {
     meta = document.createElement("meta");
     meta.name = "theme-color";
@@ -49,7 +53,10 @@ export const paintThemeColor = (theme = currentTheme()) => {
   meta.setAttribute("content", colors[theme]);
 };
 
-export const applyTheme = (theme, { persist = false } = {}) => {
+export const applyTheme = (
+  theme: Theme,
+  { persist = false }: { persist?: boolean } = {}
+) => {
   const root = document.documentElement;
 
   if (persist) {
@@ -57,7 +64,7 @@ export const applyTheme = (theme, { persist = false } = {}) => {
     root.classList.toggle("light-theme", theme === "light");
     try {
       localStorage.setItem(THEME_KEY, theme);
-    } catch (error) {
+    } catch {
       // Storage can be unavailable in private browsing.
     }
   } else {

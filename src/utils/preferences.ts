@@ -1,9 +1,9 @@
 import { useSyncExternalStore } from "react";
 import { PREFERENCES_EVENT } from "./preferenceEvents";
-import { currentTheme } from "./theme";
-import { currentSkin } from "./skin";
+import { currentTheme, type Theme } from "./theme";
+import { currentSkin, type Skin } from "./skin";
 
-const subscribe = (callback) => {
+const subscribe = (callback: () => void) => {
   document.addEventListener(PREFERENCES_EVENT, callback);
   return () => document.removeEventListener(PREFERENCES_EVENT, callback);
 };
@@ -16,22 +16,22 @@ const getSnapshot = () => `${currentTheme()}|${currentSkin()}`;
 // hydration without a mismatch warning.
 const getServerSnapshot = () => "light|default";
 
-export const usePreferences = () => {
+export const usePreferences = (): { theme: Theme; skin: Skin } => {
   const [theme, skin] = useSyncExternalStore(
     subscribe,
     getSnapshot,
     getServerSnapshot
-  ).split("|");
+  ).split("|") as [Theme, Skin];
   return { theme, skin };
 };
 
-export const useMediaQuery = (query, serverValue) =>
+export const useMediaQuery = (query: string, serverValue: boolean) =>
   useSyncExternalStore(
     (callback) => {
       let media;
       try {
         media = window.matchMedia(query);
-      } catch (error) {
+      } catch {
         return () => {};
       }
       if (!media || typeof media.addEventListener !== "function") {
@@ -43,7 +43,7 @@ export const useMediaQuery = (query, serverValue) =>
     () => {
       try {
         return window.matchMedia(query).matches;
-      } catch (error) {
+      } catch {
         return serverValue;
       }
     },
