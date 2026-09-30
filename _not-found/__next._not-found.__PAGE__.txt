@@ -1,16 +1,16 @@
 1:"$Sreact.fragment"
-2:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"OutletBoundary"]
+2:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"OutletBoundary"]
 3:"$Sreact.suspense"
-7:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"ViewportBoundary"]
-8:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"MetadataBoundary"]
-9:I[27201,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"IconMark"]
-b:I[39756,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"default"]
-c:I[37457,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"default"]
+7:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"ViewportBoundary"]
+8:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"MetadataBoundary"]
+9:I[27201,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"IconMark"]
+b:I[39756,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"default"]
+c:I[37457,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"default"]
 :HL["/_next/static/chunks/2v-_xmhirg8w2.css","style"]
 6:X
 e:X
 e:C
-f:T7ce,(function () {
+f:T8ee,(function () {
   var root = document.documentElement;
   var params = null;
   var navigation = "navigate";
@@ -25,8 +25,19 @@ f:T7ce,(function () {
   var pick = function (value, allowed) {
     return allowed.indexOf(value) === -1 ? null : value;
   };
-  var linkSkin = params && pick(params.get("skin"), ["terminal", "standard"]);
-  var linkTheme = params && pick(params.get("theme"), ["dark", "light"]);
+  // /look/<skin>-<theme>/ works like ?skin=&theme=, under the same rule.
+  var look = null;
+  if (params) {
+    look = window.location.pathname.match(
+      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+    );
+  }
+  var linkSkin =
+    (params && pick(params.get("skin"), ["terminal", "standard"])) ||
+    (look && look[1]);
+  var linkTheme =
+    (params && pick(params.get("theme"), ["dark", "light"])) ||
+    (look && look[2]);
   var read = function (storage, key) {
     try {
       return window[storage].getItem(key);
@@ -63,9 +74,9 @@ f:T7ce,(function () {
     meta.content = dark ? colors.dark : colors.light;
     document.head.appendChild(meta);
   } catch (error) {}
-})();0:{"buildId":"vKmLokp6p6tcy2-rBfocp","data":[{"rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":"$@5","staleTime":"$6","varyParams":null},{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L7",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L8",null,{"children":["$","$3",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found · Tomasz Stanisz"}],["$","meta","1",{"name":"robots","content":"noindex"}],["$","link","2",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L9","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@a","staleTime":"$6","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$6","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2v-_xmhirg8w2.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/3fntmmi971322.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/2hoc--hrax4ns.js","async":true}]],["$","html",null,{"lang":"en","translate":"no","className":"inter_c15e96cb-module__0bjUvq__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$f"}}]}],"$L10"]}]]}],"isPartial":"$@11","staleTime":"$6","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
-14:I[63831,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],"default"]
-15:I[22016,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2hoc--hrax4ns.js"],""]
+})();0:{"buildId":"5UAmkvc8W-DXynOhqUmNW","data":[{"rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":"$@5","staleTime":"$6","varyParams":null},{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L7",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L8",null,{"children":["$","$3",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found · Tomasz Stanisz"}],["$","meta","1",{"name":"robots","content":"noindex"}],["$","link","2",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L9","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@a","staleTime":"$6","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$6","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2v-_xmhirg8w2.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/3fntmmi971322.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/0nh49m42lxfc2.js","async":true}]],["$","html",null,{"lang":"en","translate":"no","className":"inter_c15e96cb-module__0bjUvq__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$f"}}]}],"$L10"]}]]}],"isPartial":"$@11","staleTime":"$6","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+14:I[63831,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],"default"]
+15:I[22016,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/0nh49m42lxfc2.js"],""]
 4:null
 10:["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L14",null,{}],["$","main",null,{"id":"main","children":["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}],"notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],[]]}]}],["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$L15",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]]}]}]
 6:300
