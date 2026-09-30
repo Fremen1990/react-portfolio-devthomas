@@ -21,6 +21,7 @@ import "@/sections/Background/Background.css";
 import "@/components/FooterPanel/footer.css";
 import "@/components/CommandPalette/palette.css";
 import "@/components/Prose/prose.css";
+import "@/components/CaseStudy/case-study.css";
 import "@/design/skin-terminal.css";
 
 // Only Latin is preloaded; Polish characters (latin-ext) still load on demand

@@ -44,6 +44,11 @@ describe("filterCommands", () => {
     expect(ids("whoami")[0]).toBe("top");
   });
 
+  test("finds published case studies", () => {
+    expect(ids("case study")).toContain("case-study-orange-cms");
+    expect(ids("cat work/orange-cms.md")[0]).toBe("case-study-orange-cms");
+  });
+
   test("returns nothing for unknown input", () => {
     expect(ids("rm -rf")).toEqual([]);
   });
@@ -64,6 +69,8 @@ test("commands call the matching action", () => {
 
   run("section-approach");
   expect(context.goToSection).toHaveBeenCalledWith("approach");
+  run("case-study-orange-cms");
+  expect(context.goToPage).toHaveBeenCalledWith("/work/orange-cms/");
   run("colophon");
   expect(context.goToPage).toHaveBeenCalledWith("/colophon/");
   run("cv");

@@ -1,0 +1,60 @@
+import { Flow } from "@/components/Flow/Flow";
+
+## The situation
+
+Orange Polska needed one internal CMS to sit in front of a growing number of legacy systems and services, each built differently. It had to stay stable and maintainable for years. There was no fixed specification: new requirements, features and integrations would keep arriving as the project went on.
+
+## Constraints
+
+- **A small team** that, at the start, knew vanilla JavaScript but not a frontend framework.
+- **Legacy systems with their own rules,** and a lot of customisation expected on top.
+- **A stack that would not lock us in.** It had to be mature enough to rely on for years, flexible enough for heavy customisation, and not so strict or unusual that new people would struggle to learn it.
+
+## Options I considered
+
+- **Vanilla JavaScript,** which the team already knew. I argued against it. For a system meant to last for years, I wanted strong type safety to keep it maintainable and bugs easy to trace.
+- **React with TypeScript,** which I recommended. Other Orange projects already used React, including the Orange TV GO streaming platform, where I also worked, and developers sometimes move between projects. A shared stack makes those moves easier.
+- **Our own components and CSS,** or **MUI with a custom palette.** We chose MUI: well-tested components we could theme, instead of building and maintaining our own.
+- **Our own forms system,** or **RJSF.** We chose RJSF, which renders forms straight from JSON Schema, and extended it with custom fields and widgets.
+
+## The decision
+
+The biggest decision was how much control to give the backend. We let the backend describe the frontend: navigation, URLs, views and forms all come from backend configuration and JSON Schema. The React app is a generic renderer for whatever the backend sends.
+
+The trade-off was debugging. When something goes wrong, the cause can sit in configuration far from the screen that shows the problem. We answered this with:
+
+- **Error logging** designed for this setup.
+- **A strict frontend/backend contract checker.** It checks what the backend sends against what the frontend expects, and logs detailed errors to the console for developers.
+- **Friendly messages for users:** a short notification explaining that something went wrong, instead of a broken screen.
+
+## How it works
+
+<Flow
+  label="How a screen is built: the backend describes it, the frontend renders it."
+  steps={[
+    {
+      title: "Backend",
+      text: "Sends configuration and JSON Schemas",
+    },
+    {
+      title: "CMS shell",
+      text: "Builds navigation, URLs and views from the configuration",
+    },
+    {
+      title: "Forms",
+      text: "RJSF renders the schemas with our custom fields and widgets on MUI",
+    },
+    {
+      title: "Data grids",
+      text: "MUI X Data Grid shows data with configured actions, including bulk operations",
+    },
+  ]}
+/>
+
+## The outcome
+
+The frontend stays out of the way. When a new resource is added, the backend usually configures it fully and it works in the frontend without changes. **Dozens of new resources have reached production without any frontend work.**
+
+## What I'd do differently
+
+I'd be stricter about customisation. Some features we rebuilt were already working in MUI or RJSF. For example, the business asked us to override default hover and keyboard behaviour. Each override is code we now maintain, and changing standard keyboard behaviour also makes an interface harder to use with a keyboard or a screen reader. I would push back on requests like that earlier.

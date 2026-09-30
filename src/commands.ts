@@ -1,6 +1,7 @@
 import { profile } from "./content/publicProfile";
 import { SITE_URL } from "./lib/metadata";
 import { sections } from "./content/navigation";
+import { caseStudyPath, publishedCaseStudies } from "./content/work/studies";
 import type { Theme } from "./utils/theme";
 import type { Skin } from "./utils/skin";
 
@@ -48,6 +49,14 @@ export const commands: Command[] = [
     keywords: [section.label, section.id],
     group: "Section",
     run: (context) => context.goToSection(section.id),
+  })),
+  ...publishedCaseStudies.map((study): Command => ({
+    id: `case-study-${study.slug}`,
+    title: `Case study: ${study.title}`,
+    alias: `cat work/${study.slug}.md`,
+    keywords: ["case study", study.company, study.stack],
+    group: "Page",
+    run: (context) => context.goToPage(caseStudyPath(study.slug)),
   })),
   {
     id: "colophon",

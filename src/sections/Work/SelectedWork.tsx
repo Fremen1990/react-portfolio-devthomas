@@ -1,5 +1,7 @@
 import React from "react";
+import Link from "next/link";
 import { profile } from "../../content/publicProfile";
+import { caseStudyFor, caseStudyPath } from "../../content/work/studies";
 
 export const SelectedWork = () => {
   return (
@@ -7,6 +9,7 @@ export const SelectedWork = () => {
       {profile.contributions.map((item) => {
         const headingId = `${item.id}-heading`;
         const hasScope = Array.isArray(item.scope) && item.scope.length > 0;
+        const caseStudy = caseStudyFor(item.id);
 
         return (
           <article
@@ -55,6 +58,18 @@ export const SelectedWork = () => {
                     ))}
                   </ul>
                 </details>
+              )}
+              {caseStudy && (
+                <p className="contribution-case-study">
+                  <Link href={caseStudyPath(caseStudy.slug)}>
+                    Read the case study
+                    <span className="visually-hidden">
+                      {" "}
+                      about {caseStudy.title}
+                    </span>{" "}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </p>
               )}
             </div>
           </article>

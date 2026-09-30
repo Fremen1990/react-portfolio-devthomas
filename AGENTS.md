@@ -43,6 +43,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - `src/commands.ts` — the ⌘K palette's commands as data, plus the filter.
 - `src/utils/` — theme, skin, preferences store, `scrollToSection`, console greeting.
 - `src/design/skin-terminal.css` — every rule of the optional Terminal skin.
+- `src/content/work/` — case studies: facts and `published` in `studies.ts`, text in `<slug>.mdx`, mapped in `bodies.ts`. Pages render at `/work/<slug>/`.
 - `e2e/site.spec.ts` — Playwright suite. Add each new route to `PAGES`.
 
 ## Rules that are easy to break

@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 // Every exported page. Add new routes here as they ship.
-const PAGES = ["/", "/colophon/"];
+const PAGES = ["/", "/colophon/", "/work/orange-cms/"];
 
 const SKINS = ["standard", "terminal"] as const;
 const THEMES = ["light", "dark"] as const;
@@ -468,4 +468,44 @@ test("the build notes page is linked from the footer and the palette", async ({
     .fill("how this site");
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/colophon\/$/);
+});
+
+test("a case study is linked from its project and from the palette", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByRole("link", {
+      name: /^Read the case study about A CMS the backend can extend without frontend changes/,
+    })
+    .click();
+  await expect(page).toHaveURL(/\/work\/orange-cms\/$/);
+  await expect(
+    page.getByRole("heading", {
+      level: 1,
+      name: "A CMS the backend can extend without frontend changes",
+    })
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("list", {
+        name: "How a screen is built: the backend describes it, the frontend renders it.",
+      })
+      .getByRole("listitem")
+  ).toHaveCount(4);
+
+  await page.getByRole("link", { name: "← Back to selected work" }).click();
+  await expect(page).toHaveURL(/\/#work$/);
+
+  await page.keyboard.press("ControlOrMeta+k");
+  await page
+    .getByRole("combobox", { name: "Search commands" })
+    .fill("cat work/orange-cms.md");
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/work\/orange-cms\/$/);
+});
+
+test("an unpublished or unknown case study is a 404", async ({ page }) => {
+  const response = await page.goto("/work/no-such-study/");
+  expect(response?.status()).toBe(404);
 });
