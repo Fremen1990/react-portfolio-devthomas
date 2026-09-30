@@ -1,37 +1,46 @@
 1:"$Sreact.fragment"
-2:I[97367,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"OutletBoundary"]
+2:I[97367,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"OutletBoundary"]
 3:"$Sreact.suspense"
-7:I[97367,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"ViewportBoundary"]
-8:I[97367,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"MetadataBoundary"]
-9:I[27201,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"IconMark"]
-b:I[39756,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"default"]
-c:I[37457,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"default"]
-10:I[63831,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],"default"]
+7:I[97367,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"ViewportBoundary"]
+8:I[97367,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"MetadataBoundary"]
+9:I[27201,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"IconMark"]
+b:I[39756,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"default"]
+c:I[37457,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"default"]
 :HL["/_next/static/chunks/1hi2iqaj007ry.css","style"]
 6:X
 e:X
 e:C
-f:T515,(function () {
+f:T701,(function () {
   var root = document.documentElement;
-  var theme = null;
-  var storedSkin = null;
-  var linkedSkin = null;
+  var params = null;
   try {
-    linkedSkin = new URLSearchParams(window.location.search).get("skin");
+    params = new URLSearchParams(window.location.search);
   } catch (error) {}
+  var pick = function (value, allowed) {
+    return allowed.indexOf(value) === -1 ? null : value;
+  };
+  var linkSkin = params && pick(params.get("skin"), ["terminal", "standard"]);
+  var linkTheme = params && pick(params.get("theme"), ["dark", "light"]);
+  var read = function (storage, key) {
+    try {
+      return window[storage].getItem(key);
+    } catch (error) {
+      return null;
+    }
+  };
   try {
-    theme = localStorage.getItem("portfolio-theme");
-    if (linkedSkin === "terminal") {
-      localStorage.setItem("portfolio-skin", "terminal");
-    }
-    if (linkedSkin === "standard") {
-      localStorage.removeItem("portfolio-skin");
-    }
-    storedSkin = localStorage.getItem("portfolio-skin");
+    if (linkSkin) sessionStorage.setItem("portfolio-link-skin", linkSkin);
+    if (linkTheme) sessionStorage.setItem("portfolio-link-theme", linkTheme);
   } catch (error) {}
-  var terminal =
-    linkedSkin === "terminal" ||
-    (linkedSkin !== "standard" && storedSkin === "terminal");
+  var skin =
+    linkSkin ||
+    pick(read("sessionStorage", "portfolio-link-skin"), ["terminal", "standard"]) ||
+    (read("localStorage", "portfolio-skin") === "terminal" ? "terminal" : "standard");
+  var theme =
+    linkTheme ||
+    pick(read("sessionStorage", "portfolio-link-theme"), ["dark", "light"]) ||
+    pick(read("localStorage", "portfolio-theme"), ["dark", "light"]);
+  var terminal = skin === "terminal";
   if (theme === "dark") root.classList.add("dark-theme");
   if (theme === "light") root.classList.add("light-theme");
   if (terminal) root.classList.add("skin-terminal");
@@ -48,17 +57,16 @@ f:T515,(function () {
     meta.content = dark ? colors.dark : colors.light;
     document.head.appendChild(meta);
   } catch (error) {}
-})();0:{"buildId":"S9wGcTIzbNNeKFaXGpkzL","data":[{"rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":"$@5","staleTime":"$6","varyParams":null},{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L7",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L8",null,{"children":["$","$3",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found · Tomasz Stanisz"}],["$","meta","1",{"name":"robots","content":"noindex"}],["$","link","2",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L9","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@a","staleTime":"$6","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$6","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1hi2iqaj007ry.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/3rod-afrrt-so.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/312asrdea6fsk.js","async":true}]],["$","html",null,{"lang":"en","translate":"no","className":"inter_c15e96cb-module__0bjUvq__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$f"}}]}],["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L10",null,{}],["$","main",null,{"id":"main","children":["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}],"notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],"$L11","$L12"]}]}],[]]}]}],"$L13"]}]}]]}]]}],"isPartial":"$@14","staleTime":"$6","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@15","rootVaryParams":null,"needsRuntimeRequest":"$@16"}
-17:I[22016,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/312asrdea6fsk.js"],""]
+})();0:{"buildId":"94SHZhf7af1-vWsgC_tM0","data":[{"rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":"$@5","staleTime":"$6","varyParams":null},{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L7",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L8",null,{"children":["$","$3",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found · Tomasz Stanisz"}],["$","meta","1",{"name":"robots","content":"noindex"}],["$","link","2",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L9","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@a","staleTime":"$6","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$6","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/1hi2iqaj007ry.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/3rod-afrrt-so.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/2b71wm42rpd3t.js","async":true}]],["$","html",null,{"lang":"en","translate":"no","className":"inter_c15e96cb-module__0bjUvq__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$f"}}]}],"$L10"]}]]}],"isPartial":"$@11","staleTime":"$6","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+14:I[63831,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],"default"]
+15:I[22016,["/_next/static/chunks/3rod-afrrt-so.js","/_next/static/chunks/2b71wm42rpd3t.js"],""]
 4:null
-11:["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}]
-12:["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]
-13:["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$L17",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]
+10:["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L14",null,{}],["$","main",null,{"id":"main","children":["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}],"notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],[]]}]}],["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$L15",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]]}]}]
 6:300
-16:true
+13:true
 6:C
-15:0
+12:0
 a:"$undefined"
 d:"$undefined"
-14:"$undefined"
+11:"$undefined"
 5:"$undefined"
