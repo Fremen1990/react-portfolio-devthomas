@@ -122,7 +122,8 @@ html.skin-terminal.dark-theme {
   font-weight: 400;
 }
 
-@media (max-width: 520px) {
+/* The prompt suffix only fits beside the name on wide screens. */
+@media (max-width: 1099px) {
   :where(html.skin-terminal) .brand-name::after {
     display: none;
   }
@@ -170,6 +171,7 @@ html.skin-terminal.dark-theme {
   content: "]" / "";
 }
 
+:where(html.skin-terminal) .palette-toggle,
 :where(html.skin-terminal) .skin-toggle,
 :where(html.skin-terminal) .theme-toggle,
 :where(html.skin-terminal) .nav-toggle {
@@ -643,4 +645,108 @@ html.skin-terminal.dark-theme .hero-portrait {
 :where(html.skin-terminal) .site-footer p:first-child::before {
   content: "exit 0 · " / "";
   color: var(--accent);
+}
+
+/* ---------- Command palette: a shell prompt ---------- */
+
+:where(html.skin-terminal) .palette::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+:where(html.skin-terminal) .palette-panel {
+  padding-top: 30px;
+  border-color: var(--accent);
+  border-radius: var(--radius-surface);
+  box-shadow:
+    var(--glow),
+    0 30px 80px -30px rgba(0, 0, 0, 0.7);
+}
+
+:where(html.skin-terminal) .palette-panel::before {
+  content: "●  ●  ●" / "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--separator);
+  background: var(--surface-2);
+  color: var(--text-secondary);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+:where(html.skin-terminal) .palette-input-row {
+  border-bottom: 1px dashed var(--separator);
+}
+
+:where(html.skin-terminal) .palette-input-row:focus-within {
+  box-shadow: none;
+}
+
+:where(html.skin-terminal) .palette-prompt {
+  display: inline;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .palette-search-icon {
+  display: none;
+}
+
+:where(html.skin-terminal) .palette-input {
+  font-size: 15px;
+  caret-color: var(--accent);
+}
+
+:where(html.skin-terminal) .palette-option {
+  border-radius: 0;
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .palette-option[aria-selected="true"] {
+  background: var(--accent);
+}
+
+:where(html.skin-terminal) .palette-alias {
+  display: inline;
+  min-width: 16ch;
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .palette-title {
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .palette-title::before {
+  content: "# " / "";
+}
+
+:where(html.skin-terminal) .palette-option[aria-selected="true"] .palette-alias,
+:where(html.skin-terminal)
+  .palette-option[aria-selected="true"]
+  .palette-title {
+  color: var(--on-accent);
+}
+
+:where(html.skin-terminal) .palette-hint {
+  display: none;
+}
+
+:where(html.skin-terminal) .palette-empty {
+  color: var(--accent-2);
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .palette-footer {
+  border-top-style: dashed;
+  font-size: 12px;
+}
+
+:where(html.skin-terminal) .palette-toast {
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--accent);
+  box-shadow: var(--glow);
 }

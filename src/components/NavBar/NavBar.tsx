@@ -4,11 +4,14 @@ import React, {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
   type MouseEvent as ReactMouseEvent,
 } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "../../content/publicProfile";
+import { sections } from "../../content/navigation";
+import { CommandPalette } from "../CommandPalette/CommandPalette";
 import { scrollToSection } from "../../utils/scrollToSection";
 import {
   applyTheme,
@@ -19,15 +22,20 @@ import { applySkin } from "../../utils/skin";
 import { useMediaQuery, usePreferences } from "../../utils/preferences";
 import { greetDevelopers } from "../../utils/consoleGreeting";
 
-const links = [
-  { id: "work", label: "Work" },
-  { id: "approach", label: "Approach" },
-  { id: "about", label: "Background" },
-  { id: "contact", label: "Contact" },
-];
-
-const sectionIds = links.map((link) => link.id);
+const sectionIds = sections.map((section) => section.id);
 const DESKTOP_NAV_QUERY = "(min-width: 801px)";
+
+const isApplePlatform = () =>
+  /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+
+// The server can't know the platform; Apple devices switch to ⌘K after
+// hydration.
+const useShortcutLabel = () =>
+  useSyncExternalStore(
+    () => () => {},
+    () => (isApplePlatform() ? "⌘K" : "Ctrl K"),
+    () => "Ctrl K"
+  );
 
 const currentSectionId = () => {
   const header = document.querySelector(".site-header");
@@ -103,6 +111,8 @@ const NavBar = () => {
   const terminal = skin === "terminal";
   const isDesktop = useMediaQuery(DESKTOP_NAV_QUERY, true);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const shortcutLabel = useShortcutLabel();
 
   useEffect(() => {
     if (!open) {
@@ -276,7 +286,7 @@ const NavBar = () => {
             className="site-nav-links"
             hidden={!isDesktop && !open}
           >
-            {links.map((link) => {
+            {sections.map((link) => {
               if (!isHome) {
                 return (
                   <Link
@@ -327,6 +337,16 @@ const NavBar = () => {
         </nav>
         <button
           type="button"
+          className="palette-toggle"
+          aria-label="Open command palette"
+          aria-haspopup="dialog"
+          aria-keyshortcuts="Meta+K Control+K"
+          onClick={() => setPaletteOpen(true)}
+        >
+          <kbd>{shortcutLabel}</kbd>
+        </button>
+        <button
+          type="button"
           className="skin-toggle"
           aria-pressed={terminal}
           aria-label={
@@ -357,6 +377,11 @@ const NavBar = () => {
           Menu
         </button>
       </div>
+      <CommandPalette
+        open={paletteOpen}
+        onOpenChange={setPaletteOpen}
+        isHome={isHome}
+      />
     </header>
   );
 };

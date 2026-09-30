@@ -75,6 +75,7 @@
   margin-left: auto;
 }
 
+.palette-toggle,
 .skin-toggle,
 .theme-toggle {
   display: inline-flex;
@@ -91,6 +92,7 @@
   cursor: pointer;
 }
 
+.palette-toggle:hover,
 .skin-toggle:hover,
 .theme-toggle:hover {
   color: var(--accent-hover);
@@ -102,6 +104,20 @@
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.palette-toggle {
+  flex: 0 0 auto;
+  width: auto;
+  padding: 0 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.palette-toggle kbd {
+  font: inherit;
 }
 
 .theme-icon {
@@ -129,6 +145,14 @@
 
 .site-nav-links[hidden] {
   display: none !important;
+}
+
+/* The palette opens with ⌘K / Ctrl+K at any width; the button that hints at
+   it only appears where the header has room. */
+@media (max-width: 1023px) {
+  .palette-toggle {
+    display: none;
+  }
 }
 
 @media (max-width: 800px) {
@@ -187,5 +211,15 @@
 
   .site-nav-links {
     display: contents;
+  }
+}
+
+@media (min-width: 1024px) {
+  .palette-toggle {
+    margin-left: 4px;
+  }
+
+  .skin-toggle {
+    margin-left: 0;
   }
 }

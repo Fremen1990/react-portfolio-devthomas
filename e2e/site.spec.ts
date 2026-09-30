@@ -189,20 +189,22 @@ test("the hero link scrolls to Selected work and focuses its heading", async ({
 
 for (const skin of SKINS) {
   for (const theme of THEMES) {
-    test(`no sideways scroll at 320px (${skin}, ${theme})`, async ({
-      page,
-    }) => {
-      await usePreferences(page, skin, theme);
-      await page.setViewportSize({ width: 320, height: 700 });
-      await page.goto("/");
-      await page.evaluate(() =>
-        document.querySelectorAll("details").forEach((d) => (d.open = true))
-      );
-      const overflow = await page.evaluate(
-        () => document.documentElement.scrollWidth - window.innerWidth
-      );
-      expect(overflow).toBeLessThanOrEqual(0);
-    });
+    for (const width of [320, 801]) {
+      test(`no sideways scroll at ${width}px (${skin}, ${theme})`, async ({
+        page,
+      }) => {
+        await usePreferences(page, skin, theme);
+        await page.setViewportSize({ width, height: 700 });
+        await page.goto("/");
+        await page.evaluate(() =>
+          document.querySelectorAll("details").forEach((d) => (d.open = true))
+        );
+        const overflow = await page.evaluate(
+          () => document.documentElement.scrollWidth - window.innerWidth
+        );
+        expect(overflow).toBeLessThanOrEqual(0);
+      });
+    }
 
     test(`no accessibility violations (${skin}, ${theme})`, async ({
       page,
@@ -216,6 +218,154 @@ for (const skin of SKINS) {
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
         .analyze();
       expect(results.violations).toEqual([]);
+    });
+  }
+}
+
+test.describe("command palette", () => {
+  test("opens with the keyboard, traps focus, and runs a section command", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await page.keyboard.press("ControlOrMeta+k");
+    const dialog = page.getByRole("dialog", { name: "Command palette" });
+    await expect(dialog).toBeVisible();
+    const search = page.getByRole("combobox", { name: "Search commands" });
+    await expect(search).toBeFocused();
+
+    // The page behind the modal dialog is inert: Tab never reaches it.
+    for (let step = 0; step < 3; step += 1) {
+      await page.keyboard.press("Tab");
+      const onPageBehind = await page.evaluate(() => {
+        const active = document.activeElement;
+        return Boolean(
+          active && active !== document.body && !active.closest("dialog")
+        );
+      });
+      expect(onPageBehind).toBe(false);
+    }
+    await search.focus();
+
+    await search.fill("contact");
+    await page.keyboard.press("Enter");
+    await expect(dialog).toBeHidden();
+    await expect(page).toHaveURL(/#contact$/);
+    await expect(
+      page.getByRole("heading", { level: 2, name: "Contact" })
+    ).toBeFocused();
+  });
+
+  test("the header button opens it and Escape returns focus", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const button = page.getByRole("button", { name: "Open command palette" });
+    await button.click();
+    await expect(
+      page.getByRole("dialog", { name: "Command palette" })
+    ).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(
+      page.getByRole("dialog", { name: "Command palette" })
+    ).toBeHidden();
+    await expect(button).toBeFocused();
+  });
+
+  test("copies the email address", async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.goto("/");
+    await page.keyboard.press("ControlOrMeta+k");
+    await page
+      .getByRole("combobox", { name: "Search commands" })
+      .fill("copy email");
+    await page.keyboard.press("Enter");
+    await expect(page.getByText("Email address copied")).toBeVisible();
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+      "thomas.dev666@gmail.com"
+    );
+  });
+
+  test("is a shell prompt in the terminal skin", async ({ page }) => {
+    await usePreferences(page, "terminal", "dark");
+    await page.goto("/");
+    await page.keyboard.press("ControlOrMeta+k");
+    await expect(page.getByText("tomasz@devthomas:~$")).toBeVisible();
+    await page.getByRole("combobox", { name: "Search commands" }).fill("nope");
+    await expect(
+      page.locator(".palette-empty", {
+        hasText: "command not found: nope — type help",
+      })
+    ).toBeVisible();
+    await page
+      .getByRole("combobox", { name: "Search commands" })
+      .fill("theme light");
+    await page.keyboard.press("Enter");
+    await expect(page.locator("html")).toHaveClass(/light-theme/);
+  });
+
+  for (const skin of SKINS) {
+    test(`has no accessibility violations while open (${skin})`, async ({
+      page,
+    }) => {
+      await usePreferences(page, skin, "dark");
+      await page.goto("/");
+      await page.keyboard.press("ControlOrMeta+k");
+      await expect(
+        page.getByRole("dialog", { name: "Command palette" })
+      ).toBeVisible();
+      const results = await new AxeBuilder({ page })
+        .include("dialog")
+        .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .analyze();
+      expect(results.violations).toEqual([]);
+    });
+  }
+});
+
+for (const skin of SKINS) {
+  for (const width of [801, 900, 1024, 1100, 1280]) {
+    test(`header items don't overlap at ${width}px (${skin})`, async ({
+      page,
+    }) => {
+      await usePreferences(page, skin, "light");
+      await page.setViewportSize({ width, height: 700 });
+      await page.goto("/");
+      const boxes = await page.evaluate(() =>
+        [
+          ...document.querySelectorAll(
+            ".site-header .brand, .site-header .site-nav-links > a:not(.nav-cv-menu), .site-header .nav-cv, .site-header button"
+          ),
+        ]
+          .filter((element) => (element as HTMLElement).offsetParent !== null)
+          .map((element) => {
+            const rect = element.getBoundingClientRect();
+            return {
+              name: element.textContent?.trim() || element.className,
+              // Text that spills out of its box (e.g. a pseudo-element suffix)
+              // overlaps neighbours without changing the box itself.
+              overflows:
+                element.clientWidth > 0 &&
+                element.scrollWidth > element.clientWidth + 1,
+              left: rect.left,
+              right: rect.right,
+              top: rect.top,
+              bottom: rect.bottom,
+            };
+          })
+      );
+      for (const box of boxes) {
+        expect(box.overflows, `${box.name} overflows its box`).toBe(false);
+      }
+      for (const [i, a] of boxes.entries()) {
+        for (const b of boxes.slice(i + 1)) {
+          const overlap =
+            a.left < b.right - 1 &&
+            b.left < a.right - 1 &&
+            a.top < b.bottom - 1 &&
+            b.top < a.bottom - 1;
+          expect(overlap, `${a.name} overlaps ${b.name}`).toBe(false);
+        }
+      }
     });
   }
 }

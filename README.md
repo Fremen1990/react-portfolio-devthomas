@@ -51,6 +51,9 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 - `src/utils/scrollToSection.ts` — in-page navigation, fragment history, and destination focus
 - `src/utils/theme.ts` — light/dark choice in `localStorage`, otherwise the operating-system preference
 - `src/utils/skin.ts` — standard or Terminal style in `localStorage`; `src/design/skin-terminal.css` holds every Terminal rule, scoped under `html.skin-terminal`
+- `src/commands.ts` — the command palette's commands as data, and the filter that ranks them
+- `src/components/CommandPalette/` — the ⌘K palette (a native `<dialog>` with a combobox), mounted by NavBar
+- `src/content/navigation.ts` — the home page sections, shared by the header and the palette
 - `src/utils/preferences.ts` — keeps controls in sync with the current theme and skin, and lets the server render before either is known
 - `src/sections/Work/`, `src/sections/Experience/`, `src/sections/Background/`, `src/sections/Contact/` — the four sections after the hero, rendered to static HTML
 - `src/components/FooterPanel/` — copyright and GitHub
@@ -66,6 +69,7 @@ All CSS is imported in `src/app/layout.tsx` and nowhere else, with `skin-termina
 - Below 801px the closed menu is not in the tab order. At 801px and above the section links stay available, including after a resize from an open or closed mobile menu.
 - The theme button stores `dark` or `light` under `portfolio-theme`. With nothing stored, the page follows `prefers-color-scheme`.
 - The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `src/app/layout.tsx` applies a saved skin before first paint. JetBrains Mono is self-hosted and not preloaded, so the browser downloads it only when Terminal is used.
+- ⌘K (Ctrl+K elsewhere) opens the command palette from anywhere except other text fields. From 1024px wide, a header button opens it too. It can go to a section, open the CV, LinkedIn, GitHub or this repository, copy the email address, and switch theme or style. Arrow keys choose, Enter runs, and Escape or a click outside closes it and returns focus. In the Terminal style, the same palette is a shell prompt: each command has an alias (`cd work`, `cat cv`, `theme dark`), `help` lists them all, `exit` closes it, and unknown input reports `command not found`. Everything in it is also reachable without it.
 - A link with `?skin=terminal` opens the page in the Terminal style and saves that choice. `?skin=standard` returns to the standard style. This works even when storage is blocked, for that visit.
 - The inline script also creates the `theme-color` meta tag for the current skin and theme, and `paintThemeColor` updates it. It is not part of Next's metadata, because React replaces a server-rendered meta tag whose content changed.
 - Each "Scope and approach" control is a native disclosure. All three start closed and can stay open independently. The same is true of Earlier projects and Earlier training.
