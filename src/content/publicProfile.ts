@@ -127,7 +127,7 @@ export const profile: Profile = {
       heading: "Establishing an E2E testing practice",
       meta: "Test automation and mentoring",
       summary:
-        "I established a separate Cypress E2E project from scratch, including its test architecture and parallel execution. I trained two junior testers and reviewed their code during the project's first year.",
+        "I established a separate Cypress E2E project from scratch, including its test architecture and parallel execution. I trained two testers and reviewed their code during the project's first year.",
       outcome:
         "Regression checks went from one to three days of manual testing to about an hour on Orange TV GO and about 30 minutes on the CMS.",
       bullets: [],
@@ -170,7 +170,7 @@ export const profile: Profile = {
     },
     {
       label: "Technical guidance",
-      text: "I guide developers and mentor junior testers through practical feedback and code review.",
+      text: "I guide developers and mentor testers through practical feedback and code review.",
     },
     {
       label: "Community leadership",
@@ -181,6 +181,7 @@ export const profile: Profile = {
     "Additional breadth: React Native, backend contributions in Go, and Python used as needed.",
   credentials: [
     "Associate Cloud Engineer Certification — Google. Issued July 2024; expires July 2027.",
+    "Architecture training: Architektura na Froncie (frontend architecture, Tomasz Ducin) and Droga Nowoczesnego Architekta (software architecture: DDD, event sourcing, microservices).",
     "Master's degree, Finance and Accounting — University of Lodz, 2012–2014.",
     "Bachelor's degree, Finance and Accounting — University of Lodz, 2009–2012.",
     "English: approximately C1, used professionally.",
