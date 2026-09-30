@@ -44,11 +44,14 @@ export const metadata: Metadata = {
   icons: { icon: { url: "/favicon.webp", type: "image/webp" } },
 };
 
-// Applies the saved theme and skin before first paint, so a returning visitor
-// never sees the other look flash, and adds the theme-color meta tag.
+// Applies the theme and skin before first paint, so a visitor never sees the
+// other look flash, and adds the theme-color meta tag.
 //
-// ?skin=terminal or ?skin=standard in the URL picks the skin and saves it, so
-// a shared link opens in that style. It still applies when storage is blocked.
+// Precedence: ?skin= / ?theme= in the URL, then a look opened from such a link
+// earlier in this tab (sessionStorage), then the visitor's saved choice
+// (localStorage), then the system setting. A shared link lasts only for the
+// visit and never overwrites saved choices. It still applies when storage is
+// blocked. Keys and values match src/utils/theme.ts and src/utils/skin.ts.
 //
 // theme-color is deliberately not in Next's metadata: this script has to set
 // it before paint, and React replaces a server-rendered meta tag whose content
@@ -56,25 +59,35 @@ export const metadata: Metadata = {
 // hydration; the colours here match THEME_COLORS there.
 const applySavedPreferences = `(function () {
   var root = document.documentElement;
-  var theme = null;
-  var storedSkin = null;
-  var linkedSkin = null;
+  var params = null;
   try {
-    linkedSkin = new URLSearchParams(window.location.search).get("skin");
+    params = new URLSearchParams(window.location.search);
   } catch (error) {}
+  var pick = function (value, allowed) {
+    return allowed.indexOf(value) === -1 ? null : value;
+  };
+  var linkSkin = params && pick(params.get("skin"), ["terminal", "standard"]);
+  var linkTheme = params && pick(params.get("theme"), ["dark", "light"]);
+  var read = function (storage, key) {
+    try {
+      return window[storage].getItem(key);
+    } catch (error) {
+      return null;
+    }
+  };
   try {
-    theme = localStorage.getItem("portfolio-theme");
-    if (linkedSkin === "terminal") {
-      localStorage.setItem("portfolio-skin", "terminal");
-    }
-    if (linkedSkin === "standard") {
-      localStorage.removeItem("portfolio-skin");
-    }
-    storedSkin = localStorage.getItem("portfolio-skin");
+    if (linkSkin) sessionStorage.setItem("portfolio-link-skin", linkSkin);
+    if (linkTheme) sessionStorage.setItem("portfolio-link-theme", linkTheme);
   } catch (error) {}
-  var terminal =
-    linkedSkin === "terminal" ||
-    (linkedSkin !== "standard" && storedSkin === "terminal");
+  var skin =
+    linkSkin ||
+    pick(read("sessionStorage", "portfolio-link-skin"), ["terminal", "standard"]) ||
+    (read("localStorage", "portfolio-skin") === "terminal" ? "terminal" : "standard");
+  var theme =
+    linkTheme ||
+    pick(read("sessionStorage", "portfolio-link-theme"), ["dark", "light"]) ||
+    pick(read("localStorage", "portfolio-theme"), ["dark", "light"]);
+  var terminal = skin === "terminal";
   if (theme === "dark") root.classList.add("dark-theme");
   if (theme === "light") root.classList.add("light-theme");
   if (terminal) root.classList.add("skin-terminal");

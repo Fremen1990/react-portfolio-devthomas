@@ -204,3 +204,23 @@ test("the shortcut is ignored while typing in another text field", () => {
   fireEvent.keyDown(other, { key: "k", ctrlKey: true });
   expect(dialog()).not.toHaveAttribute("open");
 });
+
+test('"Copy link to this look" copies a link to this page, style and theme', async () => {
+  const writeText = vi.fn().mockResolvedValue(undefined);
+  Object.defineProperty(navigator, "clipboard", {
+    configurable: true,
+    value: { writeText },
+  });
+  document.documentElement.classList.add("skin-terminal", "dark-theme");
+  renderPage();
+
+  pressShortcut();
+  fireEvent.change(input(), { target: { value: "share" } });
+  await act(async () => {
+    fireEvent.keyDown(input(), { key: "Enter" });
+  });
+  expect(writeText).toHaveBeenCalledWith(
+    "https://devthomas.pl/?skin=terminal&theme=dark"
+  );
+  expect(screen.getByText("Link copied")).toBeInTheDocument();
+});

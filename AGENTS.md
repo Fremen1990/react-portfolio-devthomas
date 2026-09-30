@@ -50,7 +50,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - **CSS order.** Every stylesheet is imported in `src/app/layout.tsx`, and nowhere else, with `skin-terminal.css` last. Its rules are scoped as `:where(html.skin-terminal) …` and win on order, not specificity. A component that imports its own CSS loads after the skin and breaks it.
 - **Terminal skin coverage.** New UI needs Terminal styles in `skin-terminal.css`, and must be checked in both skins and both themes.
 - **Theme and skin state.** Read it with `usePreferences()`, and change it with `applyTheme` or `applySkin`. Don't read `document` or `localStorage` during render, because the server renders without them.
-- **Before-paint script.** The inline script in `layout.tsx` applies the saved theme, the skin and `?skin=` before paint, and owns the `theme-color` meta tag. Keep its colours in sync with `THEME_COLORS` in `src/utils/theme.ts`. Don't add `themeColor` to Next metadata, because React would duplicate the tag.
+- **Before-paint script.** The inline script in `layout.tsx` applies the theme and skin before paint (share-link `?skin=`/`?theme=` first, then the visit's link choice in `sessionStorage`, then saved choices), and owns the `theme-color` meta tag. Keep its colours in sync with `THEME_COLORS` in `src/utils/theme.ts`. Don't add `themeColor` to Next metadata, because React would duplicate the tag.
 - **Client code.** Keep content in Server Components. Add `"use client"` only where interaction needs it.
 - **Section links.** In-page section links go through `scrollToSection`, which moves focus to the section's heading. Off the home page they point to `/#id`.
 - **Per-page metadata.** Every page sets it with `pageMetadata()` from `src/lib/metadata.ts`.
