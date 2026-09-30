@@ -9,13 +9,6 @@
  * this file has no effect and the standard design shows.
  */
 
-/* Bootstrap normally provides this; keep it even if the CDN sheet fails. */
-:where(html.skin-terminal) *,
-:where(html.skin-terminal) *::before,
-:where(html.skin-terminal) *::after {
-  box-sizing: border-box;
-}
-
 html.skin-terminal {
   --canvas: #f3f1e7;
   --surface: #fbfaf4;
