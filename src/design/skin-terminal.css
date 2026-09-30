@@ -854,3 +854,25 @@ html.skin-terminal.dark-theme .hero-portrait {
   content: "// " / "";
   color: var(--accent);
 }
+
+/* Project outcomes read like a command's successful result. */
+:where(html.skin-terminal) .contribution-outcome {
+  border: 1px dashed var(--accent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--text);
+  font-weight: 400;
+}
+
+:where(html.skin-terminal) .contribution-outcome::before {
+  content: "→ exit 0" / "";
+  display: block;
+  margin-bottom: 4px;
+  color: var(--accent);
+  font-weight: 700;
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .contribution-outcome strong {
+  color: var(--accent-2);
+}
