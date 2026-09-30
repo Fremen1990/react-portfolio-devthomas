@@ -1,11 +1,14 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import sharp from "sharp";
 import { findLook, looks, type Look } from "@/content/looks";
 import { profile } from "@/content/publicProfile";
 
 // The 1200×630 link-preview card for each look, rendered once at build time
-// and exported as /look/<slug>/card.png. Colours match the design tokens in
+// and exported as /look/<slug>/card.jpg. next/og draws a PNG; it is converted
+// to JPEG because the photo made the PNG about 425 kB, and some apps
+// (WhatsApp) skip preview images much over 300 kB. Colours match the design tokens in
 // src/index.css and src/design/skin-terminal.css.
 
 export const dynamic = "force-static";
@@ -272,7 +275,7 @@ export async function GET(
     readFile(portraitPath),
   ]);
 
-  return new ImageResponse(
+  const png = new ImageResponse(
     look.skin === "terminal" ? (
       <TerminalCard look={look} />
     ) : (
@@ -302,4 +305,11 @@ export async function GET(
       ],
     }
   );
+
+  const jpeg = await sharp(Buffer.from(await png.arrayBuffer()))
+    .jpeg({ quality: 85, mozjpeg: true })
+    .toBuffer();
+  return new Response(new Uint8Array(jpeg), {
+    headers: { "Content-Type": "image/jpeg" },
+  });
 }

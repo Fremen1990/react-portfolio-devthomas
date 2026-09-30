@@ -44,7 +44,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - `src/utils/` — theme, skin, preferences store, `scrollToSection`, console greeting.
 - `src/design/skin-terminal.css` — every rule of the optional Terminal skin.
 - `src/content/work/` — case studies: facts and `published` in `studies.ts`, text in `<slug>.mdx`, mapped in `bodies.ts`. Pages render at `/work/<slug>/`.
-- `src/content/looks.ts` and `src/app/look/[look]/` — one copy of the home page per skin and theme, each with a preview card rendered at build time from `card.png/route.tsx`. Card colours mirror the CSS tokens; keep them in sync when the design changes.
+- `src/content/looks.ts` and `src/app/look/[look]/` — one copy of the home page per skin and theme, each with a preview card rendered at build time from `card.jpg/route.tsx`. Card colours mirror the CSS tokens; keep them in sync when the design changes.
 - `e2e/site.spec.ts` — Playwright suite. Add each new route to `PAGES`.
 
 ## Rules that are easy to break

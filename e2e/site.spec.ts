@@ -1,5 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import sharp from "sharp";
 
 // Every exported page. Add new routes here as they ship.
 const PAGES = ["/", "/colophon/", "/work/orange-cms/"];
@@ -640,20 +641,25 @@ test.describe("look pages", () => {
       );
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
         "content",
-        `https://devthomas.pl/look/${slug}/card.png`
+        `https://devthomas.pl/look/${slug}/card.jpg`
       );
       await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
         "content",
-        `https://devthomas.pl/look/${slug}/card.png`
+        `https://devthomas.pl/look/${slug}/card.jpg`
       );
 
-      const card = await request.get(`/look/${slug}/card.png`);
+      const card = await request.get(`/look/${slug}/card.jpg`);
       expect(card.status()).toBe(200);
-      expect(card.headers()["content-type"]).toContain("image/png");
+      expect(card.headers()["content-type"]).toContain("image/jpeg");
       const bytes = await card.body();
-      // PNG header: width and height are big-endian at bytes 16 and 20.
-      expect(bytes.readUInt32BE(16)).toBe(1200);
-      expect(bytes.readUInt32BE(20)).toBe(630);
+      const { format, width, height } = await sharp(bytes).metadata();
+      expect({ format, width, height }).toEqual({
+        format: "jpeg",
+        width: 1200,
+        height: 630,
+      });
+      // Some apps (WhatsApp) skip preview images much over 300 kB.
+      expect(bytes.length).toBeLessThan(300 * 1024);
     });
   }
 
