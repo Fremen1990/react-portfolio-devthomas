@@ -512,12 +512,22 @@ test.describe("command palette", () => {
   }
 });
 
+const HEADER_CASES = [
+  ...[320, 360, 390].flatMap((width) =>
+    THEMES.map((theme) => ({ width, theme }))
+  ),
+  ...[801, 900, 1024, 1100, 1280].map((width) => ({
+    width,
+    theme: "light" as const,
+  })),
+];
+
 for (const skin of SKINS) {
-  for (const width of [801, 900, 1024, 1100, 1280]) {
-    test(`header items don't overlap at ${width}px (${skin})`, async ({
+  for (const { width, theme } of HEADER_CASES) {
+    test(`header items don't overlap at ${width}px (${skin}, ${theme})`, async ({
       page,
     }) => {
-      await usePreferences(page, skin, "light");
+      await usePreferences(page, skin, theme);
       await page.setViewportSize({ width, height: 700 });
       await page.goto("/");
       const boxes = await page.evaluate(() =>
@@ -770,4 +780,78 @@ test.describe("search basics", () => {
       author: { name: "Tomasz Stanisz" },
     });
   });
+});
+
+for (const skin of SKINS) {
+  for (const width of [320, 360, 390]) {
+    test(`the open mobile menu fits and works at ${width}px (${skin})`, async ({
+      page,
+    }) => {
+      await usePreferences(page, skin, "dark");
+      await page.setViewportSize({ width, height: 740 });
+      await page.goto("/");
+      await page.getByRole("button", { name: "Menu" }).click();
+
+      const menu = page.locator("#site-nav-links");
+      await expect(menu).toBeVisible();
+      const box = await menu.boundingBox();
+      expect(box!.x).toBeGreaterThanOrEqual(0);
+      expect(box!.x + box!.width).toBeLessThanOrEqual(width);
+
+      // Every item is a comfortable touch target.
+      const items = menu.locator("a:visible, button:visible");
+      for (const item of await items.all()) {
+        expect((await item.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+      }
+
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - window.innerWidth
+      );
+      expect(overflow).toBeLessThanOrEqual(0);
+
+      // Below 380px the style switch lives in the menu instead of the header.
+      const skinItem = menu.getByRole("button", { name: /Use .* style/ });
+      const headerSkin = page.locator(".site-header .skin-toggle");
+      if (width < 380) {
+        await expect(headerSkin).toBeHidden();
+        await skinItem.click();
+        await expect(page.locator("html")).toHaveClass(
+          skin === "terminal" ? /^(?!.*skin-terminal)/ : /skin-terminal/
+        );
+      } else {
+        await expect(skinItem).toBeHidden();
+        await expect(headerSkin).toBeVisible();
+      }
+    });
+  }
+}
+
+test("a saved dark theme paints the CV dark palette from the first frame", async ({
+  page,
+}) => {
+  await usePreferences(page, "standard", "dark");
+  // Sample the background on the first animation frame with a <body>:
+  // frames run just before paint, after render-blocking CSS, and before a
+  // missing or late theme would be corrected by React.
+  await page.addInitScript(() => {
+    const sample = () => {
+      if (document.body) {
+        (window as unknown as { firstBackground: string }).firstBackground =
+          getComputedStyle(document.body).backgroundColor;
+      } else {
+        requestAnimationFrame(sample);
+      }
+    };
+    requestAnimationFrame(sample);
+  });
+  await page.goto("/");
+  expect(
+    await page.evaluate(
+      () => (window as unknown as { firstBackground: string }).firstBackground
+    )
+  ).toBe("rgb(15, 20, 19)");
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+    "content",
+    "#0f1413"
+  );
 });
