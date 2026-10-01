@@ -12,12 +12,34 @@
   scroll-margin-top: calc(var(--header-height) + 48px);
 }
 
+/* The CV's section title: Fraunces, followed by a hairline to the edge. */
 .section-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
   margin: 0 0 24px;
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   line-height: 1.2;
+}
+
+.section-heading::after {
+  content: "";
+  flex: 1;
+  align-self: center;
+  height: 1px;
+  background: var(--separator);
+}
+
+/* The heading's hairline already separates the first row of each section.
+   Only the width is removed, so the Terminal skin can restore it and keep its
+   own border styles and colours. */
+.contribution:first-child,
+.work-way:first-child,
+.role-row:first-child {
+  border-top-width: 0;
 }
 
 .lede,
@@ -58,7 +80,7 @@
   }
 
   .section-heading {
-    font-size: 32px;
+    font-size: 34px;
   }
 }
 

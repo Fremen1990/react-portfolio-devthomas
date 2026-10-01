@@ -272,6 +272,7 @@ const NavBar = () => {
             <span className="brand-mark" aria-hidden="true">
               TS
             </span>
+            <span className="brand-wordmark">devthomas.pl</span>{" "}
             <span className="brand-name">{profile.name}</span>
           </a>
         ) : (
@@ -279,6 +280,7 @@ const NavBar = () => {
             <span className="brand-mark" aria-hidden="true">
               TS
             </span>
+            <span className="brand-wordmark">devthomas.pl</span>{" "}
             <span className="brand-name">{profile.name}</span>
           </Link>
         )}
@@ -326,6 +328,16 @@ const NavBar = () => {
             >
               View CV
             </a>
+            <button
+              type="button"
+              className="nav-skin-menu"
+              onClick={() => {
+                toggleSkin();
+                close();
+              }}
+            >
+              {terminal ? "Use standard style" : "Use terminal style"}
+            </button>
           </div>
           <a
             className="nav-cv"

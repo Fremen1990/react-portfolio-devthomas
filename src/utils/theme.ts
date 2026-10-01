@@ -9,7 +9,7 @@ export type Theme = "light" | "dark";
 
 // Browser-chrome colour for each skin and theme; matches each --canvas.
 const THEME_COLORS: Record<Skin, Record<Theme, string>> = {
-  default: { light: "#f7f8fa", dark: "#10161b" },
+  default: { light: "#f7f5f0", dark: "#0f1413" },
   terminal: { light: "#f3f1e7", dark: "#07090a" },
 };
 

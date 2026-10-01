@@ -1,13 +1,18 @@
+/* The standard skin uses the CV's design system (cv.devthomas.pl): warm
+   paper, one teal accent, pill controls, 20px cards, and Fraunces / Geist /
+   Geist Mono. The Terminal skin redefines every token it uses. */
 :root {
-  --canvas: #f7f8fa;
+  --canvas: #f7f5f0;
   --surface: #ffffff;
-  --text: #17212b;
-  --text-secondary: #4b5563;
+  --text: #16181a;
+  --text-soft: #34383b;
+  --text-secondary: #5b5f63;
   --accent: #0f6b75;
   --accent-hover: #0b525b;
+  --accent-soft: #e2efee;
   --on-accent: #ffffff;
-  --separator: #dde3e8;
-  --header: rgba(247, 248, 250, 0.94);
+  --separator: #e0dbd0;
+  --header: color-mix(in srgb, var(--canvas) 92%, transparent);
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -16,41 +21,47 @@
   --space-6: 32px;
   --space-7: 48px;
   --space-8: 64px;
-  --radius-control: 6px;
-  --radius-surface: 12px;
-  --header-height: 72px;
+  --radius-control: 999px;
+  --radius-surface: 20px;
+  --header-height: 64px;
   --content-width: 1120px;
   --font:
-    var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    var(--font-geist), ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-mono:
+    var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light-theme) {
-    --canvas: #10161b;
-    --surface: #1a232b;
-    --text: #e8eef2;
-    --text-secondary: #c5d0d8;
+    --canvas: #0f1413;
+    --surface: #161d1b;
+    --text: #e8eeeb;
+    --text-soft: #c3ccc8;
+    --text-secondary: #9aa6a1;
     --accent: #8fd3da;
     --accent-hover: #b7e6ea;
-    --on-accent: #102228;
-    --separator: #2c3842;
-    --header: rgba(16, 22, 27, 0.94);
+    --accent-soft: #17292b;
+    --on-accent: #0f1413;
+    --separator: #2a3531;
     color-scheme: dark;
   }
 }
 
 html.dark-theme {
-  --canvas: #10161b;
-  --surface: #1a232b;
-  --text: #e8eef2;
-  --text-secondary: #c5d0d8;
+  --canvas: #0f1413;
+  --surface: #161d1b;
+  --text: #e8eeeb;
+  --text-soft: #c3ccc8;
+  --text-secondary: #9aa6a1;
   --accent: #8fd3da;
   --accent-hover: #b7e6ea;
-  --on-accent: #102228;
-  --separator: #2c3842;
-  --header: rgba(16, 22, 27, 0.94);
+  --accent-soft: #17292b;
+  --on-accent: #0f1413;
+  --separator: #2a3531;
   color-scheme: dark;
 }
 

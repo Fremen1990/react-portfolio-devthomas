@@ -197,7 +197,7 @@ test.describe("share links", () => {
     expect(page.url()).toContain("?skin=terminal&theme=dark");
     await expect(html(page)).not.toHaveClass(/skin-terminal/);
     await expect(html(page)).toHaveClass(/light-theme/);
-    await expect(themeColor(page)).toHaveAttribute("content", "#f7f8fa");
+    await expect(themeColor(page)).toHaveAttribute("content", "#f7f5f0");
   });
 
   test("changing only one part keeps the other from the link after a reload", async ({
@@ -360,7 +360,7 @@ test("theme-color follows the operating system when nothing is saved", async ({
   await page.goto("/");
   const themeColor = page.locator('meta[name="theme-color"]');
   await expect(themeColor).toHaveCount(1);
-  await expect(themeColor).toHaveAttribute("content", "#10161b");
+  await expect(themeColor).toHaveAttribute("content", "#0f1413");
   await context.close();
 });
 

@@ -27,8 +27,8 @@ export const SelectedWork = () => {
               <h3 id={headingId} className="contribution-heading">
                 {item.heading}
               </h3>
-              <p className="meta">{item.employer}</p>
-              <p className="meta">{item.meta}</p>
+              <p className="meta contribution-employer">{item.employer}</p>
+              <p className="meta contribution-meta">{item.meta}</p>
               {item.status && (
                 <p className="contribution-status">{item.status}</p>
               )}
@@ -36,10 +36,10 @@ export const SelectedWork = () => {
             <div>
               <p className="contribution-summary">{item.summary}</p>
               {item.outcome && (
-                <p className="contribution-outcome">
-                  <strong>Outcome: </strong>
-                  {item.outcome}
-                </p>
+                <div className="contribution-outcome">
+                  <p className="contribution-outcome-label">Outcome</p>
+                  <p className="contribution-outcome-text">{item.outcome}</p>
+                </div>
               )}
               {item.bullets.length > 0 && (
                 <ul className="contribution-list">
@@ -48,10 +48,23 @@ export const SelectedWork = () => {
                   ))}
                 </ul>
               )}
-              <p className="contribution-tech">
-                <strong>Technologies: </strong>
-                {item.technologies}
-              </p>
+              <div className="contribution-tech">
+                <p className="contribution-tech-label" id={`${item.id}-tech`}>
+                  Technologies
+                </p>
+                <ul className="chips" aria-labelledby={`${item.id}-tech`}>
+                  {item.technologies.map((technology) => (
+                    <li key={technology} className="chip">
+                      {technology}
+                    </li>
+                  ))}
+                </ul>
+                {item.technologiesNote && (
+                  <p className="contribution-tech-note">
+                    {item.technologiesNote}
+                  </p>
+                )}
+              </div>
               {hasScope && (
                 <details className="scope">
                   <summary>

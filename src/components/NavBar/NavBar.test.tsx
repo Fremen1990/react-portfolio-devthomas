@@ -443,7 +443,9 @@ test("the browser Back button restores the previous fragment and focus", async (
 test("the home brand link focuses the hero heading", () => {
   renderPage();
 
-  fireEvent.click(screen.getByRole("link", { name: "Tomasz Stanisz" }));
+  fireEvent.click(
+    screen.getByRole("link", { name: "devthomas.pl Tomasz Stanisz" })
+  );
 
   expect(window.location.hash).toBe("#home");
   expect(document.getElementById("home-heading")).toHaveFocus();
@@ -479,10 +481,9 @@ test("off the home page, the brand and section links lead back to the home page"
   vi.mocked(usePathname).mockReturnValue("/work/example/");
   render(<NavBar />);
 
-  expect(screen.getByRole("link", { name: "Tomasz Stanisz" })).toHaveAttribute(
-    "href",
-    "/"
-  );
+  expect(
+    screen.getByRole("link", { name: "devthomas.pl Tomasz Stanisz" })
+  ).toHaveAttribute("href", "/");
   for (const [name, href] of [
     ["Work", "/#work"],
     ["Approach", "/#approach"],

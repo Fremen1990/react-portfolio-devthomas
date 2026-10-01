@@ -11,7 +11,9 @@ export type Contribution = {
   /** The measurable or visible result, shown highlighted under the summary. */
   outcome?: string;
   bullets: string[];
-  technologies: string;
+  technologies: string[];
+  /** Shown after the technology tags, e.g. secondary contributions. */
+  technologiesNote?: string;
   featured?: boolean;
   scopeTitle: string;
   scope: string[];
@@ -87,7 +89,13 @@ export const profile: Profile = {
         "Own frontend wizard forms, the frontend design system and Storybook, alongside the landing page and blog.",
         "Review code, feature implementations, and manual and automated tests, with personal oversight of agent-assisted workflows.",
       ],
-      technologies: "Next.js, NestJS, TypeScript, Playwright, Storybook",
+      technologies: [
+        "Next.js",
+        "NestJS",
+        "TypeScript",
+        "Playwright",
+        "Storybook",
+      ],
       featured: true,
       scopeTitle: "Scope and approach",
       scope: [
@@ -110,8 +118,8 @@ export const profile: Profile = {
         "Provide technical guidance and code review on the CMS, and review code across the department's React projects.",
         "Contribute to a streaming platform, including a feedback form and backend submission flow that makes user opinions available to the Product Owner.",
       ],
-      technologies:
-        "React, TypeScript, JSON Schema · Additional backend contributions in Go",
+      technologies: ["React", "TypeScript", "JSON Schema"],
+      technologiesNote: "Additional backend contributions in Go",
       scopeTitle: "Scope and approach",
       scope: [
         "Use React JSON Schema Form (RJSF) to render schema-defined forms.",
@@ -131,7 +139,7 @@ export const profile: Profile = {
       outcome:
         "Regression checks went from one to three days of manual testing to about an hour on Orange TV GO and about 30 minutes on the CMS.",
       bullets: [],
-      technologies: "Cypress, TypeScript",
+      technologies: ["Cypress", "TypeScript"],
       scopeTitle: "Scope and approach",
       scope: [
         "Implemented the Page Object Model to organize application interactions into reusable page objects.",
