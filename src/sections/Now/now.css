@@ -1,0 +1,247 @@
+/* Now building (TheEventa, a dark band card) and shipped on my own (Car
+   Brain, a paper card with a phone). Stacked on phones; 0.8 : 1.2 on wide
+   screens. Without Car Brain, TheEventa spans the row. */
+.now-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.now-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 22px;
+  border-radius: var(--radius-surface);
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.now-card--building {
+  border: 1px solid var(--band-line);
+}
+
+.now-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin: 0;
+}
+
+.now-eyebrow {
+  color: var(--accent);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-control);
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.now-years {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.now-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.now-card--building .now-title {
+  color: var(--band-strong);
+}
+
+.now-text {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* How a change ships at TheEventa: chips in order, my sign-off last. */
+.pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pipeline-step {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.pipeline-step.is-key {
+  border-color: var(--accent);
+  color: var(--band-strong);
+}
+
+.now-link {
+  margin: auto 0 0;
+  font-weight: 500;
+}
+
+/* Car Brain */
+.now-card--shipped {
+  display: grid;
+  gap: 24px;
+}
+
+.now-shipped-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.now-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin: auto 0 0;
+}
+
+.store-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-control);
+  background: var(--text);
+  color: var(--canvas);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.store-link:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+  text-decoration: none;
+}
+
+.now-site-link {
+  font-weight: 500;
+}
+
+.phone-shots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+}
+
+/* The screenshots' own background, so the phone frame blends in. */
+.phone-tile {
+  display: flex;
+  justify-content: center;
+  width: 230px;
+  max-width: 100%;
+  padding: 14px 0 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #323234;
+}
+
+.phone-shot {
+  display: block;
+  width: 196px;
+  max-width: calc(100% - 24px);
+  height: auto;
+  aspect-ratio: 392 / 822;
+}
+
+.shot-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.shot-tab {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 13px;
+}
+
+.shot-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.shot-tab[aria-pressed="true"] {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--canvas);
+}
+
+@media (pointer: coarse) {
+  .shot-tab {
+    min-height: 44px;
+  }
+}
+
+@media (min-width: 801px) {
+  .now-card {
+    padding: 32px;
+  }
+
+  .now-title {
+    font-size: 26px;
+    line-height: 1.15;
+  }
+}
+
+@media (min-width: 1024px) {
+  .now-grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 24px;
+  }
+
+  .now-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .now-card--shipped {
+    grid-template-columns: minmax(0, 1fr) 230px;
+    gap: 28px;
+  }
+}

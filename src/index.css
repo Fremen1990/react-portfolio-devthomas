@@ -1,6 +1,8 @@
-/* The standard skin uses the CV's design system (cv.devthomas.pl): warm
+/* The standard skin keeps the CV's palette and type (cv.devthomas.pl): warm
    paper, one teal accent, pill controls, 20px cards, and Fraunces / Geist /
-   Geist Mono. The Terminal skin redefines every token it uses. */
+   Geist Mono. Its own layout adds dark brand bands (header, hero, approach,
+   the "Now building" card) that stay dark in both themes, and a teal contact
+   band. The Terminal skin redefines every token it uses. */
 :root {
   --canvas: #f7f5f0;
   --surface: #ffffff;
@@ -13,6 +15,16 @@
   --on-accent: #ffffff;
   --separator: #e0dbd0;
   --header: color-mix(in srgb, var(--canvas) 92%, transparent);
+  /* Brand bands: dark in both themes. */
+  --band: #0f1413;
+  --band-line: #0f1413;
+  --band-strong: #ffffff;
+  --band-node: #161d1b;
+  --band-node-line: #2a3531;
+  --band-node-hover: #5f8f93;
+  --band-node-active: #17292b;
+  --band-panel: #121918;
+  --teal-band: #0f6b75;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -47,6 +59,8 @@
     --accent-soft: #17292b;
     --on-accent: #0f1413;
     --separator: #2a3531;
+    --band: #0a0e0d;
+    --band-line: #2a3531;
     color-scheme: dark;
   }
 }
@@ -62,7 +76,49 @@ html.dark-theme {
   --accent-soft: #17292b;
   --on-accent: #0f1413;
   --separator: #2a3531;
+  --band: #0a0e0d;
+  --band-line: #2a3531;
   color-scheme: dark;
+}
+
+/* Inside a dark band, the generic tokens take the band's values, so links,
+   buttons, cards and the Flow diagram adapt without their own rules. The
+   header's inner row is a band too; its palette dialog is a sibling, so it
+   keeps the page's palette. */
+.band,
+.site-header-inner {
+  --canvas: var(--band);
+  --surface: var(--band-node);
+  --text: #e8eeeb;
+  --text-soft: #c3ccc8;
+  --text-secondary: #9aa6a1;
+  --accent: #8fd3da;
+  --accent-hover: #b7e6ea;
+  --accent-soft: #17292b;
+  --on-accent: #0f1413;
+  --separator: var(--band-node-line);
+  color-scheme: dark;
+  color: var(--text);
+}
+
+.band {
+  background: var(--band);
+}
+
+/* The contact band: white on teal in both themes. */
+.page-section--teal {
+  --canvas: #0b525b;
+  --surface: #0b525b;
+  --text: #ffffff;
+  --text-soft: #e2efee;
+  --text-secondary: #e2efee;
+  --accent: #ffffff;
+  --accent-hover: #e2efee;
+  --accent-soft: #0b525b;
+  --on-accent: #0b525b;
+  --separator: #e2efee;
+  background: var(--teal-band);
+  color: var(--text);
 }
 
 /* Base reset. These are the element rules the page relied on from
@@ -189,7 +245,7 @@ summary:focus-visible {
 }
 
 h2.section-heading.nav-target[tabindex="-1"],
-h1.hero-name.nav-target[tabindex="-1"] {
+h1.hero-headline.nav-target[tabindex="-1"] {
   outline: 3px solid var(--accent) !important;
   outline-offset: 3px !important;
 }

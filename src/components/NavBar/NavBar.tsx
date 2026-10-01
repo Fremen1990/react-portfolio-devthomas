@@ -275,7 +275,9 @@ const NavBar = () => {
             <span className="brand-mark" aria-hidden="true">
               TS
             </span>
-            <span className="brand-wordmark">devthomas.pl</span>{" "}
+            <span className="brand-wordmark">
+              devthomas<span className="brand-wordmark-tld">.pl</span>
+            </span>{" "}
             <span className="brand-name">{profile.name}</span>
           </a>
         ) : (
@@ -283,7 +285,9 @@ const NavBar = () => {
             <span className="brand-mark" aria-hidden="true">
               TS
             </span>
-            <span className="brand-wordmark">devthomas.pl</span>{" "}
+            <span className="brand-wordmark">
+              devthomas<span className="brand-wordmark-tld">.pl</span>
+            </span>{" "}
             <span className="brand-name">{profile.name}</span>
           </Link>
         )}
