@@ -1437,7 +1437,7 @@ html.skin-terminal.dark-theme .hero-portrait {
   padding: 14px 18px;
   border: 1px dashed var(--accent);
   border-radius: 2px;
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  background: var(--surface);
 }
 
 :where(html.skin-terminal) .outcome-tile-label {
