@@ -35,6 +35,17 @@ html.skin-terminal {
   --font-mono: var(--font);
   --text-soft: var(--text);
   --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+  /* The standard skin's brand bands have no place here: bands, nodes and
+     panels fall back to the Terminal surfaces. */
+  --band: var(--canvas);
+  --band-line: var(--separator);
+  --band-strong: var(--text);
+  --band-node: var(--surface);
+  --band-node-line: var(--separator);
+  --band-node-hover: var(--accent);
+  --band-node-active: color-mix(in srgb, var(--accent) 12%, transparent);
+  --band-panel: var(--surface);
+  --teal-band: var(--canvas);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -103,6 +114,41 @@ html.skin-terminal.dark-theme {
   color: var(--accent-hover);
 }
 
+/* Dark bands, the header row and the teal contact band re-point the generic
+   tokens in the standard skin. Here they take the Terminal's values from
+   the page instead. */
+:where(html.skin-terminal) :is(.band, .site-header-inner, .page-section--teal) {
+  --canvas: inherit;
+  --surface: inherit;
+  --text: inherit;
+  --text-soft: inherit;
+  --text-secondary: inherit;
+  --accent: inherit;
+  --accent-hover: inherit;
+  --accent-soft: inherit;
+  --on-accent: inherit;
+  --separator: inherit;
+  color-scheme: inherit;
+  background: transparent;
+}
+
+:where(html.skin-terminal) .page-section--band {
+  border-top: 1px dashed var(--separator);
+  border-bottom: 1px dashed var(--separator);
+}
+
+/* Mono labels read as shell comments. */
+:where(html.skin-terminal) .eyebrow {
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:where(html.skin-terminal) .section-eyebrow::before {
+  content: "# " / "";
+  color: var(--accent);
+}
+
 /* ---------- Header: a tmux-style status bar ---------- */
 
 :where(html.skin-terminal) .site-header {
@@ -163,7 +209,9 @@ html.skin-terminal.dark-theme {
   color: var(--text-secondary);
 }
 
-:where(html.skin-terminal) .site-nav-links > a:not(.nav-cv-menu)::before {
+:where(html.skin-terminal)
+  .site-nav-links
+  > a:not(.nav-cv-menu, .nav-back)::before {
   content: "./" / "";
   color: var(--accent);
   opacity: 0.6;
@@ -217,106 +265,30 @@ html.skin-terminal.dark-theme {
 
 /* ---------- Hero: a boot sequence ---------- */
 
-/* The standard skin's hero is the CV's (round portrait, pill, Fraunces).
-   The Terminal skin keeps its own layout: heading, a rectangular portrait
-   and the copy, side by side on wide screens. */
-:where(html.skin-terminal) .hero-grid {
-  grid-template-areas:
-    "heading"
-    "portrait"
-    "copy";
-  gap: 24px;
-  justify-items: stretch;
-  align-items: center;
-}
-
-:where(html.skin-terminal) .hero-copy {
-  display: block;
-}
-
-:where(html.skin-terminal) .hero-copy .action-row {
-  margin-top: 24px;
-}
-
-:where(html.skin-terminal) .hero-name {
-  font-size: 32px;
-  line-height: 1.1;
-  overflow-wrap: normal;
-}
-
-:where(html.skin-terminal) .hero-role {
-  margin: 8px 0 0;
-  font-size: 22px;
-  line-height: 1.3;
-}
-
-:where(html.skin-terminal) .hero-intro {
-  max-width: 62ch;
-  font-size: 17px;
-  line-height: inherit;
-}
-
-:where(html.skin-terminal) .hero-availability {
-  display: block;
-  margin: 12px 0 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: inherit;
-}
-
-:where(html.skin-terminal) .dot {
-  display: none;
-}
-
-:where(html.skin-terminal) .hero-portrait {
-  width: 100%;
-  height: 180px;
-  margin: 0;
-  object-position: center 42%;
-  border: 1px solid var(--separator);
-  box-shadow: none;
-}
-
-@media (min-width: 801px) {
-  :where(html.skin-terminal) .hero-grid {
-    grid-template-columns: minmax(0, 1fr) 320px;
-    grid-template-areas:
-      "heading portrait"
-      "copy portrait";
-    gap: 16px 48px;
-    align-items: start;
-  }
-
-  :where(html.skin-terminal) .hero-portrait {
-    width: 320px;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    margin-top: 8px;
-  }
-
-  :where(html.skin-terminal) .hero-name {
-    font-size: 48px;
-  }
-
-  :where(html.skin-terminal) .hero-role {
-    font-size: 26px;
-  }
-
-  :where(html.skin-terminal) .hero-intro {
-    margin-top: 16px;
-    font-size: 18px;
-  }
-}
-
+/* The standard hero is a dark band with a small round portrait. Here it is
+   one terminal window: `whoami` with the name and a blinking cursor, the
+   role, a comment, `cat about.txt` with the headline as output, and the
+   large green-tinted photo. The CMS diagram prints as `tree` output. */
 :where(html.skin-terminal) .hero {
   padding: 40px 0 16px;
 }
 
+:where(html.skin-terminal) .hero-main,
+:where(html.skin-terminal) .hero-identity {
+  display: contents;
+}
+
 :where(html.skin-terminal) .hero-grid {
   position: relative;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "heading"
+    "portrait"
+    "about"
+    "actions"
+    "arch";
+  gap: 24px;
+  align-items: start;
   padding: 44px 20px 28px;
   border: 1px solid var(--separator);
   border-radius: var(--radius-surface);
@@ -324,6 +296,37 @@ html.skin-terminal.dark-theme {
   box-shadow:
     var(--glow),
     0 30px 80px -40px rgba(0, 0, 0, 0.6);
+}
+
+:where(html.skin-terminal) .hero-heading {
+  grid-area: heading;
+  gap: 0;
+}
+
+:where(html.skin-terminal) .hero-portrait {
+  grid-area: portrait;
+  width: 100%;
+  height: 180px;
+  margin: 0;
+  object-position: center 42%;
+  border: 1px solid var(--separator);
+  border-radius: 2px;
+  box-shadow: none;
+  filter: grayscale(1) contrast(1.15);
+}
+
+:where(html.skin-terminal) .hero-about {
+  grid-area: about;
+  gap: 12px;
+}
+
+:where(html.skin-terminal) .hero-main .action-row {
+  grid-area: actions;
+  margin: 0;
+}
+
+:where(html.skin-terminal) .arch {
+  grid-area: arch;
 }
 
 /* Window chrome: three dots and a title. */
@@ -367,8 +370,10 @@ html.skin-terminal.dark-theme {
 }
 
 :where(html.skin-terminal) .hero-name {
+  font-size: 32px;
   font-weight: 800;
   letter-spacing: -0.04em;
+  line-height: 1.1;
   color: var(--accent);
   text-shadow: var(--glow);
 }
@@ -391,37 +396,61 @@ html.skin-terminal.dark-theme {
 }
 
 :where(html.skin-terminal) .hero-role {
+  margin: 8px 0 0;
   color: var(--accent-2);
+  font-family: var(--font);
+  font-size: 20px;
   font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 
-:where(html.skin-terminal) .hero-role::before {
+:where(html.skin-terminal) .hero-title::before {
   content: "> " / "";
   color: var(--text-secondary);
 }
 
-:where(html.skin-terminal) .hero-intro::before {
-  content: "$ cat about.txt" / "";
+:where(html.skin-terminal) .hero-separator {
+  display: none;
+}
+
+/* The comment line. */
+:where(html.skin-terminal) .hero-location {
   display: block;
-  margin-bottom: 6px;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-:where(html.skin-terminal) .hero-availability {
+  margin-top: 12px;
   color: var(--accent-3);
+  font-size: 15px;
 }
 
-:where(html.skin-terminal) .hero-availability::before {
+:where(html.skin-terminal) .hero-location::before {
   content: "# " / "";
   color: var(--text-secondary);
 }
 
-:where(html.skin-terminal) .hero-portrait {
-  border-radius: 2px;
-  border: 1px solid var(--separator);
-  filter: grayscale(1) contrast(1.15);
-  mix-blend-mode: normal;
+:where(html.skin-terminal) .hero-about::before {
+  content: "$ cat about.txt" / "";
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .hero-headline {
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+:where(html.skin-terminal) .hero-accent {
+  color: var(--accent);
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .hero-intro {
+  max-width: 62ch;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: inherit;
 }
 
 html.skin-terminal.dark-theme .hero-portrait {
@@ -438,7 +467,21 @@ html.skin-terminal.dark-theme .hero-portrait {
 
 @media (min-width: 801px) {
   :where(html.skin-terminal) .hero-grid {
+    grid-template-columns: minmax(0, 1fr) 360px;
+    grid-template-areas:
+      "heading portrait"
+      "about arch"
+      "actions arch";
+    grid-template-rows: auto auto 1fr;
+    gap: 24px 48px;
     padding: 64px 40px 40px;
+  }
+
+  /* Sized to the name block, so the photo and the tree line up. */
+  :where(html.skin-terminal) .hero-portrait {
+    width: 300px;
+    height: auto;
+    aspect-ratio: 3 / 2;
   }
 
   :where(html.skin-terminal) .hero-name {
@@ -449,9 +492,151 @@ html.skin-terminal.dark-theme .hero-portrait {
     font-size: 22px;
   }
 
+  :where(html.skin-terminal) .hero-headline {
+    font-size: 28px;
+  }
+
   :where(html.skin-terminal) .hero-intro {
     font-size: 16px;
   }
+}
+
+/* The CMS diagram as `tree` output: each part is a line and a button, and
+   the selected part's caption prints below it. */
+:where(html.skin-terminal) .arch {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+:where(html.skin-terminal) .arch-titlebar {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+}
+
+:where(html.skin-terminal) .arch-titlebar::before {
+  content: "$ tree orange-cms/" / "";
+  display: block;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .arch-dots,
+:where(html.skin-terminal) .arch-wire {
+  display: none;
+}
+
+:where(html.skin-terminal) .arch-title {
+  display: block;
+  margin: 0;
+  color: var(--accent-3);
+  font-size: 13px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+:where(html.skin-terminal) .arch-title::before {
+  content: "# " / "";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .arch-body {
+  padding: 8px 0 0;
+}
+
+:where(html.skin-terminal) .arch-body::before {
+  content: "orange-cms/" / "";
+  color: var(--accent);
+  font-weight: 700;
+}
+
+:where(html.skin-terminal) .arch-grid {
+  display: block;
+}
+
+:where(html.skin-terminal) .arch-node {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0 1ch;
+  min-height: 32px;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 13px;
+}
+
+:where(html.skin-terminal) .arch-node::before {
+  content: attr(data-tree) / "";
+  color: var(--text-secondary);
+  white-space: pre;
+}
+
+:where(html.skin-terminal) .arch-node:hover {
+  background: var(--accent-soft);
+}
+
+:where(html.skin-terminal) .arch-node-label {
+  display: none;
+}
+
+:where(html.skin-terminal) .arch-node-short {
+  color: var(--text);
+  font-size: inherit;
+}
+
+:where(html.skin-terminal) .arch-node-short::before {
+  content: "# " / "";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .arch-node[aria-pressed="true"] {
+  background: var(--accent);
+}
+
+:where(html.skin-terminal) .arch-node[aria-pressed="true"]::before,
+:where(html.skin-terminal) .arch-node[aria-pressed="true"] .arch-node-short,
+:where(html.skin-terminal)
+  .arch-node[aria-pressed="true"]
+  .arch-node-short::before {
+  color: var(--on-accent);
+}
+
+:where(html.skin-terminal) .arch-caption {
+  min-height: 0;
+  margin-top: 12px;
+  padding: 0 0 0 12px;
+  border: 0;
+  border-left: 2px solid var(--accent-3);
+  border-radius: 0;
+  background: none;
+  color: var(--text);
+}
+
+:where(html.skin-terminal) .arch-footer {
+  display: block;
+  padding: 10px 12px;
+  border: 1px dashed var(--accent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--text);
+}
+
+:where(html.skin-terminal) .arch-footer::before {
+  content: "→ exit 0 · " / "";
+  color: var(--accent);
+  font-weight: 700;
+}
+
+:where(html.skin-terminal) .arch-footer-value {
+  margin-left: 1ch;
+  font-family: var(--font);
+  font-size: inherit;
+  font-weight: 700;
 }
 
 /* ---------- Buttons: bracketed commands ---------- */
@@ -532,9 +717,9 @@ html.skin-terminal.dark-theme .hero-portrait {
 
 /* ---------- Selected work: each item is a terminal window ---------- */
 
-:where(html.skin-terminal) .contribution {
+:where(html.skin-terminal) .work-card,
+:where(html.skin-terminal) .now-card {
   position: relative;
-  margin-bottom: 28px;
   padding: 48px 20px 24px;
   border: 1px solid var(--separator);
   border-radius: var(--radius-surface);
@@ -544,12 +729,17 @@ html.skin-terminal.dark-theme .hero-portrait {
     box-shadow 200ms ease;
 }
 
-:where(html.skin-terminal) .contribution:hover {
+:where(html.skin-terminal) .work-card:hover,
+:where(html.skin-terminal) .work-card:focus-within,
+:where(html.skin-terminal) .now-card:hover,
+:where(html.skin-terminal) .now-card:focus-within {
   border-color: var(--accent);
   box-shadow: var(--glow);
 }
 
-:where(html.skin-terminal) .contribution::before {
+:where(html.skin-terminal) .work-card::before,
+:where(html.skin-terminal) .now-card::before,
+:where(html.skin-terminal) .phone-window::before {
   content: "●  ●  ●" / "";
   position: absolute;
   top: 0;
@@ -563,24 +753,27 @@ html.skin-terminal.dark-theme .hero-portrait {
   letter-spacing: 2px;
 }
 
-:where(html.skin-terminal) .contribution--featured {
-  border-color: var(--accent);
+:where(html.skin-terminal) .work-eyebrow {
+  color: var(--text-secondary);
 }
 
-:where(html.skin-terminal) .contribution-number {
+:where(html.skin-terminal) .work-number,
+:where(html.skin-terminal) .now-meta[data-pid]::before {
   display: inline-block;
   padding: 0 6px;
   background: var(--accent-2);
   color: var(--on-accent);
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
-:where(html.skin-terminal) .contribution-number::before {
+:where(html.skin-terminal) .work-number::before {
   content: "PID " / "";
 }
 
-:where(html.skin-terminal) .contribution-heading {
+:where(html.skin-terminal) .work-title,
+:where(html.skin-terminal) .now-title {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -588,232 +781,427 @@ html.skin-terminal.dark-theme .hero-portrait {
   color: var(--text);
 }
 
-:where(html.skin-terminal) .contribution--featured .contribution-heading {
-  font-size: 26px;
+/* Outcomes read like a command's successful result. */
+:where(html.skin-terminal) .work-outcome {
+  padding: 12px 16px;
+  border: 1px dashed var(--accent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--text);
+  font-size: inherit;
+  line-height: inherit;
 }
 
-@media (min-width: 801px) {
-  :where(html.skin-terminal) .contribution-heading {
-    font-size: 22px;
-  }
-}
-
-:where(html.skin-terminal) .contribution-employer {
-  margin: 0 0 1rem;
-}
-
-:where(html.skin-terminal) .contribution-status {
+:where(html.skin-terminal) .work-outcome::before {
+  content: "→ exit 0" / "";
   display: block;
-  padding: 0;
-  border-radius: 0;
-  background: none;
+  margin-bottom: 4px;
   color: var(--accent);
-  font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
+  text-shadow: var(--glow);
 }
 
-:where(html.skin-terminal) .contribution-status::before {
-  content: "● " / "";
-}
-
-:where(html.skin-terminal) .contribution-list {
-  list-style: none;
-  padding-left: 0;
-}
-
-:where(html.skin-terminal) .contribution-list li {
-  position: relative;
-  padding-left: 1.6em;
-}
-
-:where(html.skin-terminal) .contribution-list li::before {
-  content: "→" / "";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-}
-
-:where(html.skin-terminal) .contribution-tech {
+/* Decision and trade-off as key = value lines. */
+:where(html.skin-terminal) .work-decisions {
+  gap: 4px;
   padding: 8px 12px;
   border-left: 2px solid var(--accent-3);
   background: var(--surface-2);
   font-size: 13.5px;
 }
 
-/* The standard skin's chips read as one line here:
-   "Technologies: Next.js, NestJS, …". */
-:where(html.skin-terminal) .contribution-tech-label,
-:where(html.skin-terminal) .contribution-tech .chips,
-:where(html.skin-terminal) .contribution-tech .chip,
-:where(html.skin-terminal) .contribution-tech-note {
-  display: inline;
-  margin: 0;
+:where(html.skin-terminal) .work-decision {
+  display: block;
   padding: 0;
   border: 0;
   border-radius: 0;
-  font-size: inherit;
-  letter-spacing: 0;
-  text-transform: none;
+  background: none;
 }
 
-:where(html.skin-terminal) .contribution-tech-label {
+:where(html.skin-terminal) .work-decision dt,
+:where(html.skin-terminal) .work-decision dd {
+  display: inline;
+  font-size: inherit;
+}
+
+:where(html.skin-terminal) .work-decision dt {
+  color: var(--accent-3);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+:where(html.skin-terminal) .work-decision dt::after {
+  content: " = " / "";
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+:where(html.skin-terminal) .work-decision dd {
+  color: var(--text);
+}
+
+/* The bars as block-character meters. */
+:where(html.skin-terminal) .bar {
+  height: 10px;
+  border-radius: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--separator) 0 7px,
+    transparent 7px 9px
+  );
+}
+
+:where(html.skin-terminal) .bar--accent {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0 7px,
+    transparent 7px 9px
+  );
+  box-shadow: var(--glow);
+}
+
+/* Technologies read as one line: "Technologies: React, TypeScript, …". */
+:where(html.skin-terminal) .tags {
+  display: block;
+  padding: 8px 12px;
+  border-left: 2px solid var(--accent-3);
+  background: var(--surface-2);
+  font-size: 13.5px;
+}
+
+:where(html.skin-terminal) .tags::before {
+  content: "Technologies: " / "";
   color: var(--accent-3);
   font-weight: 700;
 }
 
-:where(html.skin-terminal) .contribution-tech-label::after {
-  content: ": ";
-}
-
-:where(html.skin-terminal) .contribution-tech .chip,
-:where(html.skin-terminal) .contribution-tech-note {
+:where(html.skin-terminal) .tag {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
   color: var(--text-secondary);
+  font-size: inherit;
 }
 
-:where(html.skin-terminal) .contribution-tech .chip + .chip::before {
+:where(html.skin-terminal) .tag + .tag::before {
   content: ", ";
 }
 
-:where(html.skin-terminal) .contribution-tech-note::before {
-  content: " · ";
+/* Phones keep the standard skin's short cards. */
+@media (max-width: 640px) {
+  :where(html.skin-terminal) .work-tags {
+    display: none;
+  }
 }
 
-:where(html.skin-terminal) .scope summary {
-  list-style: none;
-  color: var(--accent);
-}
-
-:where(html.skin-terminal) .scope summary::-webkit-details-marker {
-  display: none;
-}
-
-:where(html.skin-terminal) .scope summary::before {
-  content: "[+] " / "";
-}
-
-:where(html.skin-terminal) .scope[open] summary::before {
-  content: "[-] " / "";
+:where(html.skin-terminal) .work-link a::before,
+:where(html.skin-terminal) .now-link a::before,
+:where(html.skin-terminal) .section-aside-link::before {
+  content: "$ open " / "";
+  opacity: 0.7;
 }
 
 @media (min-width: 801px) {
-  :where(html.skin-terminal) #work > .page-wrap > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  :where(html.skin-terminal) .contribution {
-    margin-bottom: 0;
+  :where(html.skin-terminal) .work-card,
+  :where(html.skin-terminal) .now-card {
     padding: 56px 32px 32px;
-    grid-template-columns: 1fr;
-    align-content: start;
-    gap: 16px;
   }
+}
 
-  :where(html.skin-terminal) .contribution--featured {
-    grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
-    gap: 32px 48px;
-  }
+/* ---------- Now: a running process and a finished one ---------- */
 
-  :where(html.skin-terminal) .contribution--featured .contribution-heading {
-    font-size: 28px;
+:where(html.skin-terminal) .now-card--building {
+  border-color: var(--accent);
+}
+
+:where(html.skin-terminal) .now-meta[data-pid]::before {
+  content: "PID " attr(data-pid) / "";
+}
+
+:where(html.skin-terminal) .now-eyebrow {
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .now-eyebrow::before {
+  content: "# " / "";
+}
+
+:where(html.skin-terminal) .status-pill {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  color: var(--accent);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+:where(html.skin-terminal) .status-pill::before {
+  content: "STATUS running · " / "";
+  color: var(--accent);
+  font-weight: 700;
+}
+
+:where(html.skin-terminal) .status-dot {
+  display: none;
+}
+
+/* The delivery steps as a pipeline: design → review → … → sign-off. */
+:where(html.skin-terminal) .pipeline {
+  gap: 4px 0;
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .pipeline-step {
+  min-height: 0;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: inherit;
+  text-transform: lowercase;
+}
+
+:where(html.skin-terminal) .pipeline-step + .pipeline-step::before {
+  content: "→" / "";
+  margin-right: 8px;
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .pipeline-step.is-key {
+  color: var(--accent);
+  font-weight: 700;
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .now-card--shipped .now-meta::before {
+  content: "→ exit 0 · " / "";
+  color: var(--accent);
+  font-weight: 700;
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .now-years {
+  font-size: 13px;
+  letter-spacing: 0;
+}
+
+:where(html.skin-terminal) .store-link {
+  min-height: 44px;
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: lowercase;
+  box-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .store-link::before {
+  content: "$" / "";
+  margin-right: 0.6em;
+  opacity: 0.7;
+}
+
+/* The phone sits in a small terminal window, with its screens as tabs. */
+:where(html.skin-terminal) .phone-window {
+  position: relative;
+  padding: 30px 8px 8px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-surface);
+  background: var(--surface-2);
+}
+
+:where(html.skin-terminal) .phone-tile {
+  border-radius: 2px;
+}
+
+:where(html.skin-terminal) .shot-tabs {
+  gap: 4px;
+}
+
+:where(html.skin-terminal) .shot-tab {
+  min-height: 32px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  text-transform: lowercase;
+}
+
+:where(html.skin-terminal) .shot-tab::before {
+  content: "[" / "";
+}
+
+:where(html.skin-terminal) .shot-tab::after {
+  content: "]" / "";
+}
+
+:where(html.skin-terminal) .shot-tab[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+@media (pointer: coarse) {
+  :where(html.skin-terminal) .shot-tab {
+    min-height: 44px;
   }
 }
 
 /* ---------- How I work: key/value config ---------- */
 
-:where(html.skin-terminal) .work-way {
-  border-top: 1px dashed var(--separator);
+:where(html.skin-terminal) .approach-grid {
+  display: block;
 }
 
-:where(html.skin-terminal) .work-label {
+:where(html.skin-terminal) .approach-card {
+  display: grid;
+  gap: 4px 24px;
+  padding: 16px 0;
+  border: 0;
+  border-top: 1px dashed var(--separator);
+  border-radius: 0;
+  background: none;
+}
+
+:where(html.skin-terminal) .approach-label {
   color: var(--accent-2);
+  font-size: inherit;
   font-weight: 700;
 }
 
-:where(html.skin-terminal) .work-label::after {
+:where(html.skin-terminal) .approach-label::after {
   content: " =" / "";
   color: var(--text-secondary);
   font-weight: 400;
 }
 
-:where(html.skin-terminal) .additional-breadth {
+:where(html.skin-terminal) .approach-text {
+  color: var(--text);
+  font-size: inherit;
+}
+
+:where(html.skin-terminal) .approach-proof,
+:where(html.skin-terminal) .approach-note {
+  margin: 0;
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .approach-proof::before,
+:where(html.skin-terminal) .approach-note::before {
+  content: "→ " / "";
+}
+
+/* The prompt arrow leads; the trailing one would repeat it. */
+:where(html.skin-terminal) .approach-proof [aria-hidden="true"] {
+  display: none;
+}
+
+:where(html.skin-terminal) .approach-note::before {
+  content: "// " / "";
   color: var(--text-secondary);
 }
 
-:where(html.skin-terminal) .additional-breadth::before {
-  content: "// " / "";
-  color: var(--accent);
+@media (min-width: 801px) {
+  :where(html.skin-terminal) .approach-card {
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: baseline;
+  }
+
+  :where(html.skin-terminal) .approach-proof,
+  :where(html.skin-terminal) .approach-note {
+    grid-column: 2;
+  }
 }
 
 /* ---------- Background: git log ---------- */
 
-:where(html.skin-terminal) .role-row {
+:where(html.skin-terminal) #about .page-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+:where(html.skin-terminal) #about .section-head {
+  display: contents;
+}
+
+:where(html.skin-terminal) #about .section-heading {
+  margin-bottom: 24px;
+}
+
+/* `$ open cv` closes the log; it has no focusable neighbours to reorder. */
+:where(html.skin-terminal) #about .section-aside-link {
+  order: 2;
+  align-self: flex-start;
+  margin-top: 20px;
+}
+
+:where(html.skin-terminal) .timeline {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+:where(html.skin-terminal) .timeline-entry {
+  display: grid;
+  gap: 2px 24px;
+  padding: 14px 0;
   border-top: 1px dashed var(--separator);
 }
 
-:where(html.skin-terminal) .role-row h3 {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent-2);
+:where(html.skin-terminal) .timeline-dot {
+  display: none;
 }
 
-:where(html.skin-terminal) .role-row h3::before {
+:where(html.skin-terminal) .timeline-name {
+  grid-row: 1;
+  color: var(--accent-2);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+:where(html.skin-terminal) .timeline-name::before {
   content: "commit " / "";
   color: var(--text-secondary);
   font-weight: 400;
 }
 
-:where(html.skin-terminal) .finance-heading {
-  font-size: 18px;
-  font-weight: 700;
+:where(html.skin-terminal) .timeline-period {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
-:where(html.skin-terminal) .finance-heading::before {
-  content: "## " / "";
+:where(html.skin-terminal) .timeline-detail {
+  color: var(--text);
+  font-size: inherit;
+}
+
+:where(html.skin-terminal) .timeline-entry.is-current .timeline-detail::after {
+  content: "  (HEAD)" / "";
   color: var(--accent);
 }
 
-:where(html.skin-terminal) .credential-list li,
-:where(html.skin-terminal) .archive-row {
-  border-top: 1px dashed var(--separator);
-}
+@media (min-width: 801px) {
+  :where(html.skin-terminal) .timeline-entry {
+    grid-template-columns: 220px minmax(0, 1fr);
+    align-items: baseline;
+    padding-top: 14px;
+  }
 
-:where(html.skin-terminal) .credential-list li::before {
-  content: "✓ " / "";
-  color: var(--accent);
-}
+  :where(html.skin-terminal) .timeline-period {
+    grid-column: 1;
+    grid-row: 2;
+  }
 
-:where(html.skin-terminal) .archive {
-  border-top: 1px dashed var(--separator);
-}
-
-:where(html.skin-terminal) .archive summary {
-  list-style: none;
-  color: var(--accent);
-}
-
-:where(html.skin-terminal) .archive summary::-webkit-details-marker {
-  display: none;
-}
-
-:where(html.skin-terminal) .archive summary::before {
-  content: "▸ ls " / "";
-  color: var(--text-secondary);
-}
-
-:where(html.skin-terminal) .archive[open] summary::before {
-  content: "▾ ls " / "";
-}
-
-:where(html.skin-terminal) .archive-row h3 {
-  font-size: 15px;
-  color: var(--accent-2);
-}
-
-:where(html.skin-terminal) .archive-links a::before {
-  content: "↗ " / "";
+  :where(html.skin-terminal) .timeline-detail {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
 }
 
 /* ---------- Contact + footer ---------- */
@@ -824,6 +1212,10 @@ html.skin-terminal.dark-theme .hero-portrait {
   border-radius: var(--radius-surface);
   background: var(--surface);
   box-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .contact-line {
+  color: var(--text-secondary);
 }
 
 @media (min-width: 801px) {
@@ -1006,13 +1398,77 @@ html.skin-terminal.dark-theme .hero-portrait {
 
 /* ---------- Case studies ---------- */
 
-:where(html.skin-terminal) .case-study-facts {
-  border-top-style: dashed;
-  border-bottom-style: dashed;
+:where(html.skin-terminal) .case-study-hero {
+  border-bottom: 1px dashed var(--separator);
+}
+
+:where(html.skin-terminal) .case-study-kicker {
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+:where(html.skin-terminal) .case-study-kicker::before {
+  content: "$ cat " / "";
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .case-study-title {
+  color: var(--accent);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .case-study-title::before {
+  content: "# " / "";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .case-study-description {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* The outcome tile as a successful exit. */
+:where(html.skin-terminal) .outcome-tile {
+  padding: 14px 18px;
+  border: 1px dashed var(--accent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+:where(html.skin-terminal) .outcome-tile-label {
+  color: var(--accent);
+  font-weight: 700;
+  text-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .outcome-tile-label::before {
+  content: "→ exit 0 · " / "";
+}
+
+:where(html.skin-terminal) .outcome-tile-value {
+  color: var(--accent-2);
+  font-family: var(--font);
+  font-size: 30px;
+  font-weight: 800;
+}
+
+:where(html.skin-terminal) .outcome-tile-text {
+  color: var(--text);
+}
+
+:where(html.skin-terminal) .case-study-facts-band {
+  border-top: 1px dashed var(--separator);
 }
 
 :where(html.skin-terminal) .case-study-facts dt {
   color: var(--accent-2);
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -1022,18 +1478,94 @@ html.skin-terminal.dark-theme .hero-portrait {
   color: var(--text-secondary);
 }
 
-:where(html.skin-terminal) .case-study-back {
+/* "On this page" as a directory listing. The label stays readable to
+   assistive technology; the prompt replaces it on screen. */
+:where(html.skin-terminal) .toc-heading {
+  font-size: 0;
+}
+
+:where(html.skin-terminal) .toc-heading::before {
+  content: "$ ls sections/" / "";
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+:where(html.skin-terminal) .toc-list a {
+  border-left-style: dashed;
+}
+
+:where(html.skin-terminal) .toc-list a.is-current {
+  border-left-style: solid;
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .toc-list a.is-current::before {
+  content: "> " / "";
+}
+
+/* Options as a checklist: [x] chosen, [ ] rejected. */
+:where(html.skin-terminal) .option {
+  border-style: dashed;
+  border-radius: 2px;
+}
+
+/* Option cards are list items; they skip the prose list arrow. */
+:where(html.skin-terminal) .prose .options .option {
+  padding: 16px 18px;
+}
+
+:where(html.skin-terminal) .prose .options .option::before {
+  content: none;
+}
+
+:where(html.skin-terminal) .option-verdict {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+:where(html.skin-terminal) .option-title::before {
+  content: "[ ] " / "";
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .option.is-chosen .option-title::before {
+  content: "[x] " / "";
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .option.is-chosen .option-title {
+  color: var(--accent);
+}
+
+:where(html.skin-terminal) .prose .option-title {
+  color: inherit;
+}
+
+:where(html.skin-terminal) .differently {
+  border: 1px dashed var(--accent-3);
+  border-radius: 2px;
+  background: none;
+}
+
+:where(html.skin-terminal) .case-study-pager {
   border-top-style: dashed;
 }
 
-:where(html.skin-terminal) .contribution-case-study a::before {
-  content: "$ open " / "";
-  opacity: 0.7;
+:where(html.skin-terminal) .flow {
+  padding: 0;
 }
 
 :where(html.skin-terminal) .flow-step {
   border-style: dashed;
   border-radius: 2px;
+}
+
+:where(html.skin-terminal) .flow-step:first-child {
+  border-color: var(--accent);
 }
 
 :where(html.skin-terminal) .flow-title {
@@ -1042,6 +1574,14 @@ html.skin-terminal.dark-theme .hero-portrait {
 
 :where(html.skin-terminal) .flow-title::before {
   content: "[" counter(flow) "] ";
+  display: inline;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: inherit;
+  letter-spacing: 0;
+}
+
+:where(html.skin-terminal) .flow-text {
   color: var(--text-secondary);
 }
 
@@ -1050,47 +1590,10 @@ html.skin-terminal.dark-theme .hero-portrait {
   color: var(--accent);
 }
 
-/* Project outcomes read like a command's successful result. */
-:where(html.skin-terminal) .contribution-outcome {
-  margin-top: 16px;
-  padding: 12px 16px;
-  border: 1px dashed var(--accent);
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
-  color: var(--text);
-  font-weight: 400;
-}
-
-:where(html.skin-terminal) .contribution-outcome::before {
-  content: "→ exit 0" / "";
-  display: block;
-  margin-bottom: 4px;
-  color: var(--accent);
-  font-weight: 700;
-  text-shadow: var(--glow);
-}
-
-:where(html.skin-terminal) .contribution-outcome-label,
-:where(html.skin-terminal) .contribution-outcome-text {
-  display: inline;
-  margin: 0;
-  font-size: inherit;
-  line-height: inherit;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-:where(html.skin-terminal) .contribution-outcome-label {
-  color: var(--accent-2);
-  font-weight: 700;
-}
-
-:where(html.skin-terminal) .contribution-outcome-label::after {
-  content: ": ";
-}
-
-:where(html.skin-terminal) .contribution-outcome-text {
-  font-weight: 400;
+@media (min-width: 801px) {
+  :where(html.skin-terminal) .case-study-title {
+    font-size: 44px;
+  }
 }
 
 /* ---------- Standard-skin type roles, restored for the Terminal look ---------- */
@@ -1120,23 +1623,6 @@ html.skin-terminal.dark-theme .hero-portrait {
   }
 }
 
-:where(html.skin-terminal) .role-time,
-:where(html.skin-terminal) .archive-date {
-  font-weight: 500;
-}
-
-:where(html.skin-terminal) .case-study-kicker {
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-:where(html.skin-terminal) .case-study-facts dt {
-  font-size: 13px;
-  font-weight: 600;
-}
-
 :where(html.skin-terminal) .palette-toggle {
   padding: 0 10px;
   font-weight: 600;
@@ -1146,16 +1632,4 @@ html.skin-terminal.dark-theme .hero-portrait {
   padding: 8px 12px;
   font-size: inherit;
   font-weight: 600;
-}
-
-:where(html.skin-terminal) .contribution-number {
-  letter-spacing: 0.08em;
-}
-
-/* The standard skin drops the first row's top border under each heading;
-   Terminal windows and rows keep theirs. */
-:where(html.skin-terminal) .contribution:first-child,
-:where(html.skin-terminal) .work-way:first-child,
-:where(html.skin-terminal) .role-row:first-child {
-  border-top-width: 1px;
 }

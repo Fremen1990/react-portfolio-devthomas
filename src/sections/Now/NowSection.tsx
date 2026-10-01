@@ -18,9 +18,8 @@ const Building = () => {
       id={building.id}
       aria-labelledby={headingId}
       className="now-card now-card--building band"
-      data-pid={building.number}
     >
-      <p className="now-meta">
+      <p className="now-meta" data-pid={building.number}>
         <span className="eyebrow now-eyebrow">{building.eyebrow}</span>
         <span className="status-pill">
           <span className="status-dot" aria-hidden="true" />
