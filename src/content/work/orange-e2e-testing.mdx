@@ -10,10 +10,22 @@ I was taking a Cypress course at the time and wanted to put it into practice. Ov
 
 ## Options I considered
 
-- **Selenium:** too complicated, with too much setup for the team we had.
-- **Playwright:** promising, but not mature enough at the time.
-- **Cypress:** modern, widely used, and a good fit for testing a web application. I chose it.
-- **A separate repository.** The tests were written and owned by testers, not by the application's developers, so they lived in their own project.
+<Options>
+  <Option title="Selenium:">
+    too complicated, with too much setup for the team we had.
+  </Option>
+  <Option title="Playwright:">
+    promising, but not mature enough at the time.
+  </Option>
+  <Option chosen title="Cypress:">
+    modern, widely used, and a good fit for testing a web application. I chose
+    it.
+  </Option>
+  <Option chosen title="A separate repository.">
+    The tests were written and owned by testers, not by the application's
+    developers, so they lived in their own project.
+  </Option>
+</Options>
 
 ## Building the practice
 
@@ -59,6 +71,10 @@ I was taking a Cypress course at the time and wanted to put it into practice. Ov
 
 Test data causes no trouble: the tests are isolated for parallel runs, and each one cleans up after itself.
 
+<Differently>
+
 ## What I'd do differently
 
 Today I would choose Playwright with TypeScript. Its access to browser developer tools and its range of options make unusual scenarios easier to handle than in Cypress. Where the tests live should follow who writes them. I would keep them in the application's repository only if its developers write end-to-end tests themselves.
+
+</Differently>

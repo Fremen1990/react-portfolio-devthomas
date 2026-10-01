@@ -6,11 +6,11 @@ type FlowProps = {
   steps: { title: string; text: string }[];
 };
 
-// A simple architecture diagram: numbered boxes joined by arrows. It is an
+// A simple architecture diagram: numbered dark nodes on a dark band. It is an
 // ordered list, so it reads in order without the visual layout, and it wraps
 // to a single column on narrow screens.
 export const Flow = ({ label, steps }: FlowProps) => (
-  <figure className="flow">
+  <figure className="flow band">
     <ol className="flow-steps" aria-label={label}>
       {steps.map((step) => (
         <li key={step.title} className="flow-step">
