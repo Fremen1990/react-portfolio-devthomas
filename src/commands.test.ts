@@ -8,7 +8,7 @@ import {
   type CommandState,
 } from "./commands";
 
-import { carBrain } from "./content/carBrain";
+import { CAR_BRAIN_PUBLISHED } from "./content/carBrainLinks";
 import { sections } from "./content/navigation";
 
 const light: CommandState = { theme: "light", skin: "default" };
@@ -101,26 +101,29 @@ test("commands call the matching action", () => {
 });
 
 describe("Car Brain commands", () => {
+  const links = {
+    appStoreUrl: "https://apps.example/app",
+    siteUrl: "https://site.example/",
+  };
+
   test("are left out while the app is unpublished", () => {
-    expect(carBrainCommands({ ...carBrain, published: false })).toEqual([]);
-    if (!carBrain.published) {
-      expect(
-        commands.some((command) => command.id.startsWith("car-brain"))
-      ).toBe(false);
-    }
+    expect(carBrainCommands(null)).toEqual([]);
+    expect(commands.some((command) => command.id.startsWith("car-brain"))).toBe(
+      CAR_BRAIN_PUBLISHED
+    );
   });
 
   test("open the store and the site once it is published", () => {
     const openExternal = vi.fn();
     const context = { openExternal } as unknown as CommandContext;
-    const published = carBrainCommands({ ...carBrain, published: true });
+    const published = carBrainCommands(links);
     expect(published.map((command) => command.id)).toEqual([
       "car-brain-app-store",
       "car-brain-site",
     ]);
     published.forEach((command) => command.run(context));
-    expect(openExternal).toHaveBeenNthCalledWith(1, carBrain.appStoreUrl);
-    expect(openExternal).toHaveBeenNthCalledWith(2, carBrain.siteUrl);
+    expect(openExternal).toHaveBeenNthCalledWith(1, links.appStoreUrl);
+    expect(openExternal).toHaveBeenNthCalledWith(2, links.siteUrl);
   });
 });
 
