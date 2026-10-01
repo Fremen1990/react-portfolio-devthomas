@@ -23,22 +23,25 @@ const HEIGHT = 630;
 const TAGLINE =
   "Frontend architecture, full-stack development and technical leadership.";
 
+// The CV's palette (cv.devthomas.pl), as in src/index.css.
 const STANDARD = {
   light: {
-    canvas: "#f7f8fa",
-    text: "#17212b",
-    secondary: "#4b5563",
+    canvas: "#f7f5f0",
+    text: "#16181a",
+    soft: "#34383b",
+    secondary: "#5b5f63",
     accent: "#0f6b75",
-    onAccent: "#ffffff",
-    separator: "#dde3e8",
+    accentSoft: "#e2efee",
+    separator: "#e0dbd0",
   },
   dark: {
-    canvas: "#10161b",
-    text: "#e8eef2",
-    secondary: "#c5d0d8",
+    canvas: "#0f1413",
+    text: "#e8eeeb",
+    soft: "#c3ccc8",
+    secondary: "#9aa6a1",
     accent: "#8fd3da",
-    onAccent: "#102228",
-    separator: "#2c3842",
+    accentSoft: "#17292b",
+    separator: "#2a3531",
   },
 };
 
@@ -70,18 +73,21 @@ const TERMINAL = {
 const fontsDir = join(process.cwd(), "src/assets/fonts");
 const portraitPath = join(process.cwd(), "public/portrait.jpg");
 
+// Matches the standard hero, which follows the CV: the mono wordmark, the
+// name in Fraunces, the availability pill, and the round, ringed portrait.
 const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
   const c = STANDARD[look.theme];
   return (
     <div
       style={{
         display: "flex",
+        alignItems: "center",
         width: "100%",
         height: "100%",
-        padding: 72,
+        padding: "64px 72px",
         background: c.canvas,
         color: c.text,
-        fontFamily: "Inter",
+        fontFamily: "Geist",
       }}
     >
       <div
@@ -90,75 +96,95 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
           flexDirection: "column",
           justifyContent: "space-between",
           flex: 1,
-          paddingRight: 56,
+          height: "100%",
+          paddingRight: 48,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 64,
-              height: 64,
-              borderRadius: 14,
-              background: c.accent,
-              color: c.onAccent,
-              fontSize: 28,
-              fontWeight: 700,
-            }}
-          >
-            TS
-          </div>
-          <div style={{ fontSize: 28, color: c.secondary }}>devthomas.pl</div>
+        <div
+          style={{
+            fontFamily: "Geist Mono",
+            fontSize: 26,
+            fontWeight: 500,
+            color: c.accent,
+          }}
+        >
+          devthomas.pl
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
-              fontSize: 84,
-              fontWeight: 700,
+              fontFamily: "Fraunces",
+              fontSize: 96,
+              fontWeight: 500,
               letterSpacing: -3,
-              lineHeight: 1.05,
+              lineHeight: 1,
             }}
           >
             {profile.name}
           </div>
-          <div
-            style={{
-              marginTop: 16,
-              fontSize: 36,
-              fontWeight: 700,
-              color: c.accent,
-            }}
-          >
+          <div style={{ marginTop: 20, fontSize: 36, fontWeight: 500 }}>
             {profile.headline}
           </div>
           <div
             style={{
-              marginTop: 28,
-              fontSize: 30,
+              marginTop: 18,
+              fontSize: 27,
               lineHeight: 1.4,
-              color: c.secondary,
+              color: c.soft,
             }}
           >
             {TAGLINE}
           </div>
         </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            alignSelf: "flex-start",
+            padding: "8px 18px",
+            border: `1px solid ${c.separator}`,
+            borderRadius: 999,
+            fontFamily: "Geist Mono",
+            fontSize: 17,
+            whiteSpace: "nowrap",
+            color: c.secondary,
+          }}
+        >
+          <div
+            style={{
+              width: 10,
+              height: 10,
+              marginRight: 12,
+              borderRadius: 999,
+              background: c.accent,
+            }}
+          />
+          {profile.availability}
+        </div>
       </div>
-      {/* next/og renders plain <img> only; next/image does not apply here. */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={portrait}
-        width={380}
-        height={486}
-        alt=""
+      <div
         style={{
-          objectFit: "cover",
-          objectPosition: "50% 40%",
-          borderRadius: 24,
-          border: `2px solid ${c.separator}`,
+          display: "flex",
+          padding: 6,
+          borderRadius: 999,
+          background: c.accentSoft,
+          border: `1px solid ${c.separator}`,
         }}
-      />
+      >
+        {/* next/og renders plain <img> only; next/image does not apply here. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={portrait}
+          width={320}
+          height={320}
+          alt=""
+          style={{
+            objectFit: "cover",
+            objectPosition: "50% 30%",
+            borderRadius: 999,
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -307,11 +333,22 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const [inter400, inter700, mono400, mono800, portrait] = await Promise.all([
-    readFile(join(fontsDir, "Inter-400.ttf")),
-    readFile(join(fontsDir, "Inter-700.ttf")),
-    readFile(join(fontsDir, "JetBrainsMono-400.ttf")),
-    readFile(join(fontsDir, "JetBrainsMono-800.ttf")),
+  const font = (file: string) => readFile(join(fontsDir, file));
+  const [
+    fraunces500,
+    geist400,
+    geist500,
+    geistMono500,
+    mono400,
+    mono800,
+    portrait,
+  ] = await Promise.all([
+    font("Fraunces-500.ttf"),
+    font("Geist-400.ttf"),
+    font("Geist-500.ttf"),
+    font("GeistMono-500.ttf"),
+    font("JetBrainsMono-400.ttf"),
+    font("JetBrainsMono-800.ttf"),
     readFile(portraitPath),
   ]);
 
@@ -331,8 +368,15 @@ export async function GET(
       width: WIDTH,
       height: HEIGHT,
       fonts: [
-        { name: "Inter", data: inter400, weight: 400, style: "normal" },
-        { name: "Inter", data: inter700, weight: 700, style: "normal" },
+        { name: "Fraunces", data: fraunces500, weight: 500, style: "normal" },
+        { name: "Geist", data: geist400, weight: 400, style: "normal" },
+        { name: "Geist", data: geist500, weight: 500, style: "normal" },
+        {
+          name: "Geist Mono",
+          data: geistMono500,
+          weight: 500,
+          style: "normal",
+        },
         {
           name: "JetBrains Mono",
           data: mono400,
