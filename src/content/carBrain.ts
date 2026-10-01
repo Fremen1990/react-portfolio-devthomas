@@ -1,7 +1,8 @@
-// Car Brain, the app I built on my own. Publication gate: while `published`
-// is false, the card is not rendered and no store link appears anywhere (the
-// page, structured data or the command palette). Flip it to true once the
-// App Store listing is live.
+import { CAR_BRAIN_PUBLISHED, carBrainLinks } from "./carBrainLinks";
+
+// Car Brain, the app I built on my own. While it is unpublished (see
+// ./carBrainLinks.ts), the card is not rendered and no store link appears
+// anywhere: not in the page, the structured data or the command palette.
 
 export type CarBrainShot = {
   id: string;
@@ -28,7 +29,7 @@ export type CarBrain = {
 };
 
 export const carBrain: CarBrain = {
-  published: false,
+  published: CAR_BRAIN_PUBLISHED,
   eyebrow: "Shipped on my own",
   years: "2024–2025",
   title: "Car Brain: a vehicle-management app, built end to end",
@@ -41,9 +42,9 @@ export const carBrain: CarBrain = {
     "Google & Apple sign-in",
   ],
   appStoreLabel: "Download on the App Store",
-  appStoreUrl: "https://apps.apple.com/app/id6754179380",
+  appStoreUrl: carBrainLinks?.appStoreUrl ?? "",
   siteLabel: "car-brain.com",
-  siteUrl: "https://car-brain.com/en",
+  siteUrl: carBrainLinks?.siteUrl ?? "",
   shotWidth: 392,
   shotHeight: 822,
   shots: [

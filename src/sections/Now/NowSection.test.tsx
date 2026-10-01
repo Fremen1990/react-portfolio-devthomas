@@ -3,11 +3,19 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { NowSection } from "./NowSection";
 import { carBrain } from "../../content/carBrain";
+import { carBrainLinks } from "../../content/carBrainLinks";
 import { profile } from "../../content/publicProfile";
 import { caseStudyPath } from "../../content/work/studies";
 
 describe("while Car Brain is unpublished", () => {
   const hidden = { ...carBrain, published: false };
+
+  test("the build carries no links for it", () => {
+    if (!carBrain.published) {
+      expect(carBrainLinks).toBeNull();
+      expect(carBrain.appStoreUrl).toBe("");
+    }
+  });
 
   test("only TheEventa renders, across the full row", () => {
     const { container } = render(<NowSection carBrain={hidden} />);
@@ -28,7 +36,12 @@ describe("while Car Brain is unpublished", () => {
 });
 
 describe("once Car Brain is published", () => {
-  const shown = { ...carBrain, published: true };
+  const shown = {
+    ...carBrain,
+    published: true,
+    appStoreUrl: "https://apps.apple.com/app/id6754179380",
+    siteUrl: "https://car-brain.com/en",
+  };
 
   test("both cards render side by side, with the store link", () => {
     const { container } = render(<NowSection carBrain={shown} />);
@@ -38,7 +51,7 @@ describe("once Car Brain is published", () => {
     expect(container.firstChild).not.toHaveClass("now-grid--single");
     expect(
       screen.getByRole("link", { name: carBrain.appStoreLabel })
-    ).toHaveAttribute("href", carBrain.appStoreUrl);
+    ).toHaveAttribute("href", shown.appStoreUrl);
   });
 
   test("the screen buttons swap the screenshot", () => {

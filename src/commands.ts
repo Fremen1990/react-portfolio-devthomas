@@ -3,7 +3,7 @@ import { SITE_URL } from "./lib/metadata";
 import { sections } from "./content/navigation";
 import { caseStudyPath, publishedCaseStudies } from "./content/work/studies";
 import { isHomePath, lookPath } from "./content/looks";
-import { carBrain, type CarBrain } from "./content/carBrain";
+import { carBrainLinks, type CarBrainLinks } from "./content/carBrainLinks";
 import type { Theme } from "./utils/theme";
 import type { Skin } from "./utils/skin";
 
@@ -35,9 +35,12 @@ export type Command = {
   run: (context: CommandContext) => void;
 };
 
-/** Car Brain's links, offered only once its publication gate is open. */
-export const carBrainCommands = (app: CarBrain): Command[] =>
-  app.published
+/**
+ * Car Brain's links, offered only once its publication gate is open. The
+ * palette imports just the gate and links, not the rest of the app's content.
+ */
+export const carBrainCommands = (links: CarBrainLinks | null): Command[] =>
+  links
     ? [
         {
           id: "car-brain-app-store",
@@ -45,7 +48,7 @@ export const carBrainCommands = (app: CarBrain): Command[] =>
           alias: "open car-brain --app-store",
           keywords: ["car brain", "app", "ios", "iphone", "download"],
           group: "Link",
-          run: (context) => context.openExternal(app.appStoreUrl),
+          run: (context) => context.openExternal(links.appStoreUrl),
         },
         {
           id: "car-brain-site",
@@ -53,7 +56,7 @@ export const carBrainCommands = (app: CarBrain): Command[] =>
           alias: "open car-brain.com",
           keywords: ["car brain", "app", "website", "landing page"],
           group: "Link",
-          run: (context) => context.openExternal(app.siteUrl),
+          run: (context) => context.openExternal(links.siteUrl),
         },
       ]
     : [];
@@ -91,7 +94,7 @@ export const commands: Command[] = [
     group: "Page",
     run: (context) => context.goToPage("/colophon/"),
   },
-  ...carBrainCommands(carBrain),
+  ...carBrainCommands(carBrainLinks),
   {
     id: "cv",
     title: "Open CV",

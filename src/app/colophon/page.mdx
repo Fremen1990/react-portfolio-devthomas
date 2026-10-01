@@ -32,7 +32,7 @@ The `>_` button in the header switches between the standard style and a Terminal
 ## Accessibility
 
 - Section links move focus to the section's heading, keep a shareable fragment URL, and work with Back. With reduced motion turned on, they jump instead of scrolling.
-- The mobile menu closes with Escape and returns focus to the Menu button. A closed menu is out of the tab order.
+- The mobile menu closes with Escape and returns focus to the Menu button. While the menu is shut, it is out of the tab order.
 - The architecture diagram's parts are native toggle buttons with `aria-pressed`, and its caption is announced politely when it changes. Without JavaScript the first part and its caption still show. The palette uses a native modal `<dialog>`, which keeps focus inside and makes the page behind it inert, with an ARIA combobox for the list.
 - Motion is small: a dot that runs down the diagram's connector, the testing bars growing once when they scroll into view, and hover states. With reduced motion turned on, all of it stops and the bars show at full length.
 - Every build runs an automated accessibility scan (axe, WCAG 2.1 AA) on each page in both skins and both themes, and on the open palette. A violation fails the checks and stops the publish.
