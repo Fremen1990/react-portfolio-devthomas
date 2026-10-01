@@ -231,8 +231,7 @@
     display: flex;
   }
 
-  .site-nav-links a,
-  .nav-skin-menu {
+  .site-nav-links a {
     display: flex;
     align-items: center;
     min-height: 44px;
@@ -258,6 +257,11 @@
   }
 
   .nav-skin-menu {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: 10px;
     border: 0;
     background: transparent;
     color: var(--text-secondary);
