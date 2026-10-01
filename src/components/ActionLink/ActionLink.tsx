@@ -3,7 +3,8 @@ import React, { type ReactNode } from "react";
 type ActionLinkProps = {
   href: string;
   children: ReactNode;
-  variant?: "solid" | "quiet";
+  /** Solid ink, outline, or the accent fill used in dark bands. */
+  variant?: "solid" | "quiet" | "bright";
   external?: boolean;
 };
 

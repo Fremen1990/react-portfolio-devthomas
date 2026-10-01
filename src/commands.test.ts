@@ -1,11 +1,15 @@
 import { describe, expect, test, vi } from "vitest";
 import {
   buildShareUrl,
+  carBrainCommands,
   commands,
   filterCommands,
   type CommandContext,
   type CommandState,
 } from "./commands";
+
+import { carBrain } from "./content/carBrain";
+import { sections } from "./content/navigation";
 
 const light: CommandState = { theme: "light", skin: "default" };
 const ids = (query: string, state = light) =>
@@ -42,6 +46,17 @@ describe("filterCommands", () => {
     expect(ids("cd background")[0]).toBe("section-about");
     expect(ids("theme dark")[0]).toBe("theme-dark");
     expect(ids("whoami")[0]).toBe("top");
+  });
+
+  test("section commands follow the page order, including Now", () => {
+    const sectionIds = commands
+      .filter((command) => command.group === "Section")
+      .map((command) => command.id);
+    expect(sectionIds).toEqual([
+      "top",
+      ...sections.map((section) => `section-${section.id}`),
+    ]);
+    expect(ids("cd now")[0]).toBe("section-now");
   });
 
   test("finds published case studies", () => {
@@ -83,6 +98,30 @@ test("commands call the matching action", () => {
   expect(context.setTheme).toHaveBeenCalledWith("dark");
   run("skin-terminal");
   expect(context.setSkin).toHaveBeenCalledWith("terminal");
+});
+
+describe("Car Brain commands", () => {
+  test("are left out while the app is unpublished", () => {
+    expect(carBrainCommands({ ...carBrain, published: false })).toEqual([]);
+    if (!carBrain.published) {
+      expect(
+        commands.some((command) => command.id.startsWith("car-brain"))
+      ).toBe(false);
+    }
+  });
+
+  test("open the store and the site once it is published", () => {
+    const openExternal = vi.fn();
+    const context = { openExternal } as unknown as CommandContext;
+    const published = carBrainCommands({ ...carBrain, published: true });
+    expect(published.map((command) => command.id)).toEqual([
+      "car-brain-app-store",
+      "car-brain-site",
+    ]);
+    published.forEach((command) => command.run(context));
+    expect(openExternal).toHaveBeenNthCalledWith(1, carBrain.appStoreUrl);
+    expect(openExternal).toHaveBeenNthCalledWith(2, carBrain.siteUrl);
+  });
 });
 
 describe("buildShareUrl", () => {
