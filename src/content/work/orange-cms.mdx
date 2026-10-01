@@ -12,10 +12,29 @@ Orange Polska needed one internal CMS to sit in front of a growing number of leg
 
 ## Options I considered
 
-- **Vanilla JavaScript,** which the team already knew. I argued against it. For a system meant to last for years, I wanted strong type safety to keep it maintainable and bugs easy to trace.
-- **React with TypeScript,** which I recommended. Other Orange projects already used React, including the Orange TV GO streaming platform, where I also worked, and developers sometimes move between projects. A shared stack makes those moves easier.
-- **Our own components and CSS,** or **MUI with a custom palette.** We chose MUI: well-tested components we could theme, instead of building and maintaining our own.
-- **Our own forms system,** or **RJSF.** We chose RJSF, which renders forms straight from JSON Schema, and extended it with custom fields and widgets.
+<Options>
+  <Option title="Vanilla JavaScript,">
+    which the team already knew. I argued against it. For a system meant to last
+    for years, I wanted strong type safety to keep it maintainable and bugs easy
+    to trace.
+  </Option>
+  <Option chosen title="React with TypeScript,">
+    which I recommended. Other Orange projects already used React, including the
+    Orange TV GO streaming platform, where I also worked, and developers
+    sometimes move between projects. A shared stack makes those moves easier.
+  </Option>
+  <Option
+    chosen
+    title="Our own components and CSS, or MUI with a custom palette."
+  >
+    We chose MUI: well-tested components we could theme, instead of building and
+    maintaining our own.
+  </Option>
+  <Option chosen title="Our own forms system, or RJSF.">
+    We chose RJSF, which renders forms straight from JSON Schema, and extended
+    it with custom fields and widgets.
+  </Option>
+</Options>
 
 ## The decision
 
@@ -55,6 +74,10 @@ The trade-off was debugging. When something goes wrong, the cause can sit in con
 
 The frontend stays out of the way. When a new resource is added, the backend usually configures it fully and it works in the frontend without changes. **Dozens of new resources have reached production without any frontend work.**
 
+<Differently>
+
 ## What I'd do differently
 
 I'd be stricter about customisation. Some features we rebuilt were already working in MUI or RJSF. For example, the business asked us to override default hover and keyboard behaviour. Each override is code we now maintain, and changing standard keyboard behaviour also makes an interface harder to use with a keyboard or a screen reader. I would push back on requests like that earlier.
+
+</Differently>

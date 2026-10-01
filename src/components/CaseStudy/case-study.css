@@ -1,56 +1,263 @@
-/* Case study pages (/work/<slug>/) and the Flow diagram they use. */
+/* Case study pages (/work/<slug>/): a dark header band with the outcome and
+   the facts, then "On this page" beside a 760px reading column. Also the
+   Flow diagram, options and the "What I'd do differently" panel. */
 
-/* Mono eyebrow, as on the CV. */
+.case-study-hero {
+  border-bottom: 1px solid var(--band-line);
+}
+
+.case-study-hero-grid {
+  display: grid;
+  gap: 24px;
+  padding: 36px 0;
+}
+
+.case-study-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
 .case-study-kicker {
-  margin: 0 0 12px;
-  color: var(--text-secondary);
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.case-study-title {
+  margin: 0;
+  color: var(--band-strong);
+  font-size: clamp(30px, 6.4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.case-study-description {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--text-soft);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.outcome-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: var(--band-node-active);
+}
+
+.outcome-tile p {
+  margin: 0;
+}
+
+.outcome-tile-label {
+  color: var(--accent);
+}
+
+.outcome-tile-value {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1;
+}
+
+.outcome-tile-text {
+  color: var(--text-soft);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.case-study-facts-band {
+  border-top: 1px solid var(--band-node-line);
 }
 
 .case-study-facts {
   display: grid;
-  gap: 10px 24px;
-  margin: 24px 0 40px;
+  gap: 16px 24px;
+  margin-top: 0;
+  margin-bottom: 0;
   padding: 20px 0;
-  border-top: 1px solid var(--separator);
-  border-bottom: 1px solid var(--separator);
-}
-
-.case-study-facts div {
-  display: grid;
-  gap: 2px;
 }
 
 .case-study-facts dt {
   color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .case-study-facts dd {
+  margin: 6px 0 0;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Body: the list of sections, then the reading column. */
+.case-study-body {
+  display: grid;
+  gap: 32px;
+  padding: 40px 0 56px;
+}
+
+.case-study-prose {
+  max-width: 760px;
+  min-width: 0;
+}
+
+.case-study-prose > h2:first-child,
+.case-study-prose > :first-child {
+  margin-top: 0;
+}
+
+.case-study-prose h2 {
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+
+.toc-heading {
+  margin: 0 0 10px;
+  color: var(--text-secondary);
+}
+
+.toc-list {
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.case-study-back {
+.toc-list a {
+  display: block;
+  padding: 7px 0 7px 14px;
+  border-left: 2px solid var(--separator);
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.toc-list a:hover {
+  color: var(--text);
+}
+
+/* Weight stays the same, so the current item never reflows the list. */
+.toc-list a.is-current {
+  border-left-color: var(--accent);
+  color: var(--text);
+}
+
+/* Options I considered, as cards: chosen ones outlined in the accent. */
+.prose .options {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.prose .options li + li {
+  margin-top: 0;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border: 1px solid var(--separator);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.option.is-chosen {
+  border-color: var(--accent);
+}
+
+.option-verdict {
+  color: var(--text-secondary);
+}
+
+.option.is-chosen .option-verdict {
+  color: var(--accent);
+}
+
+.option-title {
+  font-weight: 600;
+}
+
+.option-text {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.option-text > :last-child {
+  margin-bottom: 0;
+}
+
+/* What I'd do differently */
+.differently {
+  margin: 40px 0 0;
+  padding: 24px;
+  border-radius: var(--radius-surface);
+  background: var(--accent-soft);
+}
+
+.prose .differently h2 {
+  margin-top: 0;
+}
+
+.differently > :last-child {
+  margin-bottom: 0;
+}
+
+/* All work, and the next study. */
+.case-study-pager {
+  display: grid;
+  gap: 16px;
   margin-top: 48px;
-  padding-top: 20px;
+  padding-top: 24px;
   border-top: 1px solid var(--separator);
-  font-weight: 600;
 }
 
-.contribution-case-study {
-  margin: 16px 0 0;
-  font-weight: 600;
+.prose .pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text);
+  text-decoration: none;
 }
 
+.pager-label {
+  color: var(--text-secondary);
+}
+
+.pager-link--next .pager-label {
+  color: var(--accent);
+}
+
+.pager-link--next .pager-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.prose .pager-link:hover .pager-title {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Flow: dark numbered nodes on a dark band. A list, so it reads in order
+   without the layout; one column with arrows on narrow screens. */
 .flow {
   margin: 8px 0 24px;
+  padding: 18px;
+  border-radius: var(--radius-surface);
 }
 
 .flow-steps {
@@ -68,23 +275,40 @@
 
 .flow-step {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 4px;
   padding: 14px 16px;
-  border: 1px solid var(--separator);
-  border-radius: var(--radius-surface);
-  background: var(--surface);
+  border: 1px solid var(--band-node-line);
+  border-radius: 14px;
+  background: var(--band-node);
   counter-increment: flow;
 }
 
+.flow-step:first-child {
+  border-color: var(--accent);
+}
+
+.flow-title {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .flow-title::before {
-  content: counter(flow) ". ";
+  content: counter(flow, decimal-leading-zero);
+  display: block;
+  margin-bottom: 2px;
   color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
 .flow-text {
-  color: var(--text-secondary);
-  font-size: 15px;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 /* Arrow from the previous step. */
@@ -99,17 +323,69 @@
 }
 
 .flow-caption {
-  margin-top: 12px;
+  margin-top: 14px;
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 13px;
+}
+
+@media (min-width: 640px) {
+  .prose .options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case-study-pager {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .prose .pager-link--next {
+    text-align: right;
+  }
 }
 
 @media (min-width: 801px) {
-  .case-study-facts {
-    grid-template-columns: max-content 1fr;
+  .case-study-hero-grid {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 56px;
+    align-items: end;
+    padding: 56px 0;
   }
 
-  .case-study-facts div {
-    display: contents;
+  .case-study-description {
+    font-size: 18px;
+  }
+
+  .case-study-facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .differently {
+    padding: 28px;
+  }
+
+  .flow {
+    padding: 22px;
+  }
+
+  .flow-steps {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .flow-step + .flow-step::before {
+    content: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .case-study-body {
+    grid-template-columns: 200px minmax(0, 760px);
+    gap: 64px;
+    padding: 56px 0 72px;
+  }
+
+  .case-study-toc {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    align-self: start;
   }
 }
