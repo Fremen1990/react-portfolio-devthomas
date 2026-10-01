@@ -7,6 +7,13 @@ on:
     branches:
       - main
 
+# One publish at a time, so an older build can never finish last and
+# overwrite a newer one. A run waits for the current one instead of
+# cancelling it mid-push; GitHub keeps only the newest waiting run.
+concurrency:
+  group: publish-build
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
