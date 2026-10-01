@@ -4,9 +4,11 @@ Used only at build time by `src/app/look/[look]/card.jpg/route.tsx`, which
 renders the preview images with `next/og`. That renderer reads TTF, not the
 WOFF2 files `next/font` serves to browsers.
 
-- Fraunces 500 (optical size 144), Geist 400 and 500 and Geist Mono 500 for
-  the standard cards, and JetBrains Mono 400 and 800 for the Terminal cards:
-  static TTFs from Google Fonts.
+- Fraunces 500 (optical size 144), Geist 400, 500 and 600 and Geist Mono 500
+  for the standard cards, and JetBrains Mono 400 and 800 for the Terminal cards:
+  static TTFs from Google Fonts. Geist 600 is an instance of the variable
+  `Geist[wght].ttf` from google/fonts, made with
+  `fonttools varLib.instancer Geist[wght].ttf wght=600`.
 - Subset with fonttools `pyftsubset` to Latin, Latin Extended (Polish),
   common punctuation and the symbols the cards use (● → ⌘):
 

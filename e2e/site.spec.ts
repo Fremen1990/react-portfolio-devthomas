@@ -1,6 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import sharp from "sharp";
+import { carBrain } from "../src/content/carBrain";
 
 // Every exported page. Add new routes here as they ship.
 const PAGES = [
@@ -82,11 +83,26 @@ test("the home page is readable without JavaScript", async ({ browser }) => {
   const page = await context.newPage();
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { level: 1, name: "Tomasz Stanisz" })
+    page.getByRole("heading", { level: 1, name: /frontend architecture/ })
   ).toBeVisible();
-  for (const name of ["Selected work", "How I work", "Background", "Contact"]) {
-    await expect(page.getByRole("heading", { level: 2, name })).toBeVisible();
+  for (const name of [
+    "Proven in production",
+    "Now building and shipped",
+    "How I work, and where it shows",
+    "Background",
+    "Open to hands-on tech-lead roles",
+  ]) {
+    await expect(
+      page.getByRole("heading", { level: 2, name, exact: true })
+    ).toBeVisible();
   }
+  // The architecture panel shows its first part's caption without scripts.
+  await expect(
+    page.getByRole("button", { name: /^Backend/, pressed: true })
+  ).toBeVisible();
+  await expect(
+    page.getByText(/^The backend describes the frontend/)
+  ).toBeVisible();
   await context.close();
 });
 
@@ -197,7 +213,8 @@ test.describe("share links", () => {
     expect(page.url()).toContain("?skin=terminal&theme=dark");
     await expect(html(page)).not.toHaveClass(/skin-terminal/);
     await expect(html(page)).toHaveClass(/light-theme/);
-    await expect(themeColor(page)).toHaveAttribute("content", "#f7f5f0");
+    // The standard header is a dark band in both themes.
+    await expect(themeColor(page)).toHaveAttribute("content", "#0f1413");
   });
 
   test("changing only one part keeps the other from the link after a reload", async ({
@@ -364,15 +381,90 @@ test("theme-color follows the operating system when nothing is saved", async ({
   await context.close();
 });
 
-test("the hero link scrolls to Selected work and focuses its heading", async ({
+test("the hero link scrolls to the work and focuses its heading", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Explore selected work" }).click();
+  await page.getByRole("link", { name: "See the work" }).click();
   await expect(page).toHaveURL(/#work$/);
   await expect(
-    page.getByRole("heading", { level: 2, name: "Selected work" })
+    page.getByRole("heading", { level: 2, name: "Proven in production" })
   ).toBeFocused();
+});
+
+for (const skin of SKINS) {
+  test(`the architecture panel works from the keyboard (${skin})`, async ({
+    page,
+  }) => {
+    await usePreferences(page, skin, "dark");
+    await page.goto("/");
+    const backend = page.locator(".arch-node--root");
+    const forms = page.getByRole("button", { name: /RJSF \+ custom widgets/ });
+    await expect(backend).toHaveAttribute("aria-pressed", "true");
+
+    // Tab from the backend part through the shell and contract parts.
+    await backend.focus();
+    for (let step = 0; step < 3; step += 1) {
+      await page.keyboard.press("Tab");
+    }
+    await expect(forms).toBeFocused();
+    const outline = await forms.evaluate(
+      (element) => getComputedStyle(element).outlineStyle
+    );
+    expect(outline).not.toBe("none");
+    await page.keyboard.press("Enter");
+    await expect(forms).toHaveAttribute("aria-pressed", "true");
+    await expect(backend).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator(".arch-caption")).toHaveText(/^RJSF renders/);
+
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Space");
+    await expect(forms).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator(".arch-caption")).not.toHaveText(/^RJSF renders/);
+  });
+}
+
+test("motion stops under reduced motion", async ({ browser }) => {
+  const context = await browser.newContext({ reducedMotion: "reduce" });
+  const page = await context.newPage();
+  await page.goto("/");
+  await page.locator("#orange-e2e").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(300);
+  const running = await page.evaluate(
+    () =>
+      document
+        .getAnimations()
+        .filter((animation) => animation.playState === "running").length
+  );
+  expect(running).toBe(0);
+  // The bars show at full length, without the entrance.
+  const transform = await page
+    .locator("#orange-e2e .bar--accent")
+    .first()
+    .evaluate((element) => getComputedStyle(element).transform);
+  expect(["none", "matrix(1, 0, 0, 1, 0, 0)"]).toContain(transform);
+  await context.close();
+});
+
+test("the E2E bars grow in once they scroll into view", async ({ page }) => {
+  await page.goto("/");
+  const bars = page.locator("#orange-e2e [data-reveal]");
+  await expect(bars).toHaveAttribute("data-reveal", "armed");
+  await page.locator("#orange-e2e").scrollIntoViewIfNeeded();
+  await expect(bars).toHaveAttribute("data-reveal", "revealed");
+});
+
+test("Car Brain and its store link appear only once it is published", async ({
+  page,
+}) => {
+  for (const path of ["/", "/look/standard-light/"]) {
+    await page.goto(path);
+    const html = await page.content();
+    expect(html.includes("apps.apple.com")).toBe(carBrain.published);
+    await expect(
+      page.getByRole("heading", { level: 3, name: carBrain.title })
+    ).toHaveCount(carBrain.published ? 1 : 0);
+  }
 });
 
 for (const path of PAGES) {
@@ -441,7 +533,10 @@ test.describe("command palette", () => {
     await expect(dialog).toBeHidden();
     await expect(page).toHaveURL(/#contact$/);
     await expect(
-      page.getByRole("heading", { level: 2, name: "Contact" })
+      page.getByRole("heading", {
+        level: 2,
+        name: "Open to hands-on tech-lead roles",
+      })
     ).toBeFocused();
   });
 
@@ -616,7 +711,19 @@ test("a case study is linked from its project and from the palette", async ({
       .getByRole("listitem")
   ).toHaveCount(4);
 
-  await page.getByRole("link", { name: "← Back to selected work" }).click();
+  await expect(
+    page.getByRole("navigation", { name: "On this page" }).getByRole("link")
+  ).toHaveCount(7);
+  await page
+    .getByRole("navigation", { name: "Case studies" })
+    .getByRole("link", { name: /Next case study/ })
+    .click();
+  await expect(page).toHaveURL(/\/work\/orange-e2e-testing\/$/);
+
+  await page
+    .getByRole("navigation", { name: "Case studies" })
+    .getByRole("link", { name: /All work/ })
+    .click();
   await expect(page).toHaveURL(/\/#work$/);
 
   await openPalette(page);
@@ -687,7 +794,7 @@ test.describe("look pages", () => {
     await expect(html(page)).toHaveClass(/skin-terminal/);
     await expect(html(page)).toHaveClass(/dark-theme/);
     await expect(
-      page.getByRole("heading", { level: 1, name: "Tomasz Stanisz" })
+      page.getByRole("heading", { level: 1, name: /frontend architecture/ })
     ).toBeVisible();
   });
 
@@ -703,10 +810,10 @@ test.describe("look pages", () => {
 
   test("section links work in place on a look page", async ({ page }) => {
     await page.goto("/look/standard-dark/");
-    await page.getByRole("link", { name: "Explore selected work" }).click();
+    await page.getByRole("link", { name: "See the work" }).click();
     await expect(page).toHaveURL(/\/look\/standard-dark\/#work$/);
     await expect(
-      page.getByRole("heading", { level: 2, name: "Selected work" })
+      page.getByRole("heading", { level: 2, name: "Proven in production" })
     ).toBeFocused();
   });
 

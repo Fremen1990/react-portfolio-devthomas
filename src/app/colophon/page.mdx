@@ -14,10 +14,10 @@ This portfolio is a small codebase, and I run it like a production one: typed co
 ## Stack
 
 - **Next.js 16 with static export.** I work with Next.js every day. Here it builds every page into a plain HTML file, which my shared host serves as is. That gives each page its own URL and link preview, with no server to run.
-- **Server Components for the content.** The sections are rendered to HTML at build time, so the page is readable before any JavaScript runs, or without it. Only the header and the command palette run in the browser.
+- **Server Components for the content.** The sections are rendered to HTML at build time, so the page is readable before any JavaScript runs, or without it. Only a few small pieces run in the browser: the header and the command palette, the clickable architecture diagram, the reveal of the testing bars, and the case studies' "On this page" list.
 - **TypeScript in strict mode, React 19.**
 - **Plain CSS with design tokens.** Colours, spacing and fonts are custom properties on `:root`, redefined for dark mode. No UI framework.
-- **One design family with my [CV](https://cv.devthomas.pl/).** The standard style uses the CV's palette, type and components: warm paper with one teal accent, pill buttons, a round portrait and the `devthomas.pl` wordmark in the header. The CV is the quick scan; this site is the depth.
+- **One design family with my [CV](https://cv.devthomas.pl/).** The standard style keeps the CV's palette and type, warm paper with one teal accent, and pill buttons, but has its own layout. The header, the hero and the approach section are dark bands in both themes, the work sits on paper that follows the theme, and contact is a teal band. Inside a dark band the colour tokens take the band's values, so components need no extra rules. The CV is the document; this site is the showcase.
 - **Self-hosted fonts** through `next/font`: Fraunces for headings, Geist for text and Geist Mono for labels and dates. The page makes no requests to Google Fonts.
 
 ## Two skins, one codebase
@@ -33,13 +33,14 @@ The `>_` button in the header switches between the standard style and a Terminal
 
 - Section links move focus to the section's heading, keep a shareable fragment URL, and work with Back. With reduced motion turned on, they jump instead of scrolling.
 - The mobile menu closes with Escape and returns focus to the Menu button. A closed menu is out of the tab order.
-- Expandable details use native `<details>` elements. The palette uses a native modal `<dialog>`, which keeps focus inside and makes the page behind it inert, with an ARIA combobox for the list.
+- The architecture diagram's parts are native toggle buttons with `aria-pressed`, and its caption is announced politely when it changes. Without JavaScript the first part and its caption still show. The palette uses a native modal `<dialog>`, which keeps focus inside and makes the page behind it inert, with an ARIA combobox for the list.
+- Motion is small: a dot that runs down the diagram's connector, the testing bars growing once when they scroll into view, and hover states. With reduced motion turned on, all of it stops and the bars show at full length.
 - Every build runs an automated accessibility scan (axe, WCAG 2.1 AA) on each page in both skins and both themes, and on the open palette. A violation fails the checks and stops the publish.
 
 ## Tests and delivery
 
-- **Unit tests** with Vitest and Testing Library cover navigation and focus, the theme and skin controls, the command palette and the command search.
-- **End-to-end tests** with Playwright run against the exported site, the same files the host serves. They check each page's title, description and Open Graph tags, reading without JavaScript, the saved style applying before paint, and zero console errors. They also check that nothing scrolls sideways at 320px and 801px, and that header items never overlap between 801px and 1280px.
+- **Unit tests** with Vitest and Testing Library cover navigation and focus, the theme and skin controls, the command palette and the command search, the architecture diagram, and the case studies' contents list.
+- **End-to-end tests** with Playwright run against the exported site, the same files the host serves. They check each page's title, description and Open Graph tags, reading without JavaScript, the saved style applying before paint, and zero console errors. They also check that nothing scrolls sideways at 320px and 801px, and that header items never overlap or clip from 320px to 1280px.
 - **GitHub Actions** runs lint, type checking, formatting, the unit tests, the build and the end-to-end tests on every pull request. Merging to `main` runs the same checks, then publishes the exported site to the branch the host serves.
 - Changes land as small, reviewed [pull requests](https://github.com/Fremen1990/react-portfolio-devthomas/pulls?q=is%3Apr), each with its checks and a note on what was verified.
 

@@ -20,28 +20,58 @@ export function generateStaticParams() {
 
 const WIDTH = 1200;
 const HEIGHT = 630;
-const TAGLINE =
-  "Frontend architecture, full-stack development and technical leadership.";
+const { hero } = profile;
+const headlineAt = hero.headline.lastIndexOf(hero.headlineAccent);
+const HEADLINE = {
+  before: hero.headline.slice(0, headlineAt),
+  accent: hero.headlineAccent,
+  after: hero.headline.slice(headlineAt + hero.headlineAccent.length),
+};
 
-// The CV's palette (cv.devthomas.pl), as in src/index.css.
+// next/og spaced wrapped inline text unevenly, so the headline is laid out
+// one word per flex item, with the accent word and its punctuation together.
+// An array, not a fragment: next/og treats a fragment as one item.
+const headlineWords = (accent: string, gap: number) => [
+  ...HEADLINE.before
+    .trim()
+    .split(/\s+/)
+    .map((word, index) => (
+      <span key={index} style={{ marginRight: gap }}>
+        {word}
+      </span>
+    )),
+  <span key="accent" style={{ display: "flex" }}>
+    <span style={{ color: accent }}>{HEADLINE.accent}</span>
+    <span>{HEADLINE.after}</span>
+  </span>,
+];
+
+// The standard skin's palette (src/index.css): a dark brand band in both
+// themes, over a strip in the page colour.
+const BAND = {
+  text: "#e8eeeb",
+  strong: "#ffffff",
+  muted: "#9aa6a1",
+  accent: "#8fd3da",
+  line: "#2a3531",
+};
+
 const STANDARD = {
   light: {
-    canvas: "#f7f5f0",
+    band: "#0f1413",
+    page: "#f7f5f0",
     text: "#16181a",
-    soft: "#34383b",
-    secondary: "#5b5f63",
+    muted: "#5b5f63",
     accent: "#0f6b75",
-    accentSoft: "#e2efee",
-    separator: "#e0dbd0",
+    line: "#e0dbd0",
   },
   dark: {
-    canvas: "#0f1413",
+    band: "#0a0e0d",
+    page: "#0f1413",
     text: "#e8eeeb",
-    soft: "#c3ccc8",
-    secondary: "#9aa6a1",
+    muted: "#9aa6a1",
     accent: "#8fd3da",
-    accentSoft: "#17292b",
-    separator: "#2a3531",
+    line: "#2a3531",
   },
 };
 
@@ -73,20 +103,19 @@ const TERMINAL = {
 const fontsDir = join(process.cwd(), "src/assets/fonts");
 const portraitPath = join(process.cwd(), "public/portrait.jpg");
 
-// Matches the standard hero, which follows the CV: the mono wordmark, the
-// name in Fraunces, the availability pill, and the round, ringed portrait.
+// Matches the standard hero: the dark band with the wordmark, the round
+// portrait, name and role, and the Geist headline with its accent word,
+// over a strip in the page colour that opens the work section.
 const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
   const c = STANDARD[look.theme];
   return (
     <div
       style={{
         display: "flex",
-        alignItems: "center",
+        flexDirection: "column",
         width: "100%",
         height: "100%",
-        padding: "64px 72px",
-        background: c.canvas,
-        color: c.text,
+        background: c.page,
         fontFamily: "Geist",
       }}
     >
@@ -94,96 +123,120 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
           flex: 1,
-          height: "100%",
-          paddingRight: 48,
+          padding: "48px 72px 44px",
+          background: c.band,
+          borderBottom: `2px solid ${BAND.line}`,
+          color: BAND.text,
         }}
       >
         <div
           style={{
+            display: "flex",
             fontFamily: "Geist Mono",
             fontSize: 26,
             fontWeight: 500,
-            color: c.accent,
+            color: BAND.accent,
           }}
         >
-          devthomas.pl
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              fontFamily: "Fraunces",
-              fontSize: 96,
-              fontWeight: 500,
-              letterSpacing: -3,
-              lineHeight: 1,
-            }}
-          >
-            {profile.name}
-          </div>
-          <div style={{ marginTop: 20, fontSize: 36, fontWeight: 500 }}>
-            {profile.headline}
-          </div>
-          <div
-            style={{
-              marginTop: 18,
-              fontSize: 27,
-              lineHeight: 1.4,
-              color: c.soft,
-            }}
-          >
-            {TAGLINE}
-          </div>
+          devthomas<span style={{ color: BAND.muted }}>.pl</span>
         </div>
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            alignSelf: "flex-start",
-            padding: "8px 18px",
-            border: `1px solid ${c.separator}`,
-            borderRadius: 999,
-            fontFamily: "Geist Mono",
-            fontSize: 17,
-            whiteSpace: "nowrap",
-            color: c.secondary,
+            marginTop: 40,
           }}
         >
-          <div
+          {/* next/og renders plain <img> only; next/image does not apply here. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={portrait}
+            width={84}
+            height={84}
+            alt=""
             style={{
-              width: 10,
-              height: 10,
-              marginRight: 12,
+              objectFit: "cover",
+              objectPosition: "50% 30%",
               borderRadius: 999,
-              background: c.accent,
+              border: `3px solid ${BAND.accent}`,
             }}
           />
-          {profile.hero.location}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: 22,
+            }}
+          >
+            <div style={{ fontSize: 30, fontWeight: 600, color: BAND.strong }}>
+              {profile.name}
+            </div>
+            <div
+              style={{
+                marginTop: 4,
+                fontFamily: "Geist Mono",
+                fontSize: 20,
+                color: BAND.muted,
+              }}
+            >
+              {`${profile.headline} · ${hero.location}`}
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            width: "100%",
+            marginTop: 32,
+            fontSize: 54,
+            fontWeight: 600,
+            letterSpacing: -1.4,
+            lineHeight: 1.1,
+            color: BAND.strong,
+          }}
+        >
+          {headlineWords(BAND.accent, 14)}
         </div>
       </div>
       <div
         style={{
           display: "flex",
-          padding: 6,
-          borderRadius: 999,
-          background: c.accentSoft,
-          border: `1px solid ${c.separator}`,
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          padding: "26px 72px 30px",
+          color: c.text,
         }}
       >
-        {/* next/og renders plain <img> only; next/image does not apply here. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={portrait}
-          width={320}
-          height={320}
-          alt=""
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              fontFamily: "Geist Mono",
+              fontSize: 17,
+              letterSpacing: 2,
+              color: c.muted,
+            }}
+          >
+            {profile.work.eyebrow.toUpperCase()}
+          </div>
+          <div style={{ marginTop: 6, fontFamily: "Fraunces", fontSize: 40 }}>
+            Proven in production
+          </div>
+        </div>
+        <div
           style={{
-            objectFit: "cover",
-            objectPosition: "50% 30%",
+            display: "flex",
+            padding: "10px 24px",
             borderRadius: 999,
+            border: `2px solid ${c.accent}`,
+            color: c.accent,
+            fontSize: 22,
+            fontWeight: 500,
           }}
-        />
+        >
+          See the work
+        </div>
       </div>
     </div>
   );
@@ -274,18 +327,25 @@ const TerminalCard = ({ look, portrait }: { look: Look; portrait: string }) => {
             <div style={{ marginTop: 16, fontSize: 29, color: c.amber }}>
               {`> ${profile.headline}`}
             </div>
+            <div style={{ marginTop: 18, fontSize: 21, color: c.violet }}>
+              {`# ${hero.location}`}
+            </div>
+            <div style={{ marginTop: 24, fontSize: 21, color: c.secondary }}>
+              $ cat about.txt
+            </div>
             <div
               style={{
-                marginTop: 26,
-                fontSize: 23,
-                lineHeight: 1.45,
-                color: c.violet,
+                display: "flex",
+                flexWrap: "wrap",
+                width: "100%",
+                marginTop: 8,
+                fontSize: 25,
+                fontWeight: 800,
+                lineHeight: 1.35,
+                color: c.text,
               }}
             >
-              {`# ${TAGLINE}`}
-            </div>
-            <div style={{ marginTop: 28, fontSize: 24, color: c.text }}>
-              {"$ open devthomas.pl"}
+              {headlineWords(c.accent, 15)}
             </div>
           </div>
           {/* next/og renders plain <img> only; next/image does not apply here. */}
@@ -338,6 +398,7 @@ export async function GET(
     fraunces500,
     geist400,
     geist500,
+    geist600,
     geistMono500,
     mono400,
     mono800,
@@ -346,6 +407,7 @@ export async function GET(
     font("Fraunces-500.ttf"),
     font("Geist-400.ttf"),
     font("Geist-500.ttf"),
+    font("Geist-600.ttf"),
     font("GeistMono-500.ttf"),
     font("JetBrainsMono-400.ttf"),
     font("JetBrainsMono-800.ttf"),
@@ -371,6 +433,7 @@ export async function GET(
         { name: "Fraunces", data: fraunces500, weight: 500, style: "normal" },
         { name: "Geist", data: geist400, weight: 400, style: "normal" },
         { name: "Geist", data: geist500, weight: 500, style: "normal" },
+        { name: "Geist", data: geist600, weight: 600, style: "normal" },
         {
           name: "Geist Mono",
           data: geistMono500,
