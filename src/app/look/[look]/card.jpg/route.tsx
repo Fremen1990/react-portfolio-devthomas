@@ -159,7 +159,7 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
               background: c.accent,
             }}
           />
-          {profile.availability}
+          {profile.hero.location}
         </div>
       </div>
       <div

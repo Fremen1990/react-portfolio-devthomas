@@ -1,29 +1,53 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { SelectedWork } from "./SelectedWork";
 import { profile } from "../../content/publicProfile";
+import { caseStudyFor, caseStudyPath } from "../../content/work/studies";
 
-test("each project shows its outcome as a labelled callout", () => {
+test("each contribution is an article named by its title, with its tags", () => {
   render(<SelectedWork />);
-  for (const item of profile.contributions) {
-    if (!item.outcome) continue;
-    const callout = screen.getByText(item.outcome).closest("div");
-    expect(callout).toHaveClass("contribution-outcome");
-    expect(callout).toHaveTextContent(/^Outcome/);
-  }
-  expect(document.querySelectorAll(".contribution-outcome")).toHaveLength(3);
+  const articles = screen.getAllByRole("article");
+  expect(articles).toHaveLength(profile.contributions.length);
+  profile.contributions.forEach((item, index) => {
+    expect(articles[index]).toHaveAccessibleName(item.title);
+    const tags = within(articles[index]).getByRole("list", {
+      name: "Technologies",
+    });
+    expect(
+      within(tags)
+        .getAllByRole("listitem")
+        .map((tag) => tag.textContent)
+    ).toEqual(item.tags);
+  });
 });
 
-test("technologies are a list of tags, with any note after them", () => {
+test("each card links to its case study", () => {
   render(<SelectedWork />);
-  const lists = screen.getAllByRole("list", { name: "Technologies" });
-  expect(lists).toHaveLength(profile.contributions.length);
-  profile.contributions.forEach((item, index) => {
-    const tags = [...lists[index].querySelectorAll("li")];
-    expect(tags.map((tag) => tag.textContent)).toEqual(item.technologies);
-  });
-  expect(
-    screen.getByText("Additional backend contributions in Go")
-  ).toBeInTheDocument();
+  for (const item of profile.contributions) {
+    const study = caseStudyFor(item.id);
+    expect(study).toBeDefined();
+    const link = screen.getByRole("link", {
+      name: new RegExp(`about ${study!.title}`),
+    });
+    // next/link drops the trailing slash outside the Next build.
+    expect(link.getAttribute("href")).toBe(
+      caseStudyPath(study!.slug).replace(/\/$/, "")
+    );
+  }
+});
+
+test("bars are decorative; their labels and values stay as text", () => {
+  const { container } = render(<SelectedWork />);
+  const bars = profile.contributions.flatMap((item) => item.bars ?? []);
+  expect(bars.length).toBeGreaterThan(0);
+  for (const bar of bars) {
+    expect(screen.getByText(bar.label)).toBeVisible();
+    expect(screen.getByText(bar.value)).toBeVisible();
+  }
+  const drawn = container.querySelectorAll(".bar");
+  expect(drawn).toHaveLength(bars.length);
+  drawn.forEach((element) =>
+    expect(element).toHaveAttribute("aria-hidden", "true")
+  );
 });

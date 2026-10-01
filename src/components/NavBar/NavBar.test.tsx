@@ -84,10 +84,13 @@ const renderPage = () =>
     <>
       <NavBar />
       <Hero />
-      <SectionBand id="work" title="Selected work">
+      <SectionBand id="work" title="Proven in production">
         <p>Work body</p>
       </SectionBand>
-      <SectionBand id="approach" title="How I work">
+      <SectionBand id="now" title="Now building and shipped">
+        <p>Now body</p>
+      </SectionBand>
+      <SectionBand id="approach" title="How I work, and where it shows">
         <p>Approach body</p>
       </SectionBand>
       <SectionBand id="about" title="Background">
@@ -182,12 +185,16 @@ test("desktop links stay available after resizing an open or closed mobile menu"
   );
 });
 
-test("navigation points at work, approach, background, contact, and the CV", () => {
+test("navigation points at work, now, approach, background, and the CV", () => {
   render(<NavBar />);
 
   expect(screen.getByRole("link", { name: "Work" })).toHaveAttribute(
     "href",
     "#work"
+  );
+  expect(screen.getByRole("link", { name: "Now" })).toHaveAttribute(
+    "href",
+    "#now"
   );
   expect(screen.getByRole("link", { name: "Approach" })).toHaveAttribute(
     "href",
@@ -197,10 +204,10 @@ test("navigation points at work, approach, background, contact, and the CV", () 
     "href",
     "#about"
   );
-  expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
-    "href",
-    "#contact"
-  );
+  // Contact is the page's last band; the palette still reaches it.
+  expect(
+    screen.queryByRole("link", { name: "Contact" })
+  ).not.toBeInTheDocument();
   screen.getAllByRole("link", { name: "View CV" }).forEach((link) => {
     expect(link).toHaveAttribute("href", "https://cv.devthomas.pl/");
   });
@@ -225,7 +232,7 @@ test("marks the section currently below the header", async () => {
     value: 5000,
   });
 
-  const ids = ["work", "approach", "about", "contact"];
+  const ids = ["work", "now", "approach", "about", "contact"];
   const sections = ids.map((id) => {
     const section = document.createElement("section");
     section.id = id;
@@ -235,6 +242,7 @@ test("marks the section currently below the header", async () => {
 
   const tops: Record<string, number> = {
     work: 400,
+    now: 650,
     approach: 900,
     about: 1400,
     contact: 1900,
@@ -426,8 +434,8 @@ test("the browser Back button restores the previous fragment and focus", async (
   renderPage();
 
   fireEvent.click(screen.getByRole("link", { name: "Work" }));
-  fireEvent.click(screen.getByRole("link", { name: "Contact" }));
-  expect(window.location.hash).toBe("#contact");
+  fireEvent.click(screen.getByRole("link", { name: "Approach" }));
+  expect(window.location.hash).toBe("#approach");
 
   // jsdom traverses history on a nested timeout.
   await act(async () => {
@@ -455,7 +463,7 @@ test("the home brand link focuses the hero heading", () => {
 test("the hero's section link scrolls and focuses like the header links", () => {
   renderPage();
 
-  const explore = screen.getByRole("link", { name: "Explore selected work" });
+  const explore = screen.getByRole("link", { name: "See the work" });
   expect(fireEvent.click(explore)).toBe(false);
 
   expect(window.location.hash).toBe("#work");
@@ -478,7 +486,7 @@ test("in-page links without a section heading keep native behavior", () => {
 });
 
 test("off the home page, the brand and section links lead back to the home page", () => {
-  vi.mocked(usePathname).mockReturnValue("/work/example/");
+  vi.mocked(usePathname).mockReturnValue("/colophon/");
   render(<NavBar />);
 
   expect(
@@ -487,13 +495,29 @@ test("off the home page, the brand and section links lead back to the home page"
   for (const [name, href] of [
     ["Work", "/#work"],
     ["Approach", "/#approach"],
+    ["Now", "/#now"],
     ["Background", "/#about"],
-    ["Contact", "/#contact"],
   ]) {
     const link = screen.getByRole("link", { name });
     expect(link).toHaveAttribute("href", href);
     expect(link).not.toHaveAttribute("aria-current");
   }
+});
+
+test("on a case study, the header links back to all work instead of the sections", () => {
+  vi.mocked(usePathname).mockReturnValue("/work/orange-cms/");
+  render(<NavBar />);
+
+  expect(screen.getByRole("link", { name: "All work" })).toHaveAttribute(
+    "href",
+    "/#work"
+  );
+  for (const name of ["Work", "Now", "Approach", "Background"]) {
+    expect(screen.queryByRole("link", { name })).not.toBeInTheDocument();
+  }
+  expect(
+    screen.getAllByRole("link", { name: "View CV" }).length
+  ).toBeGreaterThan(0);
 });
 
 test("a system dark-mode change doesn't override a theme opened from a shared link", () => {

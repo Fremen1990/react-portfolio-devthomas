@@ -25,6 +25,8 @@ import { useMediaQuery, usePreferences } from "../../utils/preferences";
 import { greetDevelopers } from "../../utils/consoleGreeting";
 
 const sectionIds = sections.map((section) => section.id);
+const headerSections = sections.filter((section) => section.header);
+const isCaseStudyPath = (pathname: string) => pathname.startsWith("/work/");
 const DESKTOP_NAV_QUERY = "(min-width: 801px)";
 
 const isApplePlatform = () =>
@@ -106,6 +108,7 @@ const ThemeIcon = ({ name }: { name: "sun" | "moon" }) => {
 const NavBar = () => {
   const pathname = usePathname();
   const isHome = isHomePath(pathname);
+  const isCaseStudy = isCaseStudyPath(pathname);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { theme, skin } = usePreferences();
@@ -290,35 +293,45 @@ const NavBar = () => {
             className="site-nav-links"
             hidden={!isDesktop && !open}
           >
-            {sections.map((link) => {
-              if (!isHome) {
+            {isCaseStudy && (
+              <Link
+                className="nav-back"
+                href="/#work"
+                onClick={closeOnPlainClick}
+              >
+                <span aria-hidden="true">← </span>All work
+              </Link>
+            )}
+            {!isCaseStudy &&
+              headerSections.map((link) => {
+                if (!isHome) {
+                  return (
+                    <Link
+                      key={link.id}
+                      href={`/#${link.id}`}
+                      onClick={closeOnPlainClick}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                }
+                const current = activeSection === link.id;
                 return (
-                  <Link
+                  <a
                     key={link.id}
-                    href={`/#${link.id}`}
-                    onClick={closeOnPlainClick}
+                    href={`#${link.id}`}
+                    className={current ? "is-current" : undefined}
+                    aria-current={current ? "true" : undefined}
+                    onClick={(event) => {
+                      if (scrollToSection(event, `#${link.id}`)) {
+                        close();
+                      }
+                    }}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 );
-              }
-              const current = activeSection === link.id;
-              return (
-                <a
-                  key={link.id}
-                  href={`#${link.id}`}
-                  className={current ? "is-current" : undefined}
-                  aria-current={current ? "true" : undefined}
-                  onClick={(event) => {
-                    if (scrollToSection(event, `#${link.id}`)) {
-                      close();
-                    }
-                  }}
-                >
-                  {link.label}
-                </a>
-              );
-            })}
+              })}
             <a
               className="nav-cv-menu"
               href={profile.links.cv}

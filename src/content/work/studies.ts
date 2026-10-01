@@ -15,6 +15,8 @@ export type CaseStudy = {
   period: string;
   team: string;
   stack: string;
+  /** The headline result, shown as a tile in the page's header band. */
+  outcome: { value: string; label: string };
   /** Unpublished studies are not built, linked or listed. */
   published: boolean;
 };
@@ -31,6 +33,10 @@ export const caseStudies: CaseStudy[] = [
     period: "Since late 2022",
     team: "5 developers (including me), 3 testers, 1 product manager",
     stack: "React, TypeScript, MUI, JSON Schema, React JSON Schema Form (RJSF)",
+    outcome: {
+      value: "Dozens",
+      label: "of new resources in production without frontend work",
+    },
     published: true,
   },
   {
@@ -44,6 +50,10 @@ export const caseStudies: CaseStudy[] = [
     period: "Since 2022",
     team: "Me, one newly hired automation tester, and one manual tester who moved into automation",
     stack: "Cypress, TypeScript, Page Object Model",
+    outcome: {
+      value: "~1 h",
+      label: "Orange TV GO regression, down from 1–3 days",
+    },
     published: true,
   },
   {
@@ -58,6 +68,11 @@ export const caseStudies: CaseStudy[] = [
     team: "Me, the CEO, and a DevOps collaborator for infrastructure",
     stack:
       "Next.js, NestJS, TypeScript, Playwright, Storybook; Cursor, Codex and Claude",
+    outcome: {
+      value: "MVP v1",
+      label:
+        "in progress: most of the MVP built with a small team and AI agents",
+    },
     published: true,
   },
 ];
@@ -70,3 +85,12 @@ export const caseStudyPath = (slug: string) => `/work/${slug}/`;
 
 export const caseStudyFor = (contributionId: string) =>
   publishedCaseStudies.find((study) => study.contributionId === contributionId);
+
+/** The study after `slug` in page order, wrapping round to the first. */
+export const nextCaseStudy = (slug: string) => {
+  const index = publishedCaseStudies.findIndex((study) => study.slug === slug);
+  if (index === -1 || publishedCaseStudies.length < 2) {
+    return undefined;
+  }
+  return publishedCaseStudies[(index + 1) % publishedCaseStudies.length];
+};

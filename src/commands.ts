@@ -3,6 +3,7 @@ import { SITE_URL } from "./lib/metadata";
 import { sections } from "./content/navigation";
 import { caseStudyPath, publishedCaseStudies } from "./content/work/studies";
 import { isHomePath, lookPath } from "./content/looks";
+import { carBrain, type CarBrain } from "./content/carBrain";
 import type { Theme } from "./utils/theme";
 import type { Skin } from "./utils/skin";
 
@@ -33,6 +34,29 @@ export type Command = {
   available?: (state: CommandState) => boolean;
   run: (context: CommandContext) => void;
 };
+
+/** Car Brain's links, offered only once its publication gate is open. */
+export const carBrainCommands = (app: CarBrain): Command[] =>
+  app.published
+    ? [
+        {
+          id: "car-brain-app-store",
+          title: "Open Car Brain on the App Store",
+          alias: "open car-brain --app-store",
+          keywords: ["car brain", "app", "ios", "iphone", "download"],
+          group: "Link",
+          run: (context) => context.openExternal(app.appStoreUrl),
+        },
+        {
+          id: "car-brain-site",
+          title: "Open car-brain.com",
+          alias: "open car-brain.com",
+          keywords: ["car brain", "app", "website", "landing page"],
+          group: "Link",
+          run: (context) => context.openExternal(app.siteUrl),
+        },
+      ]
+    : [];
 
 export const commands: Command[] = [
   {
@@ -67,6 +91,7 @@ export const commands: Command[] = [
     group: "Page",
     run: (context) => context.goToPage("/colophon/"),
   },
+  ...carBrainCommands(carBrain),
   {
     id: "cv",
     title: "Open CV",
