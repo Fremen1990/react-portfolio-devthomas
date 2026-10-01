@@ -24,7 +24,10 @@ export const Hero = () => (
       />
       <div className="hero-copy">
         <p className="hero-intro">{profile.introduction}</p>
-        <p className="hero-availability">{profile.availability}</p>
+        <p className="hero-availability">
+          <span className="dot" aria-hidden="true" />
+          {profile.availability}
+        </p>
         <div className="action-row">
           <ActionLink href="#work">Explore selected work</ActionLink>
           <ActionLink href={profile.links.cv} external variant="quiet">

@@ -27,7 +27,7 @@ export const Background = () => {
           <article key={role.employer} className="role-row">
             <div>
               <h3>{role.employer}</h3>
-              <p className="meta">{role.time}</p>
+              <p className="meta role-time">{role.time}</p>
             </div>
             <div>
               <p>{role.title}</p>
@@ -69,7 +69,7 @@ export const Background = () => {
           {profile.training.map((item) => (
             <li key={item.title} className="archive-row">
               <strong>{item.title}</strong>
-              <div className="meta">{item.date}</div>
+              <div className="meta archive-date">{item.date}</div>
             </li>
           ))}
         </ul>

@@ -1,10 +1,13 @@
 /* Case study pages (/work/<slug>/) and the Flow diagram they use. */
 
+/* Mono eyebrow, as on the CV. */
 .case-study-kicker {
   margin: 0 0 12px;
   color: var(--text-secondary);
-  font-size: 15px;
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .case-study-facts {
@@ -23,8 +26,9 @@
 
 .case-study-facts dt {
   color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }

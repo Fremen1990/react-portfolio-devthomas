@@ -9,49 +9,132 @@
 .contribution-number {
   margin: 0 0 8px;
   color: var(--accent);
+  font-family: var(--font-mono);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 400;
 }
 
 .contribution-heading {
   margin: 0 0 8px;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.25;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .contribution--featured .contribution-heading {
-  font-size: 26px;
+  font-size: 28px;
+}
+
+.contribution-employer {
+  margin: 0 0 4px;
+}
+
+/* Role and dates, in mono like the CV's role dates. */
+.contribution-meta {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* The CV's badge. */
+.contribution-status {
+  display: inline-block;
+  margin: 8px 0 0;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 500;
 }
 
 .contribution-summary,
-.contribution-outcome,
 .contribution-list {
   max-width: 68ch;
+}
+
+.contribution-summary {
+  color: var(--text-soft);
 }
 
 .contribution-list {
   margin: 16px 0 0;
   padding-left: 1.1rem;
+  color: var(--text-soft);
+}
+
+.contribution-list li::marker {
+  color: var(--accent);
 }
 
 .contribution-list li + li {
   margin-top: 8px;
 }
 
-.contribution-tech {
-  margin: 16px 0 0;
-  color: var(--text-secondary);
-  font-size: 15px;
+/* The project's result, in the CV's callout: a tinted card with a mono
+   eyebrow and the text in Fraunces. */
+.contribution-outcome {
+  margin: 20px 0 0;
+  padding: 20px 24px;
+  border-radius: var(--radius-surface);
+  background: var(--accent-soft);
 }
 
-.contribution-status {
+.contribution-outcome-label {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.contribution-outcome-text {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* Technologies as the CV's chips. */
+.contribution-tech {
+  margin: 20px 0 0;
+}
+
+.contribution-tech-label {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 5px 11px;
+  border: 1px solid var(--separator);
+  border-radius: 999px;
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.contribution-tech-note {
   margin: 8px 0 0;
   color: var(--text-secondary);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
 }
 
 .scope {
@@ -80,6 +163,7 @@
   margin: 12px 0 0;
   padding-left: 1.1rem;
   max-width: 68ch;
+  color: var(--text-soft);
 }
 
 @media (min-width: 801px) {
@@ -89,22 +173,11 @@
     padding: 40px 0;
   }
 
-  .contribution--featured .contribution-heading {
-    font-size: 30px;
+  .contribution-heading {
+    font-size: 26px;
   }
-}
 
-/* The result of each project, set apart so a skimming reader sees it. */
-.contribution-outcome {
-  margin: 16px 0 0;
-  padding: 12px 16px;
-  border-left: 3px solid var(--accent);
-  border-radius: 0 var(--radius-control) var(--radius-control) 0;
-  background: color-mix(in srgb, var(--accent) 10%, transparent);
-  font-weight: 500;
-}
-
-.contribution-outcome strong {
-  color: var(--accent);
-  font-weight: 700;
+  .contribution--featured .contribution-heading {
+    font-size: 32px;
+  }
 }

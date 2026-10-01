@@ -26,10 +26,19 @@
   font-size: 15px;
 }
 
+/* Dates in mono, like the CV's role dates. */
+.role-time,
+.archive-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+}
+
 .finance-heading {
   margin: 48px 0 8px;
-  font-size: 22px;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 500;
 }
 
 @media (min-width: 801px) {

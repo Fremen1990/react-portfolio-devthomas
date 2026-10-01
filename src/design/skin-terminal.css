@@ -25,9 +25,16 @@ html.skin-terminal {
   --glow: none;
   --radius-control: 2px;
   --radius-surface: 4px;
+  --header-height: 72px;
   --font:
     var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Consolas,
     monospace;
+  /* The standard skin's CV tokens, mapped onto the Terminal look so none of
+     its fonts or tints leak in. These follow --text and --accent per theme. */
+  --font-display: var(--font);
+  --font-mono: var(--font);
+  --text-soft: var(--text);
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,6 +52,8 @@ html.skin-terminal {
     --separator: #1e2d25;
     --header: rgba(7, 9, 10, 0.9);
     --glow: 0 0 10px rgba(93, 255, 143, 0.16);
+    --text-soft: var(--text);
+    --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
   }
 }
 
@@ -62,6 +71,9 @@ html.skin-terminal.dark-theme {
   --separator: #1e2d25;
   --header: rgba(7, 9, 10, 0.9);
   --glow: 0 0 10px rgba(93, 255, 143, 0.16);
+  /* Repeated here: the standard skin's dark blocks would otherwise win. */
+  --text-soft: var(--text);
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 :where(html.skin-terminal) body {
@@ -104,6 +116,7 @@ html.skin-terminal.dark-theme {
 }
 
 :where(html.skin-terminal) .brand-mark {
+  display: inline-flex;
   width: auto;
   flex: 0 0 auto;
   height: auto;
@@ -113,6 +126,22 @@ html.skin-terminal.dark-theme {
   color: var(--on-accent);
   font-size: 14px;
   box-shadow: var(--glow);
+}
+
+/* The Terminal skin keeps the TS mark and the name; the standard skin's
+   mono wordmark is not shown here. */
+:where(html.skin-terminal) .brand-wordmark {
+  display: none;
+}
+
+:where(html.skin-terminal) .brand-name {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }
 
 :where(html.skin-terminal) .brand-name::after {
@@ -187,6 +216,100 @@ html.skin-terminal.dark-theme {
 }
 
 /* ---------- Hero: a boot sequence ---------- */
+
+/* The standard skin's hero is the CV's (round portrait, pill, Fraunces).
+   The Terminal skin keeps its own layout: heading, a rectangular portrait
+   and the copy, side by side on wide screens. */
+:where(html.skin-terminal) .hero-grid {
+  grid-template-areas:
+    "heading"
+    "portrait"
+    "copy";
+  gap: 24px;
+  justify-items: stretch;
+  align-items: center;
+}
+
+:where(html.skin-terminal) .hero-copy {
+  display: block;
+}
+
+:where(html.skin-terminal) .hero-copy .action-row {
+  margin-top: 24px;
+}
+
+:where(html.skin-terminal) .hero-name {
+  font-size: 32px;
+  line-height: 1.1;
+  overflow-wrap: normal;
+}
+
+:where(html.skin-terminal) .hero-role {
+  margin: 8px 0 0;
+  font-size: 22px;
+  line-height: 1.3;
+}
+
+:where(html.skin-terminal) .hero-intro {
+  max-width: 62ch;
+  font-size: 17px;
+  line-height: inherit;
+}
+
+:where(html.skin-terminal) .hero-availability {
+  display: block;
+  margin: 12px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: inherit;
+}
+
+:where(html.skin-terminal) .dot {
+  display: none;
+}
+
+:where(html.skin-terminal) .hero-portrait {
+  width: 100%;
+  height: 180px;
+  margin: 0;
+  object-position: center 42%;
+  border: 1px solid var(--separator);
+  box-shadow: none;
+}
+
+@media (min-width: 801px) {
+  :where(html.skin-terminal) .hero-grid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-areas:
+      "heading portrait"
+      "copy portrait";
+    gap: 16px 48px;
+    align-items: start;
+  }
+
+  :where(html.skin-terminal) .hero-portrait {
+    width: 320px;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    margin-top: 8px;
+  }
+
+  :where(html.skin-terminal) .hero-name {
+    font-size: 48px;
+  }
+
+  :where(html.skin-terminal) .hero-role {
+    font-size: 26px;
+  }
+
+  :where(html.skin-terminal) .hero-intro {
+    margin-top: 16px;
+    font-size: 18px;
+  }
+}
 
 :where(html.skin-terminal) .hero {
   padding: 40px 0 16px;
@@ -334,6 +457,8 @@ html.skin-terminal.dark-theme .hero-portrait {
 /* ---------- Buttons: bracketed commands ---------- */
 
 :where(html.skin-terminal) .action-link {
+  min-height: 44px;
+  padding: 10px 16px;
   border-radius: 2px;
   font-size: 14px;
   font-weight: 700;
@@ -341,7 +466,15 @@ html.skin-terminal.dark-theme .hero-portrait {
 }
 
 :where(html.skin-terminal) .action-link--solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
   box-shadow: var(--glow);
+}
+
+:where(html.skin-terminal) .action-link--solid:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 :where(html.skin-terminal) .action-link--solid::before {
@@ -352,6 +485,7 @@ html.skin-terminal.dark-theme .hero-portrait {
 
 :where(html.skin-terminal) .action-link--quiet {
   border: 1px dashed var(--accent);
+  color: var(--accent);
 }
 
 :where(html.skin-terminal) .action-link--quiet:hover {
@@ -362,6 +496,7 @@ html.skin-terminal.dark-theme .hero-portrait {
 /* ---------- Sections: shell prompts ---------- */
 
 :where(html.skin-terminal) .section-heading {
+  display: block;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: 0;
@@ -372,6 +507,10 @@ html.skin-terminal.dark-theme .hero-portrait {
   content: "~/tomasz $ cd " / "";
   color: var(--accent);
   font-weight: 500;
+}
+
+:where(html.skin-terminal) .section-heading::after {
+  content: none;
 }
 
 @media (min-width: 801px) {
@@ -442,13 +581,35 @@ html.skin-terminal.dark-theme .hero-portrait {
 }
 
 :where(html.skin-terminal) .contribution-heading {
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.25;
   color: var(--text);
 }
 
+:where(html.skin-terminal) .contribution--featured .contribution-heading {
+  font-size: 26px;
+}
+
+@media (min-width: 801px) {
+  :where(html.skin-terminal) .contribution-heading {
+    font-size: 22px;
+  }
+}
+
+:where(html.skin-terminal) .contribution-employer {
+  margin: 0 0 1rem;
+}
+
 :where(html.skin-terminal) .contribution-status {
+  display: block;
+  padding: 0;
+  border-radius: 0;
+  background: none;
   color: var(--accent);
+  font-size: 15px;
+  font-weight: 500;
 }
 
 :where(html.skin-terminal) .contribution-status::before {
@@ -479,8 +640,42 @@ html.skin-terminal.dark-theme .hero-portrait {
   font-size: 13.5px;
 }
 
-:where(html.skin-terminal) .contribution-tech strong {
+/* The standard skin's chips read as one line here:
+   "Technologies: Next.js, NestJS, …". */
+:where(html.skin-terminal) .contribution-tech-label,
+:where(html.skin-terminal) .contribution-tech .chips,
+:where(html.skin-terminal) .contribution-tech .chip,
+:where(html.skin-terminal) .contribution-tech-note {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  font-size: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:where(html.skin-terminal) .contribution-tech-label {
   color: var(--accent-3);
+  font-weight: 700;
+}
+
+:where(html.skin-terminal) .contribution-tech-label::after {
+  content: ": ";
+}
+
+:where(html.skin-terminal) .contribution-tech .chip,
+:where(html.skin-terminal) .contribution-tech-note {
+  color: var(--text-secondary);
+}
+
+:where(html.skin-terminal) .contribution-tech .chip + .chip::before {
+  content: ", ";
+}
+
+:where(html.skin-terminal) .contribution-tech-note::before {
+  content: " · ";
 }
 
 :where(html.skin-terminal) .scope summary {
@@ -857,6 +1052,8 @@ html.skin-terminal.dark-theme .hero-portrait {
 
 /* Project outcomes read like a command's successful result. */
 :where(html.skin-terminal) .contribution-outcome {
+  margin-top: 16px;
+  padding: 12px 16px;
   border: 1px dashed var(--accent);
   border-radius: 2px;
   background: color-mix(in srgb, var(--accent) 8%, transparent);
@@ -873,6 +1070,92 @@ html.skin-terminal.dark-theme .hero-portrait {
   text-shadow: var(--glow);
 }
 
-:where(html.skin-terminal) .contribution-outcome strong {
+:where(html.skin-terminal) .contribution-outcome-label,
+:where(html.skin-terminal) .contribution-outcome-text {
+  display: inline;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:where(html.skin-terminal) .contribution-outcome-label {
   color: var(--accent-2);
+  font-weight: 700;
+}
+
+:where(html.skin-terminal) .contribution-outcome-label::after {
+  content: ": ";
+}
+
+:where(html.skin-terminal) .contribution-outcome-text {
+  font-weight: 400;
+}
+
+/* ---------- Standard-skin type roles, restored for the Terminal look ---------- */
+
+:where(html.skin-terminal) .prose h1 {
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+:where(html.skin-terminal) .prose h2 {
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+:where(html.skin-terminal) .prose h3 {
+  font-size: 19px;
+}
+
+@media (min-width: 801px) {
+  :where(html.skin-terminal) .prose h1 {
+    font-size: 44px;
+  }
+
+  :where(html.skin-terminal) .prose h2 {
+    font-size: 28px;
+  }
+}
+
+:where(html.skin-terminal) .role-time,
+:where(html.skin-terminal) .archive-date {
+  font-weight: 500;
+}
+
+:where(html.skin-terminal) .case-study-kicker {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:where(html.skin-terminal) .case-study-facts dt {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+:where(html.skin-terminal) .palette-toggle {
+  padding: 0 10px;
+  font-weight: 600;
+}
+
+:where(html.skin-terminal) .nav-toggle {
+  padding: 8px 12px;
+  font-size: inherit;
+  font-weight: 600;
+}
+
+:where(html.skin-terminal) .contribution-number {
+  letter-spacing: 0.08em;
+}
+
+/* The standard skin drops the first row's top border under each heading;
+   Terminal windows and rows keep theirs. */
+:where(html.skin-terminal) .contribution:first-child,
+:where(html.skin-terminal) .work-way:first-child,
+:where(html.skin-terminal) .role-row:first-child {
+  border-top-width: 1px;
 }

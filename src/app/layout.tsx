@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar/NavBar";
 import FooterPanel from "@/components/FooterPanel/FooterPanel";
 import { SITE_URL } from "@/lib/metadata";
@@ -24,11 +24,26 @@ import "@/components/Prose/prose.css";
 import "@/components/CaseStudy/case-study.css";
 import "@/design/skin-terminal.css";
 
-// Only Latin is preloaded; Polish characters (latin-ext) still load on demand
-// through unicode-range.
-const inter = Inter({
+// The standard skin shares the CV's type system (cv.devthomas.pl): Fraunces
+// for display, Geist for text and Geist Mono for labels. Only Latin is
+// preloaded; Polish characters (latin-ext) still load on demand through
+// unicode-range.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-inter",
+  axes: ["opsz"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -119,7 +134,7 @@ const applySavedPreferences = `(function () {
         window.matchMedia("(prefers-color-scheme: dark)").matches);
     var colors = terminal
       ? { light: "#f3f1e7", dark: "#07090a" }
-      : { light: "#f7f8fa", dark: "#10161b" };
+      : { light: "#f7f5f0", dark: "#0f1413" };
     var meta = document.createElement("meta");
     meta.name = "theme-color";
     meta.content = dark ? colors.dark : colors.light;
@@ -132,7 +147,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="en"
       translate="no"
-      className={`${inter.variable} ${jetBrainsMono.variable}`}
+      className={[
+        fraunces.variable,
+        geist.variable,
+        geistMono.variable,
+        jetBrainsMono.variable,
+      ].join(" ")}
       // The inline script adds theme and skin classes before hydration.
       suppressHydrationWarning
     >
