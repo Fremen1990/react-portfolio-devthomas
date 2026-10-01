@@ -962,3 +962,37 @@ test("a saved dark theme paints the CV dark palette from the first frame", async
     "#0f1413"
   );
 });
+
+for (const [path, skinClass, background] of [
+  ["/?skin=terminal&theme=dark", true, "rgb(7, 9, 10)"],
+  ["/look/terminal-dark/", true, "rgb(7, 9, 10)"],
+  ["/look/standard-light/", false, "rgb(247, 245, 240)"],
+] as const) {
+  test(`${path} paints its look from the first frame`, async ({ page }) => {
+    // The visitor's saved look is the opposite, so a flash would show.
+    await usePreferences(
+      page,
+      skinClass ? "standard" : "terminal",
+      skinClass ? "light" : "dark"
+    );
+    await page.addInitScript(() => {
+      const sample = () => {
+        if (document.body) {
+          (window as unknown as { first: string[] }).first = [
+            getComputedStyle(document.body).backgroundColor,
+            document.documentElement.className,
+          ];
+        } else {
+          requestAnimationFrame(sample);
+        }
+      };
+      requestAnimationFrame(sample);
+    });
+    await page.goto(path);
+    const [firstBackground, firstClasses] = await page.evaluate(
+      () => (window as unknown as { first: string[] }).first
+    );
+    expect(firstBackground).toBe(background);
+    expect(firstClasses.includes("skin-terminal")).toBe(skinClass);
+  });
+}
