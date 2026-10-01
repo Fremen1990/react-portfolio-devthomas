@@ -1,12 +1,12 @@
+/* The header is a dark brand band in both themes. Its inner row takes the
+   band's tokens (src/index.css). */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
   height: var(--header-height);
-  background: var(--header);
-  border-bottom: 1px solid var(--separator);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background: var(--band);
+  border-bottom: 1px solid var(--band-node-line);
 }
 
 .site-header-inner {
@@ -39,10 +39,15 @@
    name stays in the accessible name here. */
 .brand-wordmark {
   color: var(--accent);
+  font-size: 15px;
   font-family: var(--font-mono);
-  font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
+}
+
+/* "devthomas" in the accent, ".pl" muted, as on the CV. */
+.brand-wordmark-tld {
+  color: var(--text-secondary);
 }
 
 .brand:hover .brand-wordmark {
@@ -156,7 +161,7 @@
 }
 
 .site-nav a {
-  color: var(--text-secondary);
+  color: var(--text-soft);
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
@@ -171,6 +176,24 @@
   font-weight: 600;
   padding-bottom: 2px;
   border-bottom: 2px solid var(--accent);
+}
+
+/* View CV as an outlined accent pill. */
+.nav-cv {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-control);
+  color: var(--accent) !important;
+  white-space: nowrap;
+}
+
+.nav-cv:hover {
+  background: var(--accent);
+  color: var(--on-accent) !important;
+  text-decoration: none;
 }
 
 .site-nav-links[hidden] {

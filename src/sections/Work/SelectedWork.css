@@ -1,183 +1,200 @@
-.contribution {
+/* Selected work: the two Orange Polska contributions, side by side on wide
+   screens. On phones the cards keep only the eyebrow, title, outcome, bars
+   and link; the case studies carry the rest. */
+.work-grid {
   display: grid;
   gap: 16px;
-  padding: 32px 0;
-  border-top: 1px solid var(--separator);
-  scroll-margin-top: calc(var(--header-height) + 12px);
 }
 
-.contribution-number {
-  margin: 0 0 8px;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 400;
+.work-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 20px;
+  scroll-margin-top: calc(var(--header-height) + 16px);
+  transition: border-color 150ms ease;
 }
 
-.contribution-heading {
-  margin: 0 0 8px;
+.work-card:hover,
+.work-card:focus-within {
+  border-color: var(--accent);
+}
+
+.work-eyebrow {
+  color: var(--text-secondary);
+}
+
+.work-title {
+  margin: 0;
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1.15;
 }
 
-.contribution--featured .contribution-heading {
-  font-size: 28px;
-}
-
-.contribution-employer {
-  margin: 0 0 4px;
-}
-
-/* Role and dates, in mono like the CV's role dates. */
-.contribution-meta {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 400;
-}
-
-/* The CV's badge. */
-.contribution-status {
-  display: inline-block;
-  margin: 8px 0 0;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 12.5px;
-  font-weight: 500;
-}
-
-.contribution-summary,
-.contribution-list {
-  max-width: 68ch;
-}
-
-.contribution-summary {
-  color: var(--text-soft);
-}
-
-.contribution-list {
-  margin: 16px 0 0;
-  padding-left: 1.1rem;
-  color: var(--text-soft);
-}
-
-.contribution-list li::marker {
-  color: var(--accent);
-}
-
-.contribution-list li + li {
-  margin-top: 8px;
-}
-
-/* The project's result, in the CV's callout: a tinted card with a mono
-   eyebrow and the text in Fraunces. */
-.contribution-outcome {
-  margin: 20px 0 0;
-  padding: 20px 24px;
-  border-radius: var(--radius-surface);
-  background: var(--accent-soft);
-}
-
-.contribution-outcome-label {
-  margin: 0 0 6px;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.contribution-outcome-text {
+.work-summary {
   margin: 0;
-  color: var(--text);
+  color: var(--text-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.work-outcome {
+  margin: 0;
+  color: var(--accent);
   font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: 19px;
+  line-height: 1.3;
 }
 
-/* Technologies as the CV's chips. */
-.contribution-tech {
-  margin: 20px 0 0;
+/* Decision and trade-off as outlined nodes. */
+.work-decisions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
 }
 
-.contribution-tech-label {
-  margin: 0 0 8px;
-  color: var(--text-secondary);
+.work-decision {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--accent);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.work-decision dt {
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.04em;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.chips {
+.work-decision dd {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Bars: illustrative, not to scale. The text carries the values. */
+.work-bars {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.chip {
-  padding: 5px 11px;
-  border: 1px solid var(--separator);
-  border-radius: 999px;
-  font-size: 13.5px;
-  line-height: 1.3;
-}
-
-.contribution-tech-note {
-  margin: 8px 0 0;
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
-.scope {
-  margin-top: 16px;
-}
-
-.scope summary {
-  cursor: pointer;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.scope-list {
-  margin: 12px 0 0;
-  padding-left: 1.1rem;
-  max-width: 68ch;
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
   color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.bar-value {
+  font-family: var(--font-mono);
+}
+
+.bar-value--accent {
+  color: var(--accent);
+}
+
+.bar {
+  grid-column: 1 / -1;
+  display: block;
+  width: var(--bar);
+  min-width: 10px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--separator);
+  transform-origin: left center;
+}
+
+.bar--accent {
+  background: var(--accent);
+  transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.bar-row + .bar-row--extra .bar--accent {
+  transition-delay: 0.2s;
+}
+
+/* RevealOnView arms the bars, then reveals them once they are seen. */
+[data-reveal="armed"] .bar--accent {
+  transform: scaleX(0);
+}
+
+[data-reveal="revealed"] .bar--accent {
+  transform: scaleX(1);
+}
+
+.work-link {
+  margin: auto 0 0;
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .work-topic,
+  .work-summary,
+  .work-decisions,
+  .work-tags,
+  .bar-row--extra {
+    display: none;
+  }
+
+  .bar {
+    height: 10px;
+  }
 }
 
 @media (min-width: 801px) {
-  .contribution {
-    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
-    gap: 32px 48px;
-    padding: 40px 0;
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
   }
 
-  .contribution-heading {
-    font-size: 26px;
+  .work-card {
+    gap: 16px;
+    padding: 32px;
   }
 
-  .contribution--featured .contribution-heading {
-    font-size: 32px;
+  .work-title {
+    font-size: 28px;
+    line-height: 1.12;
+  }
+
+  .work-outcome {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .work-card {
+    padding: 32px 36px;
+  }
+
+  .work-title {
+    font-size: 30px;
+  }
+
+  .work-outcome {
+    font-size: 23px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar--accent {
+    transition: none;
   }
 }

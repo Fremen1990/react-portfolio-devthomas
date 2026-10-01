@@ -5,8 +5,8 @@
   margin-top: 24px;
 }
 
-/* Pill buttons, as on the CV: solid ink for the main action, outline for the
-   rest. */
+/* Pill buttons: solid ink for the main action, outline for the rest, and the
+   accent fill for the main action inside a dark band. */
 .action-link {
   display: inline-flex;
   align-items: center;
@@ -27,6 +27,10 @@
     border-color 150ms ease;
 }
 
+.action-link:hover {
+  text-decoration: none;
+}
+
 .action-link--solid {
   background: var(--text);
   color: var(--canvas);
@@ -37,18 +41,28 @@
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
-  text-decoration: none;
+}
+
+.action-link--bright {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.action-link--bright:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--on-accent);
 }
 
 .action-link--quiet {
   background: transparent;
   color: var(--text);
-  border-color: var(--text);
+  border-color: var(--separator);
 }
 
 .action-link--quiet:hover {
   background: transparent;
   color: var(--accent);
   border-color: var(--accent);
-  text-decoration: none;
 }

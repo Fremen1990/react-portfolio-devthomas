@@ -1,97 +1,82 @@
-.professional-history {
+/* Background: a short timeline, vertical on phones and horizontal on wide
+   screens. The two current roles are in the accent colour. */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0 0 0 22px;
+  border-left: 2px solid var(--separator);
+  list-style: none;
   scroll-margin-top: calc(var(--header-height) + 12px);
 }
 
-.role-row {
-  display: grid;
-  gap: 4px 24px;
-  padding: 16px 0;
-  border-top: 1px solid var(--separator);
+.timeline-entry {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.role-row h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
+.timeline-dot {
+  position: absolute;
+  top: 3px;
+  left: -31px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  background: var(--canvas);
 }
 
-.role-row p {
-  margin: 0;
+.timeline-entry.is-current .timeline-dot {
+  border-color: var(--accent);
+  background: var(--accent);
 }
 
-.role-row .role-formal,
-.role-row .role-note {
-  margin: 4px 0 0;
+.timeline-period {
   color: var(--text-secondary);
-  font-size: 15px;
-}
-
-/* Dates in mono, like the CV's role dates. */
-.role-time,
-.archive-date {
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.04em;
 }
 
-.finance-heading {
-  margin: 48px 0 8px;
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 500;
+.timeline-entry.is-current .timeline-period {
+  color: var(--accent);
+}
+
+.timeline-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.timeline-detail {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 @media (min-width: 801px) {
-  .role-row {
-    grid-template-columns: 220px minmax(0, 1fr);
-    align-items: baseline;
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    padding: 0;
+    border-left: 0;
+    background: linear-gradient(var(--separator), var(--separator)) 0 7px / 100%
+      2px no-repeat;
   }
-}
 
-.credential-list,
-.archive-rows {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  .timeline-entry {
+    gap: 8px;
+    padding-top: 28px;
+  }
 
-.credential-list li,
-.archive-row {
-  padding: 12px 0;
-  border-top: 1px solid var(--separator);
-}
-
-.archive {
-  margin-top: 24px;
-  border-top: 1px solid var(--separator);
-}
-
-.archive summary {
-  cursor: pointer;
-  padding: 16px 0;
-  font-weight: 600;
-}
-
-.archive-row h3 {
-  margin: 0 0 4px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.archive-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  margin: 8px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.archive-links a {
-  color: var(--accent);
-  font-weight: 600;
-}
-
-.archive-links a:hover {
-  color: var(--accent-hover);
+  .timeline-dot {
+    top: 0;
+    left: 0;
+  }
 }

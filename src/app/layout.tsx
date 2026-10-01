@@ -135,7 +135,7 @@ const applySavedPreferences = `(function () {
         window.matchMedia("(prefers-color-scheme: dark)").matches);
     var colors = terminal
       ? { light: "#f3f1e7", dark: "#07090a" }
-      : { light: "#f7f5f0", dark: "#0f1413" };
+      : { light: "#0f1413", dark: "#0f1413" };
     var meta = document.createElement("meta");
     meta.name = "theme-color";
     meta.content = dark ? colors.dark : colors.light;

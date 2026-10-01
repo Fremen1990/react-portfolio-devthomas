@@ -7,9 +7,11 @@ export const LINK_THEME_KEY = "portfolio-link-theme";
 
 export type Theme = "light" | "dark";
 
-// Browser-chrome colour for each skin and theme; matches each --canvas.
+// Browser-chrome colour for each skin and theme. The standard header is a
+// dark band in both themes, so its colour is the band's; Terminal matches
+// its --canvas.
 const THEME_COLORS: Record<Skin, Record<Theme, string>> = {
-  default: { light: "#f7f5f0", dark: "#0f1413" },
+  default: { light: "#0f1413", dark: "#0f1413" },
   terminal: { light: "#f3f1e7", dark: "#07090a" },
 };
 

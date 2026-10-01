@@ -4,42 +4,99 @@
 }
 
 .page-section {
-  padding: 48px 0;
-  scroll-margin-top: calc(var(--header-height) + 12px);
+  padding: 40px 0;
+  scroll-margin-top: var(--header-height);
 }
 
-#work {
-  scroll-margin-top: calc(var(--header-height) + 48px);
+/* Paper sections that follow each other share one gap. */
+.page-section:not(.band, .page-section--teal)
+  + .page-section:not(.band, .page-section--teal) {
+  padding-top: 0;
 }
 
-/* The CV's section title: Fraunces, followed by a hairline to the edge. */
-.section-heading {
+.page-section--band {
+  border-top: 1px solid var(--band-line);
+  border-bottom: 1px solid var(--band-line);
+}
+
+.section-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 12px;
+  justify-content: space-between;
+  gap: 8px 24px;
   margin: 0 0 24px;
+}
+
+.section-head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Section titles in Fraunces, as on the CV. */
+.section-heading {
+  margin: 0;
   font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.15;
+  scroll-margin-top: calc(var(--header-height) + 24px);
 }
 
-.section-heading::after {
-  content: "";
-  flex: 1;
-  align-self: center;
-  height: 1px;
-  background: var(--separator);
+.band .section-heading,
+.page-section--teal .section-heading {
+  color: var(--band-strong);
 }
 
-/* The heading's hairline already separates the first row of each section.
-   Only the width is removed, so the Terminal skin can restore it and keep its
-   own border styles and colours. */
-.contribution:first-child,
-.work-way:first-child,
-.role-row:first-child {
-  border-top-width: 0;
+.section-aside-link {
+  font-weight: 500;
+}
+
+/* Mono labels above titles. */
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.section-eyebrow {
+  color: var(--text-secondary);
+}
+
+.card {
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-surface);
+  background: var(--surface);
+}
+
+/* Technology tags as pills. */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 2px 12px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-control);
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.3;
 }
 
 .lede,
@@ -51,6 +108,18 @@
   color: var(--text-secondary);
   font-size: 15px;
   font-weight: 500;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .skip-link {
@@ -76,16 +145,75 @@
   }
 
   .page-section {
-    padding: 72px 0;
+    padding: 48px 0;
+  }
+
+  .section-head {
+    margin-bottom: 28px;
   }
 
   .section-heading {
-    font-size: 34px;
+    font-size: 36px;
   }
 }
 
-@media (max-width: 680px) {
-  .page-wrap {
-    width: min(var(--content-width), calc(100% - 32px));
+@media (min-width: 1024px) {
+  #work .section-heading {
+    font-size: 40px;
+  }
+}
+
+/* Contact: a teal band in both themes. */
+#contact .page-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 40px;
+}
+
+#contact .section-head {
+  margin: 0;
+}
+
+.contact-body {
+  display: contents;
+}
+
+.contact-line {
+  order: 1;
+  flex: 1 0 100%;
+  margin: -8px 0 0;
+  color: var(--text-soft);
+  font-size: 16px;
+}
+
+.contact-actions {
+  order: 2;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  #contact .page-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 40px;
+  }
+
+  #contact .section-head {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .contact-line {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+
+  .contact-actions {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
   }
 }
