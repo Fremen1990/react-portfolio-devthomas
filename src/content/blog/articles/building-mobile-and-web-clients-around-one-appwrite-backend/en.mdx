@@ -1,0 +1,59 @@
+import { AuthSequence } from "@/components/Blog/ClientArchitecture";
+
+**One backend removes a second source of truth. It does not remove distributed state.** That is the architectural tension behind adding a web client to Car Brain, my React Native vehicle-management application.
+
+The target is three platforms—iOS, Android and Web—with two client implementations sharing Appwrite. The interesting decisions concern boundaries: where sessions live, who owns freshness, and how much logic to share before “reuse” becomes a second project with its own roadmap.
+
+## The system boundary: shared services, separate clients
+
+Car Brain groups vehicle records, refuels, service history, costs and attachments. I built the original mobile product in 2024–2025. The current extension adds a signed-in application to the existing Next.js web codebase.
+
+Mobile uses the React Native Appwrite SDK and TanStack Query. Web uses a server-side Appwrite client behind Next.js. Accounts and product data belong to the same backend; session lifecycles, rendering and state management belong to the clients.
+
+<ClientArchitecture locale="en" />
+
+**Development snapshot — 4 October 2026:** mobile data flows and web authentication/application shell exist in source. Web vehicle screens and the complete cross-client journey remain under development. Solid paths show implemented code, not verified production behavior.
+
+### Decision 1: reuse Appwrite, keep a separate web UI
+
+Appwrite gives me [authentication, data storage, files and functions](https://appwrite.io/docs) without rebuilding those foundations for the browser. The attraction for a mobile-first product is straightforward: spend engineering effort on the domain instead of commissioning another login system. Login screens rarely need a cinematic universe.
+
+**Gain:** one account/data foundation and fewer backend capabilities to implement myself. **Cost:** clients depend on Appwrite's SDKs, permissions and service model. Moving providers would require adapting those boundaries; using a managed backend does not outsource domain design or access control.
+
+A separate Next.js client also gives the web its own interaction model for tables and longer histories. **The price is two presentation layers and some duplicated domain logic.** A browser build of the mobile application could share more UI, but the recorded decision favors desktop-oriented workflows and avoids forcing native-specific dependencies into that path. It is a tradeoff, not a claim that React Native cannot target web.
+
+## The session boundary: a server layer earns its keep
+
+The web design places the session on the application's server side. Next.js establishes an Appwrite session, stores its secret in an HTTP-only cookie, and uses it on subsequent requests. Authentication operations and access in the user's permission context remain separate.
+
+<AuthSequence locale="en" />
+
+**Gain:** an explicit server boundary for session handling and a place to enforce the web request flow. **Cost:** a server runtime, cookie/expiry handling and another failure boundary. A web client directly using the Appwrite SDK would be simpler in some respects; this approach deliberately accepts server-side work.
+
+Appwrite's [SSR guide](https://appwrite.io/docs/products/auth/server-side-rendering) separates administrative and session-based clients. That distinction matters more than the diagram's box count: privileged access must not become the convenient default for ordinary vehicle reads. “Works with the admin key” is an excellent way to postpone discovering that authorization does not.
+
+The current helper exposes account access. Planned domain operations must preserve the user-scoped boundary, with account-isolation and expiry tests. The diagram explains the design; it does not certify those tests as passed.
+
+## The state boundary: one database, several versions of “now”
+
+Shared backend state does not imply shared screen state. A refuel saved on mobile can coexist with an older browser view until that client fetches or revalidates. The database is shared; the screens are not telepathic.
+
+Mobile's TanStack Query configuration uses a five-minute `staleTime` and focus/connectivity handling. **Freshness is not a polling schedule:** `staleTime` controls when cached data becomes stale; a refetch still needs a trigger. Periodic polling is a separate setting. [The defaults documentation makes that distinction explicit](https://tanstack.com/query/latest/docs/framework/react/guides/important-defaults).
+
+Web domain reads are planned server-side, with validated Server Actions for writes and subsequent revalidation. **Gain:** each client can use a state model suited to its runtime. **Cost:** freshness semantics differ, so a cross-client journey needs explicit acceptance criteria.
+
+[Appwrite Realtime](https://appwrite.io/docs/apis/realtime/subscribe) is a possible update mechanism, not a consequence of choosing Appwrite. Subscriptions would add lifecycle and reconnect work. For the first slice, I want a predictable write/read path before choosing stronger freshness guarantees. Live cross-device updates, offline writes and conflict resolution are not established here.
+
+## The reuse boundary: duplication with an expiry question
+
+The recorded decision postpones a shared domain package while the mobile refactor evolves. The web plan initially ports necessary pure logic, records its origin and tests equivalent behavior.
+
+**Gain:** a narrower initial change without coupling it to the mobile refactor. **Cost:** calculations can drift between implementations. I would revisit extraction when stable shared rules and repeated changes make maintaining two copies more expensive than coordinating a package. “DRY” is a principle, not a summons to create a monorepo package before lunch.
+
+Visual consistency is another boundary: web generates CSS from repository-owned design tokens; mobile still has its own implementation, with alignment in progress. Shared visual language does not require identical components. The design-system tradeoffs deserve a separate article.
+
+## What would turn this diagram into evidence?
+
+One complete vehicle/refuel journey: write under one account, retrieve in the other client, verify equivalent values and document the refresh trigger. Then exercise another account, an expired session and a failed request.
+
+The architectural success criterion is concrete: common identity and data, explicit client responsibilities, and predictable failure behavior. Three platforms can share a backend. They should not share an assumption that someone else is handling the edge cases.

@@ -6,6 +6,7 @@ export type Heading = { id: string; text: string };
 export const slugify = (text: string) =>
   text
     .toLowerCase()
+    .replace(/ł/g, "l")
     .normalize("NFKD")
     .replace(/[̀-ͯ]/g, "")
     .replace(/['’]/g, "")

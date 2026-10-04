@@ -27,7 +27,7 @@ import { greetDevelopers } from "../../utils/consoleGreeting";
 const sectionIds = sections.map((section) => section.id);
 const headerSections = sections.filter((section) => section.header);
 const isCaseStudyPath = (pathname: string) => pathname.startsWith("/work/");
-const DESKTOP_NAV_QUERY = "(min-width: 801px)";
+const DESKTOP_NAV_QUERY = "(min-width: 1100px)";
 
 const isApplePlatform = () =>
   /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
@@ -109,6 +109,9 @@ const NavBar = () => {
   const pathname = usePathname();
   const isHome = isHomePath(pathname);
   const isCaseStudy = isCaseStudyPath(pathname);
+  const isBlog = pathname.startsWith("/blog");
+  const isBlogArticle = /^\/blog\/(en|pl)\/[^/]+\/?$/.test(pathname);
+  const blogLocale = pathname.startsWith("/blog/pl/") ? "pl" : "en";
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { theme, skin } = usePreferences();
@@ -306,7 +309,18 @@ const NavBar = () => {
                 <span aria-hidden="true">← </span>All work
               </Link>
             )}
+            {isBlogArticle && (
+              <Link
+                className="nav-back"
+                href={blogLocale === "pl" ? "/blog/pl/" : "/blog/"}
+                lang={blogLocale}
+                onClick={closeOnPlainClick}
+              >
+                {blogLocale === "pl" ? "← Wróć do bloga" : "← Back to blog"}
+              </Link>
+            )}
             {!isCaseStudy &&
+              !isBlogArticle &&
               headerSections.map((link) => {
                 if (!isHome) {
                   return (
@@ -336,6 +350,16 @@ const NavBar = () => {
                   </a>
                 );
               })}
+            {!isBlogArticle && (
+              <Link
+                href="/blog/"
+                aria-current={isBlog ? "page" : undefined}
+                className={isBlog ? "is-current" : undefined}
+                onClick={closeOnPlainClick}
+              >
+                Blog
+              </Link>
+            )}
             <a
               className="nav-cv-menu"
               href={profile.links.cv}

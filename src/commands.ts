@@ -1,3 +1,5 @@
+import { visiblePosts } from "./content/blog/.generated/posts";
+import { blogArticlePath } from "./content/blog/model";
 import { profile } from "./content/publicProfile";
 import { SITE_URL } from "./lib/metadata";
 import { sections } from "./content/navigation";
@@ -62,6 +64,24 @@ export const carBrainCommands = (links: CarBrainLinks | null): Command[] =>
     : [];
 
 export const commands: Command[] = [
+  {
+    id: "blog",
+    title: "Read the blog",
+    alias: "ls blog/",
+    keywords: ["writing", "articles", "blog"],
+    group: "Page",
+    run: (context) => context.goToPage("/blog/"),
+  },
+  ...visiblePosts.flatMap((post) =>
+    (["en", "pl"] as const).map((locale): Command => ({
+      id: `blog-${locale}-${post.slug}`,
+      title: `${post.editions[locale].title} (${locale.toUpperCase()})`,
+      alias: `cat blog/${locale}/${post.slug}.mdx`,
+      keywords: ["article", "blog", ...post.editions[locale].topics],
+      group: "Page",
+      run: (context) => context.goToPage(blogArticlePath(post.slug, locale)),
+    }))
+  ),
   {
     id: "top",
     title: "Go to top",

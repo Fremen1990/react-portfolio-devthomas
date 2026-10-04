@@ -16,7 +16,14 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "prettier": "prettier --write src e2e *.mjs *.mts *.ts .github",
-    "prettier:check": "prettier --check src e2e *.mjs *.mts *.ts .github"
+    "prettier:check": "prettier --check src e2e *.mjs *.mts *.ts .github",
+    "prepare:blog": "node scripts/prepare-blog.mjs",
+    "predev": "npm run prepare:blog",
+    "prebuild": "npm run prepare:blog",
+    "pretest": "npm run prepare:blog",
+    "pretypecheck": "npm run prepare:blog",
+    "prelint": "npm run prepare:blog",
+    "dev:blog": "BLOG_PREVIEW_DIR=${BLOG_PREVIEW_DIR:-../professional-career/materials/articles/car-brain-appwrite} npm run dev -- --hostname 127.0.0.1"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

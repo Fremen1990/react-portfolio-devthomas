@@ -1,5 +1,6 @@
 import type { MDXComponents } from "mdx/types";
 import type { ComponentPropsWithoutRef } from "react";
+import { ClientArchitecture } from "@/components/Blog/ClientArchitecture";
 import { slugify, textOf } from "@/lib/headings";
 import {
   Differently,
@@ -23,7 +24,7 @@ const components: MDXComponents = {
   ),
   // Wide tables scroll inside their own box instead of the page.
   table: (props: ComponentPropsWithoutRef<"table">) => (
-    <div className="prose-table">
+    <div className="prose-table" tabIndex={0}>
       <table {...props} />
     </div>
   ),
@@ -36,6 +37,7 @@ const components: MDXComponents = {
   Options,
   Option,
   Differently,
+  ClientArchitecture,
 };
 
 export function useMDXComponents(): MDXComponents {
