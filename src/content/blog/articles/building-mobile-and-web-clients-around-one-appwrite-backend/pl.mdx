@@ -1,0 +1,59 @@
+import { AuthSequence } from "@/components/Blog/ClientArchitecture";
+
+**Jeden backend usuwa drugie źródło prawdy. Nie usuwa rozproszonego stanu.** Wokół tego napięcia projektuję rozszerzenie Car Brain, mojej aplikacji React Native do zarządzania informacjami o samochodzie, o klienta webowego.
+
+Docelowo trzy platformy — iOS, Android i Web — korzystają z dwóch implementacji klienta i jednego Appwrite. Najciekawsze decyzje dotyczą granic: gdzie żyje sesja, kto odpowiada za świeżość danych i ile logiki współdzielić, zanim „reuse” stanie się drugim projektem z własną roadmapą.
+
+## Granica systemu: wspólne usługi, osobne klienty
+
+Car Brain gromadzi dane pojazdów, tankowania, historię serwisową, koszty i załączniki. Pierwszy produkt mobilny zbudowałem w latach 2024–2025. Teraz dodaję część dostępną po zalogowaniu do istniejącej aplikacji Next.js.
+
+Mobile wykorzystuje SDK Appwrite dla React Native i TanStack Query. Web korzysta z serwerowego klienta Appwrite za warstwą Next.js. Konta i dane produktu należą do wspólnego backendu; cykl życia sesji, renderowanie i zarządzanie stanem pozostają odpowiedzialnością klientów.
+
+<ClientArchitecture locale="pl" />
+
+**Stan prac — 4 października 2026:** przepływy danych mobile oraz webowe uwierzytelnianie i szkielet aplikacji istnieją w kodzie. Ekrany pojazdów w webie i pełny scenariusz między klientami nadal powstają. Linie ciągłe oznaczają implementację, nie potwierdzenie działania na produkcji.
+
+### Decyzja 1: wykorzystać Appwrite, zachować osobny web UI
+
+Appwrite zapewnia [uwierzytelnianie, bazę danych, pliki i funkcje](https://appwrite.io/docs), więc dodanie przeglądarki nie wymaga ponownego budowania tych podstaw. Przy produkcie zaczynającym od mobile wolę przeznaczyć ten wysiłek na domenę. Ekran logowania naprawdę nie potrzebuje własnego uniwersum filmowego.
+
+**Zysk:** wspólne konta i dane oraz mniej elementów backendu do samodzielnej implementacji. **Koszt:** zależność od SDK, modelu uprawnień i usług Appwrite. Zmiana dostawcy wymagałaby dostosowania tych granic. Gotowy backend nie przejmuje odpowiedzialności za model domenowy ani kontrolę dostępu.
+
+Osobny klient Next.js daje też swobodę projektowania tabel i przeglądania dłuższych historii. **Ceną są dwie warstwy prezentacji i część powielonej logiki.** Webowy build aplikacji mobilnej pozwoliłby współdzielić więcej UI, ale zapisana decyzja preferuje scenariusze desktopowe i unikanie przenoszenia zależności natywnych do tej ścieżki. To kompromis, nie stwierdzenie, że React Native nie obsługuje webu.
+
+## Granica sesji: serwer musi na siebie zapracować
+
+W wersji webowej sesję obsługuje serwer aplikacji. Next.js tworzy sesję Appwrite, zapisuje jej sekret w ciasteczku HTTP-only i wykorzystuje go przy kolejnych żądaniach. Operacje uwierzytelniania i dostęp w kontekście uprawnień użytkownika pozostają rozdzielone.
+
+<AuthSequence locale="pl" />
+
+**Zysk:** jawna granica obsługi sesji i miejsce kontroli przepływu żądań webowych. **Koszt:** utrzymanie runtime’u serwerowego, obsługa ciasteczek i wygasania sesji oraz kolejny punkt awarii. Bezpośrednie użycie SDK Appwrite w przeglądarce uprościłoby część tego przepływu. Wybrany wariant świadomie przyjmuje dodatkową pracę po stronie serwera.
+
+[Dokumentacja SSR Appwrite](https://appwrite.io/docs/products/auth/server-side-rendering) rozdziela klienty administracyjne i sesyjne. To ważniejsze niż liczba prostokątów na schemacie: uprzywilejowany dostęp nie może zostać wygodnym domyślnym sposobem odczytywania historii samochodu. „Na kluczu admina działa” to świetny sposób, żeby później dowiedzieć się, że autoryzacja nie działała.
+
+Obecny helper udostępnia dostęp do konta. Planowane operacje domenowe muszą zachować kontekst użytkownika, a testy sprawdzić izolację kont i wygasanie sesji. Diagram przedstawia projekt; nie zastępuje wyników tych testów.
+
+## Granica stanu: jedna baza, kilka wersji „teraz”
+
+Wspólny stan backendu nie oznacza wspólnego stanu ekranów. Tankowanie zapisane w mobile może współistnieć ze starszym widokiem w przeglądarce, dopóki klient nie pobierze danych lub nie wykona rewalidacji. Baza jest wspólna. Ekrany nadal nie są telepatami.
+
+Konfiguracja TanStack Query w mobile używa pięciominutowego `staleTime` oraz obsługi łączności i powrotu aplikacji na pierwszy plan. **Świeżość to nie harmonogram odpytywania:** `staleTime` określa, kiedy cache przestaje być świeży; ponowne pobranie nadal potrzebuje wyzwalacza. Cykliczne odpytywanie ma osobne ustawienie. [Dokumentacja wyjaśnia tę różnicę](https://tanstack.com/query/latest/docs/framework/react/guides/important-defaults).
+
+Dla webu planuję odczyty domenowe po stronie serwera, walidowane zapisy przez Server Actions i późniejszą rewalidację. **Zysk:** każdy klient ma model stanu dopasowany do swojego środowiska. **Koszt:** różna semantyka świeżości, którą trzeba uwzględnić w kryteriach akceptacji scenariusza między klientami.
+
+[Appwrite Realtime](https://appwrite.io/docs/apis/realtime/subscribe) jest możliwym mechanizmem aktualizacji, nie automatycznym skutkiem wyboru Appwrite. Subskrypcje oznaczałyby dodatkowo zarządzanie ich cyklem życia i ponownym łączeniem. Najpierw chcę przewidywalnej ścieżki zapis–odczyt, potem decyzji o mocniejszych gwarancjach świeżości. Aktualizacje między urządzeniami na żywo, zapisy offline i rozwiązywanie konfliktów nie są tu potwierdzonymi funkcjami.
+
+## Granica współdzielenia: duplikacja z pytaniem o termin ważności
+
+Zapisana decyzja odracza wspólny pakiet domenowy na czas refaktoringu mobile. Web ma początkowo przenosić potrzebną czystą logikę, dokumentować jej pochodzenie i testować zgodność zachowania.
+
+**Zysk:** węższy zakres zmiany, bez sprzęgania jej z refaktoringiem aplikacji mobilnej. **Koszt:** ryzyko rozbieżności obliczeń. Wróciłbym do ekstrakcji, gdy stabilne wspólne reguły i powtarzalne zmiany uczynią utrzymanie dwóch kopii droższym niż koordynowanie pakietu. DRY to zasada, nie wezwanie do stworzenia paczki w monorepo przed obiadem.
+
+Osobną granicą jest spójność wizualna: web generuje CSS z tokenów repozytorium, a mobile ma własną implementację, której dostosowanie nadal trwa. Wspólny język wizualny nie wymaga identycznych komponentów. Kompromisy design systemu zostawiam na osobny artykuł.
+
+## Co zamieni ten schemat w dowód?
+
+Jeden pełny scenariusz pojazdu lub tankowania: zapis na jednym koncie, odczyt w drugim kliencie, zgodność wartości i udokumentowany wyzwalacz odświeżenia. Następnie inne konto, wygasła sesja i nieudane żądanie.
+
+Kryterium powodzenia architektury jest konkretne: wspólna tożsamość i dane, jawne odpowiedzialności klientów oraz przewidywalna obsługa błędów. Trzy platformy mogą współdzielić backend. Nie powinny współdzielić założenia, że przypadkami brzegowymi zajmuje się ktoś inny.

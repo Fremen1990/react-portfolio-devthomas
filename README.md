@@ -107,3 +107,32 @@ Look at 1440, 768, 390, and 320px, and at both sides of the 801px navigation swi
 On 2026-09-29, `https://3d-portfolio.devthomas.pl/` did not resolve (DNS `NXDOMAIN`). The footer does not link to it. GitHub, this portfolio, and the CV remain linked.
 
 Orange's October 2022 start is still the date already published here; it is provisional until that month is confirmed directly.
+
+## Bilingual blog
+
+The blog shares the existing MDX renderer, design tokens, standard/Terminal skins and light/dark themes. `/blog/` is the English index and `/blog/pl/` the Polish index. Article editions use `/blog/en/<slug>/` and `/blog/pl/<slug>/`, with one stable English slug. Language choices never redirect automatically.
+
+Maintain approved articles in `src/content/blog/catalog.ts` and MDX bodies under `src/content/blog/articles/`. The typed registry requires English and Polish titles, descriptions, topics and body references together. Set `publishedAt` to the actual release date, and only set `published: true` when both editions have been reviewed and publication is authorized. `updatedAt` is for substantive later changes. The optional `developmentAsOf` renders a dated development note. Reading time is derived independently from each body.
+
+`npm run prepare:blog` validates the registry and generates concrete static article routes, metadata and localized share-card routes. It runs before dev, build, lint, typecheck and unit tests. Generated files in `src/content/blog/.generated/`, `src/app/blog/en/` and the article subdirectories of `src/app/blog/pl/` are ignored: never edit or commit them. Concrete routes allow an empty initial catalogue without exporting a placeholder article. Run checks sequentially, because preparation replaces those generated files.
+
+The homepage shows up to two published articles between Background and Contact and hides the section when none exist. Both indexes and published editions appear in the command palette and sitemap. The production catalogue includes the approved Car Brain/Appwrite article in English and Polish. It builds normally without private manuscript files or BLOG_PREVIEW_DIR.
+
+### Private local manuscript review
+
+For this sibling career workspace, use `npm run dev:blog -- --port 3012`. It selects the private manuscripts automatically and binds to 127.0.0.1. Open `http://127.0.0.1:3012/blog/` exactly: another project may already use `localhost` on the same port. Stop the previous portfolio dev server before switching modes. Run lint/build/test in a separate checkout or after stopping the preview, because their preparation hooks replace generated routes.
+
+Unreviewed manuscripts do not belong in this public repository. A local-only `BLOG_PREVIEW_DIR` may point to a private directory containing `posts.json` and the referenced EN/PL MDX files. Records must be unpublished and have no release date. The generator rejects this mode in CI. Preview pages have visible draft labels and `noindex`, and are excluded from the sitemap. This is a local review facility, not access control: **never upload a preview build or expose its server publicly**.
+
+```bash
+BLOG_PREVIEW_DIR=/absolute/path/to/private/drafts npm run dev
+```
+
+For automated preview verification, use the same environment for preparation/build and the following Playwright run. Tests discover the generated article editions. A normal build without `BLOG_PREVIEW_DIR` removes generated private routes and body copies and exports only published records:
+
+```bash
+env -u BLOG_PREVIEW_DIR npm run build
+npm run test:e2e
+```
+
+Article headings must have unique, non-empty generated IDs. Polish characters are normalized for heading anchors. Use `ClientArchitecture` only for the Car Brain article, with `locale="en"` or `locale="pl"`; it distinguishes implemented authentication from planned web data paths. Publication does not enable the independent Car Brain launch card or App Store links.

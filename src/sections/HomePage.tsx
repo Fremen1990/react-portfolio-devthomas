@@ -1,3 +1,4 @@
+import { LatestWriting } from "@/components/Blog/BlogList";
 import { Hero } from "@/components/Hero/Hero";
 import { SectionBand } from "@/components/SectionBand/SectionBand";
 import { SelectedWork } from "@/sections/Work/SelectedWork";
@@ -32,6 +33,7 @@ export const HomePage = () => (
     <SectionBand id="about" title={sectionTitle("about")} aside={<CvLink />}>
       <Background />
     </SectionBand>
+    <LatestWriting />
     <SectionBand id="contact" title={profile.contact.heading} tone="teal">
       <Contact />
     </SectionBand>

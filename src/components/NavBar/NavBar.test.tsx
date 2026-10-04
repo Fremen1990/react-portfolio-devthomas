@@ -46,7 +46,7 @@ const installMatchMedia = (overrides: Partial<typeof mediaState> = {}) => {
     };
     Object.defineProperty(list, "matches", {
       get() {
-        if (query.includes("min-width: 801px")) {
+        if (query.includes("min-width: 1100px")) {
           return mediaState.desktop;
         }
         if (query.includes("prefers-reduced-motion")) {
@@ -71,7 +71,7 @@ const installMatchMedia = (overrides: Partial<typeof mediaState> = {}) => {
     setDesktop(desktop: boolean) {
       mediaState.desktop = desktop;
       listeners
-        .filter((item) => item.query.includes("min-width: 801px"))
+        .filter((item) => item.query.includes("min-width: 1100px"))
         .forEach((item) =>
           item.listener({ matches: desktop, media: item.query })
         );
@@ -549,5 +549,14 @@ test("on a look page, section links stay on the page", () => {
   expect(screen.getByRole("link", { name: "Work" })).toHaveAttribute(
     "href",
     "#work"
+  );
+});
+
+test("blog detail navigation returns to the correct language index", () => {
+  (usePathname as Mock).mockReturnValue("/blog/pl/example/");
+  render(<NavBar />);
+  expect(screen.getByRole("link", { name: "← Wróć do bloga" })).toHaveAttribute(
+    "href",
+    expect.stringMatching(/^\/blog\/pl\/?$/)
   );
 });

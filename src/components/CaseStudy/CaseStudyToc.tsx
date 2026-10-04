@@ -6,7 +6,13 @@ import type { Heading } from "../../lib/headings";
 // "On this page": the study's sections, rendered on the server so the list
 // works without JavaScript. After hydration it marks the section being read.
 // Only colour and the border colour change, so nothing shifts.
-export const CaseStudyToc = ({ headings }: { headings: Heading[] }) => {
+export const CaseStudyToc = ({
+  headings,
+  label = "On this page",
+}: {
+  headings: Heading[];
+  label?: string;
+}) => {
   const [currentId, setCurrentId] = useState(headings[0]?.id);
 
   useEffect(() => {
@@ -47,7 +53,7 @@ export const CaseStudyToc = ({ headings }: { headings: Heading[] }) => {
   return (
     <nav className="case-study-toc" aria-labelledby="toc-heading">
       <p id="toc-heading" className="eyebrow toc-heading">
-        On this page
+        {label}
       </p>
       <ol className="toc-list">
         {headings.map(({ id, text }) => {

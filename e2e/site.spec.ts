@@ -1,12 +1,19 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import sharp from "sharp";
+import { visiblePosts } from "../src/content/blog/.generated/posts";
+import { blogArticlePath } from "../src/content/blog/model";
 import { carBrain } from "../src/content/carBrain";
 
 // Every exported page. Add new routes here as they ship.
 const PAGES = [
   "/",
   "/colophon/",
+  "/blog/",
+  "/blog/pl/",
+  ...visiblePosts.flatMap((post) =>
+    (["en", "pl"] as const).map((locale) => blogArticlePath(post.slug, locale))
+  ),
   "/work/orange-cms/",
   "/work/orange-e2e-testing/",
   "/work/theeventa-mvp/",
@@ -62,7 +69,7 @@ for (const path of PAGES) {
     }
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       "content",
-      "https://devthomas.pl/og-share.png"
+      `https://devthomas.pl${path.startsWith("/blog/en/") || /^\/blog\/pl\/[^/]+\/$/.test(path) ? `${path}card.jpg` : "/og-share.png"}`
     );
   });
 }
@@ -846,7 +853,18 @@ test.describe("search basics", () => {
       .map((match) => match[1])
       .sort();
     expect(locations).toEqual(
-      PAGES.map((path) => `https://devthomas.pl${path}`).sort()
+      PAGES.filter(
+        (path) =>
+          !visiblePosts.some(
+            (post) =>
+              post.preview &&
+              (["en", "pl"] as const).some(
+                (locale) => blogArticlePath(post.slug, locale) === path
+              )
+          )
+      )
+        .map((path) => `https://devthomas.pl${path}`)
+        .sort()
     );
   });
 

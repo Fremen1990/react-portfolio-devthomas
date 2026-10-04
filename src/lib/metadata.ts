@@ -21,6 +21,9 @@ type PageMetadataInput = {
   canonical?: string;
   /** Preview image when it differs from the site-wide one. */
   image?: { url: string; alt: string };
+  languages?: Record<string, string>;
+  noIndex?: boolean;
+  article?: { locale: "en" | "pl"; publishedAt?: string; updatedAt?: string };
 };
 
 // Next merges `openGraph` and `twitter` shallowly, so every page gets the full
@@ -31,6 +34,9 @@ export const pageMetadata = ({
   description = profile.introduction,
   canonical = path,
   image,
+  languages,
+  noIndex,
+  article,
 }: PageMetadataInput): Metadata => {
   const fullTitle = title ? `${title} · ${profile.name}` : SITE_TITLE;
   const shareImage = image ? { ...SHARE_IMAGE, ...image } : SHARE_IMAGE;
@@ -38,9 +44,19 @@ export const pageMetadata = ({
   return {
     title: fullTitle,
     description,
-    alternates: { canonical },
+    alternates: { canonical, ...(languages ? { languages } : {}) },
+    ...(noIndex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
-      type: "website",
+      ...(article
+        ? {
+            type: "article" as const,
+            locale: article.locale === "pl" ? "pl_PL" : "en_GB",
+            alternateLocale: article.locale === "pl" ? "en_GB" : "pl_PL",
+            publishedTime: article.publishedAt,
+            modifiedTime: article.updatedAt,
+            authors: [profile.name],
+          }
+        : { type: "website" as const }),
       url: path,
       title: fullTitle,
       description,

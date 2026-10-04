@@ -1633,3 +1633,20 @@ html.skin-terminal.dark-theme .hero-portrait {
   font-size: inherit;
   font-weight: 600;
 }
+
+/* Blog follows Terminal's own type and surfaces. */
+:where(html.skin-terminal) .blog-index h1,
+:where(html.skin-terminal) .blog-hero h1,
+:where(html.skin-terminal) .blog-list-item :is(h2, h3) {
+  font-family: var(--font-mono);
+  letter-spacing: -0.035em;
+}
+:where(html.skin-terminal) .blog-languages a,
+:where(html.skin-terminal) .blog-notice,
+:where(html.skin-terminal) .prose pre {
+  border-radius: 2px;
+}
+:where(html.skin-terminal) .blog-notice {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+}

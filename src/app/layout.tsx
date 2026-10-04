@@ -23,6 +23,7 @@ import "@/components/FooterPanel/footer.css";
 import "@/components/CommandPalette/palette.css";
 import "@/components/Prose/prose.css";
 import "@/components/CaseStudy/case-study.css";
+import "@/components/Blog/blog.css";
 import "@/design/skin-terminal.css";
 
 // The standard skin shares the CV's type system (cv.devthomas.pl): Fraunces
