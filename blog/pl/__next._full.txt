@@ -1,0 +1,92 @@
+1:"$Sreact.fragment"
+3:I[63831,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default"]
+4:I[39756,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default"]
+5:I[37457,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default"]
+d:I[68027,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default",1]
+:HL["/_next/static/chunks/15kz69i2m4ar_.css","style"]
+:HL["/_next/static/media/791bf8c4bb753ed6-s.p.0ggqn9ig56u4s.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+2:T8ee,(function () {
+  var root = document.documentElement;
+  var params = null;
+  var navigation = "navigate";
+  try {
+    navigation = performance.getEntriesByType("navigation")[0].type;
+  } catch (error) {}
+  try {
+    if (navigation !== "reload" && navigation !== "back_forward") {
+      params = new URLSearchParams(window.location.search);
+    }
+  } catch (error) {}
+  var pick = function (value, allowed) {
+    return allowed.indexOf(value) === -1 ? null : value;
+  };
+  // /look/<skin>-<theme>/ works like ?skin=&theme=, under the same rule.
+  var look = null;
+  if (params) {
+    look = window.location.pathname.match(
+      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+    );
+  }
+  var linkSkin =
+    (params && pick(params.get("skin"), ["terminal", "standard"])) ||
+    (look && look[1]);
+  var linkTheme =
+    (params && pick(params.get("theme"), ["dark", "light"])) ||
+    (look && look[2]);
+  var read = function (storage, key) {
+    try {
+      return window[storage].getItem(key);
+    } catch (error) {
+      return null;
+    }
+  };
+  try {
+    if (linkSkin) sessionStorage.setItem("portfolio-link-skin", linkSkin);
+    if (linkTheme) sessionStorage.setItem("portfolio-link-theme", linkTheme);
+  } catch (error) {}
+  var skin =
+    linkSkin ||
+    pick(read("sessionStorage", "portfolio-link-skin"), ["terminal", "standard"]) ||
+    (read("localStorage", "portfolio-skin") === "terminal" ? "terminal" : "standard");
+  var theme =
+    linkTheme ||
+    pick(read("sessionStorage", "portfolio-link-theme"), ["dark", "light"]) ||
+    pick(read("localStorage", "portfolio-theme"), ["dark", "light"]);
+  var terminal = skin === "terminal";
+  if (theme === "dark") root.classList.add("dark-theme");
+  if (theme === "light") root.classList.add("light-theme");
+  if (terminal) root.classList.add("skin-terminal");
+  try {
+    var dark =
+      theme === "dark" ||
+      (theme !== "light" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var colors = terminal
+      ? { light: "#f3f1e7", dark: "#07090a" }
+      : { light: "#0f1413", dark: "#0f1413" };
+    var meta = document.createElement("meta");
+    meta.name = "theme-color";
+    meta.content = dark ? colors.dark : colors.light;
+    document.head.appendChild(meta);
+  } catch (error) {}
+})();b:X
+0:{"P":null,"c":["","blog","pl",""],"q":"","i":false,"f":[[["",{"children":["blog",{"children":["pl",{"children":["__PAGE__",{},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4624],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/15kz69i2m4ar_.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/3fntmmi971322.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/2s6rm_y2rqs2z.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","translate":"no","className":"fraunces_5e9ce7c5-module__6dWAra__variable geist_e799d87a-module__u8MhCG__variable geist_mono_42eec60-module__Gb1_vG__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]}],["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L3",null,{}],["$","main",null,{"id":"main","children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":"$L6"}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],"$L7"]}]}]]}]]}],{"children":["$L8",{"children":["$L9",{"children":["$La",{},null,false,null]},null,false,"$b"]},null,false,"$b"]},null,false,null],"$Lc",false]],"m":"$undefined","G":["$d",["$Le"]],"S":true,"h":null,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"Z2HXM09iE78n0gwqe3HfR"}
+f:I[22016,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],""]
+10:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"OutletBoundary"]
+11:"$Sreact.suspense"
+13:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"ViewportBoundary"]
+15:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"MetadataBoundary"]
+6:["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]
+7:["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$Lf",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]
+8:["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+9:["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+a:["$","$1","c",{"children":[["$","section",null,{"lang":"pl","className":"page-section blog-index","aria-labelledby":"blog-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","header",null,{"className":"blog-index-header","children":[["$","p",null,{"className":"eyebrow","children":"Blog · Tomasz Stanisz"}],["$","h1",null,{"id":"blog-heading","children":"Artykuły"}],["$","p",null,{"className":"blog-description","children":"Decyzje architektoniczne, szczegóły implementacji i wnioski z tworzenia aplikacji."}],["$","nav",null,{"className":"blog-languages","aria-label":"Język bloga","children":[["$","$Lf","en",{"href":"/blog/","hrefLang":"en","lang":"en","aria-current":"$undefined","children":"English"}],["$","$Lf","pl",{"href":"/blog/pl/","hrefLang":"pl","lang":"pl","aria-current":"page","children":"Polski"}]]}]]}],false,["$","ul",null,{"className":"blog-list","children":[["$","li","building-mobile-and-web-clients-around-one-appwrite-backend",{"className":"blog-list-item","children":[["$","p",null,{"className":"blog-meta","children":[["$","time",null,{"dateTime":"2026-10-04","children":"4 października 2026"}],["$","span",null,{"aria-hidden":"true","children":" · "}],5," ","min czytania"]}],["$","h2",null,{"children":["$","$Lf",null,{"href":"/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/","children":"Aplikacja mobilna i webowa ze wspólnym backendem Appwrite"}]}],["$","p",null,{"className":"blog-description","children":"Trzy platformy, dwa klienty, jeden backend. Jak rozwijam Car Brain o web i dlaczego sesje oraz cache nadal wymagają własnych decyzji."}],["$","nav",null,{"className":"blog-languages","aria-label":"Język artykułu","children":[["$","$Lf","en",{"href":"/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/","hrefLang":"en","lang":"en","aria-current":"$undefined","children":"English"}],["$","$Lf","pl",{"href":"/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/","hrefLang":"pl","lang":"pl","aria-current":"page","children":"Polski"}]]}]]}]]}]]}]}],null,["$","$L10",null,{"children":["$","$11",null,{"name":"Next.MetadataOutlet","children":"$@12"}]}]]}]
+c:["$","$1","h",{"children":[null,["$","$L13",null,{"children":"$L14"}],["$","div",null,{"hidden":true,"children":["$","$L15",null,{"children":["$","$11",null,{"name":"Next.Metadata","children":"$L16"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+e:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/15kz69i2m4ar_.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+b:C
+14:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+17:I[27201,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"IconMark"]
+12:null
+16:[["$","title","0",{"children":"Artykuły · Tomasz Stanisz"}],["$","meta","1",{"name":"description","content":"Decyzje architektoniczne, szczegóły implementacji i wnioski z tworzenia aplikacji."}],["$","link","2",{"rel":"canonical","href":"https://devthomas.pl/blog/pl/"}],["$","link","3",{"rel":"alternate","hrefLang":"en","href":"https://devthomas.pl/blog/"}],["$","link","4",{"rel":"alternate","hrefLang":"pl","href":"https://devthomas.pl/blog/pl/"}],["$","meta","5",{"property":"og:title","content":"Artykuły · Tomasz Stanisz"}],["$","meta","6",{"property":"og:description","content":"Decyzje architektoniczne, szczegóły implementacji i wnioski z tworzenia aplikacji."}],["$","meta","7",{"property":"og:url","content":"https://devthomas.pl/blog/pl/"}],["$","meta","8",{"property":"og:image","content":"https://devthomas.pl/og-share.png"}],["$","meta","9",{"property":"og:image:width","content":"1200"}],["$","meta","10",{"property":"og:image:height","content":"630"}],["$","meta","11",{"property":"og:image:alt","content":"Tomasz Stanisz portfolio — Software Engineer and Tech Lead"}],["$","meta","12",{"property":"og:type","content":"website"}],["$","meta","13",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","14",{"name":"twitter:title","content":"Artykuły · Tomasz Stanisz"}],["$","meta","15",{"name":"twitter:description","content":"Decyzje architektoniczne, szczegóły implementacji i wnioski z tworzenia aplikacji."}],["$","meta","16",{"name":"twitter:image","content":"https://devthomas.pl/og-share.png"}],["$","link","17",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L17","18",{}]]

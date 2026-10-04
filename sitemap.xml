@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<url>
+<loc>https://devthomas.pl/blog/</loc>
+</url>
+<url>
+<loc>https://devthomas.pl/blog/pl/</loc>
+</url>
+<url>
+<loc>https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/" />
+<lastmod>2026-10-04</lastmod>
+</url>
+<url>
+<loc>https://devthomas.pl/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/" />
+<lastmod>2026-10-04</lastmod>
+</url>
 <url>
 <loc>https://devthomas.pl/</loc>
 <changefreq>monthly</changefreq>
