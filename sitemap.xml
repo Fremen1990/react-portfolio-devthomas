@@ -2,44 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 <url>
 <loc>https://devthomas.pl/blog/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/blog/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/blog/pl/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/blog/" />
 </url>
 <url>
 <loc>https://devthomas.pl/blog/pl/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/blog/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/blog/pl/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/blog/" />
 </url>
 <url>
 <loc>https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/" />
 <lastmod>2026-10-04</lastmod>
 </url>
 <url>
 <loc>https://devthomas.pl/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/" />
 <xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/" />
 <lastmod>2026-10-04</lastmod>
 </url>
 <url>
 <loc>https://devthomas.pl/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/" />
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://devthomas.pl/pl/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/" />
 <changefreq>monthly</changefreq>
 <priority>1</priority>
 </url>
 <url>
 <loc>https://devthomas.pl/work/orange-cms/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/work/orange-cms/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/work/orange-cms/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/work/orange-cms/" />
+<changefreq>yearly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://devthomas.pl/pl/work/orange-cms/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/work/orange-cms/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/work/orange-cms/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/work/orange-cms/" />
 <changefreq>yearly</changefreq>
 <priority>0.8</priority>
 </url>
 <url>
 <loc>https://devthomas.pl/work/orange-e2e-testing/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/work/orange-e2e-testing/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/work/orange-e2e-testing/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/work/orange-e2e-testing/" />
+<changefreq>yearly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://devthomas.pl/pl/work/orange-e2e-testing/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/work/orange-e2e-testing/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/work/orange-e2e-testing/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/work/orange-e2e-testing/" />
 <changefreq>yearly</changefreq>
 <priority>0.8</priority>
 </url>
 <url>
 <loc>https://devthomas.pl/work/theeventa-mvp/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/work/theeventa-mvp/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/work/theeventa-mvp/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/work/theeventa-mvp/" />
+<changefreq>yearly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://devthomas.pl/pl/work/theeventa-mvp/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/work/theeventa-mvp/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/work/theeventa-mvp/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/work/theeventa-mvp/" />
 <changefreq>yearly</changefreq>
 <priority>0.8</priority>
 </url>
 <url>
 <loc>https://devthomas.pl/colophon/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/colophon/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/colophon/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/colophon/" />
+<changefreq>yearly</changefreq>
+<priority>0.4</priority>
+</url>
+<url>
+<loc>https://devthomas.pl/pl/colophon/</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://devthomas.pl/colophon/" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://devthomas.pl/pl/colophon/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://devthomas.pl/colophon/" />
 <changefreq>yearly</changefreq>
 <priority>0.4</priority>
 </url>

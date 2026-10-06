@@ -1,10 +1,8 @@
 1:"$Sreact.fragment"
-3:I[63831,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default"]
-4:I[39756,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default"]
-5:I[37457,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default"]
-c:I[68027,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"default",1]
-:HL["/_next/static/chunks/15kz69i2m4ar_.css","style"]
-2:T8ee,(function () {
+3:I[63831,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],"default"]
+b:I[68027,[],"default",1]
+:HL["/_next/static/chunks/350irjpqxtyki.css","style"]
+2:T8f6,(function () {
   var root = document.documentElement;
   var params = null;
   var navigation = "navigate";
@@ -23,7 +21,7 @@ c:I[68027,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y
   var look = null;
   if (params) {
     look = window.location.pathname.match(
-      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+      new RegExp("^/(?:pl/)?look/(terminal|standard)-(dark|light)/?$")
     );
   }
   var linkSkin =
@@ -68,21 +66,22 @@ c:I[68027,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y
     meta.content = dark ? colors.dark : colors.light;
     document.head.appendChild(meta);
   } catch (error) {}
-})();a:X
-0:{"P":null,"c":["","_not-found",""],"q":"","i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4624],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/15kz69i2m4ar_.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/3fntmmi971322.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/2s6rm_y2rqs2z.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","translate":"no","className":"fraunces_5e9ce7c5-module__6dWAra__variable geist_e799d87a-module__u8MhCG__variable geist_mono_42eec60-module__Gb1_vG__variable jetbrains_mono_c910bbf7-module__wROeXW__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]}],["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L3",null,{}],["$","main",null,{"id":"main","children":["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":"$L6"}],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],"$L7"]}]}]]}]]}],{"children":["$L8",{"children":["$L9",{},null,false,null]},null,false,"$a"]},null,false,null],"$Lb",false]],"m":"$undefined","G":["$c",["$Ld"]],"S":true,"h":null,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"Z2HXM09iE78n0gwqe3HfR"}
-e:I[22016,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],""]
-f:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"OutletBoundary"]
+})();9:X
+0:{"P":null,"c":["","_not-found",""],"q":"","i":false,"f":[[["",{"children":["/_not-found",{"children":["__PAGE__",{},"$undefined","$undefined",4608]},"$undefined","$undefined",4608]},"$undefined","$undefined",4624],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/350irjpqxtyki.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/_next/static/chunks/3jnihsg-rcdh1.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/_next/static/chunks/0thllf-p6ad1d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","translate":"no","className":"fraunces_b25d6faa-module__pyHDeW__variable geist_efadddb-module__prKzGa__variable geist_mono_3db16e18-module__s_xPmq__variable jetbrains_mono_4ca57adb-module__-TIowa__variable","suppressHydrationWarning":true,"children":[["$","head",null,{"children":["$","script",null,{"dangerouslySetInnerHTML":{"__html":"$2"}}]}],["$","body",null,{"children":["$","div",null,{"className":"App","children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],["$","$L3",null,{"locale":"en"}],["$","main",null,{"id":"main","children":["$","section",null,{"className":"page-section","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"children":"Page not found"}],["$","p",null,{"lang":"pl","children":"Nie znaleziono strony."}],["$","p",null,{"children":["$L4"," ·"," ","$L5"]}]]}]}]}],"$L6"]}]}]]}]]}],{"children":["$L7",{"children":["$L8",{},null,false,null]},null,false,"$9"]},null,false,null],"$La",false]],"m":"$undefined","G":["$b",[]],"S":true,"h":null,"r":"$undefined","s":"$undefined","a":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"b-7FDFYsv7Dpr3qJWt9hq"}
+c:I[22016,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],""]
+d:I[39756,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],"default"]
+e:I[37457,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],"default"]
+f:I[97367,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],"OutletBoundary"]
 10:"$Sreact.suspense"
-12:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"ViewportBoundary"]
-14:I[97367,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"MetadataBoundary"]
-6:["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]
-7:["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase ·"," ",["$","$Le",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]
-8:["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
-9:["$","$1","c",{"children":[["$","section",null,{"className":"page-section","aria-labelledby":"not-found-heading","children":["$","div",null,{"className":"page-wrap","children":[["$","h1",null,{"id":"not-found-heading","className":"section-heading","children":"Page not found"}],["$","p",null,{"className":"prose","children":"There is nothing at this address. The portfolio, CV and contact details are one click away."}],["$","div",null,{"className":"action-row","children":[["$","a",null,{"className":"action-link action-link--solid","href":"/","children":"Go to the portfolio"}],["$","a",null,{"className":"action-link action-link--quiet","href":"https://cv.devthomas.pl/","target":"_blank","rel":"noopener noreferrer","children":"View CV"}]]}]]}]}],null,["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]]}]
-b:["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L12",null,{"children":"$L13"}],["$","div",null,{"hidden":true,"children":["$","$L14",null,{"children":["$","$10",null,{"name":"Next.Metadata","children":"$L15"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
-d:["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/15kz69i2m4ar_.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
-a:C
+12:I[97367,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],"ViewportBoundary"]
+14:I[97367,["/_next/static/chunks/3jnihsg-rcdh1.js","/_next/static/chunks/0thllf-p6ad1d.js"],"MetadataBoundary"]
+4:["$","$Lc",null,{"href":"/","children":"Go to the portfolio"}]
+5:["$","$Lc",null,{"href":"/pl/","lang":"pl","children":"Przejdź do portfolio"}]
+6:["$","footer",null,{"className":"site-footer","children":["$","div",null,{"className":"page-wrap site-footer-inner","children":[["$","p",null,{"children":["© Tomasz Stanisz ",2026]}],["$","p",null,{"className":"footer-note","children":["Two skins, one codebase · ",["$","$Lc",null,{"href":"/colophon/","children":"How this site is built"}]]}],["$","a",null,{"href":"https://github.com/Fremen1990","target":"_blank","rel":"noopener noreferrer","children":"GitHub"}]]}]}]
+7:["$","$1","c",{"children":[null,["$","$Ld",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Le",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+8:["$","$1","c",{"children":[null,null,["$","$Lf",null,{"children":["$","$10",null,{"name":"Next.MetadataOutlet","children":"$@11"}]}]]}]
+a:["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L12",null,{"children":"$L13"}],["$","div",null,{"hidden":true,"children":["$","$L14",null,{"children":["$","$10",null,{"name":"Next.Metadata","children":"$L15"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+9:C
 13:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-16:I[27201,["/_next/static/chunks/3fntmmi971322.js","/_next/static/chunks/2s6rm_y2rqs2z.js"],"IconMark"]
 11:null
-15:[["$","title","0",{"children":"Page not found · Tomasz Stanisz"}],["$","meta","1",{"name":"robots","content":"noindex"}],["$","link","2",{"rel":"icon","href":"/favicon.webp","type":"image/webp"}],["$","$L16","3",{}]]
+15:[["$","title","0",{"children":"Page not found / Nie znaleziono strony"}],["$","meta","1",{"name":"robots","content":"noindex"}]]
