@@ -14,7 +14,7 @@ import {
   CLOSE_INPUTS,
   SHOW_ALL,
   buildShareUrl,
-  commands,
+  createCommands,
   filterCommands,
   type Command,
   type CommandContext,
@@ -30,6 +30,7 @@ type CommandPaletteProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isHome: boolean;
+  locale?: "en" | "pl";
 };
 
 // How long a message stays up. A failed copy shows the text to copy by hand,
@@ -77,7 +78,9 @@ export const CommandPalette = ({
   open,
   onOpenChange,
   isHome,
+  locale = "en",
 }: CommandPaletteProps) => {
+  const t = (en: string, pl: string) => (locale === "pl" ? pl : en);
   const router = useRouter();
   const pathname = usePathname();
   const { theme, skin } = usePreferences();
@@ -94,8 +97,8 @@ export const CommandPalette = ({
   const isClient = useIsClient();
 
   const results = useMemo(
-    () => filterCommands(commands, query, { theme, skin }),
-    [query, theme, skin]
+    () => filterCommands(createCommands(locale), query, { theme, skin }),
+    [query, theme, skin, locale]
   );
   const activeIndex = Math.min(active, results.length - 1);
   const activeCommand = results[activeIndex];
@@ -175,7 +178,10 @@ export const CommandPalette = ({
     if (await copyToClipboard(text)) {
       showToast(copied);
     } else {
-      showToast(`Couldn't copy. ${fallback} ${text}`, { failed: true });
+      showToast(
+        `${t("Couldn't copy.", "Nie udało się skopiować.")} ${fallback} ${text}`,
+        { failed: true }
+      );
     }
   };
 
@@ -184,7 +190,9 @@ export const CommandPalette = ({
       if (isHome) {
         scrollToSection(null, `#${id}`);
       } else {
-        router.push(id === "home" ? "/" : `/#${id}`);
+        router.push(
+          `${locale === "pl" ? "/pl/" : "/"}${id === "home" ? "" : `#${id}`}`
+        );
       }
     },
     goToPage: (path) => router.push(path),
@@ -194,14 +202,14 @@ export const CommandPalette = ({
     copyEmail: () =>
       copyText(
         profile.links.emailLabel,
-        "Email address copied",
-        "The address is"
+        t("Email address copied", "Skopiowano adres e-mail"),
+        t("The address is", "Adres:")
       ),
     copyShareLink: () =>
       copyText(
         buildShareUrl(pathname, { theme, skin }),
-        "Link copied",
-        "The link is"
+        t("Link copied", "Skopiowano link"),
+        t("The link is", "Link:")
       ),
     setTheme: (next) => applyTheme(next, { persist: true }),
     setSkin: (next) => applySkin(next),
@@ -238,15 +246,17 @@ export const CommandPalette = ({
 
   const trimmed = query.trim();
   const emptyMessage = terminal
-    ? `command not found: ${trimmed} — type help`
-    : `No command matches “${trimmed}”. Type help to see them all.`;
+    ? `${t("command not found", "nie znaleziono polecenia")}: ${trimmed} — ${t("type help", "wpisz help")}`
+    : locale === "pl"
+      ? `Brak polecenia „${trimmed}”. Wpisz help, by zobaczyć wszystkie.`
+      : `No command matches “${trimmed}”. Type help to see them all.`;
 
   return (
     <>
       <dialog
         ref={dialogRef}
         className="palette"
-        aria-label="Command palette"
+        aria-label={t("Command palette", "Paleta poleceń")}
         onClose={() => {
           if (open) {
             close({ restoreFocus: true });
@@ -270,7 +280,7 @@ export const CommandPalette = ({
               className="palette-input"
               type="text"
               role="combobox"
-              aria-label="Search commands"
+              aria-label={t("Search commands", "Szukaj poleceń")}
               aria-expanded={results.length > 0}
               aria-controls="palette-list"
               aria-autocomplete="list"
@@ -281,7 +291,12 @@ export const CommandPalette = ({
               autoCapitalize="off"
               spellCheck={false}
               placeholder={
-                terminal ? "type help" : "Go to a section, open a link…"
+                terminal
+                  ? t("type help", "wpisz help")
+                  : t(
+                      "Go to a section, open a link…",
+                      "Przejdź do sekcji, otwórz link…"
+                    )
               }
               value={query}
               onChange={(event) => {
@@ -295,7 +310,7 @@ export const CommandPalette = ({
             id="palette-list"
             className="palette-list"
             role="listbox"
-            aria-label="Commands"
+            aria-label={t("Commands", "Polecenia")}
             hidden={results.length === 0}
           >
             {results.map((command, index) => (
@@ -310,7 +325,17 @@ export const CommandPalette = ({
               >
                 <span className="palette-alias">{command.alias}</span>
                 <span className="palette-title">{command.title}</span>
-                <span className="palette-hint">{command.group}</span>
+                <span className="palette-hint">
+                  {locale === "pl"
+                    ? {
+                        Section: "Sekcja",
+                        Page: "Strona",
+                        Link: "Link",
+                        Setting: "Ustawienie",
+                        Action: "Akcja",
+                      }[command.group]
+                    : command.group}
+                </span>
               </li>
             ))}
           </ul>
@@ -318,13 +343,14 @@ export const CommandPalette = ({
             <p className="palette-empty">{emptyMessage}</p>
           )}
           <p className="palette-footer" aria-hidden="true">
-            <kbd>↑</kbd> <kbd>↓</kbd> to choose · <kbd>Enter</kbd> to run ·{" "}
-            <kbd>Esc</kbd> to close
+            <kbd>↑</kbd> <kbd>↓</kbd> {t("to choose", "wybór")} ·{" "}
+            <kbd>Enter</kbd> {t("to run", "uruchom")} · <kbd>Esc</kbd>{" "}
+            {t("to close", "zamknij")}
           </p>
           <p className="visually-hidden" role="status">
             {open
               ? results.length
-                ? `${results.length} commands`
+                ? `${results.length} ${t("commands", "poleceń")}`
                 : emptyMessage
               : ""}
           </p>

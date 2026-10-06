@@ -1,0 +1,80 @@
+import { Flow } from "@/components/Flow/Flow";
+
+## Sytuacja
+
+Orange Polska potrzebowało jednego wewnętrznego CMS-a dla rosnącej liczby systemów i usług legacy, zbudowanych na różne sposoby. System miał pozostać stabilny i łatwy w utrzymaniu przez lata. Nie było zamkniętej specyfikacji: nowe wymagania, funkcje i integracje miały pojawiać się przez cały czas trwania projektu.
+
+## Ograniczenia
+
+- **Mały zespół**, który na początku znał czysty JavaScript, ale nie znał frameworka frontendowego.
+- **Systemy legacy z własnymi regułami** i duży zakres oczekiwanych dostosowań.
+- **Stack bez zamykania drogi rozwoju.** Musiał być dojrzały, elastyczny i na tyle przystępny, by nowe osoby mogły sprawnie dołączyć do projektu.
+
+## Rozważane opcje
+
+<Options>
+  <Option locale="pl" title="Czysty JavaScript,">
+    który zespół już znał. Odradzałem tę drogę. W systemie na lata zależało mi
+    na silnym typowaniu, które ułatwia utrzymanie i szukanie błędów.
+  </Option>
+  <Option locale="pl" chosen title="React z TypeScriptem,">
+    który rekomendowałem. React był już używany w innych projektach Orange, w
+    tym w Orange TV GO, przy którym również pracowałem. Programiści czasem
+    zmieniają projekty, a wspólny stack ułatwia takie przejścia.
+  </Option>
+  <Option
+    locale="pl"
+    chosen
+    title="Własne komponenty i CSS czy MUI z własną paletą?"
+  >
+    Wybraliśmy MUI: sprawdzone komponenty, które można dostosować wizualnie,
+    zamiast budować i utrzymywać wszystko samodzielnie.
+  </Option>
+  <Option locale="pl" chosen title="Własny system formularzy czy RJSF?">
+    Wybraliśmy RJSF, który renderuje formularze bezpośrednio z JSON Schema, i
+    rozszerzyliśmy go o własne pola oraz widgety.
+  </Option>
+</Options>
+
+## Decyzja
+
+Najważniejsza decyzja dotyczyła zakresu kontroli backendu. Pozwoliliśmy mu opisywać frontend: nawigacja, adresy URL, widoki i formularze wynikają z konfiguracji backendu i JSON Schema. Aplikacja React jest uniwersalnym rendererem otrzymanych danych.
+
+Kosztem jest trudniejsze debugowanie. Przyczyna błędu może znajdować się w konfiguracji, daleko od ekranu, na którym widać problem. Odpowiedzieliśmy na to przez:
+
+- **Logowanie błędów** dopasowane do tej architektury.
+- **Ścisłą kontrolę kontraktu frontend/backend.** Porównuje dane z backendu z oczekiwaniami frontendu i zapisuje szczegółowe błędy w konsoli dla programistów.
+- **Czytelne komunikaty dla użytkowników:** krótkie powiadomienie o problemie zamiast niedziałającego ekranu.
+
+## Jak to działa
+
+<Flow
+  label="Budowanie ekranu: backend go opisuje, frontend renderuje."
+  steps={[
+    { title: "Backend", text: "Wysyła konfigurację i schematy JSON" },
+    {
+      title: "Szkielet CMS",
+      text: "Buduje nawigację, adresy URL i widoki z konfiguracji",
+    },
+    {
+      title: "Formularze",
+      text: "RJSF renderuje schematy z własnymi polami i widgetami opartymi na MUI",
+    },
+    {
+      title: "Tabele danych",
+      text: "MUI X Data Grid pokazuje dane i skonfigurowane akcje, w tym operacje zbiorcze",
+    },
+  ]}
+/>
+
+## Rezultat
+
+Frontend nie blokuje rozwoju. Nowy zasób jest zwykle w całości konfigurowany przez backend i działa bez zmian we frontendzie. **Dziesiątki nowych zasobów trafiły na produkcję bez pracy nad frontendem.**
+
+<Differently>
+
+## Co zrobiłbym inaczej
+
+Byłbym bardziej stanowczy w kwestii dostosowań. Część przebudowanych funkcji działała już w MUI lub RJSF. Na przykład biznes poprosił o zmianę domyślnego zachowania po najechaniu kursorem i obsługi klawiatury. Każde takie nadpisanie to kod do utrzymania, a zmiana standardowej obsługi klawiatury utrudnia korzystanie z interfejsu osobom używającym klawiatury lub czytnika ekranu. Wcześniej kwestionowałbym takie wymagania.
+
+</Differently>

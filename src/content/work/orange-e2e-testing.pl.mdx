@@ -1,0 +1,80 @@
+import { Flow } from "@/components/Flow/Flow";
+
+## Sytuacja
+
+Dołączyłem do Orange Polska, by pracować nad platformą streamingową Orange TV GO. Wtedy testerzy manualni sprawdzali ręcznie każdy scenariusz end-to-end. Pełna regresja obejmowała ponad 100 scenariuszy i zajmowała od jednego do trzech dni.
+
+## Początki
+
+Uczyłem się wtedy Cypressa i chciałem wykorzystać go w praktyce. Podczas obiadu opowiedziałem przełożonemu o automatyzacji E2E i swoim pomyśle. Zamiast pisać propozycję, zbudowałem osobne repozytorium z pełną konfiguracją, TypeScriptem, lintowaniem i pierwszymi działającymi testami. Gdy przełożony zobaczył je w akcji, zaczął szukać testera automatyzującego.
+
+## Rozważane opcje
+
+<Options>
+  <Option locale="pl" title="Selenium:">
+    zbyt skomplikowane i wymagające zbyt dużo konfiguracji dla naszego zespołu.
+  </Option>
+  <Option locale="pl" title="Playwright:">
+    obiecujący, ale moim zdaniem jeszcze wtedy niedostatecznie dojrzały.
+  </Option>
+  <Option locale="pl" chosen title="Cypress:">
+    nowoczesny, popularny i dobrze dopasowany do testowania aplikacji webowej.
+    Wybrałem go.
+  </Option>
+  <Option locale="pl" chosen title="Osobne repozytorium.">
+    Testy pisali i utrzymywali testerzy, a nie programiści aplikacji, dlatego
+    miały własny projekt.
+  </Option>
+</Options>
+
+## Budowanie praktyki testowania
+
+- **Szkolenie:** każdy zaczynał od samodzielnych podstaw Cypressa. Następnie wspólnie pisaliśmy prawdziwe testy na mojej konfiguracji, a przez pierwszy rok przeglądałem każdą zmianę. Zespół tworzył nowo zatrudniony tester oraz tester manualny przechodzący do automatyzacji.
+- **Page Object Model:** interakcje z poszczególnymi częściami aplikacji są zamknięte w obiektach wielokrotnego użytku. Zmianę interfejsu poprawiamy w jednym miejscu.
+- **Wspólne funkcje pomocnicze:** powtarzalne kroki zapisujemy raz i wykorzystujemy ponownie (DRY).
+- **Uruchomienia równoległe:** testy działają obok siebie. Wymaga to ich niezależności, dlatego każdy test po zakończeniu usuwa własne dane przez API.
+
+<Flow
+  label="Przebieg testu: niezależne scenariusze ze wspólnych elementów, uruchamiane równolegle."
+  steps={[
+    {
+      title: "Scenariusz testowy",
+      text: "Opisuje jedną ścieżkę użytkownika, niezależną od pozostałych testów",
+    },
+    {
+      title: "Page Objects",
+      text: "Interakcje wielokrotnego użytku z poszczególnymi częściami aplikacji",
+    },
+    {
+      title: "Funkcje pomocnicze",
+      text: "Wspólne kroki zapisane raz i wykorzystywane ponownie",
+    },
+    {
+      title: "Równoległe uruchomienie",
+      text: "Scenariusze działają obok siebie; każdy usuwa własne dane przez API",
+    },
+  ]}
+/>
+
+## Uruchamianie testów
+
+- **Orange TV GO:** zestaw działa w CI/CD przy każdym merge requeście funkcji.
+- **Wewnętrzny CMS:** przed upływem roku przeszedłem do projektu CMS, który otrzymał tę samą konfigurację wewnątrz repozytorium frontendu, z równoległym uruchamianiem testów.
+- **Środowiska:** w obu projektach testy działają również na środowiskach deweloperskim, testowym i przedprodukcyjnym.
+
+## Rezultat
+
+|                                      | Wcześniej (ręcznie) | Teraz (automatycznie) |
+| ------------------------------------ | ------------------- | --------------------- |
+| Orange TV GO, ponad 100 scenariuszy  | 1–3 dni             | około 1 godziny       |
+| Wewnętrzny CMS, około 80 scenariuszy | 1–3 dni             | około 30 minut        |
+
+Dane testowe nie sprawiają problemów: testy są odizolowane na potrzeby równoległych uruchomień i każdy sprząta po sobie.
+
+<Differently>
+
+## Co zrobiłbym inaczej
+
+Dziś wybrałbym Playwright z TypeScriptem. Dostęp do narzędzi deweloperskich przeglądarki i zakres możliwości ułatwiają obsługę nietypowych scenariuszy w porównaniu z Cypressem. Miejsce testów powinno wynikać z tego, kto je pisze. Zostawiłbym je w repozytorium aplikacji tylko wtedy, gdy jej programiści sami tworzą testy E2E.
+
+</Differently>

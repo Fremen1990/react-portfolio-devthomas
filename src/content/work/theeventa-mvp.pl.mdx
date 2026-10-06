@@ -1,0 +1,73 @@
+import { Flow } from "@/components/Flow/Flow";
+
+## Sytuacja
+
+Gdy dołączyłem do TheEventa, platformy rezerwacji wydarzeń, produkt niemal startował od zera: istniało tylko uwierzytelnianie, które nie było ukończone. Skład zespołu zmieniał się wielokrotnie, a każda zmiana oznaczała przekazywanie pracy i utratę kontekstu.
+
+## Ograniczenia
+
+- **Ograniczony czas.** Pracuję nad TheEventa w weekendy i niektóre wieczory, równolegle z pracą na pełen etat.
+- **MVP do dostarczenia**, gdy produkt wciąż nabiera kształtu.
+- **Komunikacja i koordynacja** zajmowały więcej czasu niż sama praca.
+
+## Decyzja
+
+Zaproponowałem zmniejszenie zespołu. Wspólnie z CEO zdecydowaliśmy się wykonać pozostałą pracę bez angażowania kolejnych osób: jeden doświadczony Tech Lead odpowiada za architekturę i rozwój full stack z agentami AI, a projekt powstaje bezpośrednio z CEO. Mały zespół z AI wymaga znacznie mniej koordynacji niż większy.
+
+## Jak powstaje funkcja
+
+<Flow
+  label="Powstawanie funkcji: biznes uczestniczy na każdym etapie, a ja zatwierdzam kod."
+  steps={[
+    { title: "Projekt", text: "Pierwsza wersja z agentem AI i Figmą" },
+    {
+      title: "Ocena biznesowa",
+      text: "Rozmowa z CEO, potem poprawki i dostosowania",
+    },
+    { title: "Dwa przeglądy", text: "Zmianę ocenia AI, a następnie biznes" },
+    { title: "Implementacja", text: "Funkcja powstaje przyrostowo" },
+    { title: "Przegląd techniczny", text: "Code review, testy i poprawki" },
+    {
+      title: "Akceptacja",
+      text: "Końcowe ustalenia z biznesem, ostatni przegląd kodu i testy",
+    },
+  ]}
+/>
+
+Korzystam z **Cursor, Codex i Claude** — te narzędzia się uzupełniają. Używam ich do planowania, przeglądu kodu, implementacji, architektury, testów oraz sprawdzania pomysłów przed podjęciem decyzji.
+
+## Utrzymanie jakości
+
+Jakość jest celem całego procesu. Praca agentów ma jasno określone ramy:
+
+- dokumentacja, reguły frameworków i opisy architektury,
+- zasady stylu, rekomendacje i umiejętności agentów,
+- testy jednostkowe, integracyjne i end-to-end, z osobnym repozytorium Playwright.
+
+Niektórych zadań nigdy nie pozostawiam agentowi. Sam wysyłam końcowy kod i sam testuję każdą zaimplementowaną funkcję. Agenci nie mają dostępu do serwerów ani produkcji. Infrastrukturą, monitoringiem i administracją serwerów zajmuje się osobny współpracownik DevOps.
+
+## Projektowanie bez projektantów
+
+Brand book, design system i Storybook znacznie ułatwiły projektowanie. Wszystkie trzy są dostępne dla narzędzi AI, dzięki czemu nowe ekrany pozostają spójne z kodem. Nawet CEO może projektować nowe funkcje pasujące do istniejącej aplikacji.
+
+## Architektura
+
+Backend to osobna usługa NestJS, a nie część aplikacji Next.js. Za wyborem NestJS stała ocena jego efektywności przy większej skali oraz plan przejścia na mikroserwisy wraz z rozwojem TheEventa — podejście trudniejsze do zrealizowania wewnątrz Next.js.
+
+## Dotychczasowy rezultat
+
+Duża część MVP jest zbudowana:
+
+- uwierzytelnianie i SSO,
+- organizacje,
+- obiekty wydarzeń i ich przestrzenie,
+- ceny przeliczane po zmianie opcji,
+- kalendarz i rezerwacje.
+
+<Differently>
+
+## Co zrobiłbym inaczej
+
+Od początku utrzymałbym możliwie mały zespół i unikał zmieniania rzeczy, które już działają.
+
+</Differently>

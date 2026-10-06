@@ -12,15 +12,23 @@ export const Options = ({ children }: { children?: ReactNode }) => (
 export const Option = ({
   title,
   chosen = false,
+  locale = "en",
   children,
 }: {
   title: string;
   chosen?: boolean;
+  locale?: "en" | "pl";
   children?: ReactNode;
 }) => (
   <li className={chosen ? "option is-chosen" : "option"}>
     <span className="eyebrow option-verdict">
-      {chosen ? "Chosen" : "Rejected"}
+      {locale === "pl"
+        ? chosen
+          ? "Wybrano"
+          : "Odrzucono"
+        : chosen
+          ? "Chosen"
+          : "Rejected"}
     </span>
     <strong className="option-title">{title}</strong>
     <div className="option-text">{children}</div>

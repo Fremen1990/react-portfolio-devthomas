@@ -5,7 +5,7 @@ import { visiblePosts } from "../src/content/blog/.generated/posts";
 import { blogArticlePath } from "../src/content/blog/model";
 import { carBrain } from "../src/content/carBrain";
 
-// Every exported page. Add new routes here as they ship.
+// Original routes; Polish counterparts have full coverage in localization.spec.ts.
 const PAGES = [
   "/",
   "/colophon/",
@@ -69,7 +69,7 @@ for (const path of PAGES) {
     }
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       "content",
-      `https://devthomas.pl${path.startsWith("/blog/en/") || /^\/blog\/pl\/[^/]+\/$/.test(path) ? `${path}card.jpg` : "/og-share.png"}`
+      `https://devthomas.pl${path.startsWith("/blog/en/") || /^\/blog\/pl\/[^/]+\/$/.test(path) ? `${path}card.jpg` : path === "/blog/pl/" ? "/pl/look/standard-light/card.jpg" : "/og-share.png"}`
     );
   });
 }
@@ -90,7 +90,10 @@ test("the home page is readable without JavaScript", async ({ browser }) => {
   const page = await context.newPage();
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { level: 1, name: /frontend architecture/ })
+    page.getByRole("heading", {
+      level: 1,
+      name: /I turn complex requirements into working software/,
+    })
   ).toBeVisible();
   for (const name of [
     "Proven in production",
@@ -801,7 +804,10 @@ test.describe("look pages", () => {
     await expect(html(page)).toHaveClass(/skin-terminal/);
     await expect(html(page)).toHaveClass(/dark-theme/);
     await expect(
-      page.getByRole("heading", { level: 1, name: /frontend architecture/ })
+      page.getByRole("heading", {
+        level: 1,
+        name: /I turn complex requirements into working software/,
+      })
     ).toBeVisible();
   });
 
@@ -853,16 +859,19 @@ test.describe("search basics", () => {
       .map((match) => match[1])
       .sort();
     expect(locations).toEqual(
-      PAGES.filter(
-        (path) =>
-          !visiblePosts.some(
-            (post) =>
-              post.preview &&
-              (["en", "pl"] as const).some(
-                (locale) => blogArticlePath(post.slug, locale) === path
-              )
-          )
+      PAGES.flatMap((path) =>
+        path.startsWith("/blog/") ? [path] : [path, `/pl${path}`]
       )
+        .filter(
+          (path) =>
+            !visiblePosts.some(
+              (post) =>
+                post.preview &&
+                (["en", "pl"] as const).some(
+                  (locale) => blogArticlePath(post.slug, locale) === path
+                )
+            )
+        )
         .map((path) => `https://devthomas.pl${path}`)
         .sort()
     );

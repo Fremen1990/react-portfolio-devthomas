@@ -42,11 +42,11 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 
 ## Active structure
 
-- `src/app/layout.tsx` — the page shell: fonts (`next/font`, self-hosted at build), the inline script that applies a saved theme and skin before first paint, the header and footer, and every stylesheet in cascade order
+- `src/components/Document.tsx` — the page shell: fonts (`next/font`, self-hosted at build), the inline script that applies a saved theme and skin before first paint, the header and footer, and every stylesheet in cascade order
 - `src/app/page.tsx` — the home page, rendered by `src/sections/HomePage.tsx` (shared with the `/look/` copies): the hero, then Work ("Proven in production"), Now, Approach, Background and Contact
 - `src/app/colophon/page.mdx` — "How this site is built", linked from the footer and the palette. Its performance table is a dated snapshot; re-measure before changing it.
 - `src/app/work/[slug]/page.tsx` — case study pages. Facts and the published flag live in `src/content/work/studies.ts`, the text in `src/content/work/<slug>.mdx` (mapped in `bodies.ts`). A published study gets its page, a link from its card on the home page, and a palette command (`cat work/<slug>.md`). Each page has a dark header band with the study's `outcome` tile and a fact strip, an "On this page" list built from the MDX `h2`s (`src/lib/headings.ts`, highlighted by `src/components/CaseStudy/CaseStudyToc.tsx`), and a link to the next study (`nextCaseStudy`). `src/components/Flow/` draws the step diagrams; `<Options>`, `<Option chosen>` and `<Differently>` (`src/components/CaseStudy/CaseStudyParts.tsx`) lay out the options and the retrospective without changing their wording.
-- `src/app/look/[look]/` — the home page per look (`page.tsx`) and its 1200×630 preview card (`card.jpg/route.tsx`, drawn with `next/og` using the subset TTF fonts in `src/assets/fonts/`). The looks are listed in `src/content/looks.ts`.
+- `src/app/(en)/look/[look]/` — the home page per look (`page.tsx`) and its 1200×630 preview card (`card.jpg/route.tsx`, drawn with `next/og` using the subset TTF fonts in `src/assets/fonts/`). The looks are listed in `src/content/looks.ts`.
 - `src/app/sitemap.ts` — `out/sitemap.xml`: the home page, the case studies and the colophon (not the `/look/` copies). `public/robots.txt` points to it.
 - `src/lib/structuredData.ts` — schema.org JSON-LD: a `Person` and `WebSite` on the home page and its look copies, an `Article` on each case study. Rendered by `src/components/JsonLd/`, with `<` escaped.
 - `src/app/not-found.tsx` — exported as `out/404.html`
@@ -67,7 +67,7 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 - `src/sections/Work/`, `src/sections/Now/`, `src/sections/Approach/`, `src/sections/Background/`, `src/sections/Contact/` — the sections after the hero, rendered to static HTML through `src/components/SectionBand/`
 - `src/components/FooterPanel/` — copyright and GitHub
 
-All CSS is imported in `src/app/layout.tsx` and nowhere else, with `skin-terminal.css` last. The Terminal rules use `:where()`, so they win on order, not specificity. Next.js loads page-level CSS after layout CSS, so a component importing its own stylesheet would load after the skin and override it.
+All CSS is imported in `src/components/Document.tsx` and nowhere else, with `skin-terminal.css` last. The Terminal rules use `:where()`, so they win on order, not specificity. Next.js loads page-level CSS after layout CSS, so a component importing its own stylesheet would load after the skin and override it.
 
 The standard skin keeps the CV's palette and fonts. The header, the hero, the approach section and the Now building card are dark bands in both themes, and contact is a teal band. Inside a `.band` (and the header's inner row) `src/index.css` re-points the generic tokens (`--text`, `--surface`, `--accent`, …) to band values, so components inside need no colours of their own; the Terminal skin resets them to its own tokens.
 
@@ -87,7 +87,7 @@ Releases are tagged on `main` and listed on the repository's Releases page. `pac
 - Escape closes the mobile menu only while focus is inside that open menu, then returns focus to Menu. Escape elsewhere does not move focus.
 - Below 801px the closed menu is not in the tab order. At 801px and above the section links stay available, including after a resize from an open or closed mobile menu.
 - The theme button stores `dark` or `light` under `portfolio-theme`. With nothing stored, the page follows `prefers-color-scheme`.
-- The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `src/app/layout.tsx` applies a saved skin before first paint. JetBrains Mono is self-hosted and not preloaded, so the browser downloads it only when Terminal is used.
+- The `>_` button switches between the standard style and the optional Terminal style, independently of light/dark. It stores `terminal` under `portfolio-skin` and removes the key for the standard style. The inline script in `src/components/Document.tsx` applies a saved skin before first paint. JetBrains Mono is self-hosted and not preloaded, so the browser downloads it only when Terminal is used.
 - ⌘K (Ctrl+K elsewhere) opens the command palette from anywhere except other text fields. From 1024px wide, a header button opens it too. It can go to a section, open the CV, LinkedIn, GitHub or this repository, copy the email address, and switch theme or style. Arrow keys choose, Enter runs, and Escape or a click outside closes it and returns focus. In the Terminal style, the same palette is a shell prompt: each command has an alias (`cd work`, `cat cv`, `theme dark`), `help` lists them all, `exit` closes it, and unknown input reports `command not found`. Everything in it is also reachable without it.
 - Share links pick the exact look: `?skin=terminal|standard` and `?theme=dark|light`, together or alone, on any page (for example `/?skin=terminal&theme=dark`). A link applies only for that visit. It holds across reloads and pages in that tab through `sessionStorage` (`portfolio-link-skin`, `portfolio-link-theme`), and never overwrites the visitor's saved choice. The parameters apply only when the link is opened, not on a reload or Back/Forward, so a choice made after arriving survives a refresh even though the parameters stay in the address bar. Using the theme or style controls saves the visitor's own choice and replaces the linked look. System dark-mode changes don't override a linked theme. Invalid values are ignored, and links still apply when storage is blocked.
 - The home page also has one address per look: `/look/standard-light/`, `/look/standard-dark/`, `/look/terminal-light/` and `/look/terminal-dark/`. Each is a full copy of the home page that opens in that look under the same visit-only rule, names `/` as its canonical page, and carries its own link-preview card (`/look/<slug>/card.jpg`, rendered at build time). Static hosting ignores the query string, so `?skin=` links can't have their own previews; these pages can.
@@ -114,7 +114,7 @@ The blog shares the existing MDX renderer, design tokens, standard/Terminal skin
 
 Maintain approved articles in `src/content/blog/catalog.ts` and MDX bodies under `src/content/blog/articles/`. The typed registry requires English and Polish titles, descriptions, topics and body references together. Set `publishedAt` to the actual release date, and only set `published: true` when both editions have been reviewed and publication is authorized. `updatedAt` is for substantive later changes. The optional `developmentAsOf` renders a dated development note. Reading time is derived independently from each body.
 
-`npm run prepare:blog` validates the registry and generates concrete static article routes, metadata and localized share-card routes. It runs before dev, build, lint, typecheck and unit tests. Generated files in `src/content/blog/.generated/`, `src/app/blog/en/` and the article subdirectories of `src/app/blog/pl/` are ignored: never edit or commit them. Concrete routes allow an empty initial catalogue without exporting a placeholder article. Run checks sequentially, because preparation replaces those generated files.
+`npm run prepare:blog` validates the registry and generates concrete static article routes, metadata and localized share-card routes. It runs before dev, build, lint, typecheck and unit tests. Generated files in `src/content/blog/.generated/`, `src/app/(en)/blog/en/` and the article subdirectories of `src/app/(pl)/blog/pl/` are ignored: never edit or commit them. Concrete routes allow an empty initial catalogue without exporting a placeholder article. Run checks sequentially, because preparation replaces those generated files.
 
 The homepage shows up to two published articles between Background and Contact and hides the section when none exist. Both indexes and published editions appear in the command palette and sitemap. The production catalogue includes the approved Car Brain/Appwrite article in English and Polish. It builds normally without private manuscript files or BLOG_PREVIEW_DIR.
 
@@ -136,3 +136,40 @@ npm run test:e2e
 ```
 
 Article headings must have unique, non-empty generated IDs. Polish characters are normalized for heading anchors. Use `ClientArchitecture` only for the Car Brain article, with `locale="en"` or `locale="pl"`; it distinguishes implemented authentication from planned web data paths. Publication does not enable the independent Car Brain launch card or App Store links.
+
+## English / Polish localization
+
+English URLs stay unchanged. Polish portfolio pages live under `/pl/`, including
+`/pl/work/<slug>/`, `/pl/colophon/` and `/pl/look/<look>/`. The bilingual blog
+keeps `/blog/`, `/blog/pl/`, `/blog/en/<slug>/` and `/blog/pl/<slug>/`.
+There is no automatic locale selection or redirect.
+
+- `(en)` and `(pl)` are separate root layout groups sharing
+  `src/components/Document.tsx`. Raw exported HTML has the correct document
+  language. Crossing locale roots may reload the document; appearance is retained.
+- `src/i18n/routes.ts` owns route identities, pairs and explicit heading
+  correspondence. Keep existing English heading IDs; add semantic EN/PL pairs
+  when adding translated headings. Unknown fragments reset to the page top.
+- `src/content/publicProfile.ts` owns shared facts/links and English wording;
+  `src/i18n/profile.ts` owns Polish wording. Stable contribution IDs, companies,
+  links, publication flags and numerical bar widths are shared. Case study
+  translations are `<slug>.pl.mdx`; metadata is paired in `studies.ts`.
+- The header language links work without JavaScript. With JavaScript they retain
+  the current equivalent fragment and resolved theme/skin. Below 640px the same
+  control occupies a second row; desktop navigation starts at 1100px.
+- Stylesheets are imported only by `Document.tsx`, with Terminal overrides last.
+  `src/i18n/localization.css` owns the shared language control and header offsets.
+- Blog preparation now writes routes to `src/app/(en)/blog/en/<slug>/` and
+  `src/app/(pl)/blog/pl/<slug>/`. Its manifest recognizes old generated leaf
+  directories for migration, never broad application directories. Keep generated
+  paths ignored. Normal preparation excludes private previews.
+- `global-not-found.tsx` provides the bilingual static 404 with `noindex`.
+  Locale metadata uses reciprocal alternatives and English `x-default`. Look
+  previews canonicalize to the corresponding homepage and stay out of the sitemap.
+- `npm test` checks locale pairs, headings, shared facts, commands and generator
+  migration. `e2e/localization.spec.ts` covers raw exports and rendered EN/PL UI.
+  Set `PLAYWRIGHT_PORT` when another project's preview occupies the default 4173.
+
+Run checks sequentially: lint, typecheck, Prettier, unit tests, production build,
+then Playwright. Generation hooks modify generated files; do not run checks
+concurrently with a private preview in the same checkout.

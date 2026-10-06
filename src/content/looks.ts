@@ -44,14 +44,20 @@ export const looks: Look[] = [
 export const lookSlug = (skin: Skin, theme: Theme) =>
   `${skin === "terminal" ? "terminal" : "standard"}-${theme}`;
 
-export const lookPath = (skin: Skin, theme: Theme) =>
-  `/look/${lookSlug(skin, theme)}/`;
+export const lookPath = (
+  skin: Skin,
+  theme: Theme,
+  locale: "en" | "pl" = "en"
+) => `${locale === "pl" ? "/pl" : ""}/look/${lookSlug(skin, theme)}/`;
 
 export const findLook = (slug: string) =>
   looks.find((look) => look.slug === slug);
 
-const LOOK_PATH = /^\/look\/[a-z]+-[a-z]+\/?$/;
+const LOOK_PATH = /^\/(?:pl\/)?look\/[a-z]+-[a-z]+\/?$/;
 
 /** The home page and its /look/ copies share the same sections. */
 export const isHomePath = (pathname: string) =>
-  pathname === "/" || LOOK_PATH.test(pathname);
+  pathname === "/" ||
+  pathname === "/pl/" ||
+  pathname === "/pl" ||
+  LOOK_PATH.test(pathname);

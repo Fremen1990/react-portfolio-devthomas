@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-head-element -- Shared App Router root document, not a Pages Router component. */
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Fraunces, Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
@@ -24,6 +25,7 @@ import "@/components/CommandPalette/palette.css";
 import "@/components/Prose/prose.css";
 import "@/components/CaseStudy/case-study.css";
 import "@/components/Blog/blog.css";
+import "@/i18n/localization.css";
 import "@/design/skin-terminal.css";
 
 // The standard skin shares the CV's type system (cv.devthomas.pl): Fraunces
@@ -97,7 +99,7 @@ const applySavedPreferences = `(function () {
   var look = null;
   if (params) {
     look = window.location.pathname.match(
-      new RegExp("^/look/(terminal|standard)-(dark|light)/?$")
+      new RegExp("^/(?:pl/)?look/(terminal|standard)-(dark|light)/?$")
     );
   }
   var linkSkin =
@@ -144,10 +146,16 @@ const applySavedPreferences = `(function () {
   } catch (error) {}
 })();`;
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function Document({
+  children,
+  locale = "en",
+}: {
+  children: ReactNode;
+  locale?: "en" | "pl";
+}) {
   return (
     <html
-      lang="en"
+      lang={locale}
       translate="no"
       className={[
         fraunces.variable,
@@ -164,11 +172,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <div className="App">
           <a className="skip-link" href="#main">
-            Skip to content
+            {locale === "pl" ? "Przejdź do treści" : "Skip to content"}
           </a>
-          <NavBar />
+          <NavBar locale={locale} />
           <main id="main">{children}</main>
-          <FooterPanel />
+          <FooterPanel locale={locale} />
         </div>
       </body>
     </html>

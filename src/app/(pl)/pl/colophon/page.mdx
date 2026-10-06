@@ -1,0 +1,64 @@
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata({
+  path: "/pl/colophon/",
+  title: "Jak powstała ta strona",
+  description: "Stack, dwa style, dostępność i testy stojące za devthomas.pl.",
+});
+
+# Jak powstała ta strona
+
+To niewielkie portfolio, ale rozwijam je jak projekt produkcyjny: typowany kod, testy przy każdej zmianie i powtarzalne kroki. Poniżej opisuję rozwiązania i powody ich wyboru. [Kod jest dostępny na GitHubie](https://github.com/Fremen1990/react-portfolio-devthomas).
+
+## Stack
+
+- **Next.js 16 ze statycznym eksportem.** Pracuję z Next.js na co dzień. Tutaj generuje każdą stronę jako zwykły plik HTML, który udostępnia hosting współdzielony. Każda strona ma własny URL i podgląd linku, bez utrzymywania serwera aplikacji.
+- **Server Components dla treści.** Sekcje są renderowane do HTML podczas budowania, więc da się je czytać przed uruchomieniem JavaScriptu lub bez niego. W przeglądarce działa tylko kilka małych elementów: nagłówek i paleta poleceń, klikalny diagram architektury, animacja pasków testowania oraz spis treści studiów przypadków.
+- **TypeScript w trybie strict, React 19.**
+- **Zwykły CSS z tokenami projektowymi.** Kolory, odstępy i fonty to właściwości niestandardowe w `:root`, nadpisywane dla ciemnego motywu. Bez frameworka UI.
+- **Wspólna rodzina wizualna z moim [CV](https://cv.devthomas.pl/).** Styl standardowy zachowuje paletę, typografię, ciepłe tło, turkusowy akcent i zaokrąglone przyciski CV, ale ma własny układ. Nagłówek, hero i sekcja podejścia mają ciemne tło w obu motywach. Realizacje leżą na powierzchni dostosowanej do motywu, a kontakt na turkusowym tle. W ciemnej sekcji tokeny przyjmują jej wartości, więc komponenty nie potrzebują dodatkowych reguł. CV jest dokumentem; portfolio pokazuje realizacje.
+- **Fonty hostowane lokalnie** dzięki `next/font`: Fraunces dla nagłówków, Geist dla tekstu i Geist Mono dla etykiet oraz dat. Przeglądarka nie wysyła zapytań do Google Fonts.
+
+## Dwa style, jeden kod
+
+Przycisk `>_` w nagłówku przełącza styl standardowy i Terminal. Oba używają tego samego HTML i treści.
+
+- Reguły Terminala znajdują się w `src/design/skin-terminal.css`, w zakresie `html.skin-terminal`, opakowanym w `:where()`. Nie zwiększa to specyficzności selektorów: reguły wygrywają dzięki kolejności ładowania. Wszystkie arkusze są importowane w jednym miejscu i ustalonej kolejności.
+- Mały skrypt w `<head>` stosuje zapisany motyw i styl przed pierwszym renderowaniem. Dzięki temu nie pojawia się błysk innego wyglądu. Odczytuje też `?skin=` i `?theme=` z URL; link `?skin=terminal&theme=dark` otwiera dany wygląd na tę wizytę.
+- JetBrains Mono, font Terminala, nie jest wstępnie ładowany. Przeglądarka pobiera go dopiero po włączeniu tego stylu.
+- Paleta ⌘K jest wspólnym komponentem. Polecenia to dane z tytułem dla standardowego stylu i aliasem powłoki dla Terminala: `cd work`, `cat cv`, `theme dark`, `help`.
+
+## Dostępność
+
+- Linki sekcji przenoszą fokus na nagłówek, zachowują fragment URL i działają z przyciskiem Wstecz. Przy ograniczeniu animacji przewijanie jest natychmiastowe.
+- Escape zamyka menu mobilne i przywraca fokus na przycisk Menu. Zamknięte menu nie trafia do kolejności tabulacji.
+- Elementy diagramu to natywne przyciski z `aria-pressed`; zmiana opisu jest spokojnie ogłaszana przez czytnik. Bez JavaScriptu widoczny pozostaje pierwszy element i jego opis. Paleta używa natywnego `<dialog>`, utrzymującego fokus wewnątrz i blokującego interakcję z tłem, oraz listy z ARIA combobox.
+- Animacje są subtelne: punkt na łączniku diagramu, jednorazowo rosnące paski testów i stany hover. Przy ograniczeniu animacji zatrzymują się, a paski mają pełną długość.
+- Automatyczny skan dostępności (axe, WCAG 2.1 AA) sprawdza strony w obu stylach i motywach oraz otwartą paletę. Naruszenie blokuje przejście kontroli i publikację.
+
+## Testy i wdrożenia
+
+- **Testy jednostkowe** z Vitest i Testing Library obejmują nawigację i fokus, przełączniki motywu i stylu, paletę i wyszukiwanie poleceń, diagram oraz spis treści.
+- **Testy end-to-end** z Playwright działają na statycznym eksporcie, czyli plikach serwowanych przez hosting. Sprawdzają tytuły, opisy, Open Graph, czytanie bez JavaScriptu, wygląd przed pierwszym renderowaniem i brak błędów konsoli. Kontrolują też brak przewijania poziomego przy 320 i 801 px oraz brak kolizji i obcięcia nagłówka od 320 do 1280 px.
+- **GitHub Actions** uruchamia lint, kontrolę typów, formatowania, testy jednostkowe, build i testy end-to-end dla każdego pull requestu. Scalenie do `main` uruchamia te same kontrole, a następnie publikuje eksport na gałęzi obsługiwanej przez hosting.
+- Zmiany trafiają przez małe, przeglądane [pull requesty](https://github.com/Fremen1990/react-portfolio-devthomas/pulls?q=is%3Apr), wraz z wynikami kontroli i opisem weryfikacji.
+
+## Wydajność
+
+Lighthouse, profil mobilny, mediana z trzech pomiarów strony głównej z 30 września 2026:
+
+| Metryka                  | Wynik  |
+| ------------------------ | ------ |
+| Wydajność                | 96     |
+| Dostępność               | 100    |
+| Dobre praktyki           | 100    |
+| SEO                      | 100    |
+| First contentful paint   | 1,4 s  |
+| Largest contentful paint | 2,8 s  |
+| Total blocking time      | 39 ms  |
+| Cumulative layout shift  | 0      |
+| Łączny transfer          | 311 kB |
+| JavaScript (gzip)        | 144 kB |
+| CSS (gzip)               | 6,3 kB |
+
+Większość JavaScriptu stanowi runtime Next.js i React, ładowany już po pierwszym renderowaniu. Portret w hero to plik WebP o rozmiarze 16 kB.

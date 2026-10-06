@@ -1,3 +1,7 @@
+import type { Locale } from "@/i18n/locales";
+import { localizedPath, localeForPath } from "@/i18n/routes";
+import { getSections } from "@/content/navigation";
+import { getCaseStudies } from "@/content/work/studies";
 import { visiblePosts } from "./content/blog/.generated/posts";
 import { blogArticlePath } from "./content/blog/model";
 import { profile } from "./content/publicProfile";
@@ -209,7 +213,7 @@ export const commands: Command[] = [
  */
 export const buildShareUrl = (path: string, { theme, skin }: CommandState) => {
   if (isHomePath(path)) {
-    return `${SITE_URL}${lookPath(skin, theme)}`;
+    return `${SITE_URL}${lookPath(skin, theme, localeForPath(path))}`;
   }
   const params = new URLSearchParams({
     skin: skin === "terminal" ? "terminal" : "standard",
@@ -265,3 +269,72 @@ export const filterCommands = (
     .sort((a, b) => a.score - b.score || a.index - b.index)
     .map((entry) => entry.command);
 };
+
+const polishCommandTitles: Record<string, string> = {
+  blog: "Czytaj blog",
+  top: "Przejdź na górę",
+  colophon: "Jak powstała ta strona",
+  cv: "Otwórz CV (EN)",
+  linkedin: "Otwórz LinkedIn",
+  github: "Otwórz GitHub",
+  source: "Zobacz kod tej strony",
+  email: "Kopiuj adres e-mail",
+  share: "Kopiuj link z tym wyglądem",
+  "theme-dark": "Włącz ciemny motyw",
+  "theme-light": "Włącz jasny motyw",
+  "skin-terminal": "Włącz styl Terminal",
+  "skin-standard": "Włącz styl standardowy",
+  "car-brain-app-store": "Otwórz Car Brain w App Store",
+  "car-brain-site": "Otwórz car-brain.com",
+};
+export function createCommands(locale: Locale = "en"): Command[] {
+  return commands.map((command) => {
+    const section = getSections(locale).find(
+      (s) => command.id === `section-${s.id}`
+    );
+    const study = getCaseStudies(locale).find(
+      (s) => command.id === `case-study-${s.slug}`
+    );
+    const title =
+      locale === "en"
+        ? command.title
+        : section
+          ? `Przejdź: ${section.title}`
+          : study
+            ? `Studium przypadku: ${study.title}`
+            : (polishCommandTitles[command.id] ??
+              (command.id.startsWith("blog-") ? command.title : undefined));
+    if (!title) throw new Error(`Missing command translation: ${command.id}`);
+    const polishSection = getSections("pl").find(
+      (s) => command.id === `section-${s.id}`
+    );
+    const polishStudy = getCaseStudies("pl").find(
+      (s) => command.id === `case-study-${s.slug}`
+    );
+    return {
+      ...command,
+      title,
+      keywords: [
+        ...command.keywords,
+        command.title,
+        polishCommandTitles[command.id] ?? "",
+        polishSection?.title ?? "",
+        polishSection?.label ?? "",
+        polishStudy?.title ?? "",
+        "polecenie",
+      ],
+      run(context) {
+        command.run({
+          ...context,
+          goToPage(path) {
+            context.goToPage(
+              command.id.startsWith("blog-")
+                ? path
+                : localizedPath(path, locale)
+            );
+          },
+        });
+      },
+    };
+  });
+}

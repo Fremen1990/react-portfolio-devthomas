@@ -1,3 +1,4 @@
+import { localizedPath } from "@/i18n/routes";
 import { visiblePosts } from "@/content/blog/.generated/posts";
 import { blogArticlePath } from "@/content/blog/model";
 import type { MetadataRoute } from "next";
@@ -9,7 +10,7 @@ import { caseStudyPath, publishedCaseStudies } from "@/content/work/studies";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const entries: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/blog/` },
     { url: `${SITE_URL}/blog/pl/` },
     ...visiblePosts
@@ -38,4 +39,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
   ];
+  return entries.flatMap((entry) => {
+    const path = entry.url.slice(SITE_URL.length);
+    const paths = path.startsWith("/blog/")
+      ? [path]
+      : [localizedPath(path, "en"), localizedPath(path, "pl")];
+    return paths.map((p) => ({
+      ...entry,
+      url: SITE_URL + p,
+      alternates: {
+        languages: {
+          en: SITE_URL + localizedPath(p, "en"),
+          pl: SITE_URL + localizedPath(p, "pl"),
+          "x-default": SITE_URL + localizedPath(p, "en"),
+        },
+      },
+    }));
+  });
 }

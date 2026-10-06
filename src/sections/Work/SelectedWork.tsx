@@ -1,6 +1,8 @@
 import React, { type CSSProperties } from "react";
 import Link from "next/link";
-import { profile, type Contribution } from "../../content/publicProfile";
+import type { Contribution } from "../../content/publicProfile";
+import { getProfile } from "@/i18n/profile";
+import type { Locale } from "@/i18n/locales";
 import { caseStudyFor, caseStudyPath } from "../../content/work/studies";
 import { RevealOnView } from "../../components/RevealOnView/RevealOnView";
 
@@ -28,71 +30,78 @@ const Bars = ({ bars }: { bars: NonNullable<Contribution["bars"]> }) => (
   </RevealOnView>
 );
 
-export const SelectedWork = () => (
-  <div className="work-grid">
-    {profile.contributions.map((item) => {
-      const headingId = `${item.id}-heading`;
-      const caseStudy = caseStudyFor(item.id);
+export const SelectedWork = ({ locale = "en" }: { locale?: Locale }) => {
+  const profile = getProfile(locale);
+  return (
+    <div className="work-grid">
+      {profile.contributions.map((item) => {
+        const headingId = `${item.id}-heading`;
+        const caseStudy = caseStudyFor(item.id, locale);
 
-      return (
-        <article
-          key={item.id}
-          id={item.id}
-          aria-labelledby={headingId}
-          className="card work-card"
-        >
-          <p className="eyebrow work-eyebrow">
-            <span className="work-number">{item.number}</span>
-            <span className="work-topic">
+        return (
+          <article
+            key={item.id}
+            id={item.id}
+            aria-labelledby={headingId}
+            className="card work-card"
+          >
+            <p className="eyebrow work-eyebrow">
+              <span className="work-number">{item.number}</span>
+              <span className="work-topic">
+                <span aria-hidden="true"> · </span>
+                {item.topic}
+              </span>
               <span aria-hidden="true"> · </span>
-              {item.topic}
-            </span>
-            <span aria-hidden="true"> · </span>
-            <span className="work-period">{item.period}</span>
-          </p>
-          <h3 id={headingId} className="work-title">
-            {item.title}
-          </h3>
-          <p className="work-summary">{item.summary}</p>
-          <p className="work-outcome">{item.outcome}</p>
-          {(item.decision || item.tradeOff) && (
-            <dl className="work-decisions">
-              {item.decision && (
-                <div className="work-decision">
-                  <dt>Decision</dt>
-                  <dd>{item.decision}</dd>
-                </div>
-              )}
-              {item.tradeOff && (
-                <div className="work-decision">
-                  <dt>Trade-off</dt>
-                  <dd>{item.tradeOff}</dd>
-                </div>
-              )}
-            </dl>
-          )}
-          {item.bars && <Bars bars={item.bars} />}
-          <ul className="tags work-tags" aria-label="Technologies">
-            {item.tags.map((tag) => (
-              <li key={tag} className="tag">
-                {tag}
-              </li>
-            ))}
-          </ul>
-          {caseStudy && (
-            <p className="work-link">
-              <Link href={caseStudyPath(caseStudy.slug)}>
-                {profile.work.linkLabel}
-                <span className="visually-hidden">
-                  {" "}
-                  about {caseStudy.title}
-                </span>{" "}
-                <span aria-hidden="true">→</span>
-              </Link>
+              <span className="work-period">{item.period}</span>
             </p>
-          )}
-        </article>
-      );
-    })}
-  </div>
-);
+            <h3 id={headingId} className="work-title">
+              {item.title}
+            </h3>
+            <p className="work-summary">{item.summary}</p>
+            <p className="work-outcome">{item.outcome}</p>
+            {(item.decision || item.tradeOff) && (
+              <dl className="work-decisions">
+                {item.decision && (
+                  <div className="work-decision">
+                    <dt>{locale === "pl" ? "Decyzja" : "Decision"}</dt>
+                    <dd>{item.decision}</dd>
+                  </div>
+                )}
+                {item.tradeOff && (
+                  <div className="work-decision">
+                    <dt>{locale === "pl" ? "Kompromis" : "Trade-off"}</dt>
+                    <dd>{item.tradeOff}</dd>
+                  </div>
+                )}
+              </dl>
+            )}
+            {item.bars && <Bars bars={item.bars} />}
+            <ul
+              className="tags work-tags"
+              aria-label={locale === "pl" ? "Technologie" : "Technologies"}
+            >
+              {item.tags.map((tag) => (
+                <li key={tag} className="tag">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+            {caseStudy && (
+              <p className="work-link">
+                <Link href={caseStudyPath(caseStudy.slug, locale)}>
+                  {profile.work.linkLabel}
+                  <span className="visually-hidden">
+                    {" "}
+                    {locale === "pl" ? "o: " : "about "}
+                    {caseStudy.title}
+                  </span>{" "}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </p>
+            )}
+          </article>
+        );
+      })}
+    </div>
+  );
+};

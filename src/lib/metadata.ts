@@ -1,3 +1,5 @@
+import { getProfile } from "@/i18n/profile";
+import { localeForPath, localizedPath } from "@/i18n/routes";
 import type { Metadata } from "next";
 import { profile } from "@/content/publicProfile";
 
@@ -31,20 +33,37 @@ type PageMetadataInput = {
 export const pageMetadata = ({
   path,
   title,
-  description = profile.introduction,
+  description,
   canonical = path,
   image,
   languages,
   noIndex,
   article,
 }: PageMetadataInput): Metadata => {
-  const fullTitle = title ? `${title} · ${profile.name}` : SITE_TITLE;
-  const shareImage = image ? { ...SHARE_IMAGE, ...image } : SHARE_IMAGE;
+  const locale = localeForPath(path);
+  const localProfile = getProfile(locale);
+  description ??= localProfile.introduction;
+  const fullTitle = title
+    ? `${title} · ${profile.name}`
+    : `${profile.name}, ${localProfile.headline}`;
+  const shareImage = image
+    ? { ...SHARE_IMAGE, ...image }
+    : locale === "pl"
+      ? {
+          ...SHARE_IMAGE,
+          url: "/pl/look/standard-light/card.jpg",
+          alt: "Portfolio Tomasza Stanisza — inżynier oprogramowania i Tech Lead",
+        }
+      : SHARE_IMAGE;
+  const pairs = languages ?? {
+    en: localizedPath(canonical, "en"),
+    pl: localizedPath(canonical, "pl"),
+  };
 
   return {
     title: fullTitle,
     description,
-    alternates: { canonical, ...(languages ? { languages } : {}) },
+    alternates: { canonical, languages: { ...pairs, "x-default": pairs.en } },
     ...(noIndex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       ...(article
@@ -56,7 +75,11 @@ export const pageMetadata = ({
             modifiedTime: article.updatedAt,
             authors: [profile.name],
           }
-        : { type: "website" as const }),
+        : {
+            type: "website" as const,
+            locale: locale === "pl" ? "pl_PL" : "en_GB",
+            alternateLocale: locale === "pl" ? "en_GB" : "pl_PL",
+          }),
       url: path,
       title: fullTitle,
       description,

@@ -4,7 +4,7 @@ import { blogLabels } from "@/content/blog/labels";
 import { blogIndexPath } from "@/content/blog/model";
 import type { BlogLocale } from "@/content/blog/types";
 import { pageMetadata } from "@/lib/metadata";
-import { BlogLanguages, BlogList } from "./BlogList";
+import { BlogList } from "./BlogList";
 export function blogIndexMetadata(locale: BlogLocale) {
   const t = blogLabels[locale];
   return pageMetadata({
@@ -28,7 +28,6 @@ export function BlogIndex({ locale }: { locale: BlogLocale }) {
           <p className="eyebrow">Blog · Tomasz Stanisz</p>
           <h1 id="blog-heading">{t.title}</h1>
           <p className="blog-description">{t.description}</p>
-          <BlogLanguages locale={locale} />
         </header>
         {visiblePosts.some((p) => p.preview) && (
           <p className="blog-notice">{t.preview}</p>
@@ -38,7 +37,9 @@ export function BlogIndex({ locale }: { locale: BlogLocale }) {
         ) : (
           <div className="prose">
             <p>{t.empty}</p>
-            <Link href="/#work">{t.work} →</Link>
+            <Link href={locale === "pl" ? "/pl/#work" : "/#work"}>
+              {t.work} →
+            </Link>
           </div>
         )}
       </div>

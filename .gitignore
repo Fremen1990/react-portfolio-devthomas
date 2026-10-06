@@ -39,3 +39,6 @@ workspace.xml
 /src/content/blog/.generated/
 /src/app/blog/en/
 /src/app/blog/pl/*/
+
+/src/app/(en)/blog/en/
+/src/app/(pl)/blog/pl/*/

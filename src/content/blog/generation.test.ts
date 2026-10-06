@@ -62,23 +62,42 @@ test("private preview routes are removed by the next production preparation", ()
         env: { ...process.env, BLOG_PREVIEW_DIR: preview, CI: ci },
         stdio: "pipe",
       });
+    // Migrate only previously generated, recognized leaf directories.
+    const generated = join(root, "src/content/blog/.generated");
+    mkdirSync(generated, { recursive: true });
+    const legacy = "src/app/blog/en/legacy-draft";
+    mkdirSync(join(root, legacy), { recursive: true });
+    writeFileSync(join(root, legacy, "page.tsx"), "old generated route");
+    const protectedPage = join(root, "src/app/blog/pl/page.tsx");
+    mkdirSync(dirname(protectedPage), { recursive: true });
+    writeFileSync(protectedPage, "owned index");
+    writeFileSync(join(generated, "routes.json"), JSON.stringify([legacy]));
     run(drafts);
-    expect(existsSync(join(root, "src/app/blog/en/review-only/page.tsx"))).toBe(
-      true
-    );
+    expect(existsSync(join(root, legacy))).toBe(false);
+    expect(readFileSync(protectedPage, "utf8")).toBe("owned index");
     expect(
-      existsSync(join(root, "src/app/blog/pl/review-only/card.jpg/route.tsx"))
+      existsSync(join(root, "src/app/(en)/blog/en/review-only/page.tsx"))
+    ).toBe(true);
+    expect(
+      existsSync(
+        join(root, "src/app/(pl)/blog/pl/review-only/card.jpg/route.tsx")
+      )
     ).toBe(true);
     expect(
       readFileSync(join(root, "src/content/blog/.generated/posts.ts"), "utf8")
     ).toContain('"preview": true');
     expect(() => run(drafts, "true")).toThrow();
     run("");
-    expect(existsSync(join(root, "src/app/blog/en/review-only"))).toBe(false);
-    expect(existsSync(join(root, "src/app/blog/pl/review-only"))).toBe(false);
+    expect(existsSync(join(root, "src/app/(en)/blog/en/review-only"))).toBe(
+      false
+    );
+    expect(existsSync(join(root, "src/app/(pl)/blog/pl/review-only"))).toBe(
+      false
+    );
     expect(
       readFileSync(join(root, "src/content/blog/.generated/posts.ts"), "utf8")
     ).not.toContain("review-only");
+    run(""); // Repeated production preparation is idempotent.
     // A real publication builds both editions through the same pipeline.
     const articles = join(root, "src/content/blog/articles");
     mkdirSync(articles);
@@ -92,12 +111,12 @@ test("private preview routes are removed by the next production preparation", ()
     expect(
       readFileSync(join(root, "src/content/blog/.generated/posts.ts"), "utf8")
     ).toContain('"preview": false');
-    expect(existsSync(join(root, "src/app/blog/en/review-only/page.tsx"))).toBe(
-      true
-    );
-    expect(existsSync(join(root, "src/app/blog/pl/review-only/page.tsx"))).toBe(
-      true
-    );
+    expect(
+      existsSync(join(root, "src/app/(en)/blog/en/review-only/page.tsx"))
+    ).toBe(true);
+    expect(
+      existsSync(join(root, "src/app/(pl)/blog/pl/review-only/page.tsx"))
+    ).toBe(true);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

@@ -138,36 +138,3 @@
   padding-top: 24px;
   border-top: 1px solid var(--separator);
 }
-/* One extra nav destination needs the compact menu earlier. */
-@media (min-width: 801px) and (max-width: 1099px) {
-  .nav-toggle {
-    display: inline-flex;
-  }
-  .nav-cv-menu {
-    display: block;
-  }
-  .site-nav-links {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    width: min(300px, calc(100vw - 32px));
-    padding: 16px;
-    border: 1px solid var(--separator);
-    border-radius: var(--radius-surface);
-    background: var(--surface);
-    box-shadow: 0 10px 30px #0002;
-  }
-  .site-nav-links a {
-    padding: 10px 12px;
-  }
-  .nav-skin-menu {
-    display: none;
-  }
-}
-.site-nav-links[hidden] {
-  display: none;
-}
