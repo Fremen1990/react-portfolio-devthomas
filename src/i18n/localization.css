@@ -26,7 +26,10 @@
 }
 @media (max-width: 639px) {
   .site-header-inner {
-    gap: 4px;
+    gap: 2px;
+  }
+  .brand {
+    min-width: min-content;
   }
   .language-switch a {
     min-width: 32px;
