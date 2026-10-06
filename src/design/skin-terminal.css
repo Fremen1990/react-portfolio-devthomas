@@ -1641,10 +1641,25 @@ html.skin-terminal.dark-theme .hero-portrait {
   font-family: var(--font-mono);
   letter-spacing: -0.035em;
 }
+:where(html.skin-terminal) .blog-list-item {
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+:where(html.skin-terminal) .blog-list-item:hover,
+:where(html.skin-terminal) .blog-list-item:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
 :where(html.skin-terminal) .blog-languages a,
 :where(html.skin-terminal) .blog-notice,
 :where(html.skin-terminal) .prose pre {
   border-radius: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(html.skin-terminal) .blog-list-item {
+    transition: none;
+  }
 }
 :where(html.skin-terminal) .blog-notice {
   background: var(--surface);

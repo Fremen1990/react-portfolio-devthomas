@@ -1,0 +1,56 @@
+import { MobileStack } from "@/components/Blog/MobileStack";
+import { ProductScreens } from "@/components/Blog/ProductScreens";
+
+**Car Brain is the app I built so a car's paperwork would live in one place.**
+
+Fuel, service, costs and receipts were scattered. A spreadsheet is a poor filing cabinet for photos. I also wanted to learn mobile by shipping a whole product, not by finishing a tutorial. Car Brain is that product: React Native for iOS and Android, built in 2024–2025, which I am bringing back now.
+
+## What I chose, and the bill
+
+### React Native, through Expo
+
+I already knew React and TypeScript. A second language was a worse deal than one codebase for two phones.
+
+**Gain:** iOS and Android from the same project, in tools I use every day. **Cost:** a dev client, native projects, and the reminder that the two platforms still disagree. **I would revisit it** if a feature needed a native interface I could only reach by fighting the abstraction.
+
+### Appwrite, instead of a server I would have to babysit
+
+I wanted sign-in, structured records, file storage and a small place for server code. Appwrite looked simpler than writing that myself, and it is open source. Firebase and Supabase were the other names in my head. I never wrote the comparison down, so this is a preference, not a leaderboard.
+
+<MobileStack locale="en" />
+
+**Gain:** email, Google and Apple sign-in, tables, a bucket for photos and receipts, and functions. The mobile SDK talks to Appwrite directly. **Cost:** product rules live on the device or inside a function, and the schema lives in Appwrite's console as well as in the repo. Those two copies can drift. **I would revisit it** if the domain logic outgrew functions and deserved a backend I actually operate.
+
+For a mobile product, and if you already write React, I would pick this pair again. Expo is how I would reach both stores without a second language. Appwrite is the piece I would recommend most plainly: sign-in, a database, files, and a function for anything that must not ship inside the app, without a server to run. I would not call it better than Firebase or Supabase in general. I would start with it again for an app like this.
+
+One scar from that setup is a separate story. An agent put a third-party API key in an `EXPO_PUBLIC_` variable, which ships inside the app binary. I moved the call the same day. The warning stands on its own; this piece is about the product.
+
+### TanStack Query for server state
+
+Data that comes from Appwrite goes through TanStack Query. The session, language and theme stay in React Context. Preferences that belong to the device stay in AsyncStorage. I did not add Redux or Zustand. The first plan had been Context and AsyncStorage alone, which meant writing caching and invalidation by hand.
+
+**Gain:** a cache with an explicit way to mark it stale and refetch. **Cost:** two homes for state, and dashboard numbers computed on the phone from cached rows instead of stored a second time. **I would revisit a global store** only if those homes started disagreeing.
+
+### Maestro, after Detox stayed a name in a plan
+
+The early notes named Detox or Appium for end-to-end tests. Neither was added. The repository runs Maestro flows against a development build, aimed at `testID`s.
+
+**Gain:** readable YAML and no extra native test harness inside the app. **Cost:** a local CLI, a booted simulator, and flows that are not what CI runs. The decision record does not say why Maestro won, so I will not invent a reason after the fact. **I would revisit it** when those flows need to run unattended.
+
+## What is actually in the app
+
+The mobile source covers several vehicles on one account, photos, VIN auto-fill, insurance and inspection dates, refuels and service records with receipt photos, reminders, and fuel and cost analytics. The interface is English and Polish, with themes that include a night-driving mode.
+
+The public page is [car-brain.com/en](https://car-brain.com/en). That is the landing page. It is not a store listing.
+
+<ProductScreens locale="en" />
+
+The numbers and the car on these screens are sample data.
+
+Not in this product: subscriptions, a shared family account, push notifications, calendar sync, or OCR on receipts.
+
+**Development snapshot — 6 October 2026:** the feature list comes from the repository and its decision records. These screens are existing design captures. I did not re-run the app while writing this. Car Brain is coming back to the stores. This article does not claim the listing is live.
+
+## What happened when the web client showed up
+
+A second screen did not turn Car Brain into one app. It added a Next.js client beside React Native, on the same Appwrite project, with the browser session held on the server. That boundary is the next architecture piece: [Building mobile and web clients around one Appwrite backend](/blog/en/building-mobile-and-web-clients-around-one-appwrite-backend/).

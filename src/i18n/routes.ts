@@ -71,6 +71,12 @@ export const headingPairs: Record<string, Record<string, string>> = {
     "Tests and delivery": "Testy i wdrożenia",
     Performance: "Wydajność",
   },
+  "article/why-i-built-car-brain": {
+    "What I chose, and the bill": "Co wybrałem i ile mnie to kosztuje",
+    "What is actually in the app": "Co naprawdę jest w aplikacji",
+    "What happened when the web client showed up":
+      "Co się stało, gdy doszedł klient webowy",
+  },
   "article/building-mobile-and-web-clients-around-one-appwrite-backend": {
     "The system boundary: shared services, separate clients":
       "Granica systemu: wspólne usługi, osobne klienty",

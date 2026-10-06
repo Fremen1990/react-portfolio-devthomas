@@ -1,0 +1,56 @@
+import { MobileStack } from "@/components/Blog/MobileStack";
+import { ProductScreens } from "@/components/Blog/ProductScreens";
+
+**Car Brain to aplikacja, którą zbudowałem po to, żeby papiery samochodu były w jednym miejscu.**
+
+Paliwo, serwis, koszty i paragony miałem porozrzucane. Arkusz kalkulacyjny słabo nadaje się do trzymania zdjęć. Chciałem też nauczyć się aplikacji mobilnych na prawdziwym produkcie, a nie na kolejnym tutorialu. Car Brain jest właśnie tą aplikacją: React Native na iOS i Androida. Zbudowałem ją w latach 2024–2025 i teraz do niej wracam.
+
+## Co wybrałem i ile mnie to kosztuje
+
+### React Native przez Expo
+
+Reacta i TypeScript już znałem. Uczenie się drugiego języka byłoby gorszym pomysłem niż jedna baza kodu na dwa telefony.
+
+**Zysk:** iOS i Android z jednego projektu, w narzędziach, których używam na co dzień. **Koszt:** klient deweloperski, projekty natywne i przypomnienie, że obie platformy nadal mają własne zdanie. **Zmieniłbym tę decyzję,** gdyby jakaś funkcja wymagała natywnego ekranu, a Expo tylko stało na drodze.
+
+### Appwrite zamiast serwera, który musiałbym sam utrzymywać
+
+Chciałem logowanie, dane o aucie, pliki i trochę kodu po stronie serwera. Appwrite wyglądał prościej niż składanie tego od zera i jest open source. Firebase i Supabase też brałem pod uwagę. Porównania nie zapisałem, więc to moja preferencja, nie ranking.
+
+<MobileStack locale="pl" />
+
+**Zysk:** logowanie e-mailem, kontem Google i Apple, tabele, miejsce na zdjęcia i paragony oraz funkcje. Mobilne SDK rozmawia z Appwrite bezpośrednio. **Koszt:** reguły produktu siedzą albo w telefonie, albo w funkcji, a schemat jest i w konsoli Appwrite, i w repozytorium. Te dwie kopie potrafią się rozjechać. **Zmieniłbym tę decyzję,** gdyby logika produktu przestała mieścić się w funkcjach i potrzebowała backendu, który naprawdę utrzymuję.
+
+Skoro i tak piszę w Reakcie, do takiej aplikacji wziąłbym tę parę jeszcze raz. Expo jest sposobem na oba sklepy bez drugiego języka. Appwrite polecam wprost: logowanie, baza, pliki i funkcja na wszystko, czego nie wolno wkładać do aplikacji. Nie trzeba do tego stawiać własnego serwera. Nie mówię, że jest lepszy od Firebase albo Supabase w każdej sytuacji. Przy takiej aplikacji zacząłbym od niego znowu.
+
+Została z tego też jedna wpadka. O niej jest osobny tekst. Agent zapisał klucz do API auto.dev w zmiennej `EXPO_PUBLIC_`. Taki prefiks wkłada wartość do pliku aplikacji. Wywołanie przeniosłem tego samego dnia. Tutaj piszę o produkcie.
+
+### TanStack Query dla danych z serwera
+
+Dane z Appwrite idą przez TanStack Query. Sesja, język i motyw zostają w React Context. Ustawienia telefonu zostają w AsyncStorage. Nie dodałem Reduxa ani Zustand. Pierwszy plan zakładał sam Context i AsyncStorage, czyli cache i odświeżanie pisane ręcznie.
+
+**Zysk:** cache, w którym widać, kiedy dane są już stare, i jest sposób, żeby pobrać je ponownie. **Koszt:** stan jest w dwóch miejscach, a liczby na ekranie głównym liczę w telefonie z wierszy w cache, zamiast zapisywać je drugi raz. **Wspólny store wziąłbym** dopiero wtedy, gdy te dwa miejsca zaczęłyby sobie przeczyć.
+
+### Maestro, kiedy Detox został tylko nazwą w planie
+
+Wczesne notatki do testów E2E wymieniały Detox albo Appium. Żadnego z nich nie dodałem. Repozytorium odpala scenariusze Maestro na buildzie deweloperskim i szuka elementów po `testID`.
+
+**Zysk:** czytelny YAML, bez dokładania natywnej biblioteki testowej do aplikacji. **Koszt:** lokalne CLI, włączony symulator i scenariusze, których CI nie odpala. W zapisie decyzji nie ma, dlaczego wygrało Maestro, więc nie dopiszę powodu po fakcie. **Zmieniłbym ten wybór,** gdyby te testy miały lecieć same, bez ręcznego odpalania.
+
+## Co naprawdę jest w aplikacji
+
+W aplikacji jest kilka aut na jednym koncie, zdjęcia, uzupełnianie VIN, daty ubezpieczenia i przeglądu, tankowania i wpisy serwisowe ze zdjęciami paragonów, przypomnienia oraz zestawienia spalania i kosztów. Interfejs jest po angielsku i po polsku, a wśród motywów jest tryb jazdy nocą.
+
+Publiczna strona po polsku jest na [car-brain.com/pl](https://car-brain.com/pl). To landing page, nie ogłoszenie, że aplikacja jest w sklepie.
+
+<ProductScreens locale="pl" />
+
+Liczby i auto na tych ekranach to dane przykładowe.
+
+Nie ma tu subskrypcji, wspólnego konta rodzinnego, powiadomień push, synchronizacji z kalendarzem ani OCR paragonów.
+
+**Stan na 6 października 2026:** lista funkcji pochodzi z repozytorium i zapisanych decyzji. Te ekrany to zdjęcia zrobione wcześniej do portfolio. Dane na nich są przykładowe. Przy pisaniu nie uruchamiałem aplikacji. Car Brain wraca do sklepów. Nie piszę, że jest już w sklepie.
+
+## Co się stało, gdy doszedł klient webowy
+
+Sam ekran w przeglądarce nie zrobił z Car Brain jednej aplikacji. Doszedł klient Next.js obok React Native, na tym samym projekcie Appwrite, a sesja przeglądarki zostaje na serwerze. O tej granicy jest kolejny tekst: [Aplikacja mobilna i webowa ze wspólnym backendem Appwrite](/blog/pl/building-mobile-and-web-clients-around-one-appwrite-backend/).

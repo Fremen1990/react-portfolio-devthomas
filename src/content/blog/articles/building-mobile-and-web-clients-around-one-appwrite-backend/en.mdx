@@ -1,5 +1,7 @@
 import { AuthSequence } from "@/components/Blog/ClientArchitecture";
 
+The introduction is [Why I built Car Brain, and why this stack](/blog/en/why-i-built-car-brain/).
+
 **One backend removes a second source of truth. It does not remove distributed state.** That is the architectural tension behind adding a web client to Car Brain, my React Native vehicle-management application.
 
 The target is three platforms—iOS, Android and Web—with two client implementations sharing Appwrite. The interesting decisions concern boundaries: where sessions live, who owns freshness, and how much logic to share before “reuse” becomes a second project with its own roadmap.
