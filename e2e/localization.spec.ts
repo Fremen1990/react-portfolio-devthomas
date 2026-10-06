@@ -180,11 +180,7 @@ for (const width of [639, 640, 1099, 1100])
       await page.goto(`/pl/?skin=${skin}&theme=dark`);
       const brand = await page.locator(".brand").boundingBox(),
         switchBox = await page.locator(".language-switch").boundingBox();
-      if (width < 640)
-        expect(switchBox!.y).toBeGreaterThanOrEqual(
-          brand!.y + brand!.height - 1
-        );
-      else expect(Math.abs(switchBox!.y - brand!.y)).toBeLessThan(15);
+      expect(Math.abs(switchBox!.y - brand!.y)).toBeLessThan(15);
       expect(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= innerWidth

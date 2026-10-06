@@ -25,27 +25,20 @@
   outline-offset: 2px;
 }
 @media (max-width: 639px) {
-  :root {
-    --header-height: 112px;
-  }
   .site-header-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto auto;
-    grid-template-rows: minmax(44px, 1fr) 44px;
-    column-gap: 8px;
-    position: relative;
-    padding-top: 8px;
-    padding-bottom: 4px;
-    row-gap: 0;
+    gap: 2px;
   }
-  .language-switch {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-content: flex-end;
-    height: 44px;
+  .brand {
+    min-width: min-content;
+  }
+  .language-switch a {
+    min-width: 32px;
+  }
+  .nav-toggle {
+    padding-inline: 10px;
   }
 }
-@media (min-width: 640px) and (max-width: 1099px) {
+@media (max-width: 1099px) {
   .language-switch {
     margin-left: auto;
   }
@@ -59,11 +52,5 @@
   }
   .site-nav {
     gap: 14px;
-  }
-}
-
-@media (max-width: 379px) {
-  .site-header-inner {
-    grid-template-columns: minmax(0, 1fr) auto auto;
   }
 }
