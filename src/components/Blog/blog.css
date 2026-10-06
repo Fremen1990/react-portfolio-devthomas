@@ -114,6 +114,10 @@
   margin: 32px 0;
   min-width: 0;
 }
+.product-screens-hero {
+  display: flex;
+  justify-content: center;
+}
 .product-screens-row {
   display: flex;
   gap: 12px;

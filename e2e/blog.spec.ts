@@ -98,7 +98,12 @@ for (const skin of ["standard", "terminal"] as const)
             []
           );
           if (path.includes(introSlug)) {
-            await expect(page.locator(".product-screens img")).toHaveCount(3);
+            await expect(page.locator(".product-screens-hero img")).toHaveCount(
+              1
+            );
+            await expect(page.locator(".product-screens-row img")).toHaveCount(
+              2
+            );
             await expect(page.locator(".product-screens-row")).toHaveCSS(
               "overflow-x",
               "auto"

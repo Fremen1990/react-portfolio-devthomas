@@ -5,13 +5,19 @@ import { ProductScreens } from "@/components/Blog/ProductScreens";
 
 Fuel, service, costs and receipts were scattered. A spreadsheet is a poor filing cabinet for photos. I also wanted to learn mobile by shipping a whole product, not by finishing a tutorial. Car Brain is that product: React Native for iOS and Android, built in 2024–2025, which I am bringing back now.
 
+<ProductScreens locale="en" variant="hero" />
+
 ## What I chose, and the bill
 
 ### React Native, through Expo
 
 I already knew React and TypeScript. A second language was a worse deal than one codebase for two phones.
 
-**Gain:** iOS and Android from the same project, in tools I use every day. **Cost:** a dev client, native projects, and the reminder that the two platforms still disagree. **I would revisit it** if a feature needed a native interface I could only reach by fighting the abstraction.
+**Gain:** iOS and Android from the same project, in tools I use every day.
+
+**Cost:** a dev client, native projects, and the reminder that the two platforms still disagree.
+
+**I would revisit it** if a feature needed a native interface I could only reach by fighting the abstraction.
 
 ### Appwrite, instead of a server I would have to babysit
 
@@ -19,7 +25,11 @@ I wanted sign-in, structured records, file storage and a small place for server 
 
 <MobileStack locale="en" />
 
-**Gain:** email, Google and Apple sign-in, tables, a bucket for photos and receipts, and functions. The mobile SDK talks to Appwrite directly. **Cost:** product rules live on the device or inside a function, and the schema lives in Appwrite's console as well as in the repo. Those two copies can drift. **I would revisit it** if the domain logic outgrew functions and deserved a backend I actually operate.
+**Gain:** email, Google and Apple sign-in, tables, a bucket for photos and receipts, and functions. The mobile SDK talks to Appwrite directly.
+
+**Cost:** product rules live on the device or inside a function, and the schema lives in Appwrite's console as well as in the repo. Those two copies can drift.
+
+**I would revisit it** if the domain logic outgrew functions and deserved a backend I actually operate.
 
 For a mobile product, and if you already write React, I would pick this pair again. Expo is how I would reach both stores without a second language. Appwrite is the piece I would recommend most plainly: sign-in, a database, files, and a function for anything that must not ship inside the app, without a server to run. I would not call it better than Firebase or Supabase in general. I would start with it again for an app like this.
 
@@ -29,13 +39,21 @@ One scar from that setup is a separate story. An agent put a third-party API key
 
 Data that comes from Appwrite goes through TanStack Query. The session, language and theme stay in React Context. Preferences that belong to the device stay in AsyncStorage. I did not add Redux or Zustand. The first plan had been Context and AsyncStorage alone, which meant writing caching and invalidation by hand.
 
-**Gain:** a cache with an explicit way to mark it stale and refetch. **Cost:** two homes for state, and dashboard numbers computed on the phone from cached rows instead of stored a second time. **I would revisit a global store** only if those homes started disagreeing.
+**Gain:** a cache with an explicit way to mark it stale and refetch.
+
+**Cost:** two homes for state, and dashboard numbers computed on the phone from cached rows instead of stored a second time.
+
+**I would revisit a global store** only if those homes started disagreeing.
 
 ### Maestro, after Detox stayed a name in a plan
 
 The early notes named Detox or Appium for end-to-end tests. Neither was added. The repository runs Maestro flows against a development build, aimed at `testID`s.
 
-**Gain:** readable YAML and no extra native test harness inside the app. **Cost:** a local CLI, a booted simulator, and flows that are not what CI runs. The decision record does not say why Maestro won, so I will not invent a reason after the fact. **I would revisit it** when those flows need to run unattended.
+**Gain:** readable YAML and no extra native test harness inside the app.
+
+**Cost:** a local CLI, a booted simulator, and flows that are not what CI runs. The decision record does not say why Maestro won, so I will not invent a reason after the fact.
+
+**I would revisit it** when those flows need to run unattended.
 
 ## What is actually in the app
 

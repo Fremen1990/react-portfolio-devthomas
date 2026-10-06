@@ -5,6 +5,7 @@ const ink = "var(--text, #1c282c)";
 const muted = "var(--text-secondary, #52646a)";
 const accent = "var(--accent, #0f6b75)";
 const surface = "var(--surface, #ffffff)";
+const canvas = "var(--canvas, #f7f5f0)";
 const soft = "var(--accent-soft, #e2efee)";
 const border = "var(--separator, #d4deda)";
 
@@ -71,8 +72,8 @@ export function MobileStack({ locale = "en" }: { locale?: BlogLocale }) {
             width={230}
             height={150}
             rx={12}
-            fill={surface}
-            stroke={border}
+            fill={canvas}
+            stroke={muted}
             strokeWidth={1.5}
           />
           <text

@@ -69,13 +69,19 @@ test("mobile stack and sample screens stay in the article", () => {
   const { container } = render(
     <>
       <MobileStack locale="en" />
+      <ProductScreens locale="en" variant="hero" />
       <ProductScreens locale="en" />
     </>
   );
   expect(
     screen.getByRole("img", { name: /Car Brain mobile stack/ })
   ).toBeVisible();
-  expect(container.querySelectorAll(".product-screens img")).toHaveLength(3);
+  expect(container.querySelectorAll(".product-screens-hero img")).toHaveLength(
+    1
+  );
+  expect(container.querySelectorAll(".product-screens-row img")).toHaveLength(
+    2
+  );
 });
 for (const locale of ["en", "pl"] as const) {
   test(`architecture exposes its boundaries and planned data path (${locale})`, () => {
