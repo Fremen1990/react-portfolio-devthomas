@@ -98,22 +98,25 @@ for (const skin of ["standard", "terminal"] as const)
             []
           );
           if (path.includes(introSlug)) {
-            await expect(page.locator(".product-screens-hero img")).toHaveCount(
-              1
-            );
+            await expect(page.locator(".product-screens-hero")).toHaveCount(0);
             await expect(page.locator(".product-screens-row img")).toHaveCount(
-              2
+              3
             );
             await expect(page.locator(".product-screens-row")).toHaveCSS(
               "overflow-x",
               "auto"
             );
             const stack = page.locator(".mobile-stack");
-            await expect(stack.getByRole("img")).toBeVisible();
-            await expect(stack.getByRole("region")).toHaveCSS(
-              "overflow-x",
-              "auto"
-            );
+            const appwrite = stack.getByText("Appwrite", { exact: true });
+            await appwrite.scrollIntoViewIfNeeded();
+            await expect(appwrite).toBeVisible();
+            if (width < 700) {
+              const box = await appwrite.boundingBox();
+              expect(box?.x).toBeGreaterThanOrEqual(-1);
+              expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(
+                width + 1
+              );
+            }
           }
           if (path.includes(architectureSlug)) {
             // Diagram geometry must survive missing component CSS.

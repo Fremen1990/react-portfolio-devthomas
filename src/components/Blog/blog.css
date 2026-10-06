@@ -114,12 +114,9 @@
   margin: 32px 0;
   min-width: 0;
 }
-.product-screens-hero {
-  display: flex;
-  justify-content: center;
-}
 .product-screens-row {
   display: flex;
+  justify-content: safe center;
   gap: 12px;
   overflow-x: auto;
   min-width: 0;
@@ -142,6 +139,83 @@
   color: var(--text-secondary);
   font-size: 14px;
   line-height: 1.45;
+}
+.mobile-stack {
+  margin: 32px 0;
+  min-width: 0;
+}
+.mobile-stack-layout {
+  display: grid;
+  grid-template-columns: minmax(160px, 230px) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid var(--separator);
+  border-radius: var(--radius-surface, 16px);
+  background: var(--surface);
+}
+.mobile-stack-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 24px 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+.mobile-stack-node p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.mobile-stack-title {
+  font-size: 18px;
+  font-weight: 650;
+}
+.mobile-stack-expo {
+  background: var(--canvas);
+  border: 1.5px solid var(--text-secondary);
+  color: var(--text);
+}
+.mobile-stack-appwrite {
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+/* Terminal light mixes a 10% green tint. Accent text on that tint is just
+   under the 4.5:1 minimum, so the words use the text color. The border
+   still marks the box. */
+html.skin-terminal:not(.dark-theme) .mobile-stack-appwrite {
+  color: var(--text);
+}
+.mobile-stack-muted {
+  color: var(--text-secondary);
+}
+.mobile-stack-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.mobile-stack-sdk {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1;
+}
+.mobile-stack-arrow-icon {
+  display: block;
+  color: var(--accent);
+}
+@media (max-width: 700px) {
+  .mobile-stack-layout {
+    grid-template-columns: 1fr;
+  }
+  .mobile-stack-arrow-icon {
+    transform: rotate(90deg);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .blog-list-item {
