@@ -1666,11 +1666,7 @@ html.skin-terminal.dark-theme .hero-portrait {
   border: 1px solid var(--accent);
 }
 
-/* Keep both language/header rows inside the sticky Terminal surface. */
 @media (max-width: 639px) {
-  html.skin-terminal {
-    --header-height: 116px;
-  }
   :where(html.skin-terminal) .language-switch a {
     border-radius: 0;
   }

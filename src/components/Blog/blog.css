@@ -127,6 +127,19 @@
   min-width: 160px;
   max-width: 220px;
 }
+@media (max-width: 719px) {
+  .product-screens-row {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+  }
+  .product-screens-shot {
+    flex: none;
+    width: min(100%, 260px);
+    min-width: 0;
+    max-width: 260px;
+  }
+}
 .product-screens .phone-tile {
   width: 100%;
 }

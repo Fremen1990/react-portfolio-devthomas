@@ -54,11 +54,7 @@ export function ProductScreens({ locale = "en" }: { locale?: BlogLocale }) {
         className="product-screens-row"
         tabIndex={0}
         role="region"
-        aria-label={
-          pl
-            ? "Ekrany aplikacji. Na wąskim ekranie przewiń w poziomie."
-            : "App screens. On a narrow screen, scroll sideways."
-        }
+        aria-label={pl ? "Ekrany aplikacji" : "App screens"}
       >
         {shots[locale].map((shot, index) => (
           <div className="product-screens-shot" key={shot.src}>

@@ -99,13 +99,27 @@ for (const skin of ["standard", "terminal"] as const)
           );
           if (path.includes(introSlug)) {
             await expect(page.locator(".product-screens-hero")).toHaveCount(0);
-            await expect(page.locator(".product-screens-row img")).toHaveCount(
-              3
-            );
-            await expect(page.locator(".product-screens-row")).toHaveCSS(
-              "overflow-x",
-              "auto"
-            );
+            const shots = page.locator(".product-screens-row img");
+            await expect(shots).toHaveCount(3);
+            if (width < 720) {
+              const boxes = await shots.evaluateAll((images) =>
+                images.map((image) => {
+                  const box = image.getBoundingClientRect();
+                  return { top: box.top, right: box.right, left: box.left };
+                })
+              );
+              expect(boxes[1].top).toBeGreaterThan(boxes[0].top);
+              expect(boxes[2].top).toBeGreaterThan(boxes[1].top);
+              for (const box of boxes) {
+                expect(box.left).toBeGreaterThanOrEqual(-1);
+                expect(box.right).toBeLessThanOrEqual(width + 1);
+              }
+            } else {
+              await expect(page.locator(".product-screens-row")).toHaveCSS(
+                "overflow-x",
+                "auto"
+              );
+            }
             const stack = page.locator(".mobile-stack");
             const appwrite = stack.getByText("Appwrite", { exact: true });
             await appwrite.scrollIntoViewIfNeeded();
