@@ -1,10 +1,25 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync, existsSync } from "node:fs";
 import { localizedPath, headingPairs } from "../src/i18n/routes";
 import { slugify } from "../src/lib/headings";
 import { visiblePosts } from "../src/content/blog/.generated/posts";
 const slug = visiblePosts[0].slug;
+
+// Cmd+click on macOS, Ctrl+click elsewhere — Chromium's "open in new tab".
+const newTabModifier = process.platform === "darwin" ? "Meta" : "Control";
+
+// The shortcut listener attaches after hydration, which can lag behind the
+// load event on a slow CI machine. Retry until the palette is open.
+const openPalette = async (page: Page, name = "Command palette") => {
+  const dialog = page.getByRole("dialog", { name });
+  await expect(async () => {
+    if (!(await dialog.isVisible())) {
+      await page.keyboard.press("ControlOrMeta+k");
+    }
+    await expect(dialog).toBeVisible({ timeout: 1000 });
+  }).toPass();
+};
 const english = [
   "/",
   "/work/orange-cms/",
@@ -244,7 +259,7 @@ test("switch keeps headings, appearance and browser history even with blocked st
   await expect(page).toHaveURL(/#the-decision$/);
   await page.goForward();
   await expect(page).toHaveURL(/#decyzja$/);
-  await page.keyboard.press("Control+k");
+  await openPalette(page, "Paleta poleceń");
   await page
     .getByRole("combobox", { name: "Szukaj poleceń" })
     .fill("Realizacje");
@@ -271,7 +286,7 @@ test("English stays default regardless of browser language; modified click leave
   await page
     .locator(".language-switch")
     .getByRole("link", { name: "Polski" })
-    .click({ modifiers: ["Meta"] });
+    .click({ modifiers: [newTabModifier] });
   const popup = await popupPromise;
   await popup.waitForLoadState();
   await expect(popup.locator("html")).toHaveAttribute("lang", "pl");
@@ -338,10 +353,7 @@ test("Polish palette is keyboard accessible, announces copying and passes axe", 
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   for (const skin of ["standard", "terminal"]) {
     await page.goto(`/pl/?skin=${skin}&theme=dark`);
-    await page.keyboard.press("Control+k");
-    await expect(
-      page.getByRole("dialog", { name: "Paleta poleceń" })
-    ).toBeVisible();
+    await openPalette(page, "Paleta poleceń");
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
     await page
       .getByRole("combobox", { name: "Szukaj poleceń" })
