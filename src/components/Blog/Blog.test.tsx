@@ -69,18 +69,16 @@ test("mobile stack and sample screens stay in the article", () => {
   const { container } = render(
     <>
       <MobileStack locale="en" />
-      <ProductScreens locale="en" variant="hero" />
       <ProductScreens locale="en" />
     </>
   );
   expect(
-    screen.getByRole("img", { name: /Car Brain mobile stack/ })
+    screen.getByRole("figure", { name: /Car Brain mobile stack/ })
   ).toBeVisible();
-  expect(container.querySelectorAll(".product-screens-hero img")).toHaveLength(
-    1
-  );
+  expect(screen.getByText("Appwrite")).toBeVisible();
+  expect(container.querySelector(".product-screens-hero")).toBeNull();
   expect(container.querySelectorAll(".product-screens-row img")).toHaveLength(
-    2
+    3
   );
 });
 for (const locale of ["en", "pl"] as const) {
