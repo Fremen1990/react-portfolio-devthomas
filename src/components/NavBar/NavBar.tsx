@@ -1,4 +1,7 @@
 "use client";
+import type { Locale } from "@/i18n/locales";
+import { homePath, localizedPath } from "@/i18n/routes";
+import { LanguageSwitch } from "@/components/NavBar/LanguageSwitch";
 
 import React, {
   useEffect,
@@ -10,7 +13,7 @@ import React, {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { profile } from "../../content/publicProfile";
-import { sections } from "../../content/navigation";
+import { sections, getSections } from "../../content/navigation";
 import { isHomePath } from "../../content/looks";
 import { CommandPalette } from "../CommandPalette/CommandPalette";
 import { scrollToSection } from "../../utils/scrollToSection";
@@ -25,8 +28,9 @@ import { useMediaQuery, usePreferences } from "../../utils/preferences";
 import { greetDevelopers } from "../../utils/consoleGreeting";
 
 const sectionIds = sections.map((section) => section.id);
-const headerSections = sections.filter((section) => section.header);
-const isCaseStudyPath = (pathname: string) => pathname.startsWith("/work/");
+
+const isCaseStudyPath = (pathname: string) =>
+  /^\/(?:pl\/)?work\//.test(pathname);
 const DESKTOP_NAV_QUERY = "(min-width: 1100px)";
 
 const isApplePlatform = () =>
@@ -105,7 +109,11 @@ const ThemeIcon = ({ name }: { name: "sun" | "moon" }) => {
   );
 };
 
-const NavBar = () => {
+const NavBar = ({ locale = "en" }: { locale?: Locale }) => {
+  const headerSections = getSections(locale).filter(
+    (section) => section.header
+  );
+  const t = (en: string, pl: string) => (locale === "pl" ? pl : en);
   const pathname = usePathname();
   const isHome = isHomePath(pathname);
   const isCaseStudy = isCaseStudyPath(pathname);
@@ -284,7 +292,11 @@ const NavBar = () => {
             <span className="brand-name">{profile.name}</span>
           </a>
         ) : (
-          <Link className="brand" href="/" onClick={closeOnPlainClick}>
+          <Link
+            className="brand"
+            href={homePath(locale)}
+            onClick={closeOnPlainClick}
+          >
             <span className="brand-mark" aria-hidden="true">
               TS
             </span>
@@ -303,10 +315,11 @@ const NavBar = () => {
             {isCaseStudy && (
               <Link
                 className="nav-back"
-                href="/#work"
+                href={`${homePath(locale)}#work`}
                 onClick={closeOnPlainClick}
               >
-                <span aria-hidden="true">← </span>All work
+                <span aria-hidden="true">← </span>
+                {t("All work", "Wszystkie realizacje")}
               </Link>
             )}
             {isBlogArticle && (
@@ -326,7 +339,7 @@ const NavBar = () => {
                   return (
                     <Link
                       key={link.id}
-                      href={`/#${link.id}`}
+                      href={`${homePath(locale)}#${link.id}`}
                       onClick={closeOnPlainClick}
                     >
                       {link.label}
@@ -352,7 +365,7 @@ const NavBar = () => {
               })}
             {!isBlogArticle && (
               <Link
-                href="/blog/"
+                href={localizedPath("/blog/", locale)}
                 aria-current={isBlog ? "page" : undefined}
                 className={isBlog ? "is-current" : undefined}
                 onClick={closeOnPlainClick}
@@ -367,7 +380,7 @@ const NavBar = () => {
               rel="noopener noreferrer"
               onClick={closeOnPlainClick}
             >
-              View CV
+              {t("View CV", "Zobacz CV (EN)")}
             </a>
             <button
               type="button"
@@ -377,7 +390,9 @@ const NavBar = () => {
                 close();
               }}
             >
-              {terminal ? "Use standard style" : "Use terminal style"}
+              {terminal
+                ? t("Use standard style", "Włącz styl standardowy")
+                : t("Use terminal style", "Włącz styl Terminal")}
             </button>
           </div>
           <a
@@ -387,13 +402,14 @@ const NavBar = () => {
             rel="noopener noreferrer"
             onClick={closeOnPlainClick}
           >
-            View CV
+            {t("View CV", "Zobacz CV (EN)")}
           </a>
         </nav>
+        <LanguageSwitch locale={locale} />
         <button
           type="button"
           className="palette-toggle"
-          aria-label="Open command palette"
+          aria-label={t("Open command palette", "Otwórz paletę poleceń")}
           aria-haspopup="dialog"
           aria-keyshortcuts="Meta+K Control+K"
           onClick={() => setPaletteOpen(true)}
@@ -405,9 +421,15 @@ const NavBar = () => {
           className="skin-toggle"
           aria-pressed={terminal}
           aria-label={
-            terminal ? "Switch to standard style" : "Switch to terminal style"
+            terminal
+              ? t("Switch to standard style", "Przełącz na styl standardowy")
+              : t("Switch to terminal style", "Przełącz na styl Terminal")
           }
-          title={terminal ? "Standard style" : "Terminal style"}
+          title={
+            terminal
+              ? t("Standard style", "Styl standardowy")
+              : t("Terminal style", "Styl Terminal")
+          }
           onClick={toggleSkin}
         >
           <span aria-hidden="true">{terminal ? "Aa" : ">_"}</span>
@@ -416,7 +438,11 @@ const NavBar = () => {
           type="button"
           className="theme-toggle"
           aria-pressed={dark}
-          aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+          aria-label={
+            dark
+              ? t("Switch to light theme", "Włącz jasny motyw")
+              : t("Switch to dark theme", "Włącz ciemny motyw")
+          }
           onClick={toggleTheme}
         >
           <ThemeIcon name={dark ? "sun" : "moon"} />
@@ -436,6 +462,7 @@ const NavBar = () => {
         open={paletteOpen}
         onOpenChange={setPaletteOpen}
         isHome={isHome}
+        locale={locale}
       />
     </header>
   );

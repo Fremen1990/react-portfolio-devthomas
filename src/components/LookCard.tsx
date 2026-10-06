@@ -3,7 +3,8 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
 import { findLook, looks, type Look } from "@/content/looks";
-import { profile } from "@/content/publicProfile";
+import { getProfile } from "@/i18n/profile";
+import type { Locale } from "@/i18n/locales";
 
 // The 1200×630 link-preview card for each look, rendered once at build time
 // and exported as /look/<slug>/card.jpg. next/og draws a PNG; it is converted
@@ -20,31 +21,34 @@ export function generateStaticParams() {
 
 const WIDTH = 1200;
 const HEIGHT = 630;
-const { hero } = profile;
-const headlineAt = hero.headline.lastIndexOf(hero.headlineAccent);
-const HEADLINE = {
-  before: hero.headline.slice(0, headlineAt),
-  accent: hero.headlineAccent,
-  after: hero.headline.slice(headlineAt + hero.headlineAccent.length),
-};
-
 // next/og spaced wrapped inline text unevenly, so the headline is laid out
 // one word per flex item, with the accent word and its punctuation together.
 // An array, not a fragment: next/og treats a fragment as one item.
-const headlineWords = (accent: string, gap: number) => [
-  ...HEADLINE.before
-    .trim()
-    .split(/\s+/)
-    .map((word, index) => (
-      <span key={index} style={{ marginRight: gap }}>
-        {word}
-      </span>
-    )),
-  <span key="accent" style={{ display: "flex" }}>
-    <span style={{ color: accent }}>{HEADLINE.accent}</span>
-    <span>{HEADLINE.after}</span>
-  </span>,
-];
+const headlineWords = (accent: string, gap: number, locale: Locale) => {
+  const { hero } = getProfile(locale);
+
+  const headlineAt = hero.headline.lastIndexOf(hero.headlineAccent);
+  const HEADLINE = {
+    before: hero.headline.slice(0, headlineAt),
+    accent: hero.headlineAccent,
+    after: hero.headline.slice(headlineAt + hero.headlineAccent.length),
+  };
+
+  return [
+    ...HEADLINE.before
+      .trim()
+      .split(/\s+/)
+      .map((word, index) => (
+        <span key={index} style={{ marginRight: gap }}>
+          {word}
+        </span>
+      )),
+    <span key="accent" style={{ display: "flex" }}>
+      <span style={{ color: accent }}>{HEADLINE.accent}</span>
+      <span>{HEADLINE.after}</span>
+    </span>,
+  ];
+};
 
 // The standard skin's palette (src/index.css): a dark brand band in both
 // themes, over a strip in the page colour.
@@ -106,7 +110,17 @@ const portraitPath = join(process.cwd(), "public/portrait.jpg");
 // Matches the standard hero: the dark band with the wordmark, the round
 // portrait, name and role, and the Geist headline with its accent word,
 // over a strip in the page colour that opens the work section.
-const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
+const StandardCard = ({
+  look,
+  portrait,
+  locale,
+}: {
+  look: Look;
+  portrait: string;
+  locale: Locale;
+}) => {
+  const profile = getProfile(locale);
+  const { hero } = profile;
   const c = STANDARD[look.theme];
   return (
     <div
@@ -197,7 +211,7 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
             color: BAND.strong,
           }}
         >
-          {headlineWords(BAND.accent, 14)}
+          {headlineWords(BAND.accent, 14, locale)}
         </div>
       </div>
       <div
@@ -221,7 +235,9 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
             {profile.work.eyebrow.toUpperCase()}
           </div>
           <div style={{ marginTop: 6, fontFamily: "Fraunces", fontSize: 40 }}>
-            Proven in production
+            {locale === "pl"
+              ? "Sprawdzone na produkcji"
+              : "Proven in production"}
           </div>
         </div>
         <div
@@ -235,7 +251,7 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
             fontWeight: 500,
           }}
         >
-          See the work
+          {profile.hero.primaryAction}
         </div>
       </div>
     </div>
@@ -244,7 +260,17 @@ const StandardCard = ({ look, portrait }: { look: Look; portrait: string }) => {
 
 // Matches the site's Terminal hero: text on the left, the photo inside the
 // window on the right, tinted like the site (green in dark, greyscale in light).
-const TerminalCard = ({ look, portrait }: { look: Look; portrait: string }) => {
+const TerminalCard = ({
+  look,
+  portrait,
+  locale,
+}: {
+  look: Look;
+  portrait: string;
+  locale: Locale;
+}) => {
+  const profile = getProfile(locale);
+  const { hero } = profile;
   const c = TERMINAL[look.theme];
   return (
     <div
@@ -345,7 +371,7 @@ const TerminalCard = ({ look, portrait }: { look: Look; portrait: string }) => {
                 color: c.text,
               }}
             >
-              {headlineWords(c.accent, 15)}
+              {headlineWords(c.accent, 15, locale)}
             </div>
           </div>
           {/* next/og renders plain <img> only; next/image does not apply here. */}
@@ -384,9 +410,10 @@ const terminalPortrait = async (source: Buffer, look: Look) => {
   return `data:image/png;base64,${tinted.toString("base64")}`;
 };
 
-export async function GET(
+export async function renderLookCard(
   _request: Request,
-  { params }: { params: Promise<{ look: string }> }
+  { params }: { params: Promise<{ look: string }> },
+  locale: Locale = "en"
 ) {
   const look = findLook((await params).look);
   if (!look) {
@@ -417,11 +444,13 @@ export async function GET(
   const png = new ImageResponse(
     look.skin === "terminal" ? (
       <TerminalCard
+        locale={locale}
         look={look}
         portrait={await terminalPortrait(portrait, look)}
       />
     ) : (
       <StandardCard
+        locale={locale}
         look={look}
         portrait={`data:image/jpeg;base64,${portrait.toString("base64")}`}
       />

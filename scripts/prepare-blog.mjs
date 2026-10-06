@@ -57,7 +57,10 @@ try {
   if (e.code !== "ENOENT") throw e;
 }
 for (const path of previous) {
-  if (!/^src\/app\/blog\/(en|pl)\/[a-z0-9-]+$/.test(path))
+  const match = /^src\/app\/(?:\((en|pl)\)\/)?blog\/(en|pl)\/[a-z0-9-]+$/.exec(
+    path
+  );
+  if (!match || (match[1] && match[1] !== match[2]))
     throw new Error("Invalid generated route manifest");
   await rm(join(root, path), { recursive: true, force: true });
 }
@@ -76,7 +79,7 @@ for (const { post, sources } of loaded) {
   };
   visible.push(entry);
   for (const lang of blogLocales) {
-    const route = `src/app/blog/${lang}/${post.slug}`;
+    const route = `src/app/(${lang})/blog/${lang}/${post.slug}`;
     routes.push(route);
     const bodyName = `${post.slug}.${lang}.mdx`;
     await writeFile(join(generated, bodyName), sources[lang]);

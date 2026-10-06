@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { profile } from "../../content/publicProfile";
+import { getProfile } from "@/i18n/profile";
+import type { Locale } from "@/i18n/locales";
 import {
   carBrain as carBrainContent,
   type CarBrain,
@@ -8,9 +9,10 @@ import {
 import { caseStudyFor, caseStudyPath } from "../../content/work/studies";
 import { CarBrainShots } from "./CarBrainShots";
 
-const Building = () => {
+const Building = ({ locale = "en" }: { locale?: Locale }) => {
+  const profile = getProfile(locale);
   const { building } = profile;
-  const caseStudy = caseStudyFor(building.id);
+  const caseStudy = caseStudyFor(building.id, locale);
   const headingId = `${building.id}-heading`;
 
   return (
@@ -30,7 +32,12 @@ const Building = () => {
         {building.title}
       </h3>
       <p className="now-text">{building.text}</p>
-      <ol className="pipeline" aria-label="How a change ships">
+      <ol
+        className="pipeline"
+        aria-label={
+          locale === "pl" ? "Droga zmiany do wdrożenia" : "How a change ships"
+        }
+      >
         {building.steps.map((step, index) => (
           <li
             key={step}
@@ -46,9 +53,11 @@ const Building = () => {
       </ol>
       {caseStudy && (
         <p className="now-link">
-          <Link href={caseStudyPath(caseStudy.slug)}>
+          <Link href={caseStudyPath(caseStudy.slug, locale)}>
             {building.linkLabel}
-            <span className="visually-hidden"> at TheEventa</span>{" "}
+            <span className="visually-hidden">
+              {locale === "pl" ? " w TheEventa" : " at TheEventa"}
+            </span>{" "}
             <span aria-hidden="true">→</span>
           </Link>
         </p>
@@ -57,7 +66,13 @@ const Building = () => {
   );
 };
 
-const Shipped = ({ carBrain }: { carBrain: CarBrain }) => (
+const Shipped = ({
+  carBrain,
+  locale = "en",
+}: {
+  carBrain: CarBrain;
+  locale?: Locale;
+}) => (
   <article
     id="car-brain"
     aria-labelledby="car-brain-heading"
@@ -72,7 +87,10 @@ const Shipped = ({ carBrain }: { carBrain: CarBrain }) => (
         {carBrain.title}
       </h3>
       <p className="now-text">{carBrain.text}</p>
-      <ul className="tags" aria-label="Technologies">
+      <ul
+        className="tags"
+        aria-label={locale === "pl" ? "Technologie" : "Technologies"}
+      >
         {carBrain.tags.map((tag) => (
           <li key={tag} className="tag">
             {tag}
@@ -110,13 +128,15 @@ const Shipped = ({ carBrain }: { carBrain: CarBrain }) => (
 // publication gate is open. Without Car Brain, TheEventa spans the row.
 export const NowSection = ({
   carBrain = carBrainContent,
+  locale = "en",
 }: {
   carBrain?: CarBrain;
+  locale?: Locale;
 }) => (
   <div
     className={carBrain.published ? "now-grid" : "now-grid now-grid--single"}
   >
-    <Building />
-    {carBrain.published && <Shipped carBrain={carBrain} />}
+    <Building locale={locale} />
+    {carBrain.published && <Shipped carBrain={carBrain} locale={locale} />}
   </div>
 );

@@ -8,34 +8,46 @@ import { Background, CvLink } from "@/sections/Background/Background";
 import Contact from "@/sections/Contact/Contact";
 import { JsonLd } from "@/components/JsonLd/JsonLd";
 import { homeStructuredData } from "@/lib/structuredData";
-import { profile } from "@/content/publicProfile";
+import { getProfile } from "@/i18n/profile";
+import type { Locale } from "@/i18n/locales";
 import { sectionTitle } from "@/content/navigation";
 
 // The home page's sections, shared by / and its /look/<slug>/ copies. Their
 // order and titles come from src/content/navigation.ts.
-export const HomePage = () => (
-  <>
-    <JsonLd data={homeStructuredData()} />
-    <Hero />
-    <SectionBand
-      id="work"
-      title={sectionTitle("work")}
-      eyebrow={profile.work.eyebrow}
-    >
-      <SelectedWork />
-    </SectionBand>
-    <SectionBand id="now" title={sectionTitle("now")}>
-      <NowSection />
-    </SectionBand>
-    <SectionBand id="approach" title={sectionTitle("approach")} tone="band">
-      <Approach />
-    </SectionBand>
-    <SectionBand id="about" title={sectionTitle("about")} aside={<CvLink />}>
-      <Background />
-    </SectionBand>
-    <LatestWriting />
-    <SectionBand id="contact" title={profile.contact.heading} tone="teal">
-      <Contact />
-    </SectionBand>
-  </>
-);
+export const HomePage = ({ locale = "en" }: { locale?: Locale }) => {
+  const profile = getProfile(locale);
+  return (
+    <>
+      <JsonLd data={homeStructuredData(locale)} />
+      <Hero locale={locale} />
+      <SectionBand
+        id="work"
+        title={sectionTitle("work", locale)}
+        eyebrow={profile.work.eyebrow}
+      >
+        <SelectedWork locale={locale} />
+      </SectionBand>
+      <SectionBand id="now" title={sectionTitle("now", locale)}>
+        <NowSection locale={locale} />
+      </SectionBand>
+      <SectionBand
+        id="approach"
+        title={sectionTitle("approach", locale)}
+        tone="band"
+      >
+        <Approach locale={locale} />
+      </SectionBand>
+      <SectionBand
+        id="about"
+        title={sectionTitle("about", locale)}
+        aside={<CvLink locale={locale} />}
+      >
+        <Background locale={locale} />
+      </SectionBand>
+      <LatestWriting locale={locale} />
+      <SectionBand id="contact" title={profile.contact.heading} tone="teal">
+        <Contact locale={locale} />
+      </SectionBand>
+    </>
+  );
+};

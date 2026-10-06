@@ -21,5 +21,22 @@ export const sections = [
 
 export type SectionId = (typeof sections)[number]["id"];
 
-export const sectionTitle = (id: SectionId) =>
-  sections.find((section) => section.id === id)?.title ?? "";
+export const sectionTitle = (id: SectionId, locale: "en" | "pl" = "en") =>
+  getSections(locale).find((section) => section.id === id)?.title ?? "";
+
+export const getSections = (locale: "en" | "pl" = "en") =>
+  sections.map((section) => ({
+    ...section,
+    ...(locale === "pl"
+      ? {
+          work: { label: "Realizacje", title: "Sprawdzone na produkcji" },
+          now: { label: "Teraz", title: "W budowie i wdrożone" },
+          approach: {
+            label: "Podejście",
+            title: "Jak pracuję — i gdzie to widać",
+          },
+          about: { label: "Doświadczenie", title: "Doświadczenie" },
+          contact: { label: "Kontakt", title: "Kontakt" },
+        }[section.id]
+      : {}),
+  }));

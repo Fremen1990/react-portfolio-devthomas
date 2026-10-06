@@ -77,15 +77,23 @@ export function BlogList({
     </ul>
   );
 }
-export function LatestWriting() {
+export function LatestWriting({ locale = "en" }: { locale?: BlogLocale }) {
   if (!visiblePosts.length) return null;
   return (
     <SectionBand
       id="writing"
-      title="Latest writing"
-      aside={<Link href="/blog/">All articles →</Link>}
+      title={locale === "pl" ? "Najnowsze artykuły" : "Latest writing"}
+      aside={
+        <Link href={blogIndexPath(locale)}>
+          {locale === "pl" ? "Wszystkie artykuły →" : "All articles →"}
+        </Link>
+      }
     >
-      <BlogList locale="en" headingLevel={3} posts={visiblePosts.slice(0, 2)} />
+      <BlogList
+        locale={locale}
+        headingLevel={3}
+        posts={visiblePosts.slice(0, 2)}
+      />
     </SectionBand>
   );
 }

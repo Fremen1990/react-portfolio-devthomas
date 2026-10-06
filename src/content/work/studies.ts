@@ -1,3 +1,4 @@
+import type { Locale } from "@/i18n/locales";
 // Case studies: the facts shown on each /work/<slug>/ page and used by the
 // home page and the command palette. The text lives in <slug>.mdx, mapped in
 // src/content/work/bodies.ts. Keep this file free of MDX imports so the
@@ -81,16 +82,72 @@ export const publishedCaseStudies = caseStudies.filter(
   (study) => study.published
 );
 
-export const caseStudyPath = (slug: string) => `/work/${slug}/`;
+export const caseStudyPath = (slug: string, locale: Locale = "en") =>
+  `${locale === "pl" ? "/pl" : ""}/work/${slug}/`;
 
-export const caseStudyFor = (contributionId: string) =>
-  publishedCaseStudies.find((study) => study.contributionId === contributionId);
+export const caseStudyFor = (contributionId: string, locale: Locale = "en") =>
+  getCaseStudies(locale).find(
+    (study) => study.contributionId === contributionId
+  );
 
 /** The study after `slug` in page order, wrapping round to the first. */
-export const nextCaseStudy = (slug: string) => {
+export const nextCaseStudy = (slug: string, locale: Locale = "en") => {
+  const publishedCaseStudies = getCaseStudies(locale);
   const index = publishedCaseStudies.findIndex((study) => study.slug === slug);
   if (index === -1 || publishedCaseStudies.length < 2) {
     return undefined;
   }
   return publishedCaseStudies[(index + 1) % publishedCaseStudies.length];
 };
+
+const polish: Record<
+  string,
+  Pick<
+    CaseStudy,
+    "title" | "description" | "role" | "period" | "team" | "outcome"
+  >
+> = {
+  "orange-cms": {
+    title: "CMS, który backend rozszerza bez zmian frontendu",
+    description:
+      "Jak zaprojektowałem CMS oparty na schematach w Orange Polska dla rosnącej liczby systemów legacy — korzyści i koszty tej decyzji.",
+    role: "Wybrałem stack i zaprojektowałem architekturę frontendu",
+    period: "Od końca 2022",
+    team: "5 programistów (w tym ja), 3 testerów, 1 product manager",
+    outcome: {
+      value: "Dziesiątki",
+      label: "nowych zasobów na produkcji bez pracy nad frontendem",
+    },
+  },
+  "orange-e2e-testing": {
+    title: "Od dni ręcznej regresji do mniej niż godziny",
+    description:
+      "Jak wprowadziłem automatyczne testy end-to-end w Orange Polska, przeszkoliłem dwie osoby i skróciłem regresję z dni do mniej niż godziny.",
+    role: "Wprowadziłem automatyzację E2E, zbudowałem architekturę testów i przeszkoliłem dwie osoby",
+    period: "Od 2022",
+    team: "Ja, nowo zatrudniony tester automatyzujący i tester manualny przechodzący do automatyzacji",
+    outcome: {
+      value: "~1 h",
+      label: "regresja Orange TV GO, wcześniej 1–3 dni",
+    },
+  },
+  "theeventa-mvp": {
+    title: "Jeden Tech Lead, agenci AI i MVP zbudowane niemal od zera",
+    description:
+      "Jak zaproponowałem mniejszy zespół TheEventa i zbudowałem większość MVP z agentami AI, zachowując osobistą kontrolę jakości.",
+    role: "Tech Lead: architektura, rozwój full stack i proces dostarczania z pomocą AI",
+    period: "Od września 2025, równolegle z pracą w Orange Polska",
+    team: "Ja, CEO i współpracownik DevOps odpowiedzialny za infrastrukturę",
+    outcome: {
+      value: "MVP v1",
+      label: "w budowie: większość MVP powstała z małym zespołem i agentami AI",
+    },
+  },
+};
+export const getCaseStudies = (locale: Locale = "en"): CaseStudy[] =>
+  publishedCaseStudies.map((study) => {
+    if (locale === "en") return study;
+    if (!polish[study.slug])
+      throw new Error(`Missing Polish case study: ${study.slug}`);
+    return { ...study, ...polish[study.slug] };
+  });

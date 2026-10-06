@@ -104,9 +104,8 @@ export const profile: Profile = {
   introduction:
     "I design and build web and mobile applications, from user interfaces to backend services. I combine hands-on engineering with architecture, testing and technical leadership.",
   hero: {
-    headline:
-      "I design frontend architecture teams can extend, and the testing that keeps it shipping.",
-    headlineAccent: "shipping",
+    headline: "I turn complex requirements into working software.",
+    headlineAccent: "software",
     subline:
       "Web and mobile applications, from user interfaces to backend services, with the architecture, testing and technical leadership around them. Regular overlap with US teams.",
     location: "Poland · Remote",

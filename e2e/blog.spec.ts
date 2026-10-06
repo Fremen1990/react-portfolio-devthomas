@@ -24,7 +24,7 @@ test("blog navigation works separately from homepage section scrolling", async (
   await page.getByRole("link", { name: "Blog", exact: true }).click();
   await expect(page).toHaveURL(/\/blog\/$/);
   await page.getByRole("link", { name: "Polski", exact: true }).first().click();
-  await expect(page).toHaveURL(/\/blog\/pl\/$/);
+  await expect(page).toHaveURL(/\/blog\/pl\/(?:\?.*)?$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Artykuły");
 });
 for (const { path, locale, post } of articlePaths) {

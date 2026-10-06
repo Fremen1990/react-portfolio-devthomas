@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { profile } from "../../content/publicProfile";
+import { getProfile } from "@/i18n/profile";
+import type { Locale } from "@/i18n/locales";
 import { ActionLink } from "../ActionLink/ActionLink";
 import { ArchitecturePanel } from "../ArchitecturePanel/ArchitecturePanel";
 
@@ -19,7 +20,8 @@ export const splitHeadline = (headline: string, accent: string) => {
 
 // "See the work" has no click handler here: this renders on the server, and
 // NavBar routes in-page section links through scrollToSection.
-export const Hero = () => {
+export const Hero = ({ locale = "en" }: { locale?: Locale }) => {
+  const profile = getProfile(locale);
   const { hero } = profile;
   const headline = splitHeadline(hero.headline, hero.headlineAccent);
 
@@ -33,7 +35,11 @@ export const Hero = () => {
               src="/portrait.webp"
               width={720}
               height={480}
-              alt="Portrait of Tomasz Stanisz"
+              alt={
+                locale === "pl"
+                  ? "Portret Tomasza Stanisza"
+                  : "Portrait of Tomasz Stanisz"
+              }
               preload
             />
             <div className="hero-heading">

@@ -36,7 +36,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 
 ## Where things live
 
-- `src/app/` — routes. `layout.tsx` is the shell; `page.tsx` is the home page; `colophon/page.mdx` is "How this site is built".
+- `src/app/` — routes. `(en)/layout.tsx` and `(pl)/layout.tsx` share the document shell; `page.tsx` is the home page; `colophon/page.mdx` is "How this site is built".
 - `src/content/publicProfile.ts` — all public wording and links, typed by `Profile`. `src/content/navigation.ts` — the home page sections.
 - `src/sections/` — the home page sections, rendered as Server Components.
 - `src/components/NavBar/` — the only client entry point: header, theme and skin controls, and it mounts `CommandPalette/`.
@@ -44,16 +44,16 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - `src/utils/` — theme, skin, preferences store, `scrollToSection`, console greeting.
 - `src/design/skin-terminal.css` — every rule of the optional Terminal skin.
 - `src/content/work/` — case studies: facts and `published` in `studies.ts`, text in `<slug>.mdx`, mapped in `bodies.ts`. Pages render at `/work/<slug>/`.
-- `src/content/looks.ts` and `src/app/look/[look]/` — one copy of the home page per skin and theme, each with a preview card rendered at build time from `card.jpg/route.tsx`. Card colours mirror the CSS tokens; keep them in sync when the design changes.
+- `src/content/looks.ts` and `src/app/(en)/look/[look]/` — one copy of the home page per skin and theme, each with a preview card rendered at build time from `card.jpg/route.tsx`. Card colours mirror the CSS tokens; keep them in sync when the design changes.
 - `src/content/blog/` — typed bilingual registry and approved MDX bodies; `scripts/prepare-blog.mjs` generates ignored static routes and metadata before checks/builds. See README for the private local review workflow. Never copy unreviewed manuscripts into tracked public files or deploy a preview build.
 - `e2e/site.spec.ts` and `e2e/blog.spec.ts` — Playwright suites; blog routes are discovered from the generated registry.
 
 ## Rules that are easy to break
 
-- **CSS order.** Every stylesheet is imported in `src/app/layout.tsx`, and nowhere else, with `skin-terminal.css` last. Its rules are scoped as `:where(html.skin-terminal) …` and win on order, not specificity. A component that imports its own CSS loads after the skin and breaks it.
+- **CSS order.** Every stylesheet is imported in `src/components/Document.tsx`, and nowhere else, with `skin-terminal.css` last. Its rules are scoped as `:where(html.skin-terminal) …` and win on order, not specificity. A component that imports its own CSS loads after the skin and breaks it.
 - **Terminal skin coverage.** New UI needs Terminal styles in `skin-terminal.css`, and must be checked in both skins and both themes.
 - **Theme and skin state.** Read it with `usePreferences()`, and change it with `applyTheme` or `applySkin`. Don't read `document` or `localStorage` during render, because the server renders without them.
-- **Before-paint script.** The inline script in `layout.tsx` applies the theme and skin before paint (share-link `?skin=`/`?theme=` first, then the visit's link choice in `sessionStorage`, then saved choices), and owns the `theme-color` meta tag. Keep its colours in sync with `THEME_COLORS` in `src/utils/theme.ts`. Don't add `themeColor` to Next metadata, because React would duplicate the tag.
+- **Before-paint script.** The inline script in `Document.tsx` applies the theme and skin before paint (share-link `?skin=`/`?theme=` first, then the visit's link choice in `sessionStorage`, then saved choices), and owns the `theme-color` meta tag. Keep its colours in sync with `THEME_COLORS` in `src/utils/theme.ts`. Don't add `themeColor` to Next metadata, because React would duplicate the tag.
 - **Client code.** Keep content in Server Components. Add `"use client"` only where interaction needs it.
 - **Section links.** In-page section links go through `scrollToSection`, which moves focus to the section's heading. Off the home page they point to `/#id`.
 - **Per-page metadata.** Every page sets it with `pageMetadata()` from `src/lib/metadata.ts`. New public pages also belong in `src/app/sitemap.ts` (the Playwright suite checks the sitemap matches `PAGES`).

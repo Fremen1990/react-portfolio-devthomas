@@ -82,6 +82,8 @@ export const scrollToSection = (
 
   if (updateHistory && window.location.hash !== href) {
     window.history.pushState(null, "", href);
+    // pushState emits no native hashchange; keep locale links in sync.
+    window.dispatchEvent(new Event("portfolio:fragment"));
   }
 
   return true;

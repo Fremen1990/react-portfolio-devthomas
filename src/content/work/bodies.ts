@@ -10,3 +10,12 @@ export const caseStudyBodies: Record<string, MDXContent> = {
   "orange-e2e-testing": OrangeE2eTesting,
   "theeventa-mvp": TheeventaMvp,
 };
+
+import OrangeCmsPl from "./orange-cms.pl.mdx";
+import OrangeE2ePl from "./orange-e2e-testing.pl.mdx";
+import TheeventaPl from "./theeventa-mvp.pl.mdx";
+export const polishCaseStudyBodies: Record<string, MDXContent> = {
+  "orange-cms": OrangeCmsPl,
+  "orange-e2e-testing": OrangeE2ePl,
+  "theeventa-mvp": TheeventaPl,
+};

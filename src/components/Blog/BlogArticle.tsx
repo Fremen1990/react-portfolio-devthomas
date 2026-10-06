@@ -14,12 +14,12 @@ import {
 import type { BlogLocale } from "@/content/blog/types";
 import { blogLabels } from "@/content/blog/labels";
 import { profile } from "@/content/publicProfile";
-import { publishedCaseStudies, caseStudyPath } from "@/content/work/studies";
+import { getCaseStudies, caseStudyPath } from "@/content/work/studies";
 import { pageMetadata, SITE_URL } from "@/lib/metadata";
 import { headingsFromMdx } from "@/lib/headings";
 import { JsonLd } from "@/components/JsonLd/JsonLd";
 import { CaseStudyToc } from "@/components/CaseStudy/CaseStudyToc";
-import { BlogLanguages } from "./BlogList";
+
 const find = (slug: string) => visiblePosts.find((p) => p.slug === slug);
 export function articleMetadata(slug: string, locale: BlogLocale) {
   const post = find(slug);
@@ -62,7 +62,7 @@ export async function BlogArticle({
   );
   const headings = headingsFromMdx(source);
   const url = SITE_URL + blogArticlePath(slug, locale);
-  const related = publishedCaseStudies.filter((s) =>
+  const related = getCaseStudies(locale).filter((s) =>
     post.relatedWork?.includes(s.slug)
   );
   return (
@@ -108,7 +108,6 @@ export async function BlogArticle({
               </time>
             </p>
           )}
-          <BlogLanguages locale={locale} slug={slug} />
         </div>
       </header>
       <div className="page-wrap case-study-body blog-body">
@@ -133,7 +132,7 @@ export async function BlogArticle({
               <ul>
                 {related.map((s) => (
                   <li key={s.slug}>
-                    <Link href={caseStudyPath(s.slug)}>{s.title}</Link>
+                    <Link href={caseStudyPath(s.slug, locale)}>{s.title}</Link>
                   </li>
                 ))}
               </ul>

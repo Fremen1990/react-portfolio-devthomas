@@ -1,6 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 4173;
+const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 4173);
 
 // Runs against the static export in out/, the same files Hostinger serves.
 // Build first: npm run build && npm run test:e2e
