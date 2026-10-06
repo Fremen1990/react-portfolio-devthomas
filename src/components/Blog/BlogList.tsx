@@ -12,15 +12,18 @@ import { SectionBand } from "@/components/SectionBand/SectionBand";
 export function BlogLanguages({
   locale,
   slug,
+  label,
 }: {
   locale: BlogLocale;
   slug?: string;
+  label?: string;
 }) {
   return (
     <nav
       className="blog-languages"
       aria-label={
-        slug ? blogLabels[locale].language : blogLabels[locale].indexLanguage
+        label ??
+        (slug ? blogLabels[locale].language : blogLabels[locale].indexLanguage)
       }
     >
       {(["en", "pl"] as const).map((lang) => (
@@ -51,7 +54,7 @@ export function BlogList({
   return (
     <ul className="blog-list">
       {posts.map((post) => (
-        <li key={post.slug} className="blog-list-item">
+        <li key={post.slug} className="card blog-list-item">
           <p className="blog-meta">
             {post.publishedAt ? (
               <time dateTime={post.publishedAt}>
@@ -64,14 +67,21 @@ export function BlogList({
             {post.readingMinutes[locale]} {t.minute}
           </p>
           <Heading>
-            <Link href={blogArticlePath(post.slug, locale)}>
+            <Link
+              className="blog-list-link"
+              href={blogArticlePath(post.slug, locale)}
+            >
               {post.editions[locale].title}
             </Link>
           </Heading>
           <p className="blog-description">
             {post.editions[locale].description}
           </p>
-          <BlogLanguages locale={locale} slug={post.slug} />
+          <BlogLanguages
+            locale={locale}
+            slug={post.slug}
+            label={`${t.language}: ${post.editions[locale].title}`}
+          />
         </li>
       ))}
     </ul>

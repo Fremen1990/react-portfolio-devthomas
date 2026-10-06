@@ -2,6 +2,8 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { expect, test } from "vitest";
 import { ClientArchitecture } from "./ClientArchitecture";
+import { MobileStack } from "./MobileStack";
+import { ProductScreens } from "./ProductScreens";
 import { BlogList, BlogLanguages, LatestWriting } from "./BlogList";
 import { BlogIndex, blogIndexMetadata } from "./BlogIndex";
 import { visiblePosts } from "@/content/blog/.generated/posts";
@@ -16,6 +18,15 @@ test("language switch keeps the same article", () => {
     "href",
     expect.stringMatching(/^\/blog\/en\/example\/?$/)
   );
+});
+test("the title link does not wrap the language switch", () => {
+  const post = visiblePosts[0];
+  const { container } = render(<BlogList locale="en" posts={[post]} />);
+  const item = container.querySelector(".blog-list-item");
+  expect(item).toHaveClass("card");
+  const title = screen.getByRole("link", { name: post.editions.en.title });
+  expect(title.closest(".blog-languages")).toBeNull();
+  expect(item?.querySelector(".blog-languages a")).toBeTruthy();
 });
 test("empty article list has no placeholder cards", () => {
   const { container } = render(<BlogList locale="en" posts={[]} />);
@@ -54,6 +65,18 @@ test("article metadata preserves independent canonicals and prevents draft index
   expect(m.robots).toMatchObject({ index: false, follow: false });
 });
 
+test("mobile stack and sample screens stay in the article", () => {
+  const { container } = render(
+    <>
+      <MobileStack locale="en" />
+      <ProductScreens locale="en" />
+    </>
+  );
+  expect(
+    screen.getByRole("img", { name: /Car Brain mobile stack/ })
+  ).toBeVisible();
+  expect(container.querySelectorAll(".product-screens img")).toHaveLength(3);
+});
 for (const locale of ["en", "pl"] as const) {
   test(`architecture exposes its boundaries and planned data path (${locale})`, () => {
     const { container } = render(<ClientArchitecture locale={locale} />);

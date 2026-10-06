@@ -4,6 +4,9 @@ import { visiblePosts } from "../src/content/blog/.generated/posts";
 import { blogArticlePath } from "../src/content/blog/model";
 import { blogLabels } from "../src/content/blog/labels";
 const first = visiblePosts[0];
+const architectureSlug =
+  "building-mobile-and-web-clients-around-one-appwrite-backend";
+const introSlug = "why-i-built-car-brain";
 const articlePaths = visiblePosts.flatMap((p) =>
   (["en", "pl"] as const).map((locale) => ({
     path: blogArticlePath(p.slug, locale),
@@ -76,11 +79,11 @@ for (const skin of ["standard", "terminal"] as const)
         const paths = [
           "/blog/",
           "/blog/pl/",
-          ...(first
-            ? (["en", "pl"] as const).map((locale) =>
-                blogArticlePath(first.slug, locale)
-              )
-            : []),
+          ...visiblePosts.flatMap((post) =>
+            (["en", "pl"] as const).map((locale) =>
+              blogArticlePath(post.slug, locale)
+            )
+          ),
         ];
         const errors: string[] = [];
         page.on("pageerror", (error) => errors.push(error.message));
@@ -94,7 +97,20 @@ for (const skin of ["standard", "terminal"] as const)
           expect((await new AxeBuilder({ page }).analyze()).violations).toEqual(
             []
           );
-          if (path.includes(first?.slug ?? "__none__")) {
+          if (path.includes(introSlug)) {
+            await expect(page.locator(".product-screens img")).toHaveCount(3);
+            await expect(page.locator(".product-screens-row")).toHaveCSS(
+              "overflow-x",
+              "auto"
+            );
+            const stack = page.locator(".mobile-stack");
+            await expect(stack.getByRole("img")).toBeVisible();
+            await expect(stack.getByRole("region")).toHaveCSS(
+              "overflow-x",
+              "auto"
+            );
+          }
+          if (path.includes(architectureSlug)) {
             // Diagram geometry must survive missing component CSS.
             for (const selector of [".client-architecture", ".auth-sequence"]) {
               const diagram = page.locator(selector);
@@ -144,8 +160,14 @@ test("blog discovery and keyboard navigation reach the index and both editions",
     })),
   ];
   for (const { query, path } of destinations) {
-    await page.getByRole("button", { name: "Open command palette" }).click();
-    await page.getByRole("combobox", { name: "Search commands" }).fill(query);
+    await page
+      .getByRole("button", {
+        name: /Open command palette|Otwórz paletę poleceń/,
+      })
+      .click();
+    await page
+      .getByRole("combobox", { name: /Search commands|Szukaj poleceń/ })
+      .fill(query);
     await page.keyboard.press("Enter");
     await expect(page).toHaveURL(new RegExp(path + "$"));
   }
@@ -173,7 +195,7 @@ for (const [skin, theme, width] of [
     await page.setViewportSize({ width, height: 1000 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(
-      `${blogArticlePath(first.slug, width < 800 ? "pl" : "en")}?skin=${skin}&theme=${theme}`
+      `${blogArticlePath(architectureSlug, width < 800 ? "pl" : "en")}?skin=${skin}&theme=${theme}`
     );
     await page.screenshot({
       path: `test-results/review-${skin}-${theme}-${width}-header.png`,
@@ -190,7 +212,7 @@ test("article diagrams keep their geometry without external stylesheets", async 
 }) => {
   test.skip(!first, "No article in this build");
   await page.setViewportSize({ width: 390, height: 900 });
-  await page.goto(blogArticlePath(first.slug, "pl"));
+  await page.goto(blogArticlePath(architectureSlug, "pl"));
   await page.evaluate(() => {
     for (const sheet of Array.from(document.styleSheets)) sheet.disabled = true;
   });

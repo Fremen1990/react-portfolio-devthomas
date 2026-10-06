@@ -3,6 +3,27 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
+    slug: "why-i-built-car-brain",
+    published: true,
+    editions: {
+      en: {
+        title: "Why I built Car Brain, and why this stack",
+        description:
+          "Why Car Brain exists, and why I would pick React Native, Expo and Appwrite again for a mobile app like this.",
+        topics: ["Car Brain", "Expo", "Appwrite"],
+        body: "why-i-built-car-brain/en.mdx",
+      },
+      pl: {
+        title: "Dlaczego zbudowałem Car Brain i dlaczego taki stos",
+        description:
+          "Dlaczego powstał Car Brain i dlaczego przy takiej aplikacji mobilnej wybrałbym znowu React Native, Expo i Appwrite.",
+        topics: ["Car Brain", "Expo", "Appwrite"],
+        body: "why-i-built-car-brain/pl.mdx",
+      },
+    },
+    publishedAt: "2026-10-06",
+  },
+  {
     slug: "building-mobile-and-web-clients-around-one-appwrite-backend",
     published: true,
     developmentAsOf: "2026-10-04",
