@@ -57,7 +57,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - **Client code.** Keep content in Server Components. Add `"use client"` only where interaction needs it.
 - **Section links.** In-page section links go through `scrollToSection`, which moves focus to the section's heading. Off the home page they point to `/#id`.
 - **Per-page metadata.** Every page sets it with `pageMetadata()` from `src/lib/metadata.ts`. New public pages also belong in `src/app/sitemap.ts` (the Playwright suite checks the sitemap matches `PAGES`).
-- **Dark bands.** Inside `.band` (header row, hero, approach, Now building card) the generic tokens already hold band values. Use `--text`, `--surface`, `--accent` and so on; don't hard-code band colours, or the Terminal skin can't reset them.
+- **Dark bands.** Inside `.band` (header row, hero, approach, Car Brain card) the generic tokens already hold band values. Use `--text`, `--surface`, `--accent` and so on; don't hard-code band colours, or the Terminal skin can't reset them. The light theme pairs a light TheEventa card with dark Car Brain; root card-surface tokens preserve the dark and Terminal palettes.
 - **Car Brain gate.** `CAR_BRAIN_PUBLISHED` in `src/content/carBrainLinks.ts` stays `false` until Tomasz says the App Store listing is live. The independent-product card is visible during development; keep the store links behind the gate, and never import `src/content/carBrain.ts` into client code, or the links reach the build while unpublished.
 - **Accessibility.** Keyboard access, visible focus, reduced motion, and no sideways scroll at 320px are all required. The axe scans must stay at zero violations.
 

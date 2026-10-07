@@ -187,7 +187,7 @@ export const profile: Profile = {
       number: "02",
       topic: "Quality and mentoring",
       period: "Since 2022",
-      title: "From days of manual regression to under an hour",
+      title: "From days of manual regression to about an hour",
       summary:
         "Instead of writing a proposal, I built a working Cypress suite. My manager hired an automation tester; I trained two testers and reviewed every change in the first year.",
       outcome: "1–3 days → about an hour on Orange TV GO.",

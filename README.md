@@ -69,7 +69,7 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 
 All CSS is imported in `src/components/Document.tsx` and nowhere else, with `skin-terminal.css` last. The Terminal rules use `:where()`, so they win on order, not specificity. Next.js loads page-level CSS after layout CSS, so a component importing its own stylesheet would load after the skin and override it.
 
-The standard skin keeps the CV's palette and fonts. The header, the hero, the approach section and the Now building card are dark bands in both themes, and contact is a teal band. Inside a `.band` (and the header's inner row) `src/index.css` re-points the generic tokens (`--text`, `--surface`, `--accent`, …) to band values, so components inside need no colours of their own; the Terminal skin resets them to its own tokens.
+The standard skin keeps the CV's palette and fonts. The header, hero and approach section are dark bands in both themes, and contact is a teal band. Light mode pairs a light TheEventa card with a dark Car Brain card; root card-surface tokens preserve the dark-mode palette. Inside a `.band` (and the header's inner row) `src/index.css` re-points the generic tokens (`--text`, `--surface`, `--accent`, …) to band values, so components inside need no colours of their own; the Terminal skin resets them to its own tokens. Below 640px, the standard architecture panel uses tighter spacing while retaining all nodes and explanations.
 
 ## Versions
 

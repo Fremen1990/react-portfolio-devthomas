@@ -16,7 +16,7 @@ const Building = ({ locale = "en" }: { locale?: Locale }) => {
     <article
       id={building.id}
       aria-labelledby={headingId}
-      className="now-card now-card--building band"
+      className="card now-card now-card--building"
     >
       <p className="now-meta" data-pid={building.number}>
         <span className="eyebrow now-eyebrow">{building.eyebrow}</span>
@@ -73,7 +73,7 @@ const IndependentProduct = ({
   <article
     id="car-brain"
     aria-labelledby="car-brain-heading"
-    className="card now-card now-card--shipped"
+    className="card band now-card now-card--shipped"
   >
     <div className="now-shipped-copy">
       <p className="now-meta">

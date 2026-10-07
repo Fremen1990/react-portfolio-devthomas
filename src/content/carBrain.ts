@@ -39,8 +39,7 @@ export const carBrain: CarBrain = {
   title: "Car Brain",
   role: "Creator & Developer",
   text: "A vehicle-management app I’m building for iOS, Android and the web around a shared Appwrite backend.",
-  architecture:
-    "React Native powers the mobile app and Next.js the web client under development. Both use TypeScript. Cloud functions handle AI insights and VIN decoding.",
+  architecture: "Cloud functions handle AI insights and VIN decoding.",
   features:
     "Vehicle management · Maintenance, fuel & costs · Reports & analytics",
   automation:
@@ -99,8 +98,7 @@ export const carBrainFor = (locale: "en" | "pl"): CarBrain => {
     eyebrow: "Własny produkt",
     role: "Twórca i programista",
     text: "Rozwijam aplikację do zarządzania pojazdami na iOS, Androida i przeglądarkę, ze wspólnym backendem Appwrite.",
-    architecture:
-      "Aplikacja mobilna korzysta z React Native, a powstająca wersja webowa z Next.js. Obie używają TypeScriptu. Funkcje chmurowe obsługują analizę AI i dekodowanie VIN.",
+    architecture: "Funkcje chmurowe obsługują analizę AI i dekodowanie VIN.",
     features:
       "Zarządzanie pojazdami · Serwis, paliwo i koszty · Raporty i analityka",
     automation:
