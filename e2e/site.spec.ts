@@ -464,7 +464,7 @@ test("the E2E bars grow in once they scroll into view", async ({ page }) => {
   await expect(bars).toHaveAttribute("data-reveal", "revealed");
 });
 
-test("Car Brain and its store link appear only once it is published", async ({
+test("Car Brain is visible while its store link remains gated", async ({
   page,
 }) => {
   for (const path of ["/", "/look/standard-light/"]) {
@@ -472,8 +472,8 @@ test("Car Brain and its store link appear only once it is published", async ({
     const html = await page.content();
     expect(html.includes("apps.apple.com")).toBe(carBrain.published);
     await expect(
-      page.getByRole("heading", { level: 3, name: carBrain.title })
-    ).toHaveCount(carBrain.published ? 1 : 0);
+      page.getByRole("heading", { level: 3, name: carBrain.title, exact: true })
+    ).toHaveCount(1);
   }
 });
 

@@ -53,7 +53,7 @@ GitHub Actions runs all of these on Node 24.21.0, through the shared steps in `.
 - `src/mdx-components.tsx` — how MDX pages render: one article in the prose style (`src/components/Prose/prose.css`), an id on every `h2`, tables that scroll on their own, external links in a new tab, and the case-study components
 - `src/lib/metadata.ts` — title, description, canonical and Open Graph tags for each page
 - `src/content/publicProfile.ts` — the public wording and links: hero, architecture panel, work cards, the Now building card, approach, timeline and contact
-- `src/content/carBrain.ts` and `src/content/carBrainLinks.ts` — the Car Brain card and its publication gate. While `CAR_BRAIN_PUBLISHED` is `false`, the card is not rendered and the build contains no store link. The links sit behind the gate, so the build drops them; client code imports only `carBrainLinks.ts`, never the card content.
+- `src/content/carBrain.ts` and `src/content/carBrainLinks.ts` — the Car Brain card and its publication gate. The independent-product card is visible during development in EN/PL. While `CAR_BRAIN_PUBLISHED` is `false`, the build contains no store link. The links sit behind the gate, so the build drops them; client code imports only `carBrainLinks.ts`, never the card content.
 - `src/components/NavBar/` — section navigation ("← All work" on case studies), mobile menu, and the theme and style controls
 - `src/components/Hero/` and `src/components/ArchitecturePanel/` — the hero band and its clickable CMS diagram
 - Client components are kept small: NavBar with the command palette, `ArchitecturePanel`, `src/sections/Now/CarBrainShots.tsx`, `src/components/RevealOnView/` (the E2E bars' entrance) and `CaseStudyToc`. Everything else is a Server Component.
@@ -102,7 +102,7 @@ Releases are tagged on `main` and listed on the repository's Releases page. `pac
 
 The Vitest suite checks focus after Escape and after choosing a section, hash updates, Back, reduced motion, closed-menu removal from keyboard navigation, desktop links after a resize, the saved theme and skin, the hero's section link, and links off the home page. The Playwright suite covers the built site in a real browser. Neither replaces a manual browser pass.
 
-Look at 1440, 768, 390, and 320px, and at both sides of the 801px navigation switch. Check both skins and both themes, zoom, the long email, the architecture panel and the case-study "On this page" list, and that the page does not scroll sideways. Flip `CAR_BRAIN_PUBLISHED` locally to check the Car Brain card too.
+Look at 1440, 768, 390, and 320px, and at both sides of the 801px navigation switch. Check both skins and both themes, zoom, the long email, the architecture panel and the case-study "On this page" list, and that the page does not scroll sideways. Check the Car Brain product card and screenshot controls without changing `CAR_BRAIN_PUBLISHED`; store availability remains a separate gate.
 
 On 2026-09-29, `https://3d-portfolio.devthomas.pl/` did not resolve (DNS `NXDOMAIN`). The footer does not link to it. GitHub, this portfolio, and the CV remain linked.
 
@@ -135,7 +135,7 @@ env -u BLOG_PREVIEW_DIR npm run build
 npm run test:e2e
 ```
 
-Article headings must have unique, non-empty generated IDs. Polish characters are normalized for heading anchors. Use `ClientArchitecture` only for the Car Brain article, with `locale="en"` or `locale="pl"`; it distinguishes implemented authentication from planned web data paths. Publication does not enable the independent Car Brain launch card or App Store links.
+Article headings must have unique, non-empty generated IDs. Polish characters are normalized for heading anchors. Use `ClientArchitecture` only for the Car Brain article, with `locale="en"` or `locale="pl"`; it distinguishes implemented authentication from planned web data paths. Article publication does not enable App Store links; the independent product card describes ongoing development.
 
 ## English / Polish localization
 

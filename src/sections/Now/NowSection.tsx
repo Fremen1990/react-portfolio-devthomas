@@ -2,10 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { getProfile } from "@/i18n/profile";
 import type { Locale } from "@/i18n/locales";
-import {
-  carBrain as carBrainContent,
-  type CarBrain,
-} from "../../content/carBrain";
+import { carBrainFor, type CarBrain } from "../../content/carBrain";
 import { caseStudyFor, caseStudyPath } from "../../content/work/studies";
 import { CarBrainShots } from "./CarBrainShots";
 
@@ -66,7 +63,7 @@ const Building = ({ locale = "en" }: { locale?: Locale }) => {
   );
 };
 
-const Shipped = ({
+const IndependentProduct = ({
   carBrain,
   locale = "en",
 }: {
@@ -81,42 +78,53 @@ const Shipped = ({
     <div className="now-shipped-copy">
       <p className="now-meta">
         <span className="eyebrow now-eyebrow">{carBrain.eyebrow}</span>
-        <span className="now-years">{carBrain.years}</span>
+        <span className="now-years">{carBrain.role}</span>
       </p>
       <h3 id="car-brain-heading" className="now-title">
         {carBrain.title}
       </h3>
       <p className="now-text">{carBrain.text}</p>
-      <ul
-        className="tags"
-        aria-label={locale === "pl" ? "Technologie" : "Technologies"}
-      >
-        {carBrain.tags.map((tag) => (
-          <li key={tag} className="tag">
-            {tag}
-          </li>
-        ))}
-      </ul>
+      <dl className="now-details">
+        <div>
+          <dt>Stack</dt>
+          <dd>{carBrain.tags.join(" · ")}</dd>
+        </div>
+        <div>
+          <dt>{locale === "pl" ? "Główne funkcje" : "Key features"}</dt>
+          <dd>{carBrain.features}</dd>
+        </div>
+        <div>
+          <dt>{locale === "pl" ? "AI i automatyzacja" : "AI & automation"}</dt>
+          <dd>{carBrain.automation}</dd>
+        </div>
+      </dl>
+      <p className="now-text">{carBrain.architecture}</p>
+      <p className="now-text">
+        <strong>Status: </strong>
+        {carBrain.status}
+      </p>
       <p className="now-actions">
-        <a
-          className="store-link"
-          href={carBrain.appStoreUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {carBrain.appStoreLabel}
-        </a>
-        <a
+        <Link
           className="now-site-link"
-          href={carBrain.siteUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`/blog/${locale}/why-i-built-car-brain/`}
         >
-          {carBrain.siteLabel} <span aria-hidden="true">→</span>
-        </a>
+          {carBrain.articleLabel} <span aria-hidden="true">→</span>
+        </Link>
+        {carBrain.published && carBrain.appStoreUrl && (
+          <a
+            className="store-link"
+            href={carBrain.appStoreUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {carBrain.appStoreLabel}
+          </a>
+        )}
       </p>
     </div>
     <CarBrainShots
+      label={carBrain.screensLabel}
+      caption={carBrain.sampleNote}
       shots={carBrain.shots}
       width={carBrain.shotWidth}
       height={carBrain.shotHeight}
@@ -124,19 +132,19 @@ const Shipped = ({
   </article>
 );
 
-// TheEventa, which is still an MVP, and Car Brain, which ships only once its
-// publication gate is open. Without Car Brain, TheEventa spans the row.
+// Product visibility is separate from App Store availability.
 export const NowSection = ({
-  carBrain = carBrainContent,
+  carBrain,
   locale = "en",
 }: {
   carBrain?: CarBrain;
   locale?: Locale;
 }) => (
-  <div
-    className={carBrain.published ? "now-grid" : "now-grid now-grid--single"}
-  >
+  <div className="now-grid">
     <Building locale={locale} />
-    {carBrain.published && <Shipped carBrain={carBrain} locale={locale} />}
+    <IndependentProduct
+      carBrain={carBrain ?? carBrainFor(locale)}
+      locale={locale}
+    />
   </div>
 );
