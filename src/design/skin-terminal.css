@@ -46,6 +46,8 @@ html.skin-terminal {
   --band-node-active: color-mix(in srgb, var(--accent) 12%, transparent);
   --band-panel: var(--surface);
   --teal-band: var(--canvas);
+  --building-card: var(--surface);
+  --product-card: var(--surface);
 }
 
 @media (prefers-color-scheme: dark) {

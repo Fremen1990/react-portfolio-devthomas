@@ -43,9 +43,9 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "orange-e2e-testing",
     contributionId: "orange-e2e",
-    title: "From days of manual regression to under an hour",
+    title: "From days of manual regression to about an hour",
     description:
-      "How I introduced automated end-to-end testing at Orange Polska, trained two testers, and cut regression checks from days to under an hour.",
+      "How I introduced automated end-to-end testing at Orange Polska, trained two testers, and cut regression checks from days to about an hour.",
     company: "Orange Polska",
     role: "I introduced automated end-to-end testing, built the test architecture and trained two testers",
     period: "Since 2022",
@@ -120,9 +120,9 @@ const polish: Record<
     },
   },
   "orange-e2e-testing": {
-    title: "Od dni ręcznej regresji do mniej niż godziny",
+    title: "Od dni ręcznej regresji do około godziny",
     description:
-      "Jak wprowadziłem automatyczne testy end-to-end w Orange Polska, przeszkoliłem dwie osoby i skróciłem regresję z dni do mniej niż godziny.",
+      "Jak wprowadziłem automatyczne testy end-to-end w Orange Polska, przeszkoliłem dwie osoby i skróciłem regresję z dni do około godziny.",
     role: "Wprowadziłem automatyzację E2E, zbudowałem architekturę testów i przeszkoliłem dwie osoby",
     period: "Od 2022",
     team: "Ja, nowo zatrudniony tester automatyzujący i tester manualny przechodzący do automatyzacji",

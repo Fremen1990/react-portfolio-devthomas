@@ -286,6 +286,38 @@
   }
 }
 
+/* Keep every node and its explanation visible without a tall mobile panel. */
+@media (max-width: 639px) {
+  :where(html:not(.skin-terminal)) .hero-grid {
+    gap: 20px;
+  }
+
+  :where(html:not(.skin-terminal)) .arch-body {
+    padding: 12px;
+  }
+
+  :where(html:not(.skin-terminal)) .arch-node {
+    min-height: 54px;
+    padding: 8px 10px;
+  }
+
+  :where(html:not(.skin-terminal)) .arch-grid {
+    gap: 6px;
+  }
+
+  :where(html:not(.skin-terminal)) .arch-wire {
+    height: 14px;
+    overflow: hidden;
+  }
+
+  :where(html:not(.skin-terminal)) .arch-caption,
+  :where(html:not(.skin-terminal)) .arch-footer {
+    min-height: 0;
+    margin-top: 8px;
+    padding: 8px 10px;
+  }
+}
+
 @media (min-width: 801px) {
   .hero {
     padding: 44px 0 52px;

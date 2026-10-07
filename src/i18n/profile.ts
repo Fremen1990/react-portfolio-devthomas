@@ -89,7 +89,7 @@ const polish: Profile = {
       ...profile.contributions[1],
       topic: "Jakość i mentoring",
       period: "Od 2022",
-      title: "Od dni ręcznej regresji do mniej niż godziny",
+      title: "Od dni ręcznej regresji do około godziny",
       summary:
         "Zamiast pisać propozycję, zbudowałem działający zestaw testów Cypress. Mój przełożony zatrudnił testera automatyzującego; przeszkoliłem dwie osoby i przez pierwszy rok przeglądałem każdą zmianę.",
       outcome: "1–3 dni → około godziny w Orange TV GO.",

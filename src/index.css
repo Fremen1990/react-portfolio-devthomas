@@ -1,7 +1,7 @@
 /* The standard skin keeps the CV's palette and type (cv.devthomas.pl): warm
    paper, one teal accent, pill controls, 20px cards, and Fraunces / Geist /
    Geist Mono. Its own layout adds dark brand bands (header, hero, approach,
-   the "Now building" card) that stay dark in both themes, and a teal contact
+   the Car Brain card in light mode), and a teal contact
    band. The Terminal skin redefines every token it uses. */
 :root {
   --canvas: #f7f5f0;
@@ -25,6 +25,8 @@
   --band-node-active: #17292b;
   --band-panel: #121918;
   --teal-band: #0f6b75;
+  --building-card: var(--surface);
+  --product-card: var(--band);
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -62,10 +64,14 @@
     --band: #0a0e0d;
     --band-line: #2a3531;
     color-scheme: dark;
+    --building-card: var(--band);
+    --product-card: var(--surface);
   }
 }
 
 html.dark-theme {
+  --building-card: var(--band);
+  --product-card: var(--surface);
   --canvas: #0f1413;
   --surface: #161d1b;
   --text: #e8eeeb;
