@@ -58,7 +58,7 @@ All of these must pass before a change is done. CI (`.github/actions/check/`) ru
 - **Section links.** In-page section links go through `scrollToSection`, which moves focus to the section's heading. Off the home page they point to `/#id`.
 - **Per-page metadata.** Every page sets it with `pageMetadata()` from `src/lib/metadata.ts`. New public pages also belong in `src/app/sitemap.ts` (the Playwright suite checks the sitemap matches `PAGES`).
 - **Dark bands.** Inside `.band` (header row, hero, approach, Now building card) the generic tokens already hold band values. Use `--text`, `--surface`, `--accent` and so on; don't hard-code band colours, or the Terminal skin can't reset them.
-- **Car Brain gate.** `CAR_BRAIN_PUBLISHED` in `src/content/carBrainLinks.ts` stays `false` until Tomasz says the App Store listing is live. Keep the store links behind it, and never import `src/content/carBrain.ts` into client code, or the links reach the build while unpublished.
+- **Car Brain gate.** `CAR_BRAIN_PUBLISHED` in `src/content/carBrainLinks.ts` stays `false` until Tomasz says the App Store listing is live. The independent-product card is visible during development; keep the store links behind the gate, and never import `src/content/carBrain.ts` into client code, or the links reach the build while unpublished.
 - **Accessibility.** Keyboard access, visible focus, reduced motion, and no sideways scroll at 320px are all required. The axe scans must stay at zero violations.
 
 ## Content

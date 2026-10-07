@@ -5,13 +5,21 @@ import type { CarBrainShot } from "../../content/carBrain";
 
 type CarBrainShotsProps = {
   shots: CarBrainShot[];
+  label: string;
+  caption: string;
   width: number;
   height: number;
 };
 
 // A phone screenshot with buttons that swap the screen. The image keeps its
 // width and height attributes, so swapping never shifts the layout.
-export const CarBrainShots = ({ shots, width, height }: CarBrainShotsProps) => {
+export const CarBrainShots = ({
+  shots,
+  width,
+  height,
+  label,
+  caption,
+}: CarBrainShotsProps) => {
   const [currentId, setCurrentId] = useState(shots[0]?.id);
   const current = shots.find((shot) => shot.id === currentId) ?? shots[0];
 
@@ -37,7 +45,7 @@ export const CarBrainShots = ({ shots, width, height }: CarBrainShotsProps) => {
           />
         </div>
       </div>
-      <div className="shot-tabs" role="group" aria-label="Car Brain screens">
+      <div className="shot-tabs" role="group" aria-label={label}>
         {shots.map((shot) => (
           <button
             key={shot.id}
@@ -50,6 +58,7 @@ export const CarBrainShots = ({ shots, width, height }: CarBrainShotsProps) => {
           </button>
         ))}
       </div>
+      <figcaption className="now-shot-caption">{caption}</figcaption>
     </figure>
   );
 };

@@ -1,6 +1,4 @@
-/* Now building (TheEventa, a dark band card) and shipped on my own (Car
-   Brain, a paper card with a phone). Stacked on phones; 0.8 : 1.2 on wide
-   screens. Without Car Brain, TheEventa spans the row. */
+/* TheEventa and independent Car Brain development. Stacked on phones. */
 .now-grid {
   display: grid;
   gap: 16px;
@@ -244,4 +242,29 @@
     grid-template-columns: minmax(0, 1fr) 230px;
     gap: 28px;
   }
+}
+
+.now-details {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.now-details dt {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+}
+.now-details dd {
+  margin: 3px 0 0;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.now-shot-caption {
+  max-width: 30ch;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
 }

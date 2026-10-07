@@ -17,15 +17,15 @@ describe("while Car Brain is unpublished", () => {
     }
   });
 
-  test("only TheEventa renders, across the full row", () => {
+  test("both development cards render before store availability", () => {
     const { container } = render(<NowSection carBrain={hidden} />);
     expect(
       screen.getByRole("article", { name: profile.building.title })
     ).toBeInTheDocument();
     expect(
       screen.queryByRole("article", { name: carBrain.title })
-    ).not.toBeInTheDocument();
-    expect(container.firstChild).toHaveClass("now-grid--single");
+    ).toBeInTheDocument();
+    expect(container.firstChild).not.toHaveClass("now-grid--single");
   });
 
   test("no store or site link reaches the page", () => {
@@ -81,4 +81,20 @@ test("TheEventa links to its case study", () => {
   expect(
     screen.getByRole("link", { name: /How I run delivery/ })
   ).toHaveAttribute("href", caseStudyPath("theeventa-mvp").replace(/\/$/, ""));
+});
+
+test("Polish scope and article link are localized without store claims", () => {
+  render(<NowSection locale="pl" />);
+  expect(
+    screen.getByText(/Dekodowanie VIN i automatyczne/)
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("link", { name: /Dlaczego tworzę Car Brain/ })
+  ).toHaveAttribute("href", "/blog/pl/why-i-built-car-brain");
+  expect(
+    screen.getByRole("group", { name: "Ekrany Car Brain" })
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("link", { name: /Pobierz/ })
+  ).not.toBeInTheDocument();
 });
