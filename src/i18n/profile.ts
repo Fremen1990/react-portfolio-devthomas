@@ -1,6 +1,30 @@
 import { profile, type Profile } from "@/content/publicProfile";
 import type { Locale } from "./locales";
 
+// Keyed by the English entry name so a reorder of the timeline cannot swap
+// Polish periods. Company names in the finance entry stay as written.
+const timelinePolish: Record<
+  string,
+  { period: string; name?: string; detail?: string }
+> = {
+  TheEventa: {
+    period: "wrz 2025–obecnie",
+    detail: "Tech Lead · rola równoległa",
+  },
+  "Orange Polska": {
+    period: "paź 2022–obecnie",
+    detail: "Inżynieria oprogramowania i przywództwo techniczne",
+  },
+  DareDrop: {
+    period: "maj–cze 2022",
+    detail: "Junior Full Stack Developer",
+  },
+  "Finance & accounting": {
+    period: "Wcześniejsza kariera",
+    name: "Finanse i księgowość",
+  },
+};
+
 const polish: Profile = {
   ...profile,
   headline: "Inżynier oprogramowania i Tech Lead",
@@ -152,22 +176,20 @@ const polish: Profile = {
       note: "900 członków",
     },
   ],
-  timeline: profile.timeline.map((entry, i) => ({
-    ...entry,
-    period: [
-      "Wcześniejsza kariera",
-      "maj–cze 2022",
-      "paź 2022–obecnie",
-      "wrz 2025–obecnie",
-    ][i],
-    name: i === 0 ? "Finanse i księgowość" : entry.name,
-    detail: [
-      entry.detail,
-      "Junior Full Stack Developer",
-      "Inżynieria oprogramowania i przywództwo techniczne",
-      "Tech Lead · rola równoległa",
-    ][i],
-  })),
+  timeline: profile.timeline.map((entry) => {
+    const copy = timelinePolish[entry.name];
+    if (!copy) {
+      throw new Error(
+        `Profile shape changed: translate timeline entry "${entry.name}"`
+      );
+    }
+    return {
+      ...entry,
+      period: copy.period,
+      name: copy.name ?? entry.name,
+      detail: copy.detail ?? entry.detail,
+    };
+  }),
   cvLinkLabel: "Pełne CV i PDF (EN)",
   contact: {
     heading: "Otwarty na role Tech Leada z pracą nad kodem",

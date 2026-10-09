@@ -261,16 +261,14 @@ export const profile: Profile = {
       note: "900 members",
     },
   ],
+  // Newest first, so phones and the Terminal log lead with the current roles.
+  // The wide timeline places these left to right, oldest to newest.
   timeline: [
     {
-      period: "Earlier career",
-      name: "Finance & accounting",
-      detail: "Accenture, Marsh McLennan, AkzoNobel, Tate & Lyle",
-    },
-    {
-      period: "May–Jun 2022",
-      name: "DareDrop",
-      detail: "Junior Full Stack Developer",
+      period: "Sep 2025–now",
+      name: "TheEventa",
+      detail: "Tech Lead · concurrent",
+      current: true,
     },
     {
       period: "Oct 2022–now",
@@ -279,10 +277,14 @@ export const profile: Profile = {
       current: true,
     },
     {
-      period: "Sep 2025–now",
-      name: "TheEventa",
-      detail: "Tech Lead · concurrent",
-      current: true,
+      period: "May–Jun 2022",
+      name: "DareDrop",
+      detail: "Junior Full Stack Developer",
+    },
+    {
+      period: "Earlier career",
+      name: "Finance & accounting",
+      detail: "Accenture, Marsh McLennan, AkzoNobel, Tate & Lyle",
     },
   ],
   cvLinkLabel: "Full CV and PDF",

@@ -91,8 +91,17 @@ test("required profile wording is nonempty; identities, links and numeric eviden
   ).toEqual(
     en.contributions.map((c) => [c.id, c.number, c.bars?.map((b) => b.width)])
   );
-  expect(pl.timeline.slice(1).map((t) => [t.name, t.current])).toEqual(
-    en.timeline.slice(1).map((t) => [t.name, t.current])
+  expect(en.timeline.map((t) => t.name)).toEqual([
+    "TheEventa",
+    "Orange Polska",
+    "DareDrop",
+    "Finance & accounting",
+  ]);
+  expect(pl.timeline.map((t) => [t.name, t.current])).toEqual(
+    en.timeline.map((t) => [
+      t.name === "Finance & accounting" ? "Finanse i księgowość" : t.name,
+      t.current,
+    ])
   );
   expect(pl.approach[3].text).toContain(
     "ATOM (Akademia Tworzenia Oprogramowania)"
