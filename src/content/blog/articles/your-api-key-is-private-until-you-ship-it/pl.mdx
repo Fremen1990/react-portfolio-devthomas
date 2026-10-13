@@ -1,0 +1,294 @@
+**Odczyt VIN działał. To była łatwiejsza część.**
+
+W Car Brain numer VIN pozwala uzupełnić dane pojazdu bez ręcznego wpisywania każdego pola. Pierwsza implementacja odpytywała auto.dev bezpośrednio z aplikacji mobilnej. Integrację napisał agent; za jej przegląd odpowiadałem ja.
+
+Problem krył się w miejscu, z którego pobierała klucz dostawcy: `EXPO_PUBLIC_AUTO_DEV_API_KEY`.
+
+W Expo używane w kodzie zmienne `EXPO_PUBLIC_` trafiają do paczki JavaScript aplikacji. Usunięcie wartości z Gita nie usuwa jej z aplikacji. Poprawna odpowiedź API potwierdza, że integracja działa. Nie potwierdza, że klucz znajduje się po właściwej stronie.
+
+Trzeba przyznać: nazwa `EXPO_PUBLIC_` niczego nie ukrywa.
+
+## Z konfiguracji zrobiła się decyzja architektoniczna
+
+Zmienne środowiskowe odpowiadają na pytanie „skąd pochodzi ta wartość?”. Nie rozstrzygają automatycznie, kto będzie mógł ją odczytać.
+
+Publiczny adres API może być częścią konfiguracji klienta. Sekretny klucz, który pozwala wykonywać żądania na moim koncie u dostawcy, już nie. Podczas przeglądu oba wyglądają jak zwykłe ciągi znaków. Konsekwencje są zupełnie inne.
+
+[Dokumentacja Expo](https://docs.expo.dev/guides/environment-variables/) wprost ostrzega przed umieszczaniem sekretów w zmiennych z publicznym prefiksem. Sama zmiana nazwy też nie wystarczy: jeśli aplikacja nadal potrzebuje klucza do wywołania dostawcy, problem architektoniczny zostaje.
+
+Tego samego dnia przeniosłem wywołanie do funkcji Appwrite. Klient wysyła VIN; funkcja pobiera klucz ze swojego środowiska po stronie serwera i odpytuje auto.dev.
+
+<figure>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 360 570"
+    width="360"
+    height="570"
+    style={{
+      width: "100%",
+      maxWidth: "400px",
+      height: "auto",
+      display: "block",
+      margin: "0 auto",
+    }}
+    role="img"
+    aria-labelledby="boundary-pl-title boundary-pl-desc"
+  >
+    <title id="boundary-pl-title">VIN: granica dostępu do klucza</title>
+    <desc id="boundary-pl-desc">
+      Wcześniej aplikacja wywołuje auto.dev z kluczem. Teraz wysyła VIN do
+      Appwrite; funkcja sprawdza tożsamość i dane, a potem wywołuje auto.dev z
+      kluczem serwera.
+    </desc>
+    <text
+      x="180"
+      y="22"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      WCZEŚNIEJ · BEZPOŚREDNIO
+    </text>
+    <rect
+      x="25"
+      y="35"
+      width="310"
+      height="60"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="59"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      Aplikacja mobilna
+    </text>
+    <text
+      x="180"
+      y="81"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      Klucz dostawcy w kodzie klienta
+    </text>
+    <path
+      d="M180 99v24m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <text
+      x="180"
+      y="142"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      VIN + klucz dostawcy
+    </text>
+    <rect
+      x="25"
+      y="154"
+      width="310"
+      height="40"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="180"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      auto.dev
+    </text>
+    <path d="M20 215h320" stroke="currentColor" strokeOpacity=".25" />
+    <text
+      x="180"
+      y="242"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      TERAZ · GRANICA FUNKCJI
+    </text>
+    <rect
+      x="25"
+      y="255"
+      width="310"
+      height="60"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="280"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      Aplikacja mobilna
+    </text>
+    <text
+      x="180"
+      y="301"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      VIN + sesja użytkownika
+    </text>
+    <path
+      d="M180 319v24m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <rect
+      x="12"
+      y="351"
+      width="336"
+      height="104"
+      rx="16"
+      fill="var(--accent-soft, #e2efee)"
+      stroke="var(--accent, #0f6b75)"
+      strokeWidth="2"
+      strokeDasharray="5 4"
+    />
+    <text
+      x="180"
+      y="379"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="18"
+    >
+      Funkcja Appwrite
+    </text>
+    <text
+      x="180"
+      y="405"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      Tożsamość · walidacja
+    </text>
+    <text
+      x="180"
+      y="433"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      Klucz zostaje na serwerze
+    </text>
+    <path
+      d="M180 459v24m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <text
+      x="180"
+      y="502"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      Wywołanie z kluczem
+    </text>
+    <rect
+      x="25"
+      y="516"
+      width="310"
+      height="40"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="542"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      auto.dev
+    </text>
+  </svg>
+  <figcaption>Schemat wywołań, nie wynik testu usługi.</figcaption>
+</figure>
+
+Najważniejsza zmiana dotyczy granicy dostępu do klucza. Car Brain już korzystał z Appwrite, więc funkcja pozwoliła przenieść tę operację na serwer bez dokładania osobnego serwisu API.
+
+## Funkcja ma więcej do zrobienia niż schowanie klucza
+
+Serwis mobilny wywołuje teraz API wykonywania funkcji Appwrite i interpretuje wynik. Dostępem do zewnętrznego dostawcy zajmuje się funkcja.
+
+W kodzie sprawdzonym do tego artykułu ścieżka dekodowania najpierw sprawdza obecność tożsamości wywołującego przekazanej przez Appwrite. Waliduje też format VIN, ogranicza czas żądania do dostawcy i rozróżnia błędy, między innymi niepoprawne dane, brak danych pojazdu oraz błąd dostawcy.
+
+Te obowiązki są ze sobą związane: kto może zlecić operację, jakie dane przyjmujemy i co robimy, kiedy zewnętrzne API zawiedzie. Klient nadal odpowiada za stan ładowania i czytelny komunikat. Przeniesienie wykonania nie przenosi całego doświadczenia użytkownika.
+
+Ważne jest jeszcze jedno rozróżnienie: **ukrycie klucza i kontrolowanie jego użycia to dwa osobne problemy.** Klucz na serwerze nadal może finansować niechciane żądania, jeśli dostęp do operacji jest zbyt szeroki. Uwierzytelnianie to jedna warstwa; limity użycia, częstotliwości i wydatków wymagają osobnych decyzji. Samo przeniesienie wywołania nie dowodzi, że wszystkie te mechanizmy działają.
+
+Funkcja wyznacza granicę. Nie jest miniaturowym działem bezpieczeństwa.
+
+## Co daje dodatkowy krok i ile kosztuje
+
+| Decyzja                                | Zysk                                               | Koszt                                                |
+| -------------------------------------- | -------------------------------------------------- | ---------------------------------------------------- |
+| Wywołanie dostawcy w funkcji           | Mobilna ścieżka VIN nie potrzebuje klucza dostawcy | Dodatkowy krok wykonania i wdrożenie funkcji         |
+| Walidacja i obsługa błędów na serwerze | Jedno miejsce kontroli tej integracji              | Odpowiedzi błędów stają się kontraktem dla klienta   |
+| Wykorzystanie istniejącego Appwrite    | Bez osobnego serwisu API dla tej operacji          | Zależność od modelu wykonania i ograniczeń platformy |
+
+Zimny start funkcji i opóźnienia dostawcy to możliwe koszty, a nie zmierzone tutaj pogorszenie wydajności. Nie mam benchmarku, który wykazywałby przewagę szybkości lub ceny nad innym backendem.
+
+Wróciłbym do tej decyzji, gdyby integracje wymagały na tyle dużo wspólnej logiki lub koordynacji, że uzasadniałoby to osobny serwis. Dla pojedynczego, ograniczonego zadania oznaczałby on dziś dodatkowy obowiązek operacyjny.
+
+Analiza danych pojazdu z Gemini również korzysta z osobnej funkcji Appwrite. To kolejne zastosowanie tej granicy, a nie powód, żeby zmienić tekst w przegląd całej architektury AI. Cache i koszty generowania odpowiedzi zasługują na własny artykuł.
+
+## Usunąć skrót, zachować lekcję
+
+Pierwotny dekoder pozostał w kliencie jako nieużywany kod, mimo że aktywne wywołanie przeniesiono wcześniej. Został usunięty 12 października. Obecny serwis VIN w aplikacji mobilnej korzysta ze ścieżki przez funkcję.
+
+To istotna różnica. „Dziś nikt tego nie wywołuje” daje mniej pewności niż usunięcie starej drogi, którą kolejna zmiana mogłaby przywrócić. Uzasadnienie decyzji można zachować w ADR bez zachowywania wykonywalnego skrótu.
+
+Przy kolejnej integracji chcę sprawdzić:
+
+- Czy klucz służy publicznej identyfikacji, czy daje uprzywilejowany dostęp do konta u dostawcy?
+- Dokąd trafia: do paczki klienta, środowiska serwera czy obu?
+- Kto może uruchomić operację po stronie serwera?
+- Co się dzieje, gdy dostawca nie odpowie, odrzuci żądanie lub wyczerpie limit?
+
+To pytania do przeglądu, nie deklaracja, że każdą odpowiedź wymusza automatyczny test.
+
+Wniosek wykracza poza kod generowany przez AI. Za tę granicę nadal odpowiadam ja — niezależnie od tego, czy pierwszą wersję napisał agent, znalazłem ją w tutorialu, czy podpowiedział mi ją mój własny optymizm po północy.
+
+**Stan na 12 października 2026:** artykuł opisuje kod i zapisy decyzji w repozytorium, nie nowy test działającego Appwrite. Nie stwierdza publicznego wykorzystania klucza, strat finansowych ani wydania aplikacji z przejętymi zabezpieczeniami.
+
+Kontekst produktu znajdziesz w tekście [dlaczego zbudowałem Car Brain](https://devthomas.pl/blog/pl/why-i-built-car-brain/).
