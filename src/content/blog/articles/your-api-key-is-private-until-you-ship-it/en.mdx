@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 **The VIN lookup worked. That was the easy part.**
 
 In Car Brain, entering a VIN can fill in vehicle details instead of making the user type them. The first implementation called auto.dev directly from the mobile app. An agent wrote that integration; I was responsible for reviewing it.
@@ -19,229 +21,21 @@ A public API base URL belongs in client configuration. A provider secret that au
 I moved the VIN call into an Appwrite Function the same day. The client sends the VIN; the function reads the provider key from its server-side environment and calls auto.dev.
 
 <figure>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 360 570"
-    width="360"
-    height="570"
-    style={{
-      width: "100%",
-      maxWidth: "400px",
-      height: "auto",
-      display: "block",
-      margin: "0 auto",
-    }}
-    role="img"
-    aria-labelledby="boundary-en-title boundary-en-desc"
+  <a
+    href="/blog/api-key-boundary/en.webp"
+    aria-label="Open diagram at full size"
   >
-    <title id="boundary-en-title">{"VIN lookup: credential boundary"}</title>
-    <desc id="boundary-en-desc">
-      {
-        "Before: mobile calls auto.dev with a provider key. After: mobile sends VIN to Appwrite; the function checks the caller and input, and calls auto.dev with its server-side key."
-      }
-    </desc>
-    <text
-      x="180"
-      y="22"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"BEFORE · DIRECT CALL"}
-    </text>
-    <rect
-      x="25"
-      y="35"
-      width="310"
-      height="60"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
+    <Image
+      src="/blog/api-key-boundary/en.webp"
+      width={1448}
+      height={1086}
+      alt="Before: the mobile app contains the provider key and calls auto.dev directly. After: an Appwrite Function checks the caller and input and calls auto.dev using a server-side key. The tradeoff is another hop, deployment and failure handling."
     />
-    <text
-      x="180"
-      y="59"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"Mobile client"}
-    </text>
-    <text
-      x="180"
-      y="81"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"Provider key in client code"}
-    </text>
-    <path
-      d="M180 99v24m-5-6 5 6 5-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <text
-      x="180"
-      y="142"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"VIN + provider credential"}
-    </text>
-    <rect
-      x="25"
-      y="154"
-      width="310"
-      height="40"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
-    />
-    <text
-      x="180"
-      y="180"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"auto.dev"}
-    </text>
-    <path d="M20 215h320" stroke="currentColor" strokeOpacity=".25" />
-    <text
-      x="180"
-      y="242"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"AFTER · FUNCTION BOUNDARY"}
-    </text>
-    <rect
-      x="25"
-      y="255"
-      width="310"
-      height="60"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
-    />
-    <text
-      x="180"
-      y="280"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"Mobile client"}
-    </text>
-    <text
-      x="180"
-      y="301"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"VIN + signed-in execution"}
-    </text>
-    <path
-      d="M180 319v24m-5-6 5 6 5-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <rect
-      x="12"
-      y="351"
-      width="336"
-      height="104"
-      rx="16"
-      fill="var(--accent-soft, #e2efee)"
-      stroke="var(--accent, #0f6b75)"
-      strokeWidth="2"
-      strokeDasharray="5 4"
-    />
-    <text
-      x="180"
-      y="379"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="18"
-    >
-      {"Appwrite Function"}
-    </text>
-    <text
-      x="180"
-      y="405"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"Caller check · validation"}
-    </text>
-    <text
-      x="180"
-      y="433"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"Provider key stays server-side"}
-    </text>
-    <path
-      d="M180 459v24m-5-6 5 6 5-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <text
-      x="180"
-      y="502"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"Provider call + credential"}
-    </text>
-    <rect
-      x="25"
-      y="516"
-      width="310"
-      height="40"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
-    />
-    <text
-      x="180"
-      y="542"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"auto.dev"}
-    </text>
-  </svg>
-  <figcaption>Conceptual request paths; not a live test.</figcaption>
+  </a>
+  <figcaption>
+    {"Conceptual request flow. "}
+    <a href="/blog/api-key-boundary/en.webp">{"Open diagram at full size"}</a>
+  </figcaption>
 </figure>
 
 The important change is the boundary around the credential. Appwrite was already part of Car Brain, so a function gave this operation a server-side home without introducing a separate API service.

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 **Odczyt VIN działał. To była łatwiejsza część.**
 
 W Car Brain numer VIN pozwala uzupełnić dane pojazdu bez ręcznego wpisywania każdego pola. Pierwsza implementacja odpytywała auto.dev bezpośrednio z aplikacji mobilnej. Integrację napisał agent; za jej przegląd odpowiadałem ja.
@@ -19,229 +21,23 @@ Publiczny adres API może być częścią konfiguracji klienta. Sekretny klucz, 
 Tego samego dnia przeniosłem wywołanie do funkcji Appwrite. Klient wysyła VIN; funkcja pobiera klucz ze swojego środowiska po stronie serwera i odpytuje auto.dev.
 
 <figure>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 360 570"
-    width="360"
-    height="570"
-    style={{
-      width: "100%",
-      maxWidth: "400px",
-      height: "auto",
-      display: "block",
-      margin: "0 auto",
-    }}
-    role="img"
-    aria-labelledby="boundary-pl-title boundary-pl-desc"
+  <a
+    href="/blog/api-key-boundary/pl.webp"
+    aria-label="Otwórz diagram w pełnym rozmiarze"
   >
-    <title id="boundary-pl-title">{"VIN: granica dostępu do klucza"}</title>
-    <desc id="boundary-pl-desc">
-      {
-        "Wcześniej aplikacja wywołuje auto.dev z kluczem. Teraz wysyła VIN do Appwrite; funkcja sprawdza tożsamość i dane, a potem wywołuje auto.dev z kluczem serwera."
-      }
-    </desc>
-    <text
-      x="180"
-      y="22"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"WCZEŚNIEJ · BEZPOŚREDNIO"}
-    </text>
-    <rect
-      x="25"
-      y="35"
-      width="310"
-      height="60"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
+    <Image
+      src="/blog/api-key-boundary/pl.webp"
+      width={1448}
+      height={1086}
+      alt="Przed: aplikacja mobilna zawiera klucz dostawcy i wywołuje auto.dev bezpośrednio. Po: funkcja Appwrite sprawdza użytkownika i dane wejściowe, a następnie wywołuje auto.dev z kluczem przechowywanym na serwerze. Koszt to dodatkowy krok, wdrożenie i obsługa błędów."
     />
-    <text
-      x="180"
-      y="59"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"Aplikacja mobilna"}
-    </text>
-    <text
-      x="180"
-      y="81"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"Klucz dostawcy w kodzie klienta"}
-    </text>
-    <path
-      d="M180 99v24m-5-6 5 6 5-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <text
-      x="180"
-      y="142"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"VIN + klucz dostawcy"}
-    </text>
-    <rect
-      x="25"
-      y="154"
-      width="310"
-      height="40"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
-    />
-    <text
-      x="180"
-      y="180"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"auto.dev"}
-    </text>
-    <path d="M20 215h320" stroke="currentColor" strokeOpacity=".25" />
-    <text
-      x="180"
-      y="242"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"TERAZ · GRANICA FUNKCJI"}
-    </text>
-    <rect
-      x="25"
-      y="255"
-      width="310"
-      height="60"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
-    />
-    <text
-      x="180"
-      y="280"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"Aplikacja mobilna"}
-    </text>
-    <text
-      x="180"
-      y="301"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"VIN + sesja użytkownika"}
-    </text>
-    <path
-      d="M180 319v24m-5-6 5 6 5-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <rect
-      x="12"
-      y="351"
-      width="336"
-      height="104"
-      rx="16"
-      fill="var(--accent-soft, #e2efee)"
-      stroke="var(--accent, #0f6b75)"
-      strokeWidth="2"
-      strokeDasharray="5 4"
-    />
-    <text
-      x="180"
-      y="379"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="18"
-    >
-      {"Funkcja Appwrite"}
-    </text>
-    <text
-      x="180"
-      y="405"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"Tożsamość · walidacja"}
-    </text>
-    <text
-      x="180"
-      y="433"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="14"
-    >
-      {"Klucz zostaje na serwerze"}
-    </text>
-    <path
-      d="M180 459v24m-5-6 5 6 5-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    />
-    <text
-      x="180"
-      y="502"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="13"
-    >
-      {"Wywołanie z kluczem"}
-    </text>
-    <rect
-      x="25"
-      y="516"
-      width="310"
-      height="40"
-      rx="12"
-      fill="var(--surface, #fff)"
-      stroke="currentColor"
-      strokeOpacity="0.45"
-    />
-    <text
-      x="180"
-      y="542"
-      textAnchor="middle"
-      fill="currentColor"
-      fontFamily="ui-sans-serif, system-ui, sans-serif"
-      fontSize="17"
-    >
-      {"auto.dev"}
-    </text>
-  </svg>
-  <figcaption>Schemat wywołań, nie wynik testu usługi.</figcaption>
+  </a>
+  <figcaption>
+    {"Schemat przepływu żądań. "}
+    <a href="/blog/api-key-boundary/pl.webp">
+      {"Otwórz diagram w pełnym rozmiarze"}
+    </a>
+  </figcaption>
 </figure>
 
 Najważniejsza zmiana dotyczy granicy dostępu do klucza. Car Brain już korzystał z Appwrite, więc funkcja pozwoliła przenieść tę operację na serwer bez dokładania osobnego serwisu API.
