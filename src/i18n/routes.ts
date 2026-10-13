@@ -49,6 +49,15 @@ const common = {
   "What I'd do differently": "Co zrobiłbym inaczej",
 };
 export const headingPairs: Record<string, Record<string, string>> = {
+  "article/your-api-key-is-private-until-you-ship-it": {
+    "A configuration choice became an architecture decision":
+      "Z konfiguracji zrobiła się decyzja architektoniczna",
+    "A function needs a job beyond hiding a key":
+      "Funkcja ma więcej do zrobienia niż schowanie klucza",
+    "What the extra hop buys—and costs":
+      "Co daje dodatkowy krok i ile kosztuje",
+    "Remove the shortcut, keep the lesson": "Usunąć skrót, zachować lekcję",
+  },
   "work/orange-cms": { ...common, "How it works": "Jak to działa" },
   "work/orange-e2e-testing": {
     ...common,

@@ -3,6 +3,28 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
+    slug: "your-api-key-is-private-until-you-ship-it",
+    published: true,
+    editions: {
+      en: {
+        title: "Your API key is private. Until you ship it.",
+        description:
+          "A working VIN lookup put a provider credential on the wrong side of the client/server boundary. The Appwrite Function fix, its tradeoffs, and the shortcut I removed.",
+        topics: ["Car Brain", "Expo", "Appwrite", "Architecture"],
+        body: "your-api-key-is-private-until-you-ship-it/en.mdx",
+      },
+      pl: {
+        title:
+          "Twój klucz API jest prywatny. Dopóki nie wyślesz go z aplikacją.",
+        description:
+          "Działający odczyt VIN umieścił klucz dostawcy po niewłaściwej stronie granicy klient–serwer. Funkcja Appwrite, jej koszty i usunięcie starej ścieżki.",
+        topics: ["Car Brain", "Expo", "Appwrite", "Architektura"],
+        body: "your-api-key-is-private-until-you-ship-it/pl.mdx",
+      },
+    },
+    publishedAt: "2026-10-13",
+  },
+  {
     slug: "why-i-built-car-brain",
     published: true,
     editions: {

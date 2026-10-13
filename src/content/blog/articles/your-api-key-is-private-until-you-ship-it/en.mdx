@@ -1,0 +1,294 @@
+**The VIN lookup worked. That was the easy part.**
+
+In Car Brain, entering a VIN can fill in vehicle details instead of making the user type them. The first implementation called auto.dev directly from the mobile app. An agent wrote that integration; I was responsible for reviewing it.
+
+The problem was where it read the provider credential: `EXPO_PUBLIC_AUTO_DEV_API_KEY`.
+
+In Expo, referenced `EXPO_PUBLIC_` variables are embedded in the client’s JavaScript bundle. Keeping the value out of Git does not keep it out of the application. A successful request proves the integration works. It says nothing about whether the credential belongs there.
+
+`EXPO_PUBLIC_` is remarkably honest branding.
+
+## A configuration choice became an architecture decision
+
+Environment variables answer “where does this value come from?” They do not automatically answer “who can read it?”
+
+A public API base URL belongs in client configuration. A provider secret that authorizes requests on my account does not. Both can look like ordinary strings during code review; their consequences are very different.
+
+[Expo’s documentation](https://docs.expo.dev/guides/environment-variables/) explicitly warns against putting sensitive secrets in public-prefixed variables. Renaming a variable is not enough either: if the app still needs the secret to call the provider, the architectural problem remains.
+
+I moved the VIN call into an Appwrite Function the same day. The client sends the VIN; the function reads the provider key from its server-side environment and calls auto.dev.
+
+<figure>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 360 570"
+    width="360"
+    height="570"
+    style={{
+      width: "100%",
+      maxWidth: "400px",
+      height: "auto",
+      display: "block",
+      margin: "0 auto",
+    }}
+    role="img"
+    aria-labelledby="boundary-en-title boundary-en-desc"
+  >
+    <title id="boundary-en-title">{"VIN lookup: credential boundary"}</title>
+    <desc id="boundary-en-desc">
+      {
+        "Before: mobile calls auto.dev with a provider key. After: mobile sends VIN to Appwrite; the function checks the caller and input, and calls auto.dev with its server-side key."
+      }
+    </desc>
+    <text
+      x="180"
+      y="22"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"BEFORE · DIRECT CALL"}
+    </text>
+    <rect
+      x="25"
+      y="35"
+      width="310"
+      height="60"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="59"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      {"Mobile client"}
+    </text>
+    <text
+      x="180"
+      y="81"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Provider key in client code"}
+    </text>
+    <path
+      d="M180 99v24m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <text
+      x="180"
+      y="142"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"VIN + provider credential"}
+    </text>
+    <rect
+      x="25"
+      y="154"
+      width="310"
+      height="40"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="180"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      {"auto.dev"}
+    </text>
+    <path d="M20 215h320" stroke="currentColor" strokeOpacity=".25" />
+    <text
+      x="180"
+      y="242"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"AFTER · FUNCTION BOUNDARY"}
+    </text>
+    <rect
+      x="25"
+      y="255"
+      width="310"
+      height="60"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="280"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      {"Mobile client"}
+    </text>
+    <text
+      x="180"
+      y="301"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"VIN + signed-in execution"}
+    </text>
+    <path
+      d="M180 319v24m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <rect
+      x="12"
+      y="351"
+      width="336"
+      height="104"
+      rx="16"
+      fill="var(--accent-soft, #e2efee)"
+      stroke="var(--accent, #0f6b75)"
+      strokeWidth="2"
+      strokeDasharray="5 4"
+    />
+    <text
+      x="180"
+      y="379"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="18"
+    >
+      {"Appwrite Function"}
+    </text>
+    <text
+      x="180"
+      y="405"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Caller check · validation"}
+    </text>
+    <text
+      x="180"
+      y="433"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Provider key stays server-side"}
+    </text>
+    <path
+      d="M180 459v24m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <text
+      x="180"
+      y="502"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Provider call + credential"}
+    </text>
+    <rect
+      x="25"
+      y="516"
+      width="310"
+      height="40"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="542"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="17"
+    >
+      {"auto.dev"}
+    </text>
+  </svg>
+  <figcaption>Conceptual request paths; not a live test.</figcaption>
+</figure>
+
+The important change is the boundary around the credential. Appwrite was already part of Car Brain, so a function gave this operation a server-side home without introducing a separate API service.
+
+## A function needs a job beyond hiding a key
+
+The mobile service now calls Appwrite’s function-execution API and interprets the result. The function handles provider access.
+
+In the source reviewed for this article, the decode path checks for Appwrite’s caller identity before proceeding. It also validates VIN format, uses a timeout for the provider request and distinguishes errors such as invalid input, missing vehicle data and provider failure.
+
+Those responsibilities belong together: who may request the operation, what input it accepts, and how the external call fails. The client still owns loading states and useful feedback. Moving execution does not move the entire user experience.
+
+There is a second distinction worth keeping explicit: **hiding a credential and controlling its use are separate concerns.** A server-side key can still pay for unwanted requests if its endpoint is too permissive. Authentication is one layer; quotas, rate limits and spending controls need their own decisions. I am not claiming that moving the call proves all of those controls.
+
+The function is a boundary, not a tiny security department.
+
+## What the extra hop buys—and costs
+
+| Decision                                          | Gain                                                        | Cost                                                        |
+| ------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| Provider call inside a function                   | The mobile VIN path no longer needs the provider credential | Another execution hop and a function to deploy              |
+| Validate and handle provider failures server-side | One place to govern this integration                        | Error responses become a contract the client must interpret |
+| Use the existing Appwrite platform                | No separate API service for this operation                  | Dependence on its execution model and operational limits    |
+
+Cold starts and provider delays are possible costs, not measured regressions here. I have no benchmark showing this is faster or cheaper than another backend.
+
+I would revisit the arrangement if integrations grew enough shared policy or orchestration to justify a dedicated service. For one bounded lookup, introducing that service would add another operational responsibility.
+
+Gemini-powered vehicle insights use a separate Appwrite Function too. That is another application of the boundary, not a reason to turn this article into an AI architecture tour. Caching and inference costs deserve their own story.
+
+## Remove the shortcut, keep the lesson
+
+The original client-side decoder survived as unused code after the active call moved. It was removed on 12 October. The current mobile VIN service uses the function path.
+
+That distinction matters. “Not called today” is weaker than removing an obsolete route that a future edit might reuse. An architecture decision record can preserve the reasoning without preserving an executable shortcut.
+
+My review questions for the next integration are:
+
+- Does a credential authorize public identification, or privileged use of a provider account?
+- Which artifact receives it: the client bundle, the server environment, or both?
+- Who is allowed to invoke the server-side operation?
+- What happens when the provider times out, rejects a request or exhausts a quota?
+
+These are review questions, not a claim that every answer is enforced by an automated check.
+
+The lesson is broader than generated code. I still own the boundary, whether the first implementation came from an agent, a tutorial or my own late-night optimism.
+
+**Development snapshot — 12 October 2026:** this article reflects repository code and decision records, not a fresh live Appwrite test. It makes no claim of public exploitation, financial loss or a compromised store release.
+
+For the wider product context, see [why I built Car Brain](https://devthomas.pl/blog/en/why-i-built-car-brain/).
