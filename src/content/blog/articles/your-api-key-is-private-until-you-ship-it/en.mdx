@@ -34,11 +34,11 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
     role="img"
     aria-labelledby="boundary-en-title boundary-en-desc"
   >
-    <title id="boundary-en-title">VIN lookup: credential boundary</title>
+    <title id="boundary-en-title">{"VIN lookup: credential boundary"}</title>
     <desc id="boundary-en-desc">
-      Before: mobile calls auto.dev with a provider key. After: mobile sends VIN
-      to Appwrite; the function checks the caller and input, and calls auto.dev
-      with its server-side key.
+      {
+        "Before: mobile calls auto.dev with a provider key. After: mobile sends VIN to Appwrite; the function checks the caller and input, and calls auto.dev with its server-side key."
+      }
     </desc>
     <text
       x="180"
@@ -48,7 +48,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="13"
     >
-      BEFORE · DIRECT CALL
+      {"BEFORE · DIRECT CALL"}
     </text>
     <rect
       x="25"
@@ -68,7 +68,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="17"
     >
-      Mobile client
+      {"Mobile client"}
     </text>
     <text
       x="180"
@@ -78,7 +78,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="14"
     >
-      Provider key in client code
+      {"Provider key in client code"}
     </text>
     <path
       d="M180 99v24m-5-6 5 6 5-6"
@@ -94,7 +94,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="13"
     >
-      VIN + provider credential
+      {"VIN + provider credential"}
     </text>
     <rect
       x="25"
@@ -114,7 +114,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="17"
     >
-      auto.dev
+      {"auto.dev"}
     </text>
     <path d="M20 215h320" stroke="currentColor" strokeOpacity=".25" />
     <text
@@ -125,7 +125,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="13"
     >
-      AFTER · FUNCTION BOUNDARY
+      {"AFTER · FUNCTION BOUNDARY"}
     </text>
     <rect
       x="25"
@@ -145,7 +145,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="17"
     >
-      Mobile client
+      {"Mobile client"}
     </text>
     <text
       x="180"
@@ -155,7 +155,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="14"
     >
-      VIN + signed-in execution
+      {"VIN + signed-in execution"}
     </text>
     <path
       d="M180 319v24m-5-6 5 6 5-6"
@@ -182,7 +182,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="18"
     >
-      Appwrite Function
+      {"Appwrite Function"}
     </text>
     <text
       x="180"
@@ -192,7 +192,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="14"
     >
-      Caller check · validation
+      {"Caller check · validation"}
     </text>
     <text
       x="180"
@@ -202,7 +202,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="14"
     >
-      Provider key stays server-side
+      {"Provider key stays server-side"}
     </text>
     <path
       d="M180 459v24m-5-6 5 6 5-6"
@@ -218,7 +218,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="13"
     >
-      Provider call + credential
+      {"Provider call + credential"}
     </text>
     <rect
       x="25"
@@ -238,7 +238,7 @@ I moved the VIN call into an Appwrite Function the same day. The client sends th
       fontFamily="ui-sans-serif, system-ui, sans-serif"
       fontSize="17"
     >
-      auto.dev
+      {"auto.dev"}
     </text>
   </svg>
   <figcaption>Conceptual request paths; not a live test.</figcaption>
