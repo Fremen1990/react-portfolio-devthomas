@@ -49,6 +49,15 @@ const common = {
   "What I'd do differently": "Co zrobiłbym inaczej",
 };
 export const headingPairs: Record<string, Record<string, string>> = {
+  "article/do-not-let-play-console-go-quiet": {
+    "The account closed. The app did not move.":
+      "Konto zamknięte. Aplikacja się nie przeniosła.",
+    "A new account is not a continuation": "Nowe konto nie jest kontynuacją",
+    "The package name stayed behind": "Nazwa pakietu została na starym koncie",
+    "Twelve people, fourteen days": "Dwanaście osób, czternaście dni",
+    "What it cost": "Co to kosztowało",
+    "What I would do next time": "Co zrobiłbym następnym razem",
+  },
   "article/your-api-key-is-private-until-you-ship-it": {
     "A configuration choice became an architecture decision":
       "Z konfiguracji zrobiła się decyzja architektoniczna",
