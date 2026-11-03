@@ -1,0 +1,458 @@
+**A quiet Play Console does not pause the listing.**
+
+Google closes the developer account, and the Android package name stays with it. I found that out with Car Brain. The source was fine. The accounts in Appwrite were fine. `com.carbrain.app` was already taken, so the live app is `app.carbrain.mobile`. Old Android installs do not get an update.
+
+Google Play does not do reunions.
+
+## The account closed. The app did not move.
+
+[Google's inactivity rule](https://support.google.com/googleplay/android-developer/answer/11605267) is short. The warning says what to do and by when. Miss that, and the account is closed. The registration fee is not refunded. A new account is allowed later. The old one does not reopen.
+
+The warning on record is 21 July 2026, with a deadline of 19 September. The account closed on 27 September.
+
+A transfer would not have saved the listing anyway. [Moving an app](https://support.google.com/googleplay/android-developer/answer/6230247) needs both Play Console accounts to be active. One of mine was already a locked door. The product still existed. The store identity did not.
+
+## A new account is not a continuation
+
+Starting again meant a new Google login, another US$25, and a government ID. The document was accepted. Uploading a scan still felt like a lot of paperwork for a logbook I built for myself. Personal accounts are asked for this. I am not calling it a rule aimed at one country.
+
+None of that restored the old console. It bought an empty one.
+
+Personal accounts created after 13 November 2023 also cannot walk straight into production. [The testing rule](https://support.google.com/googleplay/android-developer/answer/14151465) keeps that locked until a closed test qualifies. The more expensive surprise came first: the package name.
+
+## The package name stayed behind
+
+Android treats the application id as the app. Car Brain's was `com.carbrain.app`. On the new account that name was already taken, held by the closed account. On 8 October the relaunch moved to `app.carbrain.mobile`.
+
+Same repository. Same screens. A different Play app.
+
+Old Android installs cannot cross that line. Play has no update to offer them. The 2024–2025 build and this one are two apps. iOS did not pick up the split: the Apple bundle id is still `com.carbrain.app`. This piece is about Play. It does not say the App Store listing is back.
+
+The accounts survived for a dull reason. Sign-in lives in Appwrite. The new Android build is configured for the same project as the iOS app and the web client. Play was the shop window. It was not the database.
+
+<figure>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 360 620"
+    role="img"
+    aria-labelledby="split-en-title split-en-desc"
+    style={{
+      width: "100%",
+      maxWidth: "420px",
+      height: "auto",
+      display: "block",
+      margin: "0 auto",
+    }}
+  >
+    <title id="split-en-title">{"Two Play identities for one app"}</title>
+    <desc id="split-en-desc">
+      {
+        "The closed account still holds com.carbrain.app, with no update path for old Android installs. The new personal account publishes app.carbrain.mobile. The source code and the Appwrite project are shared."
+      }
+    </desc>
+    <text
+      x="180"
+      y="22"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"CLOSED ACCOUNT"}
+    </text>
+    <rect
+      x="24"
+      y="34"
+      width="312"
+      height="72"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="62"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="16"
+    >
+      {"Play Console"}
+    </text>
+    <text
+      x="180"
+      y="86"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Closed 27 Sep 2026"}
+    </text>
+    <path
+      d="M180 110v22m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <rect
+      x="24"
+      y="140"
+      width="312"
+      height="72"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+    />
+    <text
+      x="180"
+      y="168"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="15"
+    >
+      {"com.carbrain.app"}
+    </text>
+    <text
+      x="180"
+      y="192"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Reserved on the old account"}
+    </text>
+    <path
+      d="M180 216v18"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeDasharray="4 4"
+    />
+    <rect
+      x="48"
+      y="240"
+      width="264"
+      height="56"
+      rx="12"
+      fill="none"
+      stroke="currentColor"
+      strokeOpacity="0.45"
+      strokeDasharray="5 4"
+    />
+    <text
+      x="180"
+      y="264"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Old Android installs"}
+    </text>
+    <text
+      x="180"
+      y="284"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"No update path"}
+    </text>
+    <path d="M28 318h304" stroke="currentColor" strokeOpacity="0.25" />
+    <text
+      x="180"
+      y="346"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"NEW PERSONAL ACCOUNT"}
+    </text>
+    <rect
+      x="24"
+      y="358"
+      width="312"
+      height="64"
+      rx="12"
+      fill="var(--accent-soft, #e2efee)"
+      stroke="var(--accent, #0f6b75)"
+      strokeWidth="2"
+    />
+    <text
+      x="180"
+      y="384"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="16"
+    >
+      {"Play Console"}
+    </text>
+    <text
+      x="180"
+      y="406"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Second registration"}
+    </text>
+    <path
+      d="M180 426v22m-5-6 5 6 5-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    />
+    <rect
+      x="24"
+      y="456"
+      width="312"
+      height="72"
+      rx="12"
+      fill="var(--surface, #fff)"
+      stroke="var(--accent, #0f6b75)"
+      strokeWidth="2"
+    />
+    <text
+      x="180"
+      y="484"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="15"
+    >
+      {"app.carbrain.mobile"}
+    </text>
+    <text
+      x="180"
+      y="508"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Live listing, 29 Oct 2026"}
+    </text>
+    <text
+      x="180"
+      y="552"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Same source code"}
+    </text>
+    <text
+      x="180"
+      y="576"
+      textAnchor="middle"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"Same Appwrite project as iOS and web"}
+    </text>
+  </svg>
+  <figcaption>
+    The store identity split. The code and the Appwrite project did not. The old
+    Play page is gone.
+  </figcaption>
+</figure>
+
+## Twelve people, fourteen days
+
+For a personal account created after 13 November 2023, Google wants a closed test with at least 12 testers opted in continuously for the 14 days before you apply for production. Continuously is the word that matters. A tester who leaves early does not count. If they opt out and come back, their 14 days start again.
+
+I did not have twelve phones and twelve free afternoons. A paid testing service supplied the opted-in testers. The name stays off this page.
+
+The report arrived on 21 October, about halfway through the 14 days. Most of it was a template: of seven points, two were real defects, two were half right, and three described things the app already did.
+
+The real ones were specific. Share opened an alert that sharing would be implemented later, which is a bold sentence to show a reviewer. And the selected tab was marked only by colour. In the dark theme the active and inactive colours were almost the same lightness, about 1.03 to 1. On a dim screen every tab looks idle.
+
+The same day, 2.2.2 went to the closed track: a real share sheet, a Rate action that opens the Play listing, a tab highlight that does not depend on colour, the theme option renamed from Auto to System and from Automatyczny to Systemowy, and an unused WebView dependency removed. Scanners had been reporting a WebView the screens never rendered.
+
+Production access came through around 27–29 October. One submit stopped on Data safety until I declared an optional phone number from the profile. The public listing shows an update on 29 October 2026.
+
+<figure>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 360 390"
+    role="img"
+    aria-labelledby="time-en-title time-en-desc"
+    style={{
+      width: "100%",
+      maxWidth: "420px",
+      height: "auto",
+      display: "block",
+      margin: "0 auto",
+    }}
+  >
+    <title id="time-en-title">{"Dates on the record"}</title>
+    <desc id="time-en-desc">
+      {
+        "21 July warning, 19 September deadline, 27 September closure, 8 October new package, 21 October closed-track fix, 29 October public listing. The 14-day window has no start date in these notes."
+      }
+    </desc>
+    <line
+      x1="36"
+      y1="28"
+      x2="36"
+      y2="352"
+      stroke="currentColor"
+      strokeOpacity="0.35"
+    />
+    <circle cx="36" cy="36" r="5" fill="currentColor" />
+    <text
+      x="56"
+      y="32"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"21 Jul 2026"}
+    </text>
+    <text
+      x="56"
+      y="50"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Warning email"}
+    </text>
+    <circle cx="36" cy="96" r="5" fill="currentColor" />
+    <text
+      x="56"
+      y="92"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"19 Sep 2026"}
+    </text>
+    <text
+      x="56"
+      y="110"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Deadline in that warning"}
+    </text>
+    <circle cx="36" cy="156" r="5" fill="currentColor" />
+    <text
+      x="56"
+      y="152"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"27 Sep 2026"}
+    </text>
+    <text
+      x="56"
+      y="170"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Account closed"}
+    </text>
+    <circle cx="36" cy="216" r="5" fill="currentColor" />
+    <text
+      x="56"
+      y="212"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"8 Oct 2026"}
+    </text>
+    <text
+      x="56"
+      y="230"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"New Android package"}
+    </text>
+    <circle cx="36" cy="276" r="5" fill="currentColor" />
+    <text
+      x="56"
+      y="272"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"21 Oct 2026"}
+    </text>
+    <text
+      x="56"
+      y="290"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"2.2.2 on the closed track"}
+    </text>
+    <circle cx="36" cy="336" r="5" fill="var(--accent, #0f6b75)" />
+    <text
+      x="56"
+      y="332"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="13"
+    >
+      {"29 Oct 2026"}
+    </text>
+    <text
+      x="56"
+      y="350"
+      fill="currentColor"
+      fontFamily="ui-sans-serif, system-ui, sans-serif"
+      fontSize="14"
+    >
+      {"Public listing"}
+    </text>
+  </svg>
+  <figcaption>
+    Dates I can point at. The 14-day opt-in was underway on 21 October. The day
+    the new account was registered is not in my notes.
+  </figcaption>
+</figure>
+
+## What it cost
+
+| Item                | The bill                                                                           | What it did not buy                            |
+| ------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Registration, again | US$25. Closure does not refund the first fee.                                      | The old console                                |
+| Identity check      | A government ID upload. It was accepted.                                           | An exception to the new-account rules          |
+| Closed test         | 12 testers opted in for 14 continuous days, through a paid service                 | Credit for a tester who leaves early           |
+| Production review   | Google says this usually takes seven days or less. The listing date is 29 October. | A switch that flips the moment the 14 days end |
+| Package name        | `app.carbrain.mobile`, the live app                                                | Updates for installs of `com.carbrain.app`     |
+
+## What I would do next time
+
+I would treat Play Console as a dependency that rots. Google's prevention list is short: verify the contact email and phone, and upload a build, even to internal or closed testing, if a public release is not ready. A quiet console is how this starts.
+
+I would keep the listing text and the screenshots in the repository. The console is a bad archive. This time the old one was simply gone.
+
+I would choose the Android application id as if it could never change. It cannot, not without becoming a different app.
+
+I would also put about three weeks on the calendar before promising a Play link: the 14-day opt-in, then a review Google describes as usually seven days or less, plus the setup around both. That is a planning number, not a stopwatch reading from this relaunch.
+
+The app that came back is Car Brain 2.2.2, under a name the old Android installs do not recognise. It is on [Google Play](https://play.google.com/store/apps/details?id=app.carbrain.mobile).
+
+**Development snapshot — 3 November 2026:** the dates and package facts come from the closure record, the relaunch notes, and the public listing checked the same day. I did not run a fresh sign-in while writing this. The App Store is a separate question.
+
+For the product, rather than the shop window, see [why I built Car Brain](https://devthomas.pl/blog/en/why-i-built-car-brain/).

@@ -3,6 +3,27 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
+    slug: "do-not-let-play-console-go-quiet",
+    published: true,
+    editions: {
+      en: {
+        title: "Do not let Play Console go quiet.",
+        description:
+          "A quiet Play Console does not pause the listing. The Android package name stays with the closed account, so the app comes back as a different Play app.",
+        topics: ["Car Brain", "Google Play", "Release"],
+        body: "do-not-let-play-console-go-quiet/en.mdx",
+      },
+      pl: {
+        title: "Nie zostawiaj konta Google Play bez nadzoru.",
+        description:
+          "Jak w Play Console nic się nie dzieje, aplikacja w sklepie nie zostaje na pauzie. Nazwa pakietu Androida zostaje na zamkniętym koncie, więc wraca jako inna pozycja w Play.",
+        topics: ["Car Brain", "Google Play", "Wydanie"],
+        body: "do-not-let-play-console-go-quiet/pl.mdx",
+      },
+    },
+    publishedAt: "2026-11-04",
+  },
+  {
     slug: "your-api-key-is-private-until-you-ship-it",
     published: true,
     editions: {
