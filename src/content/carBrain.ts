@@ -44,7 +44,8 @@ export const carBrain: CarBrain = {
     "Vehicle management · Maintenance, fuel & costs · Reports & analytics",
   automation:
     "AI-powered vehicle insights · VIN decoding with automatic form filling",
-  status: "Mobile app reactivation and web development in progress.",
+  status:
+    "Version 3.0.0 is live on Google Play and the App Store, with a web app too.",
   articleLabel: "Why I built Car Brain",
   screensLabel: "Car Brain screens",
   sampleNote: "App screens with sample data.",
@@ -104,7 +105,7 @@ export const carBrainFor = (locale: "en" | "pl"): CarBrain => {
     automation:
       "Analiza danych pojazdu z AI · Dekodowanie VIN i automatyczne uzupełnianie formularza",
     status:
-      "Trwają prace nad przywróceniem aplikacji mobilnej i rozwojem wersji webowej.",
+      "Wersja 3.0.0 jest w Google Play i App Store, jest też aplikacja webowa.",
     articleLabel: "Dlaczego tworzę Car Brain",
     screensLabel: "Ekrany Car Brain",
     sampleNote: "Ekrany aplikacji z przykładowymi danymi.",

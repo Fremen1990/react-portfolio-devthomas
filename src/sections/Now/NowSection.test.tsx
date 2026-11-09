@@ -2,7 +2,7 @@ import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { NowSection } from "./NowSection";
-import { carBrain } from "../../content/carBrain";
+import { carBrain, carBrainFor } from "../../content/carBrain";
 import { carBrainLinks } from "../../content/carBrainLinks";
 import { profile } from "../../content/publicProfile";
 import { caseStudyPath } from "../../content/work/studies";
@@ -84,7 +84,13 @@ test("TheEventa links to its case study", () => {
 });
 
 test("Polish scope and article link are localized without store claims", () => {
-  render(<NowSection locale="pl" />);
+  // The unpublished card: this test is about the Polish copy, not the store links.
+  render(
+    <NowSection
+      locale="pl"
+      carBrain={{ ...carBrainFor("pl"), published: false }}
+    />
+  );
   expect(
     screen.getByText(/Dekodowanie VIN i automatyczne/)
   ).toBeInTheDocument();

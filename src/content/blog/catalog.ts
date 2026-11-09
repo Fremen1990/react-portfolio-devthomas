@@ -22,6 +22,7 @@ export const blogPosts: BlogPost[] = [
       },
     },
     publishedAt: "2026-11-04",
+    updatedAt: "2026-11-09",
   },
   {
     slug: "your-api-key-is-private-until-you-ship-it",

@@ -1,4 +1,8 @@
+import Image from "next/image";
+
 **Jak w Play Console nic się nie dzieje, aplikacja w sklepie nie zostaje na pauzie.**
+
+_Aktualizacja z 9 listopada 2026: Car Brain 3.0.0 jest już w Google Play i w App Store. [Szczegóły na końcu.](#aktualizacja-z-9-listopada-2026-3-0-0-w-obu-sklepach)_
 
 Google zamyka konto deweloperskie, a nazwa pakietu Androida zostaje przy nim. Przekonałem się o tym na Car Brain. Kod był w porządku. Konta w Appwrite też. Nazwa `com.carbrain.app` była już zajęta, więc aplikacja na żywo to `app.carbrain.mobile`. Stare instalacje Androida nie dostaną aktualizacji.
 
@@ -26,7 +30,7 @@ Android traktuje identyfikator aplikacji jak samą aplikację. U Car Brain był 
 
 To samo repozytorium. Te same ekrany. Inna aplikacja w Play.
 
-Stare instalacje Androida nie przechodzą tej granicy. Play nie ma im czego zaktualizować. Wydanie z lat 2024–2025 i to obecne to dwie aplikacje. iOS nie dostał tego rozjazdu: identyfikator u Apple to nadal `com.carbrain.app`. Ten tekst jest o Play. Nie piszę, że ogłoszenie w App Store wróciło.
+Stare instalacje Androida nie przechodzą tej granicy. Play nie ma im czego zaktualizować. Wydanie z lat 2024–2025 i to obecne to dwie aplikacje. iOS nie dostał tego rozjazdu: identyfikator u Apple to nadal `com.carbrain.app`. Ta część jest o Play. App Store opisuję w aktualizacji na końcu.
 
 Konta użytkowników przetrwały z nudnego powodu. Logowanie jest w Appwrite. Nowa wersja na Androida jest ustawiona na ten sam projekt co aplikacja na iOS i klient webowy. Play był witryną sklepu. Nie był bazą.
 
@@ -455,6 +459,32 @@ Zostawiłbym też około trzech tygodni w kalendarzu, zanim obiecam link do Play
 
 Aplikacja, która wróciła, to Car Brain 2.2.2, pod nazwą, której stare instalacje Androida nie rozpoznają. Jest w [Google Play](https://play.google.com/store/apps/details?id=app.carbrain.mobile).
 
-**Stan na 3 listopada 2026:** daty i fakty o pakiecie pochodzą z zapisu o zamknięciu, notatek z powrotu i publicznego ogłoszenia sprawdzonego tego samego dnia. Przy pisaniu nie logowałem się od nowa. App Store to osobne pytanie.
+## Aktualizacja z 9 listopada 2026: 3.0.0 w obu sklepach
+
+Pytanie o App Store ma odpowiedź. Car Brain 3.0.0 trafił do Google Play 8 listopada 2026, a do App Store 9 listopada 2026.
+
+- **Play.** Nowe konto potrzebowało opisanego wyżej testu zamkniętego, z prawdziwymi testerami zapisanymi na 14 dni, zanim mogło trafić na produkcję. 3.0.0 przeszedł potem przez ścieżkę testów zamkniętych i recenzję produkcyjną Google.
+- **App Store.** Apple nie wymagał nic takiego. Identyfikator pakietu się nie zmienił, a ogłoszenie przez cały czas było widoczne, więc osoby, które mają 1.4.0 z listopada 2025, dostają 3.0.0 jako zwykłą aktualizację. Zastępuje tamtą wersję.
+- **Teksty są teraz w repozytorium.** Opisy, informacje o wersji i plan zrzutów ekranu dla obu sklepów, po angielsku i po polsku, są plikami obok kodu. Konsola nie jest już archiwum.
+- **Czym jest 3.0.** Osobistym dziennikiem samochodów, które posiadasz: każde tankowanie, serwis i inny koszt według miesięcy z podsumowaniem ostatniego zakończonego miesiąca, paragony, przypomnienia ustawiane samodzielnie, eksport i import oraz usunięcie konta z poziomu aplikacji. Po polsku i po angielsku, z motywami Jasny, Ciemny, Jazda nocą i Wysoki kontrast.
+
+<figure>
+  <a
+    href="/blog/play-console-3-0-0/pl.webp"
+    aria-label="Otwórz grafikę w pełnym rozmiarze"
+  >
+    <Image
+      src="/blog/play-console-3-0-0/pl.webp"
+      width={1200}
+      height={1350}
+      alt="Google zamknął moje konto deweloperskie. Aplikacja wróciła pod nową nazwą. Kod był w porządku, konta też, zniknęła nazwa pakietu. US$25 za drugą rejestrację, 12 testerów zapisanych na 14 dni z rzędu, 1 nowa nazwa pakietu Androida i 3.0.0 w dwóch sklepach od 8 i 9 listopada 2026."
+    />
+  </a>
+  <figcaption>{"Koszt w czterech liczbach."}</figcaption>
+</figure>
+
+Pobierzesz go w [Google Play](https://play.google.com/store/apps/details?id=app.carbrain.mobile&utm_source=devthomas&utm_medium=blog&utm_campaign=v3_launch) albo w [App Store](https://apps.apple.com/app/id6754179380), możesz też użyć wersji webowej na [car-brain.com](https://car-brain.com/pl).
+
+**Stan na 3 listopada 2026:** daty i fakty o pakiecie pochodzą z zapisu o zamknięciu, notatek z powrotu i publicznego ogłoszenia sprawdzonego tego samego dnia. Przy pisaniu nie logowałem się od nowa. App Store był wtedy osobnym pytaniem. Odpowiada na nie aktualizacja powyżej.
 
 O produkcie, a nie o witrynie sklepu: [dlaczego zbudowałem Car Brain](https://devthomas.pl/blog/pl/why-i-built-car-brain/).
