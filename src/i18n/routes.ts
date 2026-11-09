@@ -57,6 +57,8 @@ export const headingPairs: Record<string, Record<string, string>> = {
     "Twelve people, fourteen days": "Dwanaście osób, czternaście dni",
     "What it cost": "Co to kosztowało",
     "What I would do next time": "Co zrobiłbym następnym razem",
+    "Update, 9 November 2026: 3.0.0 on both stores":
+      "Aktualizacja z 9 listopada 2026: 3.0.0 w obu sklepach",
   },
   "article/your-api-key-is-private-until-you-ship-it": {
     "A configuration choice became an architecture decision":
