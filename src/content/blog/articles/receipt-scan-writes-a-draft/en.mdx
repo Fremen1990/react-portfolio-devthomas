@@ -1,0 +1,65 @@
+import { ReceiptScanSequence } from "@/components/Blog/ReceiptScanSequence";
+
+**A fuel receipt is a document designed for a tax office, a thermal printer and nobody else.** The litres share the paper with a tax ID, a cashier and a till address, the total hides under the word SUMA, and the decimal separator is a comma that one careless parser can turn into a five-thousand-litre refuel.
+
+Car Brain 3.1.0 reads that receipt anyway. In Add or Edit Refuel on the phone, Scan Receipt takes a photo and fills in the form. Getting a model to read the paper was the easy decision. The harder one was what the model is allowed to do with what it read.
+
+A logbook is only as trustworthy as its worst row. A wrong total does not stay in one refuel: History, the monthly recap and every cost figure built on saved rows inherit it. So the rule is short: **the model writes a draft, the person saves the record.**
+
+## A draft, not a record
+
+The photo does two jobs. The form keeps a 960 px copy as the refuel's receipt, exactly as it did before scanning existed. A separate 1,600 px JPEG goes to `scan-receipt`, an Appwrite Function, and that copy is never uploaded to storage.
+
+<ReceiptScanSequence locale="en" />
+
+The function runs with the caller's session. Appwrite sets the `x-appwrite-user-id` header, and a call without it stops at 401.
+
+Nothing reaches the refuel records until the person taps Save. The scan's only write of its own is a usage counter, with no amounts and no station in it.
+
+The Gemini key lives in the function's environment, never in the phone or web app. The VIN lookup needed the same boundary, and that story is already told: [Your API key is private. Until you ship it.](/blog/en/your-api-key-is-private-until-you-ship-it/) In 3.1.0 only the phone scans. The web app does not.
+
+## The form decides what the model may touch
+
+The draft's keys mirror the form, not a parallel "receipt model": fuel type, litres, unit price, total, currency, date and station.
+
+Two fields are missing on purpose. Fill state and odometer are almost never printed, so the function drops them even if the model sends them, and the phone drops them again. A scan cannot decide you filled up.
+
+The scan is also polite about your typing. It fills only empty or untouched fields, so a station you already typed stays yours. Every filled field says "From the receipt." until you change it.
+
+The prompt tells Gemini to copy only what is printed and leave out what it cannot see. Doubt differs from absence: a hard-to-read number that was kept arrives with a "Some numbers were hard to read" warning, not as an empty field.
+
+## 50.85 litres, not 5085
+
+Polish receipts print `50,85`. Strip the comma and you get 5085, which is a tanker, not a car. Three layers stand in the way:
+
+- The prompt says it in plain words: 50,85 is 50.85, never 5085.
+- The parser reads `50,85` and `50.85` as the same number and never removes a separator to glue digits together.
+- Range checks drop what no car would log: litres above 0 and at most 300, a unit price under 50, a total of at most 20,000. An out-of-range value is dropped, not clamped to the limit.
+
+The arithmetic gets a vote too. If litres times unit price misses the total by more than 2%, all three values stay and the form says they do not match. The date must be at most two years old and at most a day ahead. Amounts in another currency are filled but not converted, and the form says so.
+
+None of this makes a misread impossible. It makes a misread visible, and fixing one means typing into an ordinary field.
+
+## What the convenience costs
+
+| Cost                             | How 3.1.0 handles it                                                                                                                                |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A paid Gemini call per scan      | 3 scans per account in a rolling 24 hours. The scan is reserved before Gemini is called, so two quick taps cannot both slip past the cap            |
+| A receipt photo leaves the phone | Named in the English and Polish privacy text. The function logs the user, the outcome and the duration, never the image, the amounts or the station |
+| A misread can look plausible     | Range checks, the 2% consistency warning, and "From the receipt." on every filled field                                                             |
+| A network call inside a form     | Gemini gets 25 seconds. A failed scan leaves manual entry open, and the photo stays attached when it fits as a receipt                              |
+
+A reserved scan counts even when the photo turns out not to be a receipt. The cap exists so a vision bill cannot run away, and results are not cached.
+
+The privacy text in the app says: "When you scan a receipt, that photo is sent to Google Gemini through Car Brain's server to suggest form fields. You review those fields before saving. The scan does not store the photo." That is the whole claim, and I will not stretch it. The Play Data safety form and the App Store privacy label need the same re-check, which no test in the repository can do.
+
+## When I would revisit it
+
+The decision record names two directions. Neither is a plan.
+
+- **On-device OCR.** Rejected for the first version: Polish fiscal layouts vary, and the project already runs Gemini in a function. If the cost per scan or the privacy cost of sending a photo outweighs that, reading on the phone is the next question.
+- **Service and expense receipts.** The same function shape could fill other forms later. Today it fills refuels only.
+
+The option I would not revisit is auto-saving the draft. A model is allowed to be wrong. A logbook that saves its mistakes for you is wrong for good, quietly, with charts.
+
+**Development snapshot — 14 November 2026:** written from the code at tag `v3.1.0` (13 November 2026) and ADR-0035. I have not measured accuracy, latency or cost per scan, so this article gives none.

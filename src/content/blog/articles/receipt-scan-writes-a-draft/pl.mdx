@@ -1,0 +1,65 @@
+import { ReceiptScanSequence } from "@/components/Blog/ReceiptScanSequence";
+
+**Paragon za paliwo projektowano dla urzędu skarbowego i drukarki termicznej. Dla nikogo więcej.** Litry dzielą papier z NIP-em, kasjerem i adresem kasy, suma chowa się pod napisem SUMA, a przecinek dziesiętny wystarczy, żeby jeden nieuważny parser zrobił z tankowania pięć tysięcy litrów.
+
+Car Brain 3.1.0 i tak ten paragon czyta. W ekranach Dodaj tankowanie i Edytuj tankowanie na telefonie przycisk Skanuj paragon robi zdjęcie i wypełnia formularz. Samo odczytanie papieru przez model było łatwą decyzją. Trudniejsze pytanie brzmiało: co model może zrobić z tym, co przeczytał.
+
+Dziennik auta jest tak wiarygodny, jak jego najgorszy wpis. Błędna suma nie zostaje w jednym tankowaniu: dziedziczą ją Historia, podsumowanie miesiąca i każda liczba kosztów zbudowana na zapisanych wpisach. Dlatego zasada jest krótka: **model pisze szkic, wpis zapisuje człowiek.**
+
+## Szkic, nie wpis
+
+Zdjęcie ma dwa zadania. Formularz zatrzymuje kopię 960 px jako paragon tankowania, dokładnie tak jak przed skanowaniem. Osobny JPEG 1600 px trafia do `scan-receipt`, funkcji Appwrite, i ta kopia nigdy nie jest wysyłana do magazynu plików.
+
+<ReceiptScanSequence locale="pl" />
+
+Funkcja działa z sesją osoby, która ją wywołuje. Appwrite ustawia nagłówek `x-appwrite-user-id`, a wywołanie bez niego kończy się kodem 401.
+
+Do wpisów tankowania nic nie trafia, dopóki człowiek nie naciśnie Zapisz. Jedyny własny zapis skanu to licznik użycia, bez kwot i bez stacji.
+
+Klucz Gemini siedzi w środowisku funkcji, nigdy w aplikacji mobilnej ani webowej. Tej samej granicy potrzebował odczyt VIN i ta historia jest już opisana: [Twój klucz API jest prywatny. Dopóki nie wyślesz go z aplikacją.](/blog/pl/your-api-key-is-private-until-you-ship-it/) W wersji 3.1.0 skanuje tylko telefon. Aplikacja webowa nie skanuje.
+
+## Formularz decyduje, czego model może dotknąć
+
+Klucze szkicu odpowiadają polom formularza, a nie równoległemu „modelowi paragonu”: rodzaj paliwa, litry, cena za litr, suma, waluta, data i stacja.
+
+Dwóch pól brakuje celowo. Stan baku i przebieg prawie nigdy nie są drukowane, więc funkcja je odrzuca, nawet jeśli model je przyśle, a telefon odrzuca je jeszcze raz. Skan nie może zdecydować za ciebie, że bak jest pełny.
+
+Skan szanuje też to, co już wpisano. Wypełnia tylko puste albo nieruszone pola, więc stacja wpisana ręcznie zostaje na miejscu. Każde wypełnione pole ma dopisek „Z paragonu.”, dopóki go nie zmienisz.
+
+Prompt każe Gemini przepisywać tylko to, co wydrukowano, i pomijać to, czego nie widać. Wątpliwość to nie brak: słabo czytelna liczba, która została zachowana, przychodzi z ostrzeżeniem „Niektóre liczby były słabo czytelne”, a nie jako puste pole.
+
+## 50,85 litra, a nie 5085
+
+Polskie paragony drukują `50,85`. Usuń przecinek, a wyjdzie 5085, czyli cysterna, nie samochód. Na drodze stoją trzy warstwy:
+
+- Prompt mówi to wprost: 50,85 to 50.85, nigdy 5085.
+- Parser czyta `50,85` i `50.85` jako tę samą liczbę i nigdy nie usuwa separatora, żeby skleić cyfry.
+- Kontrola zakresów odrzuca to, czego żadne auto by nie zapisało: litry powyżej 0 i najwyżej 300, cena za litr poniżej 50, suma najwyżej 20 000. Wartość spoza zakresu jest odrzucana, a nie przycinana do limitu.
+
+Głos ma też arytmetyka. Jeśli litry razy cena odbiegają od sumy o więcej niż 2%, wszystkie trzy wartości zostają, a formularz mówi, że się nie zgadzają. Data może mieć najwyżej dwa lata i wybiegać najwyżej o dzień w przód. Kwoty w innej walucie są wpisywane, ale nie przeliczane, i formularz o tym mówi.
+
+Nic z tego nie sprawia, że pomyłka jest niemożliwa. Sprawia, że jest widoczna, a jej poprawienie to zwykłe wpisanie liczby w zwykłe pole.
+
+## Ile kosztuje ta wygoda
+
+| Koszt                               | Jak radzi sobie z nim 3.1.0                                                                                                                  |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Płatne wywołanie Gemini przy skanie | 3 skany na konto w kroczącym oknie 24 godzin. Skan jest rezerwowany przed wywołaniem Gemini, więc dwa szybkie stuknięcia nie ominą limitu    |
+| Zdjęcie paragonu opuszcza telefon   | Opisane w angielskim i polskim tekście prywatności. W logach funkcji jest identyfikator osoby, wynik i czas, nigdy zdjęcie, kwoty ani stacja |
+| Pomyłka może wyglądać wiarygodnie   | Kontrola zakresów, ostrzeżenie o rozbieżności 2% i „Z paragonu.” przy każdym wypełnionym polu                                                |
+| Wywołanie sieciowe w formularzu     | Gemini ma 25 sekund. Nieudany skan zostawia ręczne wpisywanie, a zdjęcie zostaje dołączone, jeśli mieści się jako paragon                    |
+
+Zarezerwowany skan liczy się nawet wtedy, gdy zdjęcie okaże się nie być paragonem. Limit istnieje po to, żeby rachunek za model wizyjny nie wymknął się spod kontroli, a wyniki nie są cache’owane.
+
+Tekst prywatności w aplikacji mówi: „Gdy skanujesz paragon, to zdjęcie jest wysyłane do Google Gemini przez serwer Car Brain, aby podpowiedzieć pola formularza. Sprawdzasz te pola przed zapisem. Skan nie zapisuje zdjęcia.” To całe zapewnienie i nie zamierzam go rozciągać. Formularz Bezpieczeństwo danych w Google Play i etykieta prywatności w App Store wymagają tej samej kontroli, której nie zrobi żaden test w repozytorium.
+
+## Kiedy wróciłbym do tej decyzji
+
+Zapis decyzji wymienia dwa kierunki. Żaden z nich nie jest planem.
+
+- **OCR na urządzeniu.** Odrzucony w pierwszej wersji: układy polskich paragonów fiskalnych się różnią, a projekt już uruchamia Gemini w funkcji. Jeśli koszt skanu albo koszt prywatności wysyłania zdjęcia przeważy, odczyt na telefonie będzie kolejnym pytaniem.
+- **Paragony z serwisu i inne koszty.** Ten sam kształt funkcji mógłby kiedyś wypełniać inne formularze. Dziś wypełnia tylko tankowania.
+
+Do jednej opcji bym nie wracał: automatycznego zapisu szkicu. Model może się mylić. Dziennik, który sam zapisuje jego pomyłki, myli się na stałe, po cichu i z wykresami.
+
+**Stan prac — 14 listopada 2026:** tekst powstał na podstawie kodu z tagu `v3.1.0` (13 listopada 2026) i ADR-0035. Nie mierzyłem trafności, czasu odpowiedzi ani kosztu skanu, więc artykuł nie podaje takich liczb.
