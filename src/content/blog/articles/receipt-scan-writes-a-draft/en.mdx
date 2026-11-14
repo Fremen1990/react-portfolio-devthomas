@@ -28,7 +28,7 @@ The scan is also polite about your typing. It fills only empty or untouched fiel
 
 The prompt tells Gemini to copy only what is printed and leave out what it cannot see. Doubt differs from absence: a hard-to-read number that was kept arrives with a "Some numbers were hard to read. Check them." warning, not as an empty field.
 
-## 50.85 litres, not 5085
+## Reading 50.85 litres, not 5085
 
 Polish receipts print `50,85`. Strip the comma and you get 5085, which is a tanker, not a car. Three layers stand in the way:
 
@@ -61,4 +61,4 @@ The decision record names two directions. Neither is a plan.
 
 The option I would not revisit is auto-saving the draft. A model is allowed to be wrong. A logbook that saves its mistakes for you is wrong for good, quietly, with charts.
 
-**Development snapshot — 14 November 2026:** written from the code at tag `v3.1.0` (13 November 2026) and ADR-0035. I have not measured accuracy, latency or cost per scan, so this article gives none.
+**Development snapshot — 14 November 2026:** written from the code at tag `v3.1.0` (13 November 2026) and ADR-0035. Release 3.1.1 changes only VIN decoding, not the scan. I have not measured accuracy, latency or cost per scan, so this article gives none.

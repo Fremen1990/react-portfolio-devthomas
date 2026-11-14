@@ -4,8 +4,7 @@ import type { BlogPost } from "./types";
 export const blogPosts: BlogPost[] = [
   {
     slug: "receipt-scan-writes-a-draft",
-    // Draft for Tomasz's review. Set publishedAt and published: true only after approval.
-    published: false,
+    published: true,
     editions: {
       en: {
         title: "The model writes a draft. You save the record.",
@@ -22,6 +21,7 @@ export const blogPosts: BlogPost[] = [
         body: "receipt-scan-writes-a-draft/pl.mdx",
       },
     },
+    publishedAt: "2026-11-15",
   },
   {
     slug: "do-not-let-play-console-go-quiet",
