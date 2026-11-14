@@ -2,13 +2,13 @@ import { ReceiptScanSequence } from "@/components/Blog/ReceiptScanSequence";
 
 **A fuel receipt is a document designed for a tax office, a thermal printer and nobody else.** The litres share the paper with a tax ID, a cashier and a till address, the total hides under the word SUMA, and the decimal separator is a comma that one careless parser can turn into a five-thousand-litre refuel.
 
-Car Brain 3.1.0 reads that receipt anyway. In Add or Edit Refuel on the phone, Scan Receipt takes a photo and fills in the form. Getting a model to read the paper was the easy decision. The harder one was what the model is allowed to do with what it read.
+Car Brain 3.1.0 reads that receipt anyway. In Add Refuel Record and Edit Refuel Record on the phone, Scan Receipt takes a photo and fills in the form. Getting a model to read the paper was the easy decision. The harder one was what the model is allowed to do with what it read.
 
 A logbook is only as trustworthy as its worst row. A wrong total does not stay in one refuel: History, the monthly recap and every cost figure built on saved rows inherit it. So the rule is short: **the model writes a draft, the person saves the record.**
 
 ## A draft, not a record
 
-The photo does two jobs. The form keeps a 960 px copy as the refuel's receipt, exactly as it did before scanning existed. A separate 1,600 px JPEG goes to `scan-receipt`, an Appwrite Function, and that copy is never uploaded to storage.
+The form keeps a 960 px copy as the refuel's receipt, as it did before scanning existed. A separate 1,600 px JPEG goes to `scan-receipt`, an Appwrite Function, and that copy is never uploaded to storage.
 
 <ReceiptScanSequence locale="en" />
 
@@ -24,9 +24,9 @@ The draft's keys mirror the form, not a parallel "receipt model": fuel type, lit
 
 Two fields are missing on purpose. Fill state and odometer are almost never printed, so the function drops them even if the model sends them, and the phone drops them again. A scan cannot decide you filled up.
 
-The scan is also polite about your typing. It fills only empty or untouched fields, so a station you already typed stays yours. Every filled field says "From the receipt." until you change it.
+The scan is also polite about your typing. It fills only empty or untouched fields, so a station you already typed stays yours. Every filled field says "From the receipt." until you change it. If exactly one of litres, unit price and total is missing, the form calculates it and labels it the same way, so the label can mean "worked out from the receipt".
 
-The prompt tells Gemini to copy only what is printed and leave out what it cannot see. Doubt differs from absence: a hard-to-read number that was kept arrives with a "Some numbers were hard to read" warning, not as an empty field.
+The prompt tells Gemini to copy only what is printed and leave out what it cannot see. Doubt differs from absence: a hard-to-read number that was kept arrives with a "Some numbers were hard to read. Check them." warning, not as an empty field.
 
 ## 50.85 litres, not 5085
 
@@ -46,12 +46,11 @@ None of this makes a misread impossible. It makes a misread visible, and fixing 
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A paid Gemini call per scan      | 3 scans per account in a rolling 24 hours. The scan is reserved before Gemini is called, so two quick taps cannot both slip past the cap            |
 | A receipt photo leaves the phone | Named in the English and Polish privacy text. The function logs the user, the outcome and the duration, never the image, the amounts or the station |
-| A misread can look plausible     | Range checks, the 2% consistency warning, and "From the receipt." on every filled field                                                             |
 | A network call inside a form     | Gemini gets 25 seconds. A failed scan leaves manual entry open, and the photo stays attached when it fits as a receipt                              |
 
-A reserved scan counts even when the photo turns out not to be a receipt. The cap exists so a vision bill cannot run away, and results are not cached.
+A reserved scan stays used when the photo is not a fuel receipt, when Gemini times out and when the read fails, and the app says so. The cap exists so a vision bill cannot run away, and results are not cached.
 
-The privacy text in the app says: "When you scan a receipt, that photo is sent to Google Gemini through Car Brain's server to suggest form fields. You review those fields before saving. The scan does not store the photo." That is the whole claim, and I will not stretch it. The Play Data safety form and the App Store privacy label need the same re-check, which no test in the repository can do.
+The data-processing section of the in-app privacy text says: "When you scan a receipt, that photo is sent to Google Gemini through Car Brain's server to suggest form fields. You review those fields before saving. The scan does not store the photo." That is the whole claim. The Play Data safety form and the App Store privacy label need the same re-check, which no test in the repository can do.
 
 ## When I would revisit it
 

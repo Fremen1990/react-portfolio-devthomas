@@ -21,7 +21,7 @@ const copy = {
       ["Phone", "Refuel form"],
       ["scan-receipt", "holds the Gemini key"],
       ["Gemini", "vision model"],
-      ["Appwrite DB", "refuels · ai_usage"],
+      ["Appwrite DB", "fuelRecords · ai_usage"],
     ],
     notes: [
       ["1. Photo attached", "as the receipt"],
@@ -52,7 +52,7 @@ const copy = {
       ["Telefon", "Formularz tankowania"],
       ["scan-receipt", "trzyma klucz Gemini"],
       ["Gemini", "model wizyjny"],
-      ["Baza Appwrite", "refuels · ai_usage"],
+      ["Baza Appwrite", "fuelRecords · ai_usage"],
     ],
     notes: [
       ["1. Zdjęcie dołączone", "jako paragon"],
@@ -153,7 +153,7 @@ export function ReceiptScanSequence({
                 x={X[i]}
                 y={TOP + 42}
                 anchor="middle"
-                size={12}
+                size={11}
                 color={muted}
               >
                 {detail}

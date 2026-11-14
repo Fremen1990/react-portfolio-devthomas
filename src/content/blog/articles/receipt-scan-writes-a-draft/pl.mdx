@@ -2,13 +2,13 @@ import { ReceiptScanSequence } from "@/components/Blog/ReceiptScanSequence";
 
 **Paragon za paliwo projektowano dla urzędu skarbowego i drukarki termicznej. Dla nikogo więcej.** Litry dzielą papier z NIP-em, kasjerem i adresem kasy, suma chowa się pod napisem SUMA, a przecinek dziesiętny wystarczy, żeby jeden nieuważny parser zrobił z tankowania pięć tysięcy litrów.
 
-Car Brain 3.1.0 i tak ten paragon czyta. W ekranach Dodaj tankowanie i Edytuj tankowanie na telefonie przycisk Skanuj paragon robi zdjęcie i wypełnia formularz. Samo odczytanie papieru przez model było łatwą decyzją. Trudniejsze pytanie brzmiało: co model może zrobić z tym, co przeczytał.
+Car Brain 3.1.0 i tak ten paragon czyta. W ekranach Dodaj rekord tankowania i Edytuj rekord tankowania na telefonie przycisk Skanuj paragon robi zdjęcie i wypełnia formularz. Samo odczytanie papieru przez model było łatwą decyzją. Trudniejsze pytanie brzmiało: co model może zrobić z tym, co przeczytał.
 
 Dziennik auta jest tak wiarygodny, jak jego najgorszy wpis. Błędna suma nie zostaje w jednym tankowaniu: dziedziczą ją Historia, podsumowanie miesiąca i każda liczba kosztów zbudowana na zapisanych wpisach. Dlatego zasada jest krótka: **model pisze szkic, wpis zapisuje człowiek.**
 
 ## Szkic, nie wpis
 
-Zdjęcie ma dwa zadania. Formularz zatrzymuje kopię 960 px jako paragon tankowania, dokładnie tak jak przed skanowaniem. Osobny JPEG 1600 px trafia do `scan-receipt`, funkcji Appwrite, i ta kopia nigdy nie jest wysyłana do magazynu plików.
+Formularz zatrzymuje kopię 960 px jako paragon tankowania, dokładnie tak jak przed skanowaniem. Osobny JPEG 1600 px trafia do `scan-receipt`, funkcji Appwrite, i ta kopia nigdy nie jest wysyłana do magazynu plików.
 
 <ReceiptScanSequence locale="pl" />
 
@@ -24,9 +24,9 @@ Klucze szkicu odpowiadają polom formularza, a nie równoległemu „modelowi pa
 
 Dwóch pól brakuje celowo. Stan baku i przebieg prawie nigdy nie są drukowane, więc funkcja je odrzuca, nawet jeśli model je przyśle, a telefon odrzuca je jeszcze raz. Skan nie może zdecydować za ciebie, że bak jest pełny.
 
-Skan szanuje też to, co już wpisano. Wypełnia tylko puste albo nieruszone pola, więc stacja wpisana ręcznie zostaje na miejscu. Każde wypełnione pole ma dopisek „Z paragonu.”, dopóki go nie zmienisz.
+Skan szanuje też to, co już wpisano. Wypełnia tylko puste albo nieruszone pola, więc stacja wpisana ręcznie zostaje na miejscu. Każde wypełnione pole ma dopisek „Z paragonu.”, dopóki go nie zmienisz. Jeśli brakuje dokładnie jednej z liczb: litrów, ceny za litr lub sumy, formularz wylicza ją i oznacza tak samo, więc dopisek może znaczyć „wyliczone z paragonu”.
 
-Prompt każe Gemini przepisywać tylko to, co wydrukowano, i pomijać to, czego nie widać. Wątpliwość to nie brak: słabo czytelna liczba, która została zachowana, przychodzi z ostrzeżeniem „Niektóre liczby były słabo czytelne”, a nie jako puste pole.
+Prompt każe Gemini przepisywać tylko to, co wydrukowano, i pomijać to, czego nie widać. Wątpliwość to nie brak: słabo czytelna liczba, która została zachowana, przychodzi z ostrzeżeniem „Niektóre liczby były słabo czytelne. Sprawdź je.”, a nie jako puste pole.
 
 ## 50,85 litra, a nie 5085
 
@@ -46,12 +46,11 @@ Nic z tego nie sprawia, że pomyłka jest niemożliwa. Sprawia, że jest widoczn
 | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Płatne wywołanie Gemini przy skanie | 3 skany na konto w kroczącym oknie 24 godzin. Skan jest rezerwowany przed wywołaniem Gemini, więc dwa szybkie stuknięcia nie ominą limitu    |
 | Zdjęcie paragonu opuszcza telefon   | Opisane w angielskim i polskim tekście prywatności. W logach funkcji jest identyfikator osoby, wynik i czas, nigdy zdjęcie, kwoty ani stacja |
-| Pomyłka może wyglądać wiarygodnie   | Kontrola zakresów, ostrzeżenie o rozbieżności 2% i „Z paragonu.” przy każdym wypełnionym polu                                                |
 | Wywołanie sieciowe w formularzu     | Gemini ma 25 sekund. Nieudany skan zostawia ręczne wpisywanie, a zdjęcie zostaje dołączone, jeśli mieści się jako paragon                    |
 
-Zarezerwowany skan liczy się nawet wtedy, gdy zdjęcie okaże się nie być paragonem. Limit istnieje po to, żeby rachunek za model wizyjny nie wymknął się spod kontroli, a wyniki nie są cache’owane.
+Zarezerwowany skan pozostaje wykorzystany, gdy zdjęcie nie jest paragonem za paliwo, gdy Gemini nie odpowie na czas i gdy odczyt się nie uda, a aplikacja o tym mówi. Limit istnieje po to, żeby rachunek za model wizyjny nie wymknął się spod kontroli, a wyniki nie są cache’owane.
 
-Tekst prywatności w aplikacji mówi: „Gdy skanujesz paragon, to zdjęcie jest wysyłane do Google Gemini przez serwer Car Brain, aby podpowiedzieć pola formularza. Sprawdzasz te pola przed zapisem. Skan nie zapisuje zdjęcia.” To całe zapewnienie i nie zamierzam go rozciągać. Formularz Bezpieczeństwo danych w Google Play i etykieta prywatności w App Store wymagają tej samej kontroli, której nie zrobi żaden test w repozytorium.
+Sekcja o przetwarzaniu danych w tekście prywatności w aplikacji mówi: „Gdy skanujesz paragon, to zdjęcie jest wysyłane do Google Gemini przez serwer Car Brain, aby podpowiedzieć pola formularza. Sprawdzasz te pola przed zapisem. Skan nie zapisuje zdjęcia.” To całe zapewnienie. Formularz Bezpieczeństwo danych w Google Play i etykieta prywatności w App Store wymagają tej samej kontroli, której nie zrobi żaden test w repozytorium.
 
 ## Kiedy wróciłbym do tej decyzji
 
