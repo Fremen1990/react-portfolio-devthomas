@@ -1,14 +1,14 @@
 import { useId, type ReactNode } from "react";
 import type { BlogLocale } from "@/content/blog/types";
 
-const ink = "var(--text, #1c282c)";
-const muted = "var(--text-secondary, #52646a)";
-const accent = "var(--accent, #0f6b75)";
-const surface = "var(--surface, #ffffff)";
-const soft = "var(--accent-soft, #e2efee)";
-const border = "var(--separator, #d4deda)";
+export const ink = "var(--text, #1c282c)";
+export const muted = "var(--text-secondary, #52646a)";
+export const accent = "var(--accent, #0f6b75)";
+export const surface = "var(--surface, #ffffff)";
+export const soft = "var(--accent-soft, #e2efee)";
+export const border = "var(--separator, #d4deda)";
 
-function Label({
+export function Label({
   x,
   y,
   children,
@@ -74,9 +74,11 @@ function Node({
     </g>
   );
 }
-function Diagram({
+export function Diagram({
   locale,
   kind,
+  kicker,
+  className,
   title,
   description,
   caption,
@@ -85,6 +87,8 @@ function Diagram({
 }: {
   locale: BlogLocale;
   kind: string;
+  kicker?: string;
+  className?: string;
   title: string;
   description: string;
   caption: string;
@@ -95,7 +99,10 @@ function Diagram({
   const marker = `${id}-arrow`;
   return (
     <figure
-      className={kind === "system" ? "client-architecture" : "auth-sequence"}
+      className={
+        className ??
+        (kind === "system" ? "client-architecture" : "auth-sequence")
+      }
       style={{ margin: "32px 0", minWidth: 0 }}
     >
       <div
@@ -161,7 +168,8 @@ function Diagram({
             opacity={0.55}
           />
           <Label x={28} y={34} size={12} color={muted}>
-            {kind === "system" ? "01 / SYSTEM MAP" : "02 / SESSION BOUNDARY"}
+            {kicker ??
+              (kind === "system" ? "01 / SYSTEM MAP" : "02 / SESSION BOUNDARY")}
           </Label>
           <Label x={28} y={67} size={25} bold>
             {title}

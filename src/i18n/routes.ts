@@ -69,6 +69,14 @@ export const headingPairs: Record<string, Record<string, string>> = {
       "Co daje dodatkowy krok i ile kosztuje",
     "Remove the shortcut, keep the lesson": "Usunąć skrót, zachować lekcję",
   },
+  "article/receipt-scan-writes-a-draft": {
+    "A draft, not a record": "Szkic, nie wpis",
+    "The form decides what the model may touch":
+      "Formularz decyduje, czego model może dotknąć",
+    "Reading 50.85 litres, not 5085": "Odczyt 50,85 litra, a nie 5085",
+    "What the convenience costs": "Ile kosztuje ta wygoda",
+    "When I would revisit it": "Kiedy wróciłbym do tej decyzji",
+  },
   "work/orange-cms": { ...common, "How it works": "Jak to działa" },
   "work/orange-e2e-testing": {
     ...common,
