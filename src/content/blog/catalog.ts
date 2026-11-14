@@ -3,6 +3,27 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
+    slug: "receipt-scan-writes-a-draft",
+    // Draft for Tomasz's review. Set publishedAt and published: true only after approval.
+    published: false,
+    editions: {
+      en: {
+        title: "The model writes a draft. You save the record.",
+        description:
+          "Car Brain 3.1.0 reads a fuel receipt photo into the refuel form. Why the scan never writes a refuel, what it leaves empty on purpose, and what the convenience costs.",
+        topics: ["Car Brain", "AI", "Appwrite", "Architecture"],
+        body: "receipt-scan-writes-a-draft/en.mdx",
+      },
+      pl: {
+        title: "Model pisze szkic. Wpis zapisuje człowiek.",
+        description:
+          "Car Brain 3.1.0 odczytuje zdjęcie paragonu za paliwo do formularza tankowania. Dlaczego skan nigdy nie zapisuje wpisu, co celowo zostawia puste i ile kosztuje ta wygoda.",
+        topics: ["Car Brain", "AI", "Appwrite", "Architektura"],
+        body: "receipt-scan-writes-a-draft/pl.mdx",
+      },
+    },
+  },
+  {
     slug: "do-not-let-play-console-go-quiet",
     published: true,
     editions: {
