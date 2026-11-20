@@ -3,6 +3,27 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
+    // Draft until the App Store has 3.3.0; on launch day set published: true and publishedAt.
+    slug: "car-brain-a-logbook-for-the-car-you-own",
+    published: false,
+    editions: {
+      en: {
+        title: "Car Brain: a logbook for the car you own",
+        description:
+          "See what your car really costs. Car Brain 3.3 logs every refuel, service and other cost with its receipt, scans fuel receipts into the form and reminds you before a service or insurance is due. Free, with no ads.",
+        topics: ["Car Brain", "Product", "Release"],
+        body: "car-brain-a-logbook-for-the-car-you-own/en.mdx",
+      },
+      pl: {
+        title: "Car Brain: dziennik auta, które masz",
+        description:
+          "Zobacz, ile naprawdę kosztuje Cię auto. Car Brain 3.3 zapisuje tankowania, serwisy i inne koszty z paragonami, sam odczytuje paragon za paliwo i przypomina przed serwisem czy ubezpieczeniem. Za darmo, bez reklam.",
+        topics: ["Car Brain", "Produkt", "Wydanie"],
+        body: "car-brain-a-logbook-for-the-car-you-own/pl.mdx",
+      },
+    },
+  },
+  {
     slug: "receipt-scan-writes-a-draft",
     published: true,
     editions: {

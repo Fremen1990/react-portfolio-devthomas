@@ -1,0 +1,72 @@
+import Image from "next/image";
+
+**Your car costs more than you think. Car Brain shows you exactly how much.**
+
+Fuel goes on one card, the service on another, insurance once a year, parking a few coins at a time. Ask most drivers what their car cost last month and you get a shrug and a guess. I built Car Brain to replace the guess with a number.
+
+It is a personal logbook for the car you own: every refuel, service and other cost in one place, with the receipt attached and a reminder before the next thing is due. Version 3.3 is out on Android and iPhone, and the same account works in the browser at car-brain.com.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/en.webp"
+    aria-label="Open the screens at full size"
+  >
+    <Image
+      src="/blog/car-brain-logbook/en.webp"
+      width={1800}
+      height={1066}
+      alt="Three Car Brain screens. The monthly recap for a BMW 320d Touring shows PLN 829.70 recorded in October 2026: fuel 81%, services 17%, other costs 2%. A service record shows a PLN 450.00 DPF regeneration with its odometer reading, type and category. The reminders list shows an air conditioning service due in 3 days and an oil service due in 12 days, each with a Mark as Done button."
+    />
+  </a>
+  <figcaption>
+    {"The monthly recap, a service record and the reminders. Sample data."}
+  </figcaption>
+</figure>
+
+## What your car really costs
+
+Every refuel, service and other cost lands in one history, newest first, grouped by month. Parking, insurance, washes and other costs sit next to fuel and services, each with its receipt photo.
+
+At the end of the month, the recap adds it up: fuel, services and other costs side by side, compared with the month before. That one screen answers the question the shrug could not.
+
+Refuels can be logged in litres or kWh. Mark the full-tank fills and Car Brain works out your real fuel use from them, not the number on the brochure.
+
+## Photograph the receipt, check the form
+
+Typing a fuel receipt into a phone at the pump is nobody's hobby. So on the phone, Scan Receipt does it for you: take a photo, and the refuel form fills in the station, fuel type, litres, price per litre, total and date.
+
+You check the form and tap Save. The scan never saves anything on its own, and it never guesses your odometer or whether you filled the tank, because a receipt does not say. Each account gets 3 scans in a rolling 24 hours. If you want the engineering behind it, I wrote it up in [The model writes a draft. You save the record.](/blog/en/receipt-scan-writes-a-draft/)
+
+## A heads-up before it's due
+
+Oil change, inspection, insurance renewal: set a reminder by date or by kilometres, once or repeating. Plan a service and it becomes a reminder by itself.
+
+A dated reminder can alert you on the phone a week before and on the day. A kilometre reminder shows how far you have left; it does not send an alert.
+
+## Phone, web and your old logbook
+
+The same account and the same history open on Android, iPhone and at [car-brain.com](https://car-brain.com/en). Long edits are easier on a big screen; a refuel is easier on the phone.
+
+Coming from Drivvo? Import its export file on the website and your history comes with you. Leaving is just as easy: export the cars you choose as spreadsheets or as one backup file.
+
+## Free, no ads, and your data stays yours
+
+Car Brain is free, with no ads. A paid Pro plan is on the roadmap. Nothing is on sale today.
+
+- **Your records are private to your account.** Only your account can read them, and they are not sold or used for advertising.
+- **No usage tracking.** The app has no analytics SDK. Crash reports carry the error and your account ID, not your email, name, VIN, photos or costs.
+- **Leave whenever you like.** Delete the account and its data from inside the app or on the website.
+
+Also in the box: add a car from its VIN, short AI notes about your make and model, several cars, amounts kept in the currency you entered, English and Polish, and a Night driving theme that will not blind you at a petrol station at 23:00.
+
+## Try it
+
+| Where                                                                                                                                          | What you get                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [Google Play](https://play.google.com/store/apps/details?id=app.carbrain.mobile&utm_source=devthomas&utm_medium=blog&utm_campaign=v3_3_launch) | The full app, with receipt scan and reminder alerts                            |
+| [App Store](https://apps.apple.com/app/id6754179380)                                                                                           | The same app on iPhone                                                         |
+| [car-brain.com](https://car-brain.com/en)                                                                                                      | The same account in the browser, plus Drivvo import. No receipt scan or alerts |
+
+If something is wrong or missing, tap the bug button in the app. It sends me your note, with a screenshot if you want one.
+
+**Development snapshot — 20 November 2026:** the features come from the app at tag `v3.3.0` and its store listing. The screens are store captures with sample data. Version 3.3.0 is live on Google Play; the App Store build follows, and this post goes out when it is live. I have no user numbers to share yet, so this article gives none.

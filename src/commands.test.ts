@@ -103,6 +103,7 @@ test("commands call the matching action", () => {
 describe("Car Brain commands", () => {
   const links = {
     appStoreUrl: "https://apps.example/app",
+    playStoreUrl: "https://play.example/app",
     siteUrl: "https://site.example/",
   };
 
@@ -119,11 +120,13 @@ describe("Car Brain commands", () => {
     const published = carBrainCommands(links);
     expect(published.map((command) => command.id)).toEqual([
       "car-brain-app-store",
+      "car-brain-google-play",
       "car-brain-site",
     ]);
     published.forEach((command) => command.run(context));
     expect(openExternal).toHaveBeenNthCalledWith(1, links.appStoreUrl);
-    expect(openExternal).toHaveBeenNthCalledWith(2, links.siteUrl);
+    expect(openExternal).toHaveBeenNthCalledWith(2, links.playStoreUrl);
+    expect(openExternal).toHaveBeenNthCalledWith(3, links.siteUrl);
   });
 });
 

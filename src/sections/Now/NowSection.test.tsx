@@ -14,6 +14,7 @@ describe("while Car Brain is unpublished", () => {
     if (!carBrain.published) {
       expect(carBrainLinks).toBeNull();
       expect(carBrain.appStoreUrl).toBe("");
+      expect(carBrain.playStoreUrl).toBe("");
     }
   });
 
@@ -31,6 +32,7 @@ describe("while Car Brain is unpublished", () => {
   test("no store or site link reaches the page", () => {
     const { container } = render(<NowSection carBrain={hidden} />);
     expect(container.innerHTML).not.toContain("apps.apple.com");
+    expect(container.innerHTML).not.toContain("play.google.com");
     expect(container.innerHTML).not.toContain("car-brain.com");
   });
 });
@@ -40,10 +42,12 @@ describe("once Car Brain is published", () => {
     ...carBrain,
     published: true,
     appStoreUrl: "https://apps.apple.com/app/id6754179380",
+    playStoreUrl:
+      "https://play.google.com/store/apps/details?id=app.carbrain.mobile",
     siteUrl: "https://car-brain.com/en",
   };
 
-  test("both cards render side by side, with the store link", () => {
+  test("both cards render side by side, with both store links", () => {
     const { container } = render(<NowSection carBrain={shown} />);
     expect(
       screen.getByRole("article", { name: carBrain.title })
@@ -52,6 +56,9 @@ describe("once Car Brain is published", () => {
     expect(
       screen.getByRole("link", { name: carBrain.appStoreLabel })
     ).toHaveAttribute("href", shown.appStoreUrl);
+    expect(
+      screen.getByRole("link", { name: carBrain.playStoreLabel })
+    ).toHaveAttribute("href", shown.playStoreUrl);
   });
 
   test("the screen buttons swap the screenshot", () => {

@@ -25,6 +25,8 @@ export type CarBrain = {
   sampleNote: string;
   appStoreLabel: string;
   appStoreUrl: string;
+  playStoreLabel: string;
+  playStoreUrl: string;
   siteLabel: string;
   siteUrl: string;
   /** Screenshot size in pixels: 2× the displayed width. */
@@ -52,6 +54,8 @@ export const carBrain: CarBrain = {
   tags: ["React Native", "Next.js", "TypeScript", "Appwrite"],
   appStoreLabel: "Download on the App Store",
   appStoreUrl: carBrainLinks?.appStoreUrl ?? "",
+  playStoreLabel: "Get it on Google Play",
+  playStoreUrl: carBrainLinks?.playStoreUrl ?? "",
   siteLabel: "car-brain.com",
   siteUrl: carBrainLinks?.siteUrl ?? "",
   shotWidth: 392,
@@ -110,6 +114,7 @@ export const carBrainFor = (locale: "en" | "pl"): CarBrain => {
     screensLabel: "Ekrany Car Brain",
     sampleNote: "Ekrany aplikacji z przykładowymi danymi.",
     appStoreLabel: "Pobierz z App Store",
+    playStoreLabel: "Pobierz z Google Play",
     shots: carBrain.shots.map((shot) => ({
       ...shot,
       ...shots[shot.id as keyof typeof shots],

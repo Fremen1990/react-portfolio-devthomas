@@ -1,0 +1,72 @@
+import Image from "next/image";
+
+**Auto kosztuje więcej, niż myślisz. Car Brain pokaże Ci, ile dokładnie.**
+
+Paliwo idzie z jednej karty, serwis z drugiej, ubezpieczenie raz w roku, parking po kilka złotych. Zapytaj kierowcę, ile kosztowało go auto w zeszłym miesiącu, a usłyszysz wzruszenie ramion i strzał. Zbudowałem Car Brain, żeby zamiast strzału była liczba.
+
+To dziennik auta, które masz: każde tankowanie, serwis i inny koszt w jednym miejscu, z paragonem i przypomnieniem, zanim minie następny termin. Wersja 3.3 jest na Androida i iPhone'a, a to samo konto działa w przeglądarce na car-brain.com.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/pl.webp"
+    aria-label="Otwórz ekrany w pełnym rozmiarze"
+  >
+    <Image
+      src="/blog/car-brain-logbook/pl.webp"
+      width={1800}
+      height={1066}
+      alt="Trzy ekrany Car Brain. Podsumowanie miesiąca dla BMW 320d Touring pokazuje 829,70 zł zapisanych wydatków w październiku 2026: paliwo 81%, serwis 17%, inne koszty 2%. Wpis serwisowy pokazuje regenerację DPF za 450,00 zł z przebiegiem, typem i kategorią. Lista przypomnień pokazuje serwis klimatyzacji za 3 dni i wymianę oleju za 12 dni, każde z przyciskiem Oznacz jako wykonany."
+    />
+  </a>
+  <figcaption>
+    {"Podsumowanie miesiąca, wpis serwisowy i przypomnienia. Dane przykładowe."}
+  </figcaption>
+</figure>
+
+## Ile naprawdę kosztuje Cię auto
+
+Każde tankowanie, serwis i inny koszt trafia do jednej historii, od najnowszych, miesiąc po miesiącu. Parking, ubezpieczenie, myjnia i inne koszty leżą obok paliwa i serwisu, każdy ze zdjęciem paragonu.
+
+Na koniec miesiąca podsumowanie wszystko zlicza: paliwo, serwis i inne koszty obok siebie, w porównaniu z poprzednim miesiącem. Ten jeden ekran odpowiada na pytanie, na które wzruszenie ramion nie odpowiedziało.
+
+Tankowanie zapiszesz w litrach albo w kWh. Zaznacz pełne tankowania, a Car Brain policzy z nich prawdziwe spalanie, a nie to z katalogu.
+
+## Zrób zdjęcie paragonu, sprawdź formularz
+
+Przepisywanie paragonu do telefonu przy dystrybutorze to niczyje hobby. Dlatego w telefonie robi to Skanuj paragon: zrób zdjęcie, a formularz tankowania sam uzupełni stację, rodzaj paliwa, litry, cenę za litr, kwotę i datę.
+
+Sprawdzasz formularz i stukasz Zapisz. Skan nigdy niczego nie zapisuje sam i nie zgaduje przebiegu ani tego, czy tankowanie było do pełna, bo paragon tego nie mówi. Każde konto ma 3 skany na 24 godziny. Jeśli ciekawi Cię, jak to działa od środka, opisałem to w tekście [Model pisze szkic. Wpis zapisuje człowiek.](/blog/pl/receipt-scan-writes-a-draft/)
+
+## Przypomnimy, zanim minie termin
+
+Wymiana oleju, przegląd, ubezpieczenie OC: ustaw przypomnienie po dacie albo po przebiegu, jednorazowe albo powtarzane. Zaplanowany serwis sam staje się przypomnieniem.
+
+Przypomnienie z datą może powiadomić w telefonie tydzień wcześniej i w dniu terminu. Przypomnienie po przebiegu pokazuje, ile kilometrów zostało; nie wysyła powiadomienia.
+
+## Telefon, przeglądarka i Twój stary dziennik
+
+To samo konto i ta sama historia otwierają się na Androidzie, iPhonie i na [car-brain.com](https://car-brain.com/pl). Dłuższe poprawki wygodniej robić na dużym ekranie, tankowanie wygodniej wpisać w telefonie.
+
+Przechodzisz z Drivvo? Zaimportuj plik eksportu na stronie, a historia przejdzie razem z Tobą. Odejść jest równie łatwo: wyeksportuj wybrane auta do arkuszy albo do jednej kopii zapasowej.
+
+## Za darmo, bez reklam, a dane zostają Twoje
+
+Car Brain jest za darmo i bez reklam. Płatny plan Pro jest w planach. Dziś nic nie jest w sprzedaży.
+
+- **Twoje wpisy widzi tylko Twoje konto.** Nie są sprzedawane ani używane do reklam.
+- **Bez śledzenia.** Aplikacja nie ma narzędzi analitycznych. Raport o awarii zawiera błąd i identyfikator konta, a nie e-mail, imię, VIN, zdjęcia czy kwoty.
+- **Odejdziesz, kiedy chcesz.** Konto i jego dane usuniesz w aplikacji albo na stronie.
+
+Poza tym: auto dodasz z numeru VIN, AI napisze krótko o Twojej marce i modelu, możesz mieć kilka aut, kwoty zostają w walucie, w której je wpisano, aplikacja jest po polsku i po angielsku, a motyw nocnej jazdy nie oślepi Cię na stacji o 23:00.
+
+## Wypróbuj
+
+| Gdzie                                                                                                                                          | Co dostajesz                                                                     |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [Google Play](https://play.google.com/store/apps/details?id=app.carbrain.mobile&utm_source=devthomas&utm_medium=blog&utm_campaign=v3_3_launch) | Pełna aplikacja, ze skanem paragonu i powiadomieniami                            |
+| [App Store](https://apps.apple.com/app/id6754179380)                                                                                           | Ta sama aplikacja na iPhonie                                                     |
+| [car-brain.com](https://car-brain.com/pl)                                                                                                      | To samo konto w przeglądarce i import z Drivvo. Bez skanu paragonu i powiadomień |
+
+Jeśli coś nie działa albo czegoś brakuje, stuknij przycisk z biedronką w aplikacji. Wyśle mi Twoją uwagę, a jeśli chcesz, także zrzut ekranu.
+
+**Stan na 20 listopada 2026:** funkcje pochodzą z aplikacji w wersji `v3.3.0` i z opisu w sklepie. Ekrany to zrzuty ze sklepu z przykładowymi danymi. Wersja 3.3.0 jest w Google Play; wersja w App Store jest w drodze, a ten tekst wychodzi, gdy będzie dostępna. Nie mam jeszcze liczb o użytkownikach, więc ich tu nie podaję.

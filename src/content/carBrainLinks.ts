@@ -4,11 +4,17 @@
 // the command palette's.
 export const CAR_BRAIN_PUBLISHED: boolean = true;
 
-export type CarBrainLinks = { appStoreUrl: string; siteUrl: string };
+export type CarBrainLinks = {
+  appStoreUrl: string;
+  playStoreUrl: string;
+  siteUrl: string;
+};
 
 export const carBrainLinks: CarBrainLinks | null = CAR_BRAIN_PUBLISHED
   ? {
       appStoreUrl: "https://apps.apple.com/app/id6754179380",
+      playStoreUrl:
+        "https://play.google.com/store/apps/details?id=app.carbrain.mobile",
       siteUrl: "https://car-brain.com/en",
     }
   : null;
