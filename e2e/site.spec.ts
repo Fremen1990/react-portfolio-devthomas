@@ -471,6 +471,7 @@ test("Car Brain is visible while its store link remains gated", async ({
     await page.goto(path);
     const html = await page.content();
     expect(html.includes("apps.apple.com")).toBe(carBrain.published);
+    expect(html.includes("play.google.com")).toBe(carBrain.published);
     await expect(
       page.getByRole("heading", { level: 3, name: carBrain.title, exact: true })
     ).toHaveCount(1);

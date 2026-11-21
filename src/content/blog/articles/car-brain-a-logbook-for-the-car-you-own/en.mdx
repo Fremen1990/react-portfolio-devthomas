@@ -1,0 +1,161 @@
+import Image from "next/image";
+import { LoopVideo } from "@/components/Blog/LoopVideo";
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/hero-en.webp"
+    aria-label="Open the image at full size"
+  >
+    <Image
+      src="/blog/car-brain-logbook/hero-en.webp"
+      width={1600}
+      height={800}
+      alt="Car Brain, a car logbook for Android and iPhone, also available on the web."
+    />
+  </a>
+  <figcaption>{"Car Brain 3.3."}</figcaption>
+</figure>
+
+**What did you spend on your car last month, once you count the garage and the parking as well as the fuel?**
+
+The fuel receipt is in the glovebox, the garage invoice in a folder, and the insurance payment somewhere in your bank history. I kept my car records in Excel, Google Sheets and a Google Drive folder, then tried another app. I wanted one place to see what I spent on the car and compare one month with the next. That’s why I built Car Brain.
+
+It is a personal logbook for the car you own. Log refuels, services and other costs, and set a reminder before the next thing is due. Version 3.3 is out on Android. iPhone runs version 3.1, with 3.3 on its way. The same account also works in the browser at car-brain.com.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/en.webp"
+    aria-label="Open the screens at full size"
+  >
+    <Image
+      src="/blog/car-brain-logbook/en.webp"
+      width={1800}
+      height={1066}
+      alt="The sample BMW has PLN 829.70 in recorded October expenses. Beside the recap are an August garage visit and reminders for air conditioning service and an oil change."
+    />
+  </a>
+  <figcaption>
+    {"The monthly recap, a service record and the reminders. Sample data."}
+  </figcaption>
+</figure>
+
+## What your car really costs
+
+Every refuel, service and other cost lands in one history, newest first, grouped by month. Parking, insurance, washes and other costs sit next to fuel and services. You can attach a receipt photo to any entry.
+
+The recap shows your recorded spending on fuel, servicing and other costs side by side. You can see how each category compares with the previous month.
+
+Log fuel in litres and charging in kWh. Mark full tanks to see your real fuel consumption between fills, not the number on the brochure.
+
+## Photograph the receipt, check the form
+
+Typing a fuel receipt into a phone at the pump is nobody's hobby. So on your phone, take a photo of the fuel receipt, and Car Brain fills in the station, fuel type, litres, price per litre, total and date on the refuel form.
+
+<figure>
+  <LoopVideo
+    src="/blog/car-brain-logbook/scan-en.mp4"
+    poster="/blog/car-brain-logbook/scan-en.webp"
+    width={1160}
+    height={1080}
+    label="The phone reads the receipt. The driver enters the mileage and saves the fill-up to History."
+  />
+  <figcaption>{"Scanning a sample fuel receipt in the mobile app."}</figcaption>
+</figure>
+
+Check the details, enter the mileage, confirm whether you filled the tank and save. The scan never saves anything on its own, and it never guesses your odometer or whether you filled the tank, because a receipt does not say. Each account gets up to 3 scans in any rolling 24-hour period. If you want the engineering behind it, I wrote it up in [The model writes a draft. You save the record.](/blog/en/receipt-scan-writes-a-draft/)
+
+## A heads-up before it's due
+
+Oil change, inspection, insurance renewal: set a reminder by date or by kilometres, once or repeating.
+
+A dated reminder can alert you on the phone a week before and on the day. A kilometre reminder shows how far you have left; it does not send an alert.
+
+## AI that knows your model
+
+The Dashboard has AI Insights in four flavours:
+
+- **Personality.** A playful portrait of your model, with a nickname. The BMW 320d Touring in the sample data became The Autobahn Accountant.
+- **Fun Facts.** Five things you probably did not know about your car.
+- **Analytics.** Insights about the model, recommendations and comparisons with its rivals.
+- **Maintenance.** Service tips and a list of things worth checking on a car of that age.
+
+The AI writes from the make, model and year, not from your logbook, so read it as a tip, not a diagnosis. Your own numbers live on the separate Analytics screen: spending, average fuel use and a chart from your refuels, over the last 3, 6 or 12 months or your whole history.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/ai-en.webp"
+    aria-label="Open the image at full size"
+  >
+    <Image
+      src="/blog/car-brain-logbook/ai-en.webp"
+      width={1400}
+      height={1066}
+      alt="AI nicknames the sample BMW “The Autobahn Accountant”. The separate Analytics screen shows spending and fuel use from logged entries."
+    />
+  </a>
+  <figcaption>
+    {
+      "AI insights about the model, and Analytics from your own records. Sample data."
+    }
+  </figcaption>
+</figure>
+
+## Phone, web and your old logbook
+
+The same account and the same history open on Android, iPhone and at [car-brain.com](https://car-brain.com/en). Long edits are easier on a big screen; a refuel is easier on the phone.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/web-en.webp"
+    aria-label="Open the image at full size"
+  >
+    <Image
+      src="/blog/car-brain-logbook/web-en.webp"
+      width={1800}
+      height={1140}
+      alt="The BMW’s web dashboard shows monthly fuel and servicing costs alongside upcoming reminders."
+    />
+  </a>
+  <figcaption>{"The same account at car-brain.com. Sample data."}</figcaption>
+</figure>
+
+Coming from Drivvo? Open your export file on the Car Brain website to see which entries you can bring across before you import them. Leaving is just as easy: export the cars you choose as spreadsheets or as one backup file.
+
+## Free, no ads, and your data stays yours
+
+Car Brain is free, with no ads. A paid Pro plan is on the roadmap. Nothing is on sale today.
+
+- **Your records are private to your account.** Only your account can read them, and they are not sold or used for advertising.
+- **No usage tracking.** I do not collect usage statistics. Crash reports carry the error and your account ID, not your email, name, VIN, photos or costs.
+- **Leave whenever you like.** Delete the account and its data from inside the app or on the website.
+
+Also in the box: add a car from its VIN, several cars, amounts kept in the currency you entered, English and Polish, and a Night driving theme you can switch to after dark.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/more-en.webp"
+    aria-label="Open the image at full size"
+  >
+    <Image
+      src="/blog/car-brain-logbook/more-en.webp"
+      width={1800}
+      height={1066}
+      alt="The BMW’s service history includes a switch to summer tyres. Alongside it are the model’s AI nickname and the fuel log in the red Night driving theme."
+    />
+  </a>
+  <figcaption>
+    {"The service history, AI notes and the Night driving theme. Sample data."}
+  </figcaption>
+</figure>
+
+## Try it
+
+| Where                                                                                                                                          | What you get                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [Google Play](https://play.google.com/store/apps/details?id=app.carbrain.mobile&utm_source=devthomas&utm_medium=blog&utm_campaign=v3_3_launch) | The full app, with receipt scan and reminder alerts                            |
+| [App Store](https://apps.apple.com/app/id6754179380)                                                                                           | The app on iPhone; version 3.3 is on its way                                   |
+| [car-brain.com](https://car-brain.com/en)                                                                                                      | The same account in the browser, plus Drivvo import. No receipt scan or alerts |
+
+If something is wrong or missing, tap the bug button in the app (on iPhone from version 3.3). It sends me your note, with a screenshot if you want one.
+
+This article covers Car Brain 3.3 on mobile. The screenshots use sample data.

@@ -49,6 +49,18 @@ const common = {
   "What I'd do differently": "Co zrobiłbym inaczej",
 };
 export const headingPairs: Record<string, Record<string, string>> = {
+  "article/car-brain-a-logbook-for-the-car-you-own": {
+    "What your car really costs": "Ile naprawdę kosztuje Cię auto",
+    "Photograph the receipt, check the form":
+      "Zdjęcie paragonu zamiast przepisywania",
+    "A heads-up before it's due": "Przypomnienie, zanim minie termin",
+    "AI that knows your model": "AI, które zna Twój model",
+    "Phone, web and your old logbook":
+      "Telefon, przeglądarka i Twój stary dziennik",
+    "Free, no ads, and your data stays yours":
+      "Za darmo, bez reklam, a dane należą do Ciebie",
+    "Try it": "Wypróbuj",
+  },
   "article/do-not-let-play-console-go-quiet": {
     "The account closed. The app did not move.":
       "Konto zamknięte. Aplikacja się nie przeniosła.",

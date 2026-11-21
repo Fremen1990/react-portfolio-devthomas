@@ -3,6 +3,27 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
+    slug: "car-brain-a-logbook-for-the-car-you-own",
+    published: true,
+    editions: {
+      en: {
+        title: "Car Brain: a logbook for the car you own",
+        description:
+          "See fuel, servicing and parking in one monthly recap. Scan a fuel receipt on your phone and set a reminder for your insurance renewal. Free, with no ads.",
+        topics: ["Car Brain", "Product", "Release"],
+        body: "car-brain-a-logbook-for-the-car-you-own/en.mdx",
+      },
+      pl: {
+        title: "Car Brain: dziennik Twojego auta",
+        description:
+          "Porównaj wydatki na paliwo, serwis i parking z poprzednim miesiącem. Na telefonie zeskanujesz paragon za paliwo i ustawisz przypomnienie o terminie OC. Za darmo i bez reklam.",
+        topics: ["Car Brain", "Produkt", "Wydanie"],
+        body: "car-brain-a-logbook-for-the-car-you-own/pl.mdx",
+      },
+    },
+    publishedAt: "2026-11-21",
+  },
+  {
     slug: "receipt-scan-writes-a-draft",
     published: true,
     editions: {

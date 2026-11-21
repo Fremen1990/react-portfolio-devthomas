@@ -25,6 +25,8 @@ export type CarBrain = {
   sampleNote: string;
   appStoreLabel: string;
   appStoreUrl: string;
+  playStoreLabel: string;
+  playStoreUrl: string;
   siteLabel: string;
   siteUrl: string;
   /** Screenshot size in pixels: 2× the displayed width. */
@@ -45,13 +47,15 @@ export const carBrain: CarBrain = {
   automation:
     "AI-powered vehicle insights · VIN decoding with automatic form filling",
   status:
-    "Version 3.0.0 is live on Google Play and the App Store, with a web app too.",
+    "Version 3.3.0 is live on Google Play; the App Store has 3.1.0 until 3.3.0 clears review. There is a web app too.",
   articleLabel: "Why I built Car Brain",
   screensLabel: "Car Brain screens",
   sampleNote: "App screens with sample data.",
   tags: ["React Native", "Next.js", "TypeScript", "Appwrite"],
   appStoreLabel: "Download on the App Store",
   appStoreUrl: carBrainLinks?.appStoreUrl ?? "",
+  playStoreLabel: "Get it on Google Play",
+  playStoreUrl: carBrainLinks?.playStoreUrl ?? "",
   siteLabel: "car-brain.com",
   siteUrl: carBrainLinks?.siteUrl ?? "",
   shotWidth: 392,
@@ -105,11 +109,12 @@ export const carBrainFor = (locale: "en" | "pl"): CarBrain => {
     automation:
       "Analiza danych pojazdu z AI · Dekodowanie VIN i automatyczne uzupełnianie formularza",
     status:
-      "Wersja 3.0.0 jest w Google Play i App Store, jest też aplikacja webowa.",
+      "Wersja 3.3.0 jest w Google Play; w App Store jest 3.1.0, dopóki 3.3.0 nie przejdzie przeglądu. Jest też aplikacja webowa.",
     articleLabel: "Dlaczego tworzę Car Brain",
     screensLabel: "Ekrany Car Brain",
     sampleNote: "Ekrany aplikacji z przykładowymi danymi.",
     appStoreLabel: "Pobierz z App Store",
+    playStoreLabel: "Pobierz z Google Play",
     shots: carBrain.shots.map((shot) => ({
       ...shot,
       ...shots[shot.id as keyof typeof shots],

@@ -120,6 +120,16 @@ const IndependentProduct = ({
             {carBrain.appStoreLabel}
           </a>
         )}
+        {carBrain.published && carBrain.playStoreUrl && (
+          <a
+            className="store-link"
+            href={carBrain.playStoreUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {carBrain.playStoreLabel}
+          </a>
+        )}
       </p>
     </div>
     <CarBrainShots

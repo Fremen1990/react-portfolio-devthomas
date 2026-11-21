@@ -57,6 +57,14 @@ export const carBrainCommands = (links: CarBrainLinks | null): Command[] =>
           run: (context) => context.openExternal(links.appStoreUrl),
         },
         {
+          id: "car-brain-google-play",
+          title: "Open Car Brain on Google Play",
+          alias: "open car-brain --google-play",
+          keywords: ["car brain", "app", "android", "google play", "download"],
+          group: "Link",
+          run: (context) => context.openExternal(links.playStoreUrl),
+        },
+        {
           id: "car-brain-site",
           title: "Open car-brain.com",
           alias: "open car-brain.com",
@@ -285,6 +293,7 @@ const polishCommandTitles: Record<string, string> = {
   "skin-terminal": "Włącz styl Terminal",
   "skin-standard": "Włącz styl standardowy",
   "car-brain-app-store": "Otwórz Car Brain w App Store",
+  "car-brain-google-play": "Otwórz Car Brain w Google Play",
   "car-brain-site": "Otwórz car-brain.com",
 };
 export function createCommands(locale: Locale = "en"): Command[] {
