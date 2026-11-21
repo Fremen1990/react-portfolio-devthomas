@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
       pl: {
         title: "Car Brain: dziennik Twojego auta",
         description:
-          "Zobacz, ile naprawdę kosztuje Cię auto. Car Brain 3.3 zapisuje tankowania, serwisy i inne koszty z paragonami, sam odczytuje paragon za paliwo i przypomina przed serwisem czy ubezpieczeniem. Za darmo, bez reklam.",
+          "Zobacz, ile naprawdę kosztuje Cię auto. Car Brain 3.3 zbiera tankowania, serwisy i inne wydatki razem z paragonami, sam odczytuje paragon za paliwo i przypomina o serwisie czy OC, zanim minie termin. Za darmo i bez reklam.",
         topics: ["Car Brain", "Produkt", "Wydanie"],
         body: "car-brain-a-logbook-for-the-car-you-own/pl.mdx",
       },
