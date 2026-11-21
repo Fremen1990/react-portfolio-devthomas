@@ -54,6 +54,7 @@ export const headingPairs: Record<string, Record<string, string>> = {
     "Photograph the receipt, check the form":
       "Zdjęcie paragonu zamiast przepisywania",
     "A heads-up before it's due": "Przypomnienie, zanim minie termin",
+    "AI that knows your model": "AI, które zna Twój model",
     "Phone, web and your old logbook":
       "Telefon, przeglądarka i Twój stary dziennik",
     "Free, no ads, and your data stays yours":

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { LoopVideo } from "@/components/Blog/LoopVideo";
 
 <figure>
   <a
@@ -50,6 +51,21 @@ Tankowanie zapiszesz w litrach albo w kWh. Zaznaczaj tankowania do pełna, a Car
 
 Nikt nie lubi przepisywać paragonu do telefonu, stojąc przy dystrybutorze. Dlatego w aplikacji na telefon jest Skanuj paragon: robisz zdjęcie, a formularz tankowania sam się wypełnia. Stacja, rodzaj paliwa, litry, cena za litr, kwota i data.
 
+<figure>
+  <LoopVideo
+    src="/blog/car-brain-logbook/scan-pl.mp4"
+    poster="/blog/car-brain-logbook/scan-pl.webp"
+    width={1160}
+    height={1080}
+    label="Animacja skanu paragonu: paragon za paliwo ze Stacji Wołoska na 96,10 zł zostaje zeskanowany, data, paliwo, litry, cena za litr, kwota i stacja trafiają do formularza Dodaj rekord tankowania, przebieg zostaje wpisany ręcznie, a po zapisie tankowanie pojawia się na górze Historii."
+  />
+  <figcaption>
+    {
+      "Od zdjęcia paragonu do zapisanego tankowania. Animacja ze strony car-brain.com, paragon przykładowy."
+    }
+  </figcaption>
+</figure>
+
 Ty tylko sprawdzasz i stukasz Zapisz. Skan nigdy niczego nie zapisuje za Ciebie. Nie zgaduje też przebiegu ani tego, czy bak był pełny, bo tego na paragonie nie ma. Każde konto ma 3 skany w ciągu 24 godzin. Jak to działa od kuchni, opisałem w tekście [Model pisze szkic. Wpis zapisuje człowiek.](/blog/pl/receipt-scan-writes-a-draft/)
 
 ## Przypomnienie, zanim minie termin
@@ -57,6 +73,34 @@ Ty tylko sprawdzasz i stukasz Zapisz. Skan nigdy niczego nie zapisuje za Ciebie.
 Wymiana oleju, przegląd, OC: ustaw przypomnienie na datę albo na przebieg, jednorazowe albo cykliczne. Zaplanowany serwis od razu staje się przypomnieniem.
 
 Przypomnienie na datę może wysłać powiadomienie na telefon tydzień wcześniej i w dniu terminu. Przypomnienie na przebieg pokazuje, ile kilometrów zostało, ale nie wysyła powiadomień.
+
+## AI, które zna Twój model
+
+Na ekranie Panel czekają Wskazówki AI w czterech odsłonach:
+
+- **Osobowość.** Zabawny opis Twojego modelu z przydomkiem. BMW 320d Touring z przykładowych danych zostało Autostradowym Baronem.
+- **Ciekawostki.** Pięć ciekawych faktów o Twoim aucie, w sam raz na rozmowę przy grillu.
+- **Analityka.** Spostrzeżenia o modelu, rekomendacje i porównania z konkurentami z jego klasy.
+- **Serwis.** Podpowiedzi serwisowe i lista rzeczy, które w aucie w tym wieku warto sprawdzić.
+
+AI pisze na podstawie marki, modelu i rocznika, a nie Twojego dziennika, więc traktuj to jak podpowiedź, nie diagnozę. Twoje własne liczby pokazuje osobny ekran Analityka: wydatki łącznie, paliwo, serwis, średnie spalanie i wykres spalania przy każdym tankowaniu, za 3, 6 albo 12 miesięcy albo za cały czas.
+
+<figure>
+  <a
+    href="/blog/car-brain-logbook/ai-pl.webp"
+    aria-label="Otwórz obraz w pełnym rozmiarze"
+  >
+    <Image
+      src="/blog/car-brain-logbook/ai-pl.webp"
+      width={1400}
+      height={1066}
+      alt="Dwa ekrany. Wskazówki AI z rozwiniętą Osobowością: Autostradowy Baron, zabawny opis BMW 320d Touring, z dopiskiem, że tekst wygenerowało AI na podstawie danych auta, i kartą Ciekawostki z przyciskiem Generuj. Obok ekran Analityka za 12 miesięcy: wydano łącznie 8415 zł, paliwo 6715 zł, serwis 1637 zł, inne koszty 63 zł, średnie spalanie 6,0 l/100 km, dystans 18 230 km i wykres spalania przy każdym tankowaniu."
+    />
+  </a>
+  <figcaption>
+    {"Wskazówki AI o modelu i Analityka z Twoich wpisów. Przykładowe dane."}
+  </figcaption>
+</figure>
 
 ## Telefon, przeglądarka i Twój stary dziennik
 
@@ -87,7 +131,7 @@ Car Brain jest darmowy i nie ma reklam. Planuję płatną wersję Pro, ale dziś
 - **Bez śledzenia.** W aplikacji nie ma żadnej analityki. Raport o awarii zawiera opis błędu i identyfikator konta, ale nie e-mail, imię, VIN, zdjęcia ani kwoty.
 - **Odchodzisz, kiedy chcesz.** Konto razem z danymi usuniesz w aplikacji albo na stronie.
 
-A do tego: auto dodasz po numerze VIN, AI opowie krótko o Twojej marce i modelu, w garażu zmieścisz kilka aut, kwoty zostają w walucie, w jakiej je wpisano, aplikacja mówi po polsku i po angielsku, a motyw nocnej jazdy nie oślepi Cię na stacji o 23:00.
+A do tego: auto dodasz po numerze VIN, w garażu zmieścisz kilka aut, kwoty zostają w walucie, w jakiej je wpisano, aplikacja mówi po polsku i po angielsku, a motyw nocnej jazdy nie oślepi Cię na stacji o 23:00.
 
 <figure>
   <a

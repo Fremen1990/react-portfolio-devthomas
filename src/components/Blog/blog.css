@@ -277,9 +277,15 @@ html.skin-terminal:not(.dark-theme) .mobile-stack-appwrite {
   margin: 32px 0;
 }
 .blog-prose figure img,
-.blog-prose figure svg {
+.blog-prose figure svg,
+.blog-prose figure video {
   max-width: 100%;
   height: auto;
+}
+.blog-prose figure video {
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
 }
 .blog-prose figcaption {
   margin-top: 12px;
