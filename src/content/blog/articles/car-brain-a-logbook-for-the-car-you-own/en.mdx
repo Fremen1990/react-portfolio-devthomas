@@ -10,17 +10,17 @@ import { LoopVideo } from "@/components/Blog/LoopVideo";
       src="/blog/car-brain-logbook/hero-en.webp"
       width={1600}
       height={800}
-      alt="The Car Brain logo: a car drawn as a network of connected points, coloured from teal to orange. Next to it: Car Brain, A logbook for the car you own, Version 3.3, Android, iPhone and the web."
+      alt="Car Brain, a car logbook for Android and iPhone, also available on the web."
     />
   </a>
   <figcaption>{"Car Brain 3.3."}</figcaption>
 </figure>
 
-**Your car costs more than you think. Car Brain shows you exactly how much.**
+**What did you spend on your car last month, once you count the garage and the parking as well as the fuel?**
 
-Fuel goes on one card, the service on another, insurance once a year, parking a few coins at a time. Ask most drivers what their car cost last month and you get a shrug and a guess. I built Car Brain to replace the guess with a number.
+The fuel receipt is in the glovebox, the garage invoice in a folder, and the insurance payment somewhere in your bank history. I kept my car records in Excel, Google Sheets and a Google Drive folder, then tried another app. I wanted one place to see what I spent on the car and compare one month with the next. That’s why I built Car Brain.
 
-It is a personal logbook for the car you own: every refuel, service and other cost in one place, with the receipt attached and a reminder before the next thing is due. Version 3.3 is out on Android and iPhone, and the same account works in the browser at car-brain.com.
+It is a personal logbook for the car you own. Log refuels, services and other costs, and set a reminder before the next thing is due. Version 3.3 is out on Android and iPhone, and the same account works in the browser at car-brain.com.
 
 <figure>
   <a
@@ -31,7 +31,7 @@ It is a personal logbook for the car you own: every refuel, service and other co
       src="/blog/car-brain-logbook/en.webp"
       width={1800}
       height={1066}
-      alt="Three Car Brain screens. The monthly recap for a BMW 320d Touring shows PLN 829.70 recorded in October 2026: fuel 81%, services 17%, other costs 2%. A service record shows a PLN 450.00 DPF regeneration with its odometer reading, type and category. The reminders list shows an air conditioning service due in 3 days and an oil service due in 12 days, each with a Mark as Done button."
+      alt="The sample BMW has PLN 829.70 in recorded October expenses. Beside the recap are an August garage visit and reminders for air conditioning service and an oil change."
     />
   </a>
   <figcaption>
@@ -41,15 +41,15 @@ It is a personal logbook for the car you own: every refuel, service and other co
 
 ## What your car really costs
 
-Every refuel, service and other cost lands in one history, newest first, grouped by month. Parking, insurance, washes and other costs sit next to fuel and services, each with its receipt photo.
+Every refuel, service and other cost lands in one history, newest first, grouped by month. Parking, insurance, washes and other costs sit next to fuel and services. You can attach a receipt photo to any entry.
 
-At the end of the month, the recap adds it up: fuel, services and other costs side by side, compared with the month before. That one screen answers the question the shrug could not.
+The recap shows your recorded spending on fuel, servicing and other costs side by side. You can see how each category compares with the previous month.
 
-Refuels can be logged in litres or kWh. Mark the full-tank fills and Car Brain works out your real fuel use from them, not the number on the brochure.
+Log fuel in litres and charging in kWh. Mark full tanks to see your real fuel consumption between fills, not the number on the brochure.
 
 ## Photograph the receipt, check the form
 
-Typing a fuel receipt into a phone at the pump is nobody's hobby. So on the phone, Scan Receipt does it for you: take a photo, and the refuel form fills in the station, fuel type, litres, price per litre, total and date.
+Typing a fuel receipt into a phone at the pump is nobody's hobby. So on your phone, take a photo of the fuel receipt, and Car Brain fills in the station, fuel type, litres, price per litre, total and date on the refuel form.
 
 <figure>
   <LoopVideo
@@ -57,16 +57,12 @@ Typing a fuel receipt into a phone at the pump is nobody's hobby. So on the phon
     poster="/blog/car-brain-logbook/scan-en.webp"
     width={1160}
     height={1080}
-    label="Receipt scan animation: a PLN 96.10 fuel receipt from Stacja Wołoska is scanned, the date, fuel, litres, price per litre, total and station move into the Add Refuel Record form, the odometer is typed in by hand, and after saving the refuel appears at the top of History."
+    label="The phone reads the receipt. The driver enters the mileage and saves the fill-up to History."
   />
-  <figcaption>
-    {
-      "From a receipt photo to a saved refuel. The animation from car-brain.com, with a sample receipt."
-    }
-  </figcaption>
+  <figcaption>{"Scanning a sample fuel receipt in the mobile app."}</figcaption>
 </figure>
 
-You check the form and tap Save. The scan never saves anything on its own, and it never guesses your odometer or whether you filled the tank, because a receipt does not say. Each account gets 3 scans in a rolling 24 hours. If you want the engineering behind it, I wrote it up in [The model writes a draft. You save the record.](/blog/en/receipt-scan-writes-a-draft/)
+Check the details, enter the mileage, confirm whether you filled the tank and save. The scan never saves anything on its own, and it never guesses your odometer or whether you filled the tank, because a receipt does not say. Each account gets up to 3 scans in any rolling 24-hour period. If you want the engineering behind it, I wrote it up in [The model writes a draft. You save the record.](/blog/en/receipt-scan-writes-a-draft/)
 
 ## A heads-up before it's due
 
@@ -83,7 +79,7 @@ The Dashboard has AI Insights in four flavours:
 - **Analytics.** Insights about the model, recommendations and comparisons with its rivals.
 - **Maintenance.** Service tips and a list of things worth checking on a car of that age.
 
-The AI writes from the make, model and year, not from your logbook, so read it as a tip, not a diagnosis. Your own numbers live on the separate Analytics screen: total spent, fuel, services, average fuel use and a fuel efficiency chart for every refuel, over 3, 6 or 12 months or all time.
+The AI writes from the make, model and year, not from your logbook, so read it as a tip, not a diagnosis. Your own numbers live on the separate Analytics screen: spending, average fuel use and a chart from your refuels, over the last 3, 6 or 12 months or your whole history.
 
 <figure>
   <a
@@ -94,7 +90,7 @@ The AI writes from the make, model and year, not from your logbook, so read it a
       src="/blog/car-brain-logbook/ai-en.webp"
       width={1400}
       height={1066}
-      alt="Two screens. AI insights with Personality open: The Autobahn Accountant, a playful description of the BMW 320d Touring, with a note that the AI wrote it from the car's details, and the Fun Facts card with a Generate button. Next to it, the Analytics screen for 12 months: PLN 8,415 spent in total, fuel PLN 6,715, services PLN 1,637, other costs PLN 63, average fuel use 6.0 l/100 km, 18,230 km driven and a fuel efficiency chart for every refuel."
+      alt="AI nicknames the sample BMW “The Autobahn Accountant”. The separate Analytics screen shows spending and fuel use from logged entries."
     />
   </a>
   <figcaption>
@@ -117,23 +113,23 @@ The same account and the same history open on Android, iPhone and at [car-brain.
       src="/blog/car-brain-logbook/web-en.webp"
       width={1800}
       height={1140}
-      alt="The Car Brain dashboard in a browser for a BMW 320d Touring: average fuel use 6.0 l/100 km, fuel this month, cost per km, and the next reminder in 3 days. Below, a chart of monthly costs from June to November 2026 and the upcoming reminders: air conditioning service, oil change, insurance renewal, winter tyres."
+      alt="The BMW’s web dashboard shows monthly fuel and servicing costs alongside upcoming reminders."
     />
   </a>
   <figcaption>{"The same account at car-brain.com. Sample data."}</figcaption>
 </figure>
 
-Coming from Drivvo? Import its export file on the website and your history comes with you. Leaving is just as easy: export the cars you choose as spreadsheets or as one backup file.
+Coming from Drivvo? Open your export file on the Car Brain website to see which entries you can bring across before you import them. Leaving is just as easy: export the cars you choose as spreadsheets or as one backup file.
 
 ## Free, no ads, and your data stays yours
 
 Car Brain is free, with no ads. A paid Pro plan is on the roadmap. Nothing is on sale today.
 
 - **Your records are private to your account.** Only your account can read them, and they are not sold or used for advertising.
-- **No usage tracking.** The app has no analytics SDK. Crash reports carry the error and your account ID, not your email, name, VIN, photos or costs.
+- **No usage tracking.** I do not collect usage statistics. Crash reports carry the error and your account ID, not your email, name, VIN, photos or costs.
 - **Leave whenever you like.** Delete the account and its data from inside the app or on the website.
 
-Also in the box: add a car from its VIN, several cars, amounts kept in the currency you entered, English and Polish, and a Night driving theme that will not blind you at a petrol station at 23:00.
+Also in the box: add a car from its VIN, several cars, amounts kept in the currency you entered, English and Polish, and a Night driving theme you can switch to after dark.
 
 <figure>
   <a
@@ -144,7 +140,7 @@ Also in the box: add a car from its VIN, several cars, amounts kept in the curre
       src="/blog/car-brain-logbook/more-en.webp"
       width={1800}
       height={1066}
-      alt="Three more screens. The service history with a coolant flush, a DPF regeneration and new tyres, with costs and odometer readings. An AI note on the BMW 320d Touring's personality. The fuel history in the Night driving theme, in red tones, with fuel use on every entry."
+      alt="The BMW’s service history includes a switch to summer tyres. Alongside it are the model’s AI nickname and the fuel log in the red Night driving theme."
     />
   </a>
   <figcaption>
@@ -162,4 +158,4 @@ Also in the box: add a car from its VIN, several cars, amounts kept in the curre
 
 If something is wrong or missing, tap the bug button in the app. It sends me your note, with a screenshot if you want one.
 
-**Development snapshot — 20 November 2026:** the features come from the app at tag `v3.3.0` and its store listing. The screens are store captures with sample data. Version 3.3.0 is live on Google Play; the App Store build follows, and this post goes out when it is live. I have no user numbers to share yet, so this article gives none.
+This article covers Car Brain 3.3 on mobile. The screenshots use sample data.

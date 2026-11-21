@@ -10,14 +10,14 @@ export const blogPosts: BlogPost[] = [
       en: {
         title: "Car Brain: a logbook for the car you own",
         description:
-          "See what your car really costs. Car Brain 3.3 logs every refuel, service and other cost with its receipt, scans fuel receipts into the form and reminds you before a service or insurance is due. Free, with no ads.",
+          "See fuel, servicing and parking in one monthly recap. Scan a fuel receipt on your phone and set a reminder for your insurance renewal. Free, with no ads.",
         topics: ["Car Brain", "Product", "Release"],
         body: "car-brain-a-logbook-for-the-car-you-own/en.mdx",
       },
       pl: {
         title: "Car Brain: dziennik Twojego auta",
         description:
-          "Zobacz, ile naprawdę kosztuje Cię auto. Car Brain 3.3 zbiera tankowania, serwisy i inne wydatki razem z paragonami, sam odczytuje paragon za paliwo i przypomina o serwisie czy OC, zanim minie termin. Za darmo i bez reklam.",
+          "Porównaj wydatki na paliwo, serwis i parking z poprzednim miesiącem. Na telefonie zeskanujesz paragon za paliwo i ustawisz przypomnienie o terminie OC. Za darmo i bez reklam.",
         topics: ["Car Brain", "Produkt", "Wydanie"],
         body: "car-brain-a-logbook-for-the-car-you-own/pl.mdx",
       },
