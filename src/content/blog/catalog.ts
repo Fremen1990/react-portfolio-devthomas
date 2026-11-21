@@ -3,9 +3,8 @@ import type { BlogPost } from "./types";
 // Approved bilingual editions. Dates describe the intended release; update if deployment moves.
 export const blogPosts: BlogPost[] = [
   {
-    // Draft until the App Store has 3.3.0; on launch day set published: true and publishedAt.
     slug: "car-brain-a-logbook-for-the-car-you-own",
-    published: false,
+    published: true,
     editions: {
       en: {
         title: "Car Brain: a logbook for the car you own",
@@ -22,6 +21,7 @@ export const blogPosts: BlogPost[] = [
         body: "car-brain-a-logbook-for-the-car-you-own/pl.mdx",
       },
     },
+    publishedAt: "2026-11-21",
   },
   {
     slug: "receipt-scan-writes-a-draft",
